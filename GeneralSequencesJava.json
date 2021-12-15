@@ -1,0 +1,85 @@
+{
+	"init": {
+		"java": {
+			"JArraySequence": "new ArrayList<>()",
+			"JLinkedSequence": "new LinkedList<>()",
+			"JVectorSequence": "new Vector<>()"
+		},
+		"scala": {
+			"SArraySequence": "new ArrayBuffer<>()",
+			"SLinkedSequence": "new ListBuffer<>()"
+		}
+	},
+	"size": {
+		"java": {
+			"args": [],
+			"default": "collection.size()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.size()"
+		}
+	},
+	"get": {
+		"java": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.get(index)"
+		},
+		"scala": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.apply(index)"
+		}
+	},
+	"add": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.add(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.append(elem)"
+		}
+	},
+	"insert": {
+		"java": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.add(index, elem)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.insert(index, elem)"
+		}
+	},
+	"set": {
+		"java": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.set(index, elem)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.update(index, elem)"
+		}
+	},
+	"addAll": {
+		"java": {
+			"args": [ ],
+			"default": ""
+		},
+		"scala": {
+			"args": [ ],
+			"default": ""
+		}
+	}
+}

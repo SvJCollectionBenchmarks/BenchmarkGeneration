@@ -1,13 +1,17 @@
 {
 	"init": {
 		"java": {
+			"args": [ { "name": "clazz", "type": "Class<T>" } ],
 			"JArraySequence": "new ArrayList<>()",
 			"JLinkedSequence": "new LinkedList<>()",
 			"JVectorSequence": "new Vector<>()"
 		},
 		"scala": {
-			"SArraySequence": "new ArrayBuffer<>()",
-			"SLinkedSequence": "new ListBuffer<>()"
+			"args": [ { "name": "clazz", "type": "ClassTag<T>" } ],
+			"SArrayBufferSequence": "new ArrayBuffer<>()",
+			"SLinkedSequence": "new ListBuffer<>()",
+			"SArraySequence": "ArraySeq.from(new ArrayBuffer<T>(), clazz)",
+			"SVectorSequence": "Vector.from(new ArrayBuffer<T>())"
 		}
 	},
 	"size": {
@@ -37,23 +41,9 @@
 		},
 		"scala": {
 			"args": [ { "name": "elem", "type": "T" } ],
-			"default": "collection.append(elem)"
-		}
-	},
-	"insert": {
-		"java": {
-			"args": [ 
-				{ "name": "index", "type": "int" },
-				{ "name": "elem", "type": "T" }
-			],
-			"default": "collection.add(index, elem)"
-		},
-		"scala": {
-			"args": [ 
-				{ "name": "index", "type": "int" },
-				{ "name": "elem", "type": "T" }
-			],
-			"default": "collection.insert(index, elem)"
+			"default": "collection.append(elem)",
+			"SArraySequence": "collection = collection.appended(elem)",
+			"SVectorSequence": "collection = collection.appended(elem)"
 		}
 	},
 	"set": {
@@ -69,17 +59,46 @@
 				{ "name": "index", "type": "int" },
 				{ "name": "elem", "type": "T" }
 			],
-			"default": "collection.update(index, elem)"
+			"default": "collection.update(index, elem)",
+			"SVectorSequence": "collection = collection.updated(index, elem)"
 		}
 	},
 	"addAll": {
 		"java": {
-			"args": [ ],
-			"default": ""
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.addAll(elems)"
 		},
 		"scala": {
-			"args": [ ],
-			"default": ""
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.addAll(elems)",
+			"SArraySequence": "collection = collection.appendedAll(elems)",
+			"SVectorSequence": "collection = collection.appendedAll(elems)"
+		}
+	},
+	"subCollection": {
+		"java": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "count", "type": "int" }
+			],
+			"default": "collection.subList(index, index + count + 1)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "int" }
+			],
+			"default": "collection.slice(index, index + count + 1)"
+		}
+	},
+	"iterator": {
+		"java": {
+			"args": [],
+			"default": "collection.iterator()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.iterator()"
 		}
 	}
 }

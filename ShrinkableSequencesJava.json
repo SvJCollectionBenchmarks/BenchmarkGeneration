@@ -1,0 +1,29 @@
+{
+	"init": {
+		"java": {
+			"JArraySequence": "new ArrayList<>()",
+			"JLinkedSequence": "new LinkedList<>()",
+			"JVectorSequence": "new Vector<>()"
+		},
+		"scala": {
+			"SArrayBufferSequence": "new ArrayBuffer<>()",
+			"SLinkedSequence": "new ListBuffer<>()"
+		}
+	},
+	"insert": {
+		"java": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.add(index, elem)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.insert(index, elem)"
+		}
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"init": {
+		"java": {
+			"args": [ { "name": "clazz", "type": "Class<T>" } ]
+		},
+		"scala": {
+			"args": [ { "name": "clazz", "type": "ClassTag<T>" } ]
+		}
+	},
+	"size": {
+		"java": {
+			"args": [],
+			"default": "collection.size()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.size()"
+		}
+	}
+}

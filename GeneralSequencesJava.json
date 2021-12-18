@@ -63,6 +63,36 @@
 			"SVectorSequence": "collection = collection.updated(index, elem)"
 		}
 	},
+	"contains": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		}
+	},
+	"indexOf": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.indexOf(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.indexOf(elem)"
+		}
+	},
+	"lastIndexOf": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.lastIndexOf(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.lastIndexOf(elem, collection.size() - 1)"
+		}
+	},
 	"addAll": {
 		"java": {
 			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],

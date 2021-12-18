@@ -16,5 +16,69 @@
 			"args": [],
 			"default": "collection.size()"
 		}
+	},
+	"add": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.add(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.append(elem)",
+			"SArraySequence": "collection = collection.appended(elem)",
+			"SVectorSequence": "collection = collection.appended(elem)"
+		}
+	},
+	"contains": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		}
+	},
+	"addAll": {
+		"java": {
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.addAll(elems)"
+		},
+		"scala": {
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.addAll(elems)",
+			"SArraySequence": "collection = collection.appendedAll(elems)",
+			"SVectorSequence": "collection = collection.appendedAll(elems)"
+		}
+	},
+	"iterator": {
+		"java": {
+			"args": [],
+			"default": "collection.iterator()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.iterator()"
+		}
+	},
+	"remove": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.remove(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.subtractOne(elem)"
+		}
+	},
+	"removeAll": {
+		"java": {
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.removeAll(elems)"
+		},
+		"scala": {
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.subtractAll(elems)"
+		}
 	}
 }

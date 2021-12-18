@@ -26,6 +26,16 @@
 			"default": "collection.insert(index, elem)"
 		}
 	},
+	"remove": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.remove(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.subtractOne(elem)"
+		}
+	},
 	"removeAt": {
 		"java": {
 			"args": [ { "name": "index", "type": "int" } ],

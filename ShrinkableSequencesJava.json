@@ -25,5 +25,35 @@
 			],
 			"default": "collection.insert(index, elem)"
 		}
+	},
+	"removeAt": {
+		"java": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.remove(index)"
+		},
+		"scala": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.remove(index)"
+		}
+	},
+	"removeAll": {
+		"java": {
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.removeAll(elems)"
+		},
+		"scala": {
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.subtractAll(elems)"
+		}
+	},
+	"clear": {
+		"java": {
+			"args": [],
+			"default": "collection.clear()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.clear()"
+		}
 	}
 }

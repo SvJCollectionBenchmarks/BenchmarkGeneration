@@ -1,10 +1,11 @@
 {
 	"init": {
 		"java": {
-			"args": [ { "name": "clazz", "type": "Class<T>" } ]
+			"args": [],
+			"JHashSet": "new HashSet<>()"
 		},
 		"scala": {
-			"args": [ { "name": "clazz", "type": "ClassTag<T>" } ]
+			"args": []
 		}
 	},
 	"size": {
@@ -24,9 +25,7 @@
 		},
 		"scala": {
 			"args": [ { "name": "elem", "type": "T" } ],
-			"default": "collection.append(elem)",
-			"SArraySequence": "collection = collection.appended(elem)",
-			"SVectorSequence": "collection = collection.appended(elem)"
+			"default": "collection.add(elem)"
 		}
 	},
 	"contains": {
@@ -46,9 +45,17 @@
 		},
 		"scala": {
 			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
-			"default": "collection.addAll(elems)",
-			"SArraySequence": "collection = collection.appendedAll(elems)",
-			"SVectorSequence": "collection = collection.appendedAll(elems)"
+			"default": "collection.addAll(elems)"
+		}
+	},
+	"toArray": {
+		"java": {
+			"args": [ { "name": "tag", "type": "T[]" } ],
+			"default": "collection.toArray(tag)"
+		},
+		"scala": {
+			"args": [ { "name": "tag", "type": "ClassTag<T>" } ],
+			"default": "collection.toArray(tag)"
 		}
 	},
 	"iterator": {
@@ -68,7 +75,7 @@
 		},
 		"scala": {
 			"args": [ { "name": "elem", "type": "T" } ],
-			"default": "collection.subtractOne(elem)"
+			"default": "collection.remove(elem)"
 		}
 	},
 	"removeAll": {

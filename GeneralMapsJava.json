@@ -1,0 +1,20 @@
+{
+	"init": {
+		"java": {
+			"args": []
+		},
+		"scala": {
+			"args": []
+		}
+	},
+	"size": {
+		"java": {
+			"args": [],
+			"default": "collection.size()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.size()"
+		}
+	}
+}

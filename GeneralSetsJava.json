@@ -2,10 +2,15 @@
 	"init": {
 		"java": {
 			"args": [],
-			"JHashSet": "new HashSet<>()"
+			"JHashSet": "new HashSet<>()",
+			"JLinkedSet": "new LinkedHashSet<>()",
+			"JTreeSet": "new TreeSet<>()"
 		},
 		"scala": {
-			"args": []
+			"args": [],
+			"SHashSet": "new HashSet<>()",
+			"SLinkedSet": "new LinkedHashSet<>()",
+			"STreeSet": "new TreeSet<>(new Ordering<T>() { public int compare(T x, T y) { return x.compareTo(y); }})"
 		}
 	},
 	"size": {

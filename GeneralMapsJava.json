@@ -1,10 +1,16 @@
 {
 	"init": {
 		"java": {
-			"args": []
+			"args": [],
+			"JHashMap": "new HashMap<>()",
+			"JLinkedMap": "new LinkedHashMap<>()",
+			"JTreeMap": "new TreeMap<>()"
 		},
 		"scala": {
-			"args": []
+			"args": [],
+			"SHashMap": "new HashMap<>()",
+			"SLinkedMap": "new LinkedHashMap<>()",
+			"JTreeMap": "new TreeMap<>(new Ordering<K>() { public int compare(K x, K y) { return x.compareTo(y); }})"
 		}
 	},
 	"size": {
@@ -15,6 +21,88 @@
 		"scala": {
 			"args": [],
 			"default": "collection.size()"
+		}
+	},
+	"get": {
+		"java": {
+			"args": [ { "name": "key", "type": "K" } ],
+			"default": "collection.get(key)"
+		},
+		"scala": {
+			"args": [ { "name": "key", "type": "K" } ],
+			"default": "collection.apply(key)"
+		}
+	},
+	"put": {
+		"java": {
+			"args": [ 
+				{ "name": "key", "type": "K" },
+				{ "name": "value", "type": "V" } 
+			],
+			"default": "collection.put(key, value)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "key", "type": "K" },
+				{ "name": "value", "type": "V" } 
+			],
+			"default": "collection.update(key, value)"
+		}
+	},
+	"containsKey": {
+		"java": {
+			"args": [ { "name": "key", "type": "K" } ],
+			"default": "collection.containsKey(key)"
+		},
+		"scala": {
+			"args": [ { "name": "key", "type": "K" } ],
+			"default": "collection.contains(key)"
+		}
+	},
+	"remove": {
+		"java": {
+			"args": [ { "name": "key", "type": "K" } ],
+			"default": "collection.remove(key)"
+		},
+		"scala": {
+			"args": [ { "name": "key", "type": "K" } ],
+			"default": "collection.remove(key)"
+		}
+	},
+	"replace": {
+		"java": {
+			"args": [ 
+				{ "name": "key", "type": "K" },
+				{ "name": "value", "type": "V" } 
+			],
+			"default": "collection.replace(key, value)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "key", "type": "K" },
+				{ "name": "value", "type": "V" } 
+			],
+			"default": "collection.update(key, value)"
+		}
+	},
+	"keys": {
+		"java": {
+			"args": [],
+			"default": "collection.keySet()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.keySet()"
+		}
+	},
+	"values": {
+		"java": {
+			"args": [],
+			"default": "collection.values()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.values()"
 		}
 	}
 }

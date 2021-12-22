@@ -43,6 +43,16 @@
 			"default": "collection.contains(elem)"
 		}
 	},
+	"clear": {
+		"java": {
+			"args": [],
+			"default": "collection.clear()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.clear()"
+		}
+	},
 	"addAll": {
 		"java": {
 			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],

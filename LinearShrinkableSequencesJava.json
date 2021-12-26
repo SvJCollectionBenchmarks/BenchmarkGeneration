@@ -42,14 +42,6 @@
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
 				"content": "collection.append(elem)"
-			},
-			"SArraySequence": {
-				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection = collection.appended(elem)"
-			},
-			"SVectorSequence": {
-				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection = collection.appended(elem)"
 			}
 		},
 		"set": {
@@ -66,13 +58,6 @@
 					{ "name": "elem", "type": "T" }
 				],
 				"content": "collection.update(index, elem)"
-			},
-			"SVectorSequence": {
-				"args": [ 
-					{ "name": "index", "type": "int" },
-					{ "name": "elem", "type": "T" }
-				],
-				"content": "collection = collection.updated(index, elem)"
 			}
 		},
 		"contains": {
@@ -113,14 +98,6 @@
 			"scala": {
 				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
 				"content": "collection.addAll(elems)"
-			},
-			"SArraySequence": {
-				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
-				"content": "collection = collection.appendedAll(elems)"
-			},
-			"SVectorSequence": {
-				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
-				"content": "collection = collection.appendedAll(elems)"
 			}
 		},
 		"subCollection": {

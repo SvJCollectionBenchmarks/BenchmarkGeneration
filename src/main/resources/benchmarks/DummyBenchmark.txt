@@ -1,0 +1,10 @@
+${$group.operations.addAll.$current.args.type} elems = Arrays.asList(1, 2, 3, 4, 5);
+${$group.init.$current.content}
+int elem = 2;
+${$group.operations.add.$current.content}
+${$group.operations.addAll.$current.content}
+elem = 3;
+${$group.operations.remove.$current.content}
+int index = 3;
+bh.consume(${$group.operations.get.$current.content});
+${$group.operations.clear.$current.content}

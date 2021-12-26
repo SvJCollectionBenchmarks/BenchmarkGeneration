@@ -1,2 +1,3 @@
 New format of the json: add new entry with array of generated entities + their profiles (java, scala) - if there is custom profile (eg. SVectorSequence), then we use the profile set in there;
 Add "import" key to the JSONs
+Add isEmpty method to all

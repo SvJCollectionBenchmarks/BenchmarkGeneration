@@ -1,26 +1,16 @@
 {
 	"generated": {
-		"JHashMap": "java",
-		"JLinkedMap": "java",
-		"SHashMap": "scala",
-		"SLinkedMap": "scala"
+		"JTreeMap": "java",
+		"STreeMap": "scala"
 	},
 	"init": {
-		"JHashMap": {
+		"JTreeMap": {
 			"args": [],
-			"content": "new HashMap<>()"
+			"content": "new TreeMap<>()"
 		},
-		"JLinkedMap": {
+		"STreeMap": {
 			"args": [],
-			"content": "new LinkedHashMap<>()"
-		},
-		"SHashMap": {
-			"args": [],
-			"content": "new HashMap<>()"
-		},
-		"SLinkedMap": {
-			"args": [],
-			"content": "new LinkedHashMap<>()"
+			"content": "new TreeMap<>(new Ordering<K>() { public int compare(K x, K y) { return x.compareTo(y); }})"
 		}
 	},
 	"operations": {

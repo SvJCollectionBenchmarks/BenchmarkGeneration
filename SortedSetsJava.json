@@ -1,0 +1,102 @@
+{
+	"init": {
+		"java": {
+			"args": [],
+			"JTreeSet": "new TreeSet<>()"
+		},
+		"scala": {
+			"args": [],
+			"STreeSet": "new TreeSet<>(new Ordering<T>() { public int compare(T x, T y) { return x.compareTo(y); }})"
+		}
+	},
+	"size": {
+		"java": {
+			"args": [],
+			"default": "collection.size()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.size()"
+		}
+	},
+	"add": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.add(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.add(elem)"
+		}
+	},
+	"contains": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		}
+	},
+	"clear": {
+		"java": {
+			"args": [],
+			"default": "collection.clear()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.clear()"
+		}
+	},
+	"addAll": {
+		"java": {
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.addAll(elems)"
+		},
+		"scala": {
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.addAll(elems)"
+		}
+	},
+	"toArray": {
+		"java": {
+			"args": [ { "name": "tag", "type": "T[]" } ],
+			"default": "collection.toArray(tag)"
+		},
+		"scala": {
+			"args": [ { "name": "tag", "type": "ClassTag<T>" } ],
+			"default": "collection.toArray(tag)"
+		}
+	},
+	"iterator": {
+		"java": {
+			"args": [],
+			"default": "collection.iterator()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.iterator()"
+		}
+	},
+	"remove": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.remove(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.remove(elem)"
+		}
+	},
+	"removeAll": {
+		"java": {
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.removeAll(elems)"
+		},
+		"scala": {
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.subtractAll(elems)"
+		}
+	}
+}

@@ -1,0 +1,186 @@
+{
+	"init": {
+		"java": {
+			"JArraySequence": "new ArrayList<>()",
+			"JLinkedSequence": "new LinkedList<>()",
+			"JVectorSequence": "new Vector<>()"
+		},
+		"scala": {
+			"SArrayBufferSequence": "new ArrayBuffer<>()",
+			"SLinkedSequence": "new ListBuffer<>()"
+		}
+	},
+	"size": {
+		"java": {
+			"args": [],
+			"default": "collection.size()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.size()"
+		}
+	},
+	"get": {
+		"java": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.get(index)"
+		},
+		"scala": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.apply(index)"
+		}
+	},
+	"add": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.add(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.append(elem)",
+			"SArraySequence": "collection = collection.appended(elem)",
+			"SVectorSequence": "collection = collection.appended(elem)"
+		}
+	},
+	"set": {
+		"java": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.set(index, elem)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.update(index, elem)",
+			"SVectorSequence": "collection = collection.updated(index, elem)"
+		}
+	},
+	"contains": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.contains(elem)"
+		}
+	},
+	"indexOf": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.indexOf(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.indexOf(elem)"
+		}
+	},
+	"lastIndexOf": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.lastIndexOf(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.lastIndexOf(elem, collection.size() - 1)"
+		}
+	},
+	"addAll": {
+		"java": {
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.addAll(elems)"
+		},
+		"scala": {
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.addAll(elems)",
+			"SArraySequence": "collection = collection.appendedAll(elems)",
+			"SVectorSequence": "collection = collection.appendedAll(elems)"
+		}
+	},
+	"subCollection": {
+		"java": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "count", "type": "int" }
+			],
+			"default": "collection.subList(index, index + count + 1)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "int" }
+			],
+			"default": "collection.slice(index, index + count + 1)"
+		}
+	},
+	"iterator": {
+		"java": {
+			"args": [],
+			"default": "collection.iterator()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.iterator()"
+		}
+	},
+	"insert": {
+		"java": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.add(index, elem)"
+		},
+		"scala": {
+			"args": [ 
+				{ "name": "index", "type": "int" },
+				{ "name": "elem", "type": "T" }
+			],
+			"default": "collection.insert(index, elem)"
+		}
+	},
+	"remove": {
+		"java": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.remove(elem)"
+		},
+		"scala": {
+			"args": [ { "name": "elem", "type": "T" } ],
+			"default": "collection.subtractOne(elem)"
+		}
+	},
+	"removeAt": {
+		"java": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.remove(index)"
+		},
+		"scala": {
+			"args": [ { "name": "index", "type": "int" } ],
+			"default": "collection.remove(index)"
+		}
+	},
+	"removeAll": {
+		"java": {
+			"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+			"default": "collection.removeAll(elems)"
+		},
+		"scala": {
+			"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+			"default": "collection.subtractAll(elems)"
+		}
+	},
+	"clear": {
+		"java": {
+			"args": [],
+			"default": "collection.clear()"
+		},
+		"scala": {
+			"args": [],
+			"default": "collection.clear()"
+		}
+	}
+}

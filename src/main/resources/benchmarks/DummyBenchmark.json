@@ -1,5 +1,20 @@
 {
+  "groups": [
+    "GeneralSequencesJava",
+    "IndexedShrinkableSequencesJava",
+    "LinearShrinkableSequencesJava"
+  ],
   "variables": {
-    "T": "Integer"
+    "profiled": {
+      "java": {
+        "elemsOne": "Arrays.asList(1, 2, 3, 4, 5)"
+      },
+      "scala": {
+        "elemsOne": "dummy dummy dum dum"
+      }
+    },
+    "universal": {
+      "T": "Integer"
+    }
   }
 }

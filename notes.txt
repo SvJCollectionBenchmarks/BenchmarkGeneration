@@ -1,4 +1,4 @@
 Add "import" key to the JSONs
 Add isEmpty method to all
 Add "collection base type" OR enhance init
-Add "type variables" to jsons ($T, $K, $V etc. specified by benchmark)
+Add variables to jsons ($T, $K, $V, $firstElem etc. specified by benchmark)

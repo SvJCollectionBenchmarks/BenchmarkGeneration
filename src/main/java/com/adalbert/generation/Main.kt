@@ -20,35 +20,48 @@ fun traverse(root: JsonNode, builtTree: Tree) {
             traverse(fieldValue, newChild)
         }
     } else if (root.isArray) {
-        println("PANIC ARRAY")
         val arrayNode = root as ArrayNode
         for (i in 0 until arrayNode.size()) {
             val arrayElement = arrayNode[i]
             traverse(arrayElement, builtTree)
         }
     } else {
-        builtTree.value = root.textValue()
+        if (builtTree.values == null) builtTree.values = mutableListOf()
+        builtTree.values?.add(root.textValue())
     }
 }
 
-fun parseJsonFile(file: File) {
-    val tree = Tree(file.name.substringUntilLast("."), mutableListOf())
-    traverse(ObjectMapper().readTree(file), tree)
-    println(tree)
+fun parseJsonFile(file: File): Tree {
+    val outcomeTree = Tree(file.name.substringUntilLast("."), mutableListOf())
+    traverse(ObjectMapper().readTree(file), outcomeTree)
+    return outcomeTree
 }
 
 fun main() {
-    val resourcesUri = URLDecoder.decode(Context().javaClass.getResource("/")?.path, "UTF-8")
+    val resourcesUri = URLDecoder.decode(Tree("", mutableListOf()).javaClass.getResource("/")?.path, "UTF-8")
         ?: throw IllegalStateException("Couldn't find main resources folder")
 
-    val benchmarks = File("$resourcesUri/benchmarks").listFiles()
-        ?.filter { it.extension == "json" } ?: throw IllegalStateException("Couldn't load benchmarks")
-    val groups = File("$resourcesUri/groups").listFiles()
-        ?.filter { it.extension == "json" } ?: throw IllegalStateException("Couldn't load groups")
+    val benchmarksFiles = File("$resourcesUri/benchmarks").listFiles()
+        ?.filter { it.extension == "json" }
+        ?: throw IllegalStateException("Couldn't load benchmarks")
+    val groupsFiles = File("$resourcesUri/groups").listFiles()
+        ?.filter { it.extension == "json" }
+        ?: throw IllegalStateException("Couldn't load groups")
 
-    val tree = Tree("root", mutableListOf(
-        Tree("groups", groups.map { Tree(it.name.substringUntilLast("."), mutableListOf()) }.toMutableList()),
-        Tree("benchmarks", benchmarks.map { Tree(it.name.substringUntilLast("."), mutableListOf()) }.toMutableList())
+    val propertiesTree = Tree("root", mutableListOf(
+        Tree("groups", groupsFiles.map { file -> parseJsonFile(file) }.toMutableList()),
+        Tree("benchmarks", benchmarksFiles.map { file -> parseJsonFile(file) }.toMutableList())
     ))
 
+    val benchmarksTexts = File("$resourcesUri/benchmarks").listFiles()
+        ?.filter { it.extension == "txt" }
+        ?: throw IllegalStateException("Couldn't load benchmarks texts")
+
+    benchmarksTexts.forEach { benchmarkFile ->
+        val context: MutableMap<String, List<String>> = mutableMapOf()
+        val benchmarkName = benchmarkFile.name.substringUntilLast(".")
+        context["benchmark"] = listOf(benchmarkName)
+        val groups = propertiesTree.getValues("benchmarks", benchmarkName, "groups")
+        println("Groups for $benchmarkName are $groups")
+    }
 }

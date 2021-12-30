@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import java.io.File
 import java.net.URLDecoder
+import kotlin.math.exp
 
 
 fun traverse(root: JsonNode, builtTree: Tree) {
@@ -35,6 +36,27 @@ fun parseJsonFile(file: File): Tree {
     val outcomeTree = Tree(file.name.substringUntilLast("."), mutableListOf())
     traverse(ObjectMapper().readTree(file), outcomeTree)
     return outcomeTree
+}
+
+fun processExpressionWithVariables(expression: String, context: Map<String, List<String>>, propertiesTree: Tree) {
+    val variableRegex = Regex("\\$([^\\.]*)")
+    val fragments = expression.split(".")
+    val previouslyMatched = mutableListOf<String>()
+    fragments.forEach {
+        if (it.matches(variableRegex)) {
+            val resolved = matchValueWithVariable(previouslyMatched, it.substring(1), context, propertiesTree)
+                ?: throw IllegalStateException("Couldn't process variable ${it.substring(1)} with the given context and previously matched $previouslyMatched")
+            previouslyMatched.add(resolved)
+        } else previouslyMatched.add(it)
+    }
+    println(propertiesTree.getValues(previouslyMatched))
+}
+
+fun matchValueWithVariable(previouslyMatched: List<String>, variable: String, context: Map<String, List<String>>, propertiesTree: Tree): String? {
+    val values = context[variable] ?: return null
+    if (values.size == 1) return values[0]
+    val possibleTreeValues = propertiesTree.getKeys(previouslyMatched) ?: return null
+    return values.firstOrNull { possibleTreeValues.contains(it) }
 }
 
 fun main() {
@@ -70,8 +92,8 @@ fun main() {
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
                 profiles.addAll(defaultProfile)
-                context["profiles"] = profiles
-                println("In group $groupName, for generated $generatedName, the profiles are $profiles")
+                context["profile"] = profiles
+                processExpressionWithVariables("benchmarks.\$benchmark.variables.profiled.\$profile.elemsOne", context, propertiesTree)
             }
         }
     }

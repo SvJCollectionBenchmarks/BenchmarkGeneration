@@ -32,21 +32,21 @@
 		"get": {
 			"java": {
 				"args": [ { "name": "index", "type": "int" } ],
-				"content": "collection.get(index)"
+				"content": "collection.get($index)"
 			},
 			"scala": {
 				"args": [ { "name": "index", "type": "int" } ],
-				"content": "collection.apply(index)"
+				"content": "collection.apply($index)"
 			}
 		},
 		"add": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.add(elem)"
+				"content": "collection.add($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.append(elem)"
+				"content": "collection.append($elem)"
 			}
 		},
 		"set": {
@@ -55,54 +55,54 @@
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "T" }
 				],
-				"content": "collection.set(index, elem)"
+				"content": "collection.set($index, $elem)"
 			},
 			"scala": {
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "T" }
 				],
-				"content": "collection.update(index, elem)"
+				"content": "collection.update($index, $elem)"
 			}
 		},
 		"contains": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.contains(elem)"
+				"content": "collection.contains($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.contains(elem)"
+				"content": "collection.contains($elem)"
 			}
 		},
 		"indexOf": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.indexOf(elem)"
+				"content": "collection.indexOf($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.indexOf(elem)"
+				"content": "collection.indexOf($elem)"
 			}
 		},
 		"lastIndexOf": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.lastIndexOf(elem)"
+				"content": "collection.lastIndexOf($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.lastIndexOf(elem, collection.size() - 1)"
+				"content": "collection.lastIndexOf($elem, collection.size() - 1)"
 			}
 		},
 		"addAll": {
 			"java": {
 				"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
-				"content": "collection.addAll(elems)"
+				"content": "collection.addAll($elems)"
 			},
 			"scala": {
 				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
-				"content": "collection.addAll(elems)"
+				"content": "collection.addAll($elems)"
 			}
 		},
 		"subCollection": {
@@ -111,14 +111,14 @@
 					{ "name": "index", "type": "int" },
 					{ "name": "count", "type": "int" }
 				],
-				"content": "collection.subList(index, index + count + 1)"
+				"content": "collection.subList($index, $index + $count + 1)"
 			},
 			"scala": {
 				"args": [ 
 					{ "name": "index", "type": "int" },
-					{ "name": "elem", "type": "int" }
+					{ "name": "count", "type": "int" }
 				],
-				"content": "collection.slice(index, index + count + 1)"
+				"content": "collection.slice($index, $index + $count + 1)"
 			}
 		},
 		"iterator": {
@@ -137,44 +137,44 @@
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "T" }
 				],
-				"content": "collection.add(index, elem)"
+				"content": "collection.add($index, $elem)"
 			},
 			"scala": {
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "T" }
 				],
-				"content": "collection.insert(index, elem)"
+				"content": "collection.insert($index, $elem)"
 			}
 		},
 		"remove": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.remove(elem)"
+				"content": "collection.remove($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.subtractOne(elem)"
+				"content": "collection.subtractOne($elem)"
 			}
 		},
 		"removeAt": {
 			"java": {
 				"args": [ { "name": "index", "type": "int" } ],
-				"content": "collection.remove(index)"
+				"content": "collection.remove($index)"
 			},
 			"scala": {
 				"args": [ { "name": "index", "type": "int" } ],
-				"content": "collection.remove(index)"
+				"content": "collection.remove($index)"
 			}
 		},
 		"removeAll": {
 			"java": {
 				"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
-				"content": "collection.removeAll(elems)"
+				"content": "collection.removeAll($elems)"
 			},
 			"scala": {
 				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
-				"content": "collection.subtractAll(elems)"
+				"content": "collection.subtractAll($elems)"
 			}
 		},
 		"clear": {

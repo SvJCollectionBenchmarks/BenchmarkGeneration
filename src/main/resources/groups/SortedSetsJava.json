@@ -27,21 +27,21 @@
 		"add": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.add(elem)"
+				"content": "collection.add($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.add(elem)"
+				"content": "collection.add($elem)"
 			}
 		},
 		"contains": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.contains(elem)"
+				"content": "collection.contains($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.contains(elem)"
+				"content": "collection.contains($elem)"
 			}
 		},
 		"clear": {
@@ -57,21 +57,21 @@
 		"addAll": {
 			"java": {
 				"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
-				"content": "collection.addAll(elems)"
+				"content": "collection.addAll($elems)"
 			},
 			"scala": {
 				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
-				"content": "collection.addAll(elems)"
+				"content": "collection.addAll($elems)"
 			}
 		},
 		"toArray": {
 			"java": {
 				"args": [ { "name": "tag", "type": "T[]" } ],
-				"content": "collection.toArray(tag)"
+				"content": "collection.toArray($tag)"
 			},
 			"scala": {
 				"args": [ { "name": "tag", "type": "ClassTag<T>" } ],
-				"content": "collection.toArray(tag)"
+				"content": "collection.toArray($tag)"
 			}
 		},
 		"iterator": {
@@ -87,21 +87,21 @@
 		"remove": {
 			"java": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.remove(elem)"
+				"content": "collection.remove($elem)"
 			},
 			"scala": {
 				"args": [ { "name": "elem", "type": "T" } ],
-				"content": "collection.remove(elem)"
+				"content": "collection.remove($elem)"
 			}
 		},
 		"removeAll": {
 			"java": {
 				"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
-				"content": "collection.removeAll(elems)"
+				"content": "collection.removeAll($elems)"
 			},
 			"scala": {
 				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
-				"content": "collection.subtractAll(elems)"
+				"content": "collection.subtractAll($elems)"
 			}
 		}
 	}

@@ -38,9 +38,21 @@ fun parseJsonFile(file: File): Tree {
     return outcomeTree
 }
 
-fun processExpressionWithVariables(expression: String, context: Map<String, List<String>>, propertiesTree: Tree) {
+fun processExpressionWithArguments(expression: String, context: MutableMap<String, List<String>>, propertiesTree: Tree): String {
+    val fragments = expression.split(",").map { it.trim() }
+    val argumentsList = mutableListOf<Pair<String, String>>()
+    fragments.subList(1, fragments.size).forEach { argument ->
+        val argumentDefinition = argument.split("=").map { it.trim() }
+        argumentsList.add(Pair(argumentDefinition[0], argumentDefinition[1]))
+    }
+    var subExpression = processExpressionWithVariables(fragments[0], context, propertiesTree)
+    argumentsList.forEach { subExpression = subExpression.replace("\$${it.first}", it.second) }
+    return subExpression
+}
+
+fun processExpressionWithVariables(expression: String, context: Map<String, List<String>>, propertiesTree: Tree): String {
     val variableRegex = Regex("\\$([^\\.]*)")
-    val fragments = expression.split(".")
+    val fragments = expression.split(".").map { it.trim() }
     val previouslyMatched = mutableListOf<String>()
     fragments.forEach {
         if (it.matches(variableRegex)) {
@@ -49,7 +61,8 @@ fun processExpressionWithVariables(expression: String, context: Map<String, List
             previouslyMatched.add(resolved)
         } else previouslyMatched.add(it)
     }
-    println(propertiesTree.getValues(previouslyMatched))
+    return propertiesTree.getValues(previouslyMatched)?.joinToString(", ")
+        ?: throw IllegalStateException("Values in the tree are null!")
 }
 
 fun matchValueWithVariable(previouslyMatched: List<String>, variable: String, context: Map<String, List<String>>, propertiesTree: Tree): String? {
@@ -93,7 +106,7 @@ fun main() {
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
                 profiles.addAll(defaultProfile)
                 context["profile"] = profiles
-                processExpressionWithVariables("benchmarks.\$benchmark.variables.profiled.\$profile.elemsOne", context, propertiesTree)
+                processExpressionWithArguments("groups.\$group.operations.remove.\$profile.content, elem = 3", context, propertiesTree)
             }
         }
     }

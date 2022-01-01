@@ -38,6 +38,26 @@ fun parseJsonFile(file: File): Tree {
     return outcomeTree
 }
 
+private val variableExpressionRegex = Regex("\\$\\{([^}]*)\\}")
+private val argumentExpressionRegex = Regex("#\\{([^}]*)\\}")
+
+fun processBenchmarkContent(benchmarkFile: File, context: MutableMap<String, List<String>>, propertiesTree: Tree): String {
+    var benchmarkContent = benchmarkFile.readText()
+    variableExpressionRegex.findAll(benchmarkContent).forEach {
+        benchmarkContent = benchmarkContent.replace(
+            it.groupValues[0],
+            processExpressionWithVariables(it.groupValues[1], context, propertiesTree)
+        )
+    }
+    argumentExpressionRegex.findAll(benchmarkContent).forEach {
+        benchmarkContent = benchmarkContent.replace(
+            it.groupValues[0],
+            processExpressionWithArguments(it.groupValues[1], context, propertiesTree)
+        )
+    }
+    return benchmarkContent
+}
+
 fun processExpressionWithArguments(expression: String, context: MutableMap<String, List<String>>, propertiesTree: Tree): String {
     val fragments = expression.split(",").map { it.trim() }
     val argumentsList = mutableListOf<Pair<String, String>>()
@@ -106,7 +126,8 @@ fun main() {
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
                 profiles.addAll(defaultProfile)
                 context["profile"] = profiles
-                processExpressionWithArguments("groups.\$group.operations.remove.\$profile.content, elem = 3", context, propertiesTree)
+                println("############### ${profiles[0]} ###############")
+                println(processBenchmarkContent(benchmarkFile, context, propertiesTree))
             }
         }
     }

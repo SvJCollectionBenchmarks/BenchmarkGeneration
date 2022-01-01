@@ -6,11 +6,11 @@
 	"init": {
 		"JTreeMap": {
 			"args": [],
-			"content": "new TreeMap<>()"
+			"content": "TreeMap<$K, $V> collection = new TreeMap<>()"
 		},
 		"STreeMap": {
 			"args": [],
-			"content": "new TreeMap<>(new Ordering<K>() { public int compare(K x, K y) { return x.compareTo(y); }})"
+			"content": "TreeMap<$K, $V> collection = new TreeMap<>(new Ordering<K>() { public int compare(K x, K y) { return x.compareTo(y); }})"
 		}
 	},
 	"operations": {

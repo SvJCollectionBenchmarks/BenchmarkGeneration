@@ -8,19 +8,19 @@
 	"init": {
 		"JHashMap": {
 			"args": [],
-			"content": "new HashMap<>()"
+			"content": "HashMap<$K, $V> collection = new HashMap<>()"
 		},
 		"JLinkedMap": {
 			"args": [],
-			"content": "new LinkedHashMap<>()"
+			"content": "LinkedHashMap<$K, $V> collection = new LinkedHashMap<>()"
 		},
 		"SHashMap": {
 			"args": [],
-			"content": "new HashMap<>()"
+			"content": "HashMap<$K, $V> collection = new HashMap<>()"
 		},
 		"SLinkedMap": {
 			"args": [],
-			"content": "new LinkedHashMap<>()"
+			"content": "LinkedHashMap<$K, $V> collection = new LinkedHashMap<>()"
 		}
 	},
 	"operations": {

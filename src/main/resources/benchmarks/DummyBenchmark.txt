@@ -1,5 +1,5 @@
 ${groups.$group.operations.addAll.$profile.args.type} elems = ${benchmarks.$benchmark.variables.profiled.$profile.elemsOne};
-${groups.$group.init.$profile.content};
+#{groups.$group.init.$profile.content, T = Integer};
 #{groups.$group.operations.add.$profile.content, elem = 2};
 #{groups.$group.operations.addAll.$profile.content, elems = elems};
 #{groups.$group.operations.remove.$profile.content, elem = 3};

@@ -6,11 +6,11 @@
 	"init": {
 		"JTreeSet": {
 			"args": [],
-			"content": "new TreeSet<>()"
+			"content": "TreeSet<$T> collection = new TreeSet<>()"
 		},
 		"STreeSet": {
 			"args": [],
-			"content": "new TreeSet<>(new Ordering<T>() { public int compare(T x, T y) { return x.compareTo(y); }})"
+			"content": "TreeSet<$T> collection = new TreeSet<>(new Ordering<T>() { public int compare(T x, T y) { return x.compareTo(y); }})"
 		}
 	},
 	"operations": {

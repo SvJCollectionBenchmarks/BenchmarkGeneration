@@ -6,11 +6,11 @@
 	"init": {
 		"JLinkedSequence": {
 			"args": [],
-			"content": "new LinkedList<>()"
+			"content": "LinkedList<$T> collection = new LinkedList<>()"
 		},
 		"SLinkedSequence": {
 			"args": [],
-			"content": "new ListBuffer<>()"
+			"content": "ListBuffer<$T> collection = new ListBuffer<>()"
 		}
 	},
 	"operations": {

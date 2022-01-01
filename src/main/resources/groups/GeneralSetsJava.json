@@ -8,19 +8,19 @@
 	"init": {
 		"JHashSet": {
 			"args": [],
-			"content": "new HashSet<>()"
+			"content": "HashSet<$T> collection = new HashSet<>()"
 		},
 		"JLinkedSet": {
 			"args": [],
-			"content": "new LinkedHashSet<>()"
+			"content": "LinkedHashSet<$T> collection = new LinkedHashSet<>()"
 		},
 		"SHashSet": {
 			"args": [],
-			"content": "new HashSet<>()"
+			"content": "HashSet<$T> collection = new HashSet<>()"
 		},
 		"SLinkedSet": {
 			"args": [],
-			"content": "new LinkedHashSet<>()"
+			"content": "LinkedHashSet<$T> collection = new LinkedHashSet<>()"
 		}
 	},
 	"operations": {

@@ -7,15 +7,15 @@
 	"init": {
 		"JArraySequence": {
 			"args": [],
-			"content": "new ArrayList<>()"
+			"content": "ArrayList<$T> collection = new ArrayList<>()"
 		},
 		"JVectorSequence": {
 			"args": [],
-			"content": "new Vector<>()"
+			"content": "Vector<$T> Vector<>()"
 		},
 		"SArrayBufferSequence": {
 			"args": [],
-			"content": "new ArrayBuffer<>()"
+			"content": "ArrayBuffer<$T> ArrayBuffer<>()"
 		}
 	},
 	"operations": {

@@ -11,31 +11,31 @@
 	"init": {
 		"JArraySequence": {
 			"args": [],
-			"content": "new ArrayList<>()"
+			"content": "ArrayList<$T> collection = new ArrayList<>()"
 		},
 		"JLinkedSequence": {
 			"args": [],
-			"content": "new LinkedList<>()"
+			"content": "LinkedList<$T> collection = new LinkedList<>()"
 		},
 		"JVectorSequence": {
 			"args": [],
-			"content": "new Vector<>()"
+			"content": "Vector<$T> collection = new Vector<>()"
 		},
 		"SArrayBufferSequence": {
 			"args": [],
-			"content": "new ArrayBuffer<>()"
+			"content": "ArrayBuffer<$T> collection = new ArrayBuffer<>()"
 		},
 		"SLinkedSequence": {
 			"args": [],
-			"content": "new ListBuffer<>()"
+			"content": "ListBuffer<$T> collection = new ListBuffer<>()"
 		},
 		"SArraySequence": {
 			"args": [ { "name": "clazz", "type": "ClassTag<T>" } ],
-			"content": "ArraySeq.from(new ArrayBuffer<T>(), $clazz)"
+			"content": "ArraySeq<$T> collection = ArraySeq.from(new ArrayBuffer<T>(), $clazz)"
 		},
 		"SVectorSequence": {
 			"args": [],
-			"content": "Vector.from(new ArrayBuffer<T>())"
+			"content": "Vector<$T> collection = Vector.from(new ArrayBuffer<T>())"
 		}
 	},
 	"operations": {

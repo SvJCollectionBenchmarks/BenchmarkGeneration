@@ -1,4 +1,4 @@
-${groups.$group.operations.addAll.$profile.args.type} elems = ${benchmarks.$benchmark.variables.profiled.$profile.elemsOne};
+#{groups.$group.operations.addAll.$profile.args.type, T = Integer} elems = ${benchmarks.$benchmark.variables.profiled.$profile.elemsOne};
 #{groups.$group.init.$profile.content, T = Integer};
 #{groups.$group.operations.add.$profile.content, elem = 2};
 #{groups.$group.operations.addAll.$profile.content, elems = elems};

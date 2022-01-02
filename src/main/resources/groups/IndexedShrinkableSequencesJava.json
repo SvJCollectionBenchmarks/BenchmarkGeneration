@@ -11,7 +11,7 @@
 		},
 		"JVectorSequence": {
 			"args": [],
-			"content": "Vector<$T> Vector<>()"
+			"content": "Vector<$T> collection = new Vector<>()"
 		},
 		"SArrayBufferSequence": {
 			"args": [],
@@ -97,11 +97,11 @@
 		},
 		"addAll": {
 			"java": {
-				"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"scala": {
-				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.addAll($elems)"
 			}
 		},

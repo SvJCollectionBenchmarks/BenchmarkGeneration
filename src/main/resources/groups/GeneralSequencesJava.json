@@ -132,19 +132,19 @@
 		},
 		"addAll": {
 			"java": {
-				"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"scala": {
-				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"SArraySequence": {
-				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection = collection.appendedAll($elems)"
 			},
 			"SVectorSequence": {
-				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection = collection.appendedAll($elems)"
 			}
 		},

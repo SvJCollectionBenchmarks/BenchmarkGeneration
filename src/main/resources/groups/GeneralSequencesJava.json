@@ -9,33 +9,65 @@
 		"SVectorSequence": "scala"
 	},
 	"init": {
-		"JArraySequence": {
-			"args": [],
-			"content": "ArrayList<$T> collection = new ArrayList<>()"
+		"java": {
+			"JArraySequence": {
+				"args": [],
+				"content": "ArrayList<$T> collection = new ArrayList<>()"
+			},
+			"JLinkedSequence": {
+				"args": [],
+				"content": "LinkedList<$T> collection = new LinkedList<>()"
+			},
+			"JVectorSequence": {
+				"args": [],
+				"content": "Vector<$T> collection = new Vector<>()"
+			},
+			"SArrayBufferSequence": {
+				"args": [],
+				"content": "ArrayBuffer<$T> collection = new ArrayBuffer<>()"
+			},
+			"SLinkedSequence": {
+				"args": [],
+				"content": "ListBuffer<$T> collection = new ListBuffer<>()"
+			},
+			"SArraySequence": {
+				"args": [ { "name": "clazz", "type": "ClassTag<T>" } ],
+				"content": "ArraySeq<$T> collection = ArraySeq.from(new ArrayBuffer<T>(), $clazz)"
+			},
+			"SVectorSequence": {
+				"args": [],
+				"content": "Vector<$T> collection = Vector.from(new ArrayBuffer<T>())"
+			}
 		},
-		"JLinkedSequence": {
-			"args": [],
-			"content": "LinkedList<$T> collection = new LinkedList<>()"
-		},
-		"JVectorSequence": {
-			"args": [],
-			"content": "Vector<$T> collection = new Vector<>()"
-		},
-		"SArrayBufferSequence": {
-			"args": [],
-			"content": "ArrayBuffer<$T> collection = new ArrayBuffer<>()"
-		},
-		"SLinkedSequence": {
-			"args": [],
-			"content": "ListBuffer<$T> collection = new ListBuffer<>()"
-		},
-		"SArraySequence": {
-			"args": [ { "name": "clazz", "type": "ClassTag<T>" } ],
-			"content": "ArraySeq<$T> collection = ArraySeq.from(new ArrayBuffer<T>(), $clazz)"
-		},
-		"SVectorSequence": {
-			"args": [],
-			"content": "Vector<$T> collection = Vector.from(new ArrayBuffer<T>())"
+		"scala": {
+			"JArraySequence": {
+				"args": [],
+				"content": "ArrayList<$T> collection = new ArrayList<>()"
+			},
+			"JLinkedSequence": {
+				"args": [],
+				"content": "LinkedList<$T> collection = new LinkedList<>()"
+			},
+			"JVectorSequence": {
+				"args": [],
+				"content": "Vector<$T> collection = new Vector<>()"
+			},
+			"SArrayBufferSequence": {
+				"args": [],
+				"content": "ArrayBuffer<$T> collection = new ArrayBuffer<>()"
+			},
+			"SLinkedSequence": {
+				"args": [],
+				"content": "ListBuffer<$T> collection = new ListBuffer<>()"
+			},
+			"SArraySequence": {
+				"args": [ { "name": "clazz", "type": "ClassTag<T>" } ],
+				"content": "ArraySeq<$T> collection = ArraySeq.from(new ArrayBuffer<T>(), $clazz)"
+			},
+			"SVectorSequence": {
+				"args": [],
+				"content": "Vector<$T> collection = Vector.from(new ArrayBuffer<T>())"
+			}
 		}
 	},
 	"operations": {

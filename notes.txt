@@ -1,4 +1,2 @@
-Add "import" key to the JSONs
 Add isEmpty method to all
-Add "collection base type" OR enhance init
-Add variables to jsons ($T, $K, $V, $firstElem etc. specified by benchmark)
+Generate code in Java and Scala for ease of use

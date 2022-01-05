@@ -15,9 +15,7 @@
     "dummy"
   ],
   "groups": [
-    "GeneralSequencesJava",
-    "IndexedShrinkableSequencesJava",
-    "LinearShrinkableSequencesJava"
+    "GeneralSequencesJava"
   ],
   "variables": {
     "profiled": {

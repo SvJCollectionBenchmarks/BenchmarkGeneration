@@ -1,6 +1,6 @@
 package com.adalbert.generation
 
-import com.adalbert.utils.Tree
+import com.adalbert.utils.*
 import java.io.File
 import java.net.URLDecoder
 
@@ -22,8 +22,15 @@ fun main() {
     (0 until profilesNumber).forEach {
         val groups = propertiesTree.getKeys("groups")
         groups?.forEach { groupName ->
-            val operations = propertiesTree.getKeys("groups", groupName, "operations")
-            println("$groupName -> $operations")
+            val supportedOperations = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
+                ?: throw IllegalStateException("Couldn't read operations provided by $groupName!")
+            val chosenOperationSet = mutableSetOf<String>()
+            (0..10).forEach {
+                val randomOperation = supportedOperations.random() ?: throw IllegalStateException()
+                supportedOperations.scaleProbabilityInPlace(randomOperation, 2.0)
+                chosenOperationSet.add(randomOperation)
+            }
+            println("Chosen ${chosenOperationSet.size} of ${supportedOperations.size} operations: $chosenOperationSet")
         }
     }
 }

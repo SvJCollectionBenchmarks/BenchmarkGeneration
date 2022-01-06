@@ -1,0 +1,120 @@
+{
+	"generated": {
+		"JHashMap": "java",
+		"JLinkedMap": "java",
+		"SHashMap": "scala",
+		"SLinkedMap": "scala"
+	},
+	"init": {
+		"JHashMap": {
+			"args": [],
+			"content": "HashMap<$K, $V> collection = new HashMap<>()"
+		},
+		"JLinkedMap": {
+			"args": [],
+			"content": "LinkedHashMap<$K, $V> collection = new LinkedHashMap<>()"
+		},
+		"SHashMap": {
+			"args": [],
+			"content": "HashMap<$K, $V> collection = new HashMap<>()"
+		},
+		"SLinkedMap": {
+			"args": [],
+			"content": "LinkedHashMap<$K, $V> collection = new LinkedHashMap<>()"
+		}
+	},
+	"operations": {
+		"size": {
+			"java": {
+				"args": [],
+				"content": "collection.size()"
+			},
+			"scala": {
+				"args": [],
+				"content": "collection.size()"
+			}
+		},
+		"get": {
+			"java": {
+				"args": [ { "name": "key", "type": "K" } ],
+				"content": "collection.get($key)"
+			},
+			"scala": {
+				"args": [ { "name": "key", "type": "K" } ],
+				"content": "collection.apply($key)"
+			}
+		},
+		"put": {
+			"java": {
+				"args": [ 
+					{ "name": "key", "type": "K" },
+					{ "name": "value", "type": "V" } 
+				],
+				"content": "collection.put($key, $value)"
+			},
+			"scala": {
+				"args": [ 
+					{ "name": "key", "type": "K" },
+					{ "name": "value", "type": "V" } 
+				],
+				"content": "collection.update($key, $value)"
+			}
+		},
+		"containsKey": {
+			"java": {
+				"args": [ { "name": "key", "type": "K" } ],
+				"content": "collection.containsKey($key)"
+			},
+			"scala": {
+				"args": [ { "name": "key", "type": "K" } ],
+				"content": "collection.contains($key)"
+			}
+		},
+		"remove": {
+			"java": {
+				"args": [ { "name": "key", "type": "K" } ],
+				"content": "collection.remove($key)"
+			},
+			"scala": {
+				"args": [ { "name": "key", "type": "K" } ],
+				"content": "collection.remove($key)"
+			}
+		},
+		"replace": {
+			"java": {
+				"args": [ 
+					{ "name": "key", "type": "K" },
+					{ "name": "value", "type": "V" } 
+				],
+				"content": "collection.replace($key, $value)"
+			},
+			"scala": {
+				"args": [ 
+					{ "name": "key", "type": "K" },
+					{ "name": "value", "type": "V" } 
+				],
+				"content": "collection.update($key, $value)"
+			}
+		},
+		"keys": {
+			"java": {
+				"args": [],
+				"content": "collection.keySet()"
+			},
+			"scala": {
+				"args": [],
+				"content": "collection.keySet()"
+			}
+		},
+		"values": {
+			"java": {
+				"args": [],
+				"content": "collection.values()"
+			},
+			"scala": {
+				"args": [],
+				"content": "collection.values()"
+			}
+		}
+	}
+}

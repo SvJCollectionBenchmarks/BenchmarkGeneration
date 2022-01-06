@@ -31,60 +31,28 @@
 
 package com.adalbert.benchmarks;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
-import scala.Array;
-import scala.Function0;
-import scala.collection.IterableOnce;
-import scala.collection.mutable.ArrayBuffer;
-import scala.reflect.ClassTag;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 
+@State(Scope.Benchmark)
 public class MyBenchmark {
+
+    private final Collection<? extends Integer> elems = Arrays.asList(1, 2, 3, 4, 5);
 
     @Benchmark
     @Fork(1)
-    @Warmup(iterations = 1)
-    @Measurement(iterations = 1)
-    public void testMethod(Blackhole bh) {
-//        ############### JArraySequence ###############
-//        Collection<? extends Integer> elems = Arrays.asList(1, 2, 3, 4, 5);
-//        ArrayList<Integer> collection = new ArrayList<>();
-//        collection.add(2);
-//        collection.addAll(elems);
-//        collection.remove(3);
-//        bh.consume(collection.get(3));
-//        collection.clear();
-//        ############### JLinkedSequence ###############
-//        Collection<? extends Integer> elems = Arrays.asList(1, 2, 3, 4, 5);
-//        LinkedList<Integer> collection = new LinkedList<>();
-//        collection.add(2);
-//        collection.addAll(elems);
-//        collection.remove(3);
-//        bh.consume(collection.get(3));
-//        collection.clear();
-//        ############### JVectorSequence ###############
-//        Collection<? extends Integer> elems = Arrays.asList(1, 2, 3, 4, 5);
-//        Vector<Integer> collection = new Vector<>();
-//        collection.add(2);
-//        collection.addAll(elems);
-//        collection.remove(3);
-//        bh.consume(collection.get(3));
-//        collection.clear();
-//        ############### SArrayBufferSequence ###############
-        IterableOnce<Integer> elems = new ArrayBuffer<>(10);
-        ArrayBuffer<Integer> collection = new ArrayBuffer<>();
-        collection.append(2);
+    public void testMethodJava(Blackhole bh) {
+        ArrayList<Integer> collection = new ArrayList<>();
+        collection.add(2);
         collection.addAll(elems);
-        collection.subtractOne(3);
-        bh.consume(collection.apply(3));
+        collection.remove(3);
+        bh.consume(collection.get(3));
         collection.clear();
-
     }
 
 }

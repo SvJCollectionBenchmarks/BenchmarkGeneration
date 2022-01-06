@@ -1,2 +1,3 @@
 Add isEmpty method to all
 Generate code in Java and Scala for ease of use
+Add prefixes to collections to avoid import mishaps

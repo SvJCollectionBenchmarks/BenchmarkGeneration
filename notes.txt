@@ -1,3 +1,6 @@
 Add isEmpty method to all
 Generate code in Java and Scala for ease of use
 Add prefixes to collections to avoid import mishaps
+Why did you have to generate manually written benchmarks?
+Maybe Polya profiles could be started now
+

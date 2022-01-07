@@ -2,11 +2,18 @@ package com.adalbert.utils
 
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.sign
 import kotlin.random.Random
 
 fun String.substringUntilLast(text: String): String {
     return this.substring(0 until this.lastIndexOf(text))
+}
+
+fun String.times(times: Int): String {
+    val bob = StringBuilder()
+    (0 until times).forEach { _ -> bob.append(this) }
+    return bob.toString()
 }
 
 fun <T> Set<T>.randomWithout(value: T): T {
@@ -29,30 +36,22 @@ fun <T> List<T>.toProbabilityMap(probabilityPoints: Int = 1_000_000): MutableMap
         outcome[this[i]] = lastIndex until lastIndex + points[i]
         lastIndex += points[i]
     }
-//    val totalProbabilityPoints = outcome.values.sumOf { it.last - it.first + 1 }
-//    if (totalProbabilityPoints != probabilityPoints)
-//        throw IllegalStateException("During map creation, the probability points sum was incorrect ($totalProbabilityPoints instead of $probabilityPoints)!")
     return outcome
 }
 
-// TODO: This is bugged, probabilityPoints increase to sick values
 fun <T> MutableMap<T, IntRange>.scaleProbabilityInPlace(key: T, times: Double) {
+    val totalProbabilityPoints = this.values.sumOf { it.last - it.first + 1 }
     val oldProbabilityPoints = this[key]?.let { it.last - it.first + 1 }
         ?: throw IllegalArgumentException("No key $key in given map!")
-    val newProbabilityPoints = (oldProbabilityPoints * times).toInt()
+    val newProbabilityPoints: Int = min((oldProbabilityPoints * times).toInt(), totalProbabilityPoints - this.size + 1)
     val difference = ((oldProbabilityPoints - newProbabilityPoints).toDouble() / (this.size - 1)).toInt()
     val probabilityPoints = this.map { it.key to max(1, (it.value.last - it.value.first + difference + 1)) }
         .filter { it.first != key }.toMap().toMutableMap()
-    val totalProbabilityPoints = this.values.sumOf { it.last - it.first + 1 }
     val differenceFromTotal = totalProbabilityPoints - (probabilityPoints.values.sum() + newProbabilityPoints)
     (0 until abs(differenceFromTotal)).forEach { _ ->
-        val randomKey = probabilityPoints.keys.random()
+        val randomKey = probabilityPoints.filter { differenceFromTotal.sign > 0 || it.value > 1 }.keys.random()
         probabilityPoints[randomKey] = probabilityPoints[randomKey]!! + differenceFromTotal.sign
     }
-//    val newTotalProbabilityPoints = probabilityPoints.values.sum() + newProbabilityPoints
-//    if (totalProbabilityPoints != newTotalProbabilityPoints)
-//        throw IllegalStateException("During probability scaling, the points sum was incorrect ($newTotalProbabilityPoints instead of $totalProbabilityPoints)!")
-//    else println("Probability points: $newTotalProbabilityPoints")
     var lastPoint = 0
     this.forEach {
         val currentDifference = if (it.key == key) newProbabilityPoints.toInt()

@@ -27,7 +27,7 @@ fun main() {
             val chosenOperationSet = mutableSetOf<String>()
             (0..10).forEach {
                 val randomOperation = supportedOperations.random() ?: throw IllegalStateException()
-                supportedOperations.scaleProbabilityInPlace(randomOperation, 2.0)
+                supportedOperations.scaleProbabilityInPlace(randomOperation, 1.5)
                 chosenOperationSet.add(randomOperation)
             }
             println("Chosen ${chosenOperationSet.size} of ${supportedOperations.size} operations: $chosenOperationSet")

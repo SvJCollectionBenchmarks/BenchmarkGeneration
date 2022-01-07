@@ -20,7 +20,8 @@ internal class ExtensionsKtTest {
 
     @Test
     fun scaleProbability() {
-        val probabilityMap = listOf(1,2,3,4,5).toProbabilityMap().scaleProbability(3, 2.0)
+        val probabilityMap = listOf(1,2,3,4,5).toProbabilityMap()
+        probabilityMap.scaleProbabilityInPlace(3, 2.0)
         probabilityMap.forEach { assertEquals(if (it.key == 3) 400_000 else 150_000, it.value.last - it.value.first) }
     }
 

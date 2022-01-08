@@ -22,16 +22,28 @@ fun main() {
     (0 until profilesNumber).forEach {
         val groups = propertiesTree.getKeys("groups")
         groups?.forEach { groupName ->
-            val supportedOperations = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
+            val operations = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
                 ?: throw IllegalStateException("Couldn't read operations provided by $groupName!")
-            val chosenOperationSet = mutableSetOf<String>()
-            val randomTries = 30
-            (1 .. randomTries).forEach {
-                val randomOperation = supportedOperations.random() ?: throw IllegalStateException()
-                supportedOperations.scaleProbabilityInPlace(randomOperation, 2.0)
-                chosenOperationSet.add(randomOperation)
+            val chosenOperations = mutableListOf<String>()
+            (1 .. 20).forEach { _ ->
+                val randomOperation = operations.random() ?: throw IllegalStateException()
+                operations.scaleProbabilityInPlace(randomOperation, 1.25)
+                chosenOperations.add(randomOperation)
             }
-            println("Chosen ${chosenOperationSet.size} of ${supportedOperations.size} operations: $chosenOperationSet")
+            // println("Chosen ${chosenOperations.toSet().size} of ${supportedOperations.size} operations: $chosenOperations")
+            val generated = propertiesTree.getKeys("groups", groupName, "generated")
+            generated?.forEach { generatedName ->
+                val profiles = mutableListOf(generatedName)
+                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
+                    ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
+                profiles.addAll(defaultProfile)
+                val operationsWithArguments = chosenOperations.map {
+                    Pair(it, ArgumentsGenerator.generateArguments(groupName, profiles, it, propertiesTree))
+                }
+            }
+
         }
     }
 }
+
+

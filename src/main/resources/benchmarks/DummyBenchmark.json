@@ -45,10 +45,10 @@
     },
     "universal": {
       "java": {
-        "$T": "Integer"
+        "T": "Integer"
       },
       "scala": {
-        "$T": "Int"
+        "T": "Int"
       }
     }
   }

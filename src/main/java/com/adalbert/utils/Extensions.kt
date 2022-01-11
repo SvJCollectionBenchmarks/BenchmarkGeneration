@@ -10,6 +10,10 @@ fun String.substringUntilLast(text: String): String {
     return this.substring(0 until this.lastIndexOf(text))
 }
 
+fun String.substringFromLast(text: String): String {
+    return this.substring(this.lastIndexOf(text) + 1)
+}
+
 fun String.times(times: Int): String {
     val bob = StringBuilder()
     (0 until times).forEach { _ -> bob.append(this) }

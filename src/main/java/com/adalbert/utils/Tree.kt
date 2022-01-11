@@ -41,13 +41,11 @@ data class Tree(val key: String, val children: MutableList<Tree>, var values: Mu
         return getMappings(keys.toList())
     }
 
-    fun getMatchingTree(possibleValues: List<String>, vararg keys: String): Tree {
+    fun getFirstMatchingKey(possibleValues: List<String>, vararg keys: String): String {
         val subTree = getSubtree(keys.toList())
         val possibleTreeChildren = subTree.children.map { it.key }
-        val matchedKey = possibleValues.firstOrNull { possibleTreeChildren.contains(it) }
+        return possibleValues.firstOrNull { possibleTreeChildren.contains(it) }
             ?: throw IllegalArgumentException("Couldn't match any key from [$possibleValues] in the node with children [$possibleTreeChildren]!")
-        return subTree.children.first { it.key == matchedKey }
     }
-
 
 }

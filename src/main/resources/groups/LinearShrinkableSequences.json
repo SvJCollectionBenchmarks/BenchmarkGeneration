@@ -182,5 +182,13 @@
 				"content": "collection.clear()"
 			}
 		}
+	},
+	"variables": {
+		"java": {
+			"T": ["Integer", "String", "Double", "Boolean", "Long"]
+		},
+		"scala": {
+			"T": ["Int", "String", "Double", "Boolean", "Long"]
+		}
 	}
 }

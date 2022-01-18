@@ -1,8 +1,6 @@
 package com.adalbert.generation
 
-import com.adalbert.utils.Tree
-import com.adalbert.utils.substringFromLast
-import com.adalbert.utils.times
+import com.adalbert.utils.*
 import kotlin.random.Random
 
 object ArgumentsGenerator {
@@ -10,8 +8,8 @@ object ArgumentsGenerator {
     private data class Argument(var name: String, var type: String)
 
     fun generateArguments(group: String, profiles: List<String>, operation: String, propertiesTree: Tree): Map<String, String> {
-        val profile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "operations", operation)
-        val argsMappings = propertiesTree.getMappings("groups", group, "operations", operation, profile, "args")
+        val operationProfile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "operations", operation)
+        val argsMappings = propertiesTree.getMappings("groups", group, "operations", operation, operationProfile, "args")
         val arguments = argsMappings?.let { argsInner -> (0 until argsInner.size / 2).map { index ->
             if (argsInner[2 * index].first == "name")
                 Argument (argsInner[2 * index].second.first(), argsInner[(2 * index) + 1].second.first())
@@ -22,16 +20,19 @@ object ArgumentsGenerator {
         val typeVariables = arguments
             .filter { it.type.contains("$") }
             .map { it.type }.toSet()
-            .associateWith { matchVariableWithRandom(it, group, profile, propertiesTree) }
+            .associateWith { matchVariableWithRandom(it, group, profiles, propertiesTree) }
         arguments.forEach { if (typeVariables.containsKey(it.type)) it.type = typeVariables[it.type]!! }
+        println("$group $operation $operationProfile $arguments")
         return mapOf()
     }
 
-    private fun matchVariableWithRandom(text: String, group: String, profile: String, propertiesTree: Tree): String {
+    private fun matchVariableWithRandom(text: String, group: String, profiles: List<String>, propertiesTree: Tree): String {
         if (!text.contains("$")) return text
-        val variableName = text.substringFromLast("$")
-        return propertiesTree.getValues("groups", group, "variables", profile, variableName)?.random()
+        val variableName = text.substringFromLast("$").substringUntil('[', ']', '<', '>')
+        val variableProfile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "variables")
+        val randomizedValue = propertiesTree.getValues("groups", group, "variables", variableProfile, variableName)?.random()
             ?: throw IllegalStateException("Couldn't get variable $text for group $group!")
+        return text.replace("\$$variableName", randomizedValue)
     }
 
     val randomValuesGeneration = mapOf<String, () -> String>(

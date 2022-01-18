@@ -14,6 +14,19 @@ fun String.substringFromLast(text: String): String {
     return this.substring(this.lastIndexOf(text) + 1)
 }
 
+fun String.eliminateNotInSet(charSet: Set<Char> = (('a' .. 'z') + ('A' .. 'Z') + ('0' .. '9') + '.').toSet()): String {
+    return this.filter { charSet.contains(it) }
+}
+
+fun String.eliminateInSet(charSet: Set<Char> = setOf('<', '>')): String {
+    return this.filter { !charSet.contains(it) }
+}
+
+fun String.substringUntil(vararg chars: Char): String {
+    val lastIndex = chars.map { this.lastIndexOf(it) }.filter { it != -1 }.minByOrNull { it }
+    return this.substring(0, lastIndex ?: this.length)
+}
+
 fun String.times(times: Int): String {
     val bob = StringBuilder()
     (0 until times).forEach { _ -> bob.append(this) }

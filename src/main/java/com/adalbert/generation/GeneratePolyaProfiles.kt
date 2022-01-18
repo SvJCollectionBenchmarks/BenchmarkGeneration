@@ -25,9 +25,9 @@ fun main() {
             val operations = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
                 ?: throw IllegalStateException("Couldn't read operations provided by $groupName!")
             val chosenOperations = mutableListOf<String>()
-            (1 .. 20).forEach { _ ->
+            (1 .. 30).forEach { _ ->
                 val randomOperation = operations.random() ?: throw IllegalStateException()
-                operations.scaleProbabilityInPlace(randomOperation, 1.25)
+                operations.scaleProbabilityInPlace(randomOperation, 1.0)
                 chosenOperations.add(randomOperation)
             }
             // println("Chosen ${chosenOperations.toSet().size} of ${supportedOperations.size} operations: $chosenOperations")

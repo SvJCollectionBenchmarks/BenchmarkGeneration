@@ -36,62 +36,62 @@
 		},
 		"get": {
 			"java": {
-				"args": [ { "name": "key", "type": "K" } ],
+				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.get($key)"
 			},
 			"scala": {
-				"args": [ { "name": "key", "type": "K" } ],
+				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.apply($key)"
 			}
 		},
 		"put": {
 			"java": {
 				"args": [ 
-					{ "name": "key", "type": "K" },
-					{ "name": "value", "type": "V" } 
+					{ "name": "key", "type": "$K" },
+					{ "name": "value", "type": "$V" }
 				],
 				"content": "collection.put($key, $value)"
 			},
 			"scala": {
 				"args": [ 
-					{ "name": "key", "type": "K" },
-					{ "name": "value", "type": "V" } 
+					{ "name": "key", "type": "$K" },
+					{ "name": "value", "type": "$V" }
 				],
 				"content": "collection.update($key, $value)"
 			}
 		},
 		"containsKey": {
 			"java": {
-				"args": [ { "name": "key", "type": "K" } ],
+				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.containsKey($key)"
 			},
 			"scala": {
-				"args": [ { "name": "key", "type": "K" } ],
+				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.contains($key)"
 			}
 		},
 		"remove": {
 			"java": {
-				"args": [ { "name": "key", "type": "K" } ],
+				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			},
 			"scala": {
-				"args": [ { "name": "key", "type": "K" } ],
+				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			}
 		},
 		"replace": {
 			"java": {
 				"args": [ 
-					{ "name": "key", "type": "K" },
-					{ "name": "value", "type": "V" } 
+					{ "name": "key", "type": "$K" },
+					{ "name": "value", "type": "$V" }
 				],
 				"content": "collection.replace($key, $value)"
 			},
 			"scala": {
 				"args": [ 
-					{ "name": "key", "type": "K" },
-					{ "name": "value", "type": "V" } 
+					{ "name": "key", "type": "$K" },
+					{ "name": "value", "type": "$V" }
 				],
 				"content": "collection.update($key, $value)"
 			}
@@ -115,6 +115,16 @@
 				"args": [],
 				"content": "collection.values()"
 			}
+		}
+	},
+	"variables": {
+		"java": {
+			"K": ["Integer", "String", "Double", "Boolean", "Long"],
+			"V": ["Integer", "String", "Double", "Boolean", "Long"]
+		},
+		"scala": {
+			"K": ["Int", "String", "Double", "Boolean", "Long"],
+			"V": ["Int", "String", "Double", "Boolean", "Long"]
 		}
 	}
 }

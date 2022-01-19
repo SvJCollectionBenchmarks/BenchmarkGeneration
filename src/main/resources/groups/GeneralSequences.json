@@ -31,7 +31,7 @@
 				"content": "ListBuffer<$T> collection = new ListBuffer<>()"
 			},
 			"SArraySequence": {
-				"args": [ { "name": "clazz", "type": "ClassTag<T>" } ],
+				"args": [ { "name": "clazz", "type": "ClassTag<$T>" } ],
 				"content": "ArraySeq<$T> collection = ArraySeq.from(new ArrayBuffer<$T>(), $clazz)"
 			},
 			"SVectorSequence": {
@@ -61,7 +61,7 @@
 				"content": "var collection = new ListBuffer[$T]()"
 			},
 			"SArraySequence": {
-				"args": [ { "name": "clazz", "type": "ClassTag<T>" } ],
+				"args": [ { "name": "clazz", "type": "ClassTag<$T>" } ],
 				"content": "var collection = mutable.ArraySeq[$T]()"
 			},
 			"SVectorSequence": {

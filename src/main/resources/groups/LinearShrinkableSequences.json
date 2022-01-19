@@ -36,11 +36,11 @@
 		},
 		"add": {
 			"java": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.add($elem)"
 			},
 			"scala": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.append($elem)"
 			}
 		},
@@ -48,45 +48,45 @@
 			"java": {
 				"args": [
 					{ "name": "index", "type": "int" },
-					{ "name": "elem", "type": "T" }
+					{ "name": "elem", "type": "$T" }
 				],
 				"content": "collection.set($index, $elem)"
 			},
 			"scala": {
 				"args": [
 					{ "name": "index", "type": "int" },
-					{ "name": "elem", "type": "T" }
+					{ "name": "elem", "type": "$T" }
 				],
 				"content": "collection.update($index, $elem)"
 			}
 		},
 		"contains": {
 			"java": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			},
 			"scala": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			}
 		},
 		"indexOf": {
 			"java": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.indexOf($elem)"
 			},
 			"scala": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.indexOf($elem)"
 			}
 		},
 		"lastIndexOf": {
 			"java": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.lastIndexOf($elem)"
 			},
 			"scala": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.lastIndexOf($elem, collection.size() - 1)"
 			}
 		},
@@ -130,25 +130,25 @@
 			"java": {
 				"args": [
 					{ "name": "index", "type": "int" },
-					{ "name": "elem", "type": "T" }
+					{ "name": "elem", "type": "$T" }
 				],
 				"content": "collection.add($index, $elem)"
 			},
 			"scala": {
 				"args": [
 					{ "name": "index", "type": "int" },
-					{ "name": "elem", "type": "T" }
+					{ "name": "elem", "type": "$T" }
 				],
 				"content": "collection.insert($index, $elem)"
 			}
 		},
 		"remove": {
 			"java": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.remove($elem)"
 			},
 			"scala": {
-				"args": [ { "name": "elem", "type": "T" } ],
+				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.subtractOne($elem)"
 			}
 		},
@@ -164,11 +164,11 @@
 		},
 		"removeAll": {
 			"java": {
-				"args": [ { "name": "elems", "type": "Collection<? extends T>" } ],
+				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.removeAll($elems)"
 			},
 			"scala": {
-				"args": [ { "name": "elems", "type": "IterableOnce<A>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.subtractAll($elems)"
 			}
 		},

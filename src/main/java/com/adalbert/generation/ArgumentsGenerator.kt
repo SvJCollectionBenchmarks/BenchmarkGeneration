@@ -22,7 +22,7 @@ object ArgumentsGenerator {
             .map { it.type }.toSet()
             .associateWith { matchVariableWithRandom(it, group, profiles, propertiesTree) }
         arguments.forEach { if (typeVariables.containsKey(it.type)) it.type = typeVariables[it.type]!! }
-        println("$group $operation $operationProfile $arguments")
+        println("${arguments.map { it.type } }")
         return mapOf()
     }
 

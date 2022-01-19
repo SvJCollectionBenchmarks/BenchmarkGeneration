@@ -35,13 +35,13 @@ object ArgumentsGenerator {
         return text.replace("\$$variableName", randomizedValue)
     }
 
-    val randomValuesGeneration = mapOf<String, () -> String>(
-        "int" to { Random.nextInt(1, 1000).toString() },
-        "Integer" to { Random.nextInt(1, 1000).toString() },
-        "String" to {
-            Random.nextInt(65, 91).toChar().toString()
-                .times(Random.nextInt(1, 10))
-        }
-    )
+    val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {
+        this.putAll(listOf("int", "Int", "Integer").associateWith { { "${Random.nextInt(1, 10)}" } })
+        this.putAll(listOf("float, Float").associateWith { { "${Random.nextDouble(10.0)}" } })
+        this.putAll(listOf("double, Double").associateWith { { "${Random.nextDouble(10.0)}" } })
+        this.putAll(listOf("boolean", "Boolean").associateWith { { "${Random.nextBoolean()}" } })
+        this.putAll(listOf("long", "Long").associateWith { { "${Random.nextLong(Long.MAX_VALUE)}" } })
+        this["String"] = { ('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("") }
+    }
 
 }

@@ -43,6 +43,10 @@ fun <T> Set<T>.randomWithout(value: T): T {
     return element
 }
 
+fun <T> List<T>.randomTimes(times: Int): List<T> {
+    return (0 until times).map { this.random() }
+}
+
 fun <T> List<T>.toProbabilityMap(probabilityPoints: Int = 1_000_000): MutableMap<T, IntRange> {
     val outcome = mutableMapOf<T, IntRange>()
     val points = IntArray (this.size) { probabilityPoints / this.size }

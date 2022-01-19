@@ -22,15 +22,16 @@ fun main() {
     (0 until profilesNumber).forEach {
         val groups = propertiesTree.getKeys("groups")
         groups?.forEach { groupName ->
-            val operations = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
+            val operations: MutableMap<String, IntRange> = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
                 ?: throw IllegalStateException("Couldn't read operations provided by $groupName!")
+            // WARN: The famous "can't measure nothing" paradigm
+            operations.remove("clear")
             val chosenOperations = mutableListOf<String>()
             (1 .. 30).forEach { _ ->
                 val randomOperation = operations.random() ?: throw IllegalStateException()
                 operations.scaleProbabilityInPlace(randomOperation, 1.0)
                 chosenOperations.add(randomOperation)
             }
-            // println("Chosen ${chosenOperations.toSet().size} of ${supportedOperations.size} operations: $chosenOperations")
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
             generated?.forEach { generatedName ->
                 val profiles = mutableListOf(generatedName)

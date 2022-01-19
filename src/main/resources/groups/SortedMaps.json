@@ -109,10 +109,12 @@
 	},
 	"variables": {
 		"java": {
-			"T": ["Integer", "String", "Double", "Boolean", "Long"]
+			"K": ["Integer", "String", "Double", "Float", "Boolean", "Long"],
+			"V": ["Integer", "String", "Double", "Float", "Boolean", "Long"]
 		},
 		"scala": {
-			"T": ["Int", "String", "Double", "Boolean", "Long"]
+			"K": ["Int", "String", "Double", "Float", "Boolean", "Long"],
+			"V": ["Int", "String", "Double", "Float", "Boolean", "Long"]
 		}
 	}
 }

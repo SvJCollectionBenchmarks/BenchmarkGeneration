@@ -5,22 +5,52 @@
 		"SHashMap": "scala",
 		"SLinkedMap": "scala"
 	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable"
+		]
+	},
 	"init": {
-		"JHashMap": {
-			"args": [],
-			"content": "HashMap<$K, $V> collection = new HashMap<>()"
+		"java": {
+			"JHashMap": {
+				"args": [],
+				"content": "HashMap<$K, $V> collection = new java.util.HashMap<>()"
+			},
+			"JLinkedMap": {
+				"args": [],
+				"content": "LinkedHashMap<$K, $V> collection = new java.util.LinkedHashMap<>()"
+			},
+			"SHashMap": {
+				"args": [],
+				"content": "HashMap<$K, $V> collection = new scala.collection.mutable.HashMap<>()"
+			},
+			"SLinkedMap": {
+				"args": [],
+				"content": "LinkedHashMap<$K, $V> collection = new scala.collection.mutable.LinkedHashMap<>()"
+			}
 		},
-		"JLinkedMap": {
-			"args": [],
-			"content": "LinkedHashMap<$K, $V> collection = new LinkedHashMap<>()"
-		},
-		"SHashMap": {
-			"args": [],
-			"content": "HashMap<$K, $V> collection = new HashMap<>()"
-		},
-		"SLinkedMap": {
-			"args": [],
-			"content": "LinkedHashMap<$K, $V> collection = new LinkedHashMap<>()"
+		"scala": {
+			"JHashMap": {
+				"args": [],
+				"content": "var collection = new util.HashMap[$K, $V]()"
+			},
+			"JLinkedMap": {
+				"args": [],
+				"content": "var collection = new util.LinkedHashMap[$K, $V]()"
+			},
+			"SHashMap": {
+				"args": [],
+				"content": "var collection = mutable.HashMap[$K, $V]()"
+			},
+			"SLinkedMap": {
+				"args": [],
+				"content": "var collection = mutable.LinkedHashMap[$K, $V]()"
+			}
 		}
 	},
 	"operations": {

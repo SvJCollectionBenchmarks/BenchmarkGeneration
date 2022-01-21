@@ -1,4 +1,35 @@
 Add isEmpty method to all
+Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
+
+
+[Add two languages support to more JSONs than only GeneralSequences
 Add prefixes to collections to avoid import mishaps
-Why did you have to generate manually written benchmarks?
-Add to groups in a new section the same type variables as were added to groups, so that we can generate arguments;
+Add appropriate imports]:
+    + GeneralMaps
+    + GeneralSequences
+    - GeneralSets
+    - IndexedShrinkableSequences
+    - LinearShrinkableSequences
+    - SortedMaps
+    - SortedSets
+
+
+
+Planowane części pracy:
+	- Pomiar operacji w separacji - nie potrzebuje generacji
+		- Problemy z clear
+	- Pomiar operacji w wymyślonych scenariuszach - nie wymaga generacji, ale w przypadku zmian w grupach może się ona okazać bardzo dobra
+	- Pomiar operacji w pseudo-losowych złożeniach - generacja jest bardzo pomocna
+		- Problemy z clear
+
+Wymagania minimalne:
+	- Przyjrzeć się zestawom kolekcji i ich operacjom
+	- Spisać scenariusze dla wyznaczonych zestawów
+	- Pomierzyć wyznaczone grupy kolekcji
+	- Policzyć, czy wyniki istotnie się różnią między sobą (przedziały ufności)
+	- Opracować wyniki w formie graficznej
+
+Wymagania docelowe:
+	- Uwzględnić wielowątkowe zastosowania (yikes)
+	- Uwzględnić zastosowania w przeszukiwaniu (można pokryć odpowiednimi grupami)
+    - Uwzględnić wymagania pamięciowe kolekcji (yikes)

@@ -34,9 +34,9 @@ package com.adalbert.benchmarks;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.*;
 
 
 @State(Scope.Benchmark)
@@ -47,12 +47,16 @@ public class MyBenchmark {
     @Benchmark
     @Fork(1)
     public void testMethodJava(Blackhole bh) {
-        ArrayList<Integer> collection = new ArrayList<>();
+        ArrayList<Integer> collection = new java.util.ArrayList<>();
         collection.add(2);
         collection.addAll(elems);
         collection.remove(3);
         bh.consume(collection.get(3));
         collection.clear();
+    }
+
+    public void dummy() {
+        Vector<String> collection = new java.util.Vector<>();
     }
 
 }

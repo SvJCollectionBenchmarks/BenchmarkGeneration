@@ -8,65 +8,77 @@
 		"SArraySequence": "scala",
 		"SVectorSequence": "scala"
 	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;",
+			"import scala.collection.immutable.*;"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable",
+			"import scala.collection.immutable"
+		]
+	},
 	"init": {
 		"java": {
 			"JArraySequence": {
 				"args": [],
-				"content": "ArrayList<$T> collection = new ArrayList<>()"
+				"content": "ArrayList<$T> collection = new java.util.ArrayList<>()"
 			},
 			"JLinkedSequence": {
 				"args": [],
-				"content": "LinkedList<$T> collection = new LinkedList<>()"
+				"content": "LinkedList<$T> collection = new java.util.LinkedList<>()"
 			},
 			"JVectorSequence": {
 				"args": [],
-				"content": "Vector<$T> collection = new Vector<>()"
+				"content": "Vector<$T> collection = new java.util.Vector<>()"
 			},
 			"SArrayBufferSequence": {
 				"args": [],
-				"content": "ArrayBuffer<$T> collection = new ArrayBuffer<>()"
+				"content": "ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
 			},
 			"SLinkedSequence": {
 				"args": [],
-				"content": "ListBuffer<$T> collection = new ListBuffer<>()"
+				"content": "ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
 			},
 			"SArraySequence": {
 				"args": [ { "name": "clazz", "type": "ClassTag<$T>" } ],
-				"content": "ArraySeq<$T> collection = ArraySeq.from(new ArrayBuffer<$T>(), $clazz)"
+				"content": "ArraySeq<$T> collection = scala.collection.immutable.ArraySeq.from(new ArrayBuffer<$T>(), $clazz)"
 			},
 			"SVectorSequence": {
 				"args": [],
-				"content": "Vector<$T> collection = Vector.from(new ArrayBuffer<$T>())"
+				"content": "Vector<$T> collection = scala.collection.immutable.Vector.from(new ArrayBuffer<$T>())"
 			}
 		},
 		"scala": {
 			"JArraySequence": {
 				"args": [],
-				"content": "var collection = new ArrayList[$T]()"
+				"content": "var collection = new util.ArrayList[$T]()"
 			},
 			"JLinkedSequence": {
 				"args": [],
-				"content": "var collection = new LinkedList[$T]()"
+				"content": "var collection = new util.LinkedList[$T]()"
 			},
 			"JVectorSequence": {
 				"args": [],
-				"content": "var collection = new Vector[$T]()"
+				"content": "var collection = new util.Vector[$T]()"
 			},
 			"SArrayBufferSequence": {
 				"args": [],
-				"content": "var collection = new ArrayBuffer[$T]()"
+				"content": "var collection = mutable.ArrayBuffer[$T]()"
 			},
 			"SLinkedSequence": {
 				"args": [],
-				"content": "var collection = new ListBuffer[$T]()"
+				"content": "var collection = mutable.ListBuffer[$T]()"
 			},
 			"SArraySequence": {
 				"args": [ { "name": "clazz", "type": "ClassTag<$T>" } ],
-				"content": "var collection = mutable.ArraySeq[$T]()"
+				"content": "var collection = immutable.ArraySeq[$T]()"
 			},
 			"SVectorSequence": {
 				"args": [],
-				"content": "var collection = mutable.Vector[$T]()"
+				"content": "var collection = immutable.Vector[$T]()"
 			}
 		}
 	},

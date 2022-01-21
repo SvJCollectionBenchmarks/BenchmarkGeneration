@@ -2,6 +2,9 @@ package com.adalbert.benchmarks
 
 import org.openjdk.jmh.annotations.{Benchmark, Fork, Scope, State}
 import org.openjdk.jmh.infra.Blackhole
+import scala.collection.mutable
+import scala.collection.immutable
+import java.util
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -19,5 +22,9 @@ class SBenchmark {
     collection.subtractOne(3)
     bh.consume(collection.apply(3))
     collection.clear()
+  }
+
+  def dummy(): Unit = {
+    var collection = new util.Vector[Int]()
   }
 }

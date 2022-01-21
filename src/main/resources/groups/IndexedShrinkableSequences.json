@@ -15,7 +15,7 @@
 		},
 		"SArrayBufferSequence": {
 			"args": [],
-			"content": "ArrayBuffer<$T> ArrayBuffer<>()"
+			"content": "ArrayBuffer<$T> collection = new ArrayBuffer<>()"
 		}
 	},
 	"operations": {

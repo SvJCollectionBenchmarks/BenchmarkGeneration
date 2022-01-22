@@ -25,6 +25,6 @@ class SBenchmark {
   }
 
   def dummy(): Unit = {
-    var collection = new util.Vector[Int]()
+    var collection = new util.LinkedHashSet[Int]()
   }
 }

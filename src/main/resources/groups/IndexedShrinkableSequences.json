@@ -4,18 +4,46 @@
 		"JVectorSequence": "java",
 		"SArrayBufferSequence": "scala"
 	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;",
+			"import scala.collection.immutable.*;"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable",
+			"import scala.collection.immutable"
+		]
+	},
 	"init": {
-		"JArraySequence": {
-			"args": [],
-			"content": "ArrayList<$T> collection = new ArrayList<>()"
+		"java": {
+			"JArraySequence": {
+				"args": [],
+				"content": "ArrayList<$T> collection = new java.util.ArrayList<>()"
+			},
+			"JVectorSequence": {
+				"args": [],
+				"content": "Vector<$T> collection = new java.util.Vector<>()"
+			},
+			"SArrayBufferSequence": {
+				"args": [],
+				"content": "ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
+			}
 		},
-		"JVectorSequence": {
-			"args": [],
-			"content": "Vector<$T> collection = new Vector<>()"
-		},
-		"SArrayBufferSequence": {
-			"args": [],
-			"content": "ArrayBuffer<$T> collection = new ArrayBuffer<>()"
+		"scala": {
+			"JArraySequence": {
+				"args": [],
+				"content": "var collection = new util.ArrayList[$T]()"
+			},
+			"JVectorSequence": {
+				"args": [],
+				"content": "var collection = new util.Vector[$T]()"
+			},
+			"SArrayBufferSequence": {
+				"args": [],
+				"content": "var collection = mutable.ArrayBuffer[$T]()"
+			}
 		}
 	},
 	"operations": {

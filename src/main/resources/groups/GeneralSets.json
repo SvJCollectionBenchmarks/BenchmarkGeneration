@@ -5,22 +5,54 @@
 		"SHashSet": "scala",
 		"SLinkedSet": "scala"
 	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;",
+			"import scala.collection.immutable.*;"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable",
+			"import scala.collection.immutable"
+		]
+	},
 	"init": {
-		"JHashSet": {
-			"args": [],
-			"content": "HashSet<$T> collection = new HashSet<>()"
+		"java": {
+			"JHashSet": {
+				"args": [],
+				"content": "HashSet<$T> collection = new java.util.HashSet<>()"
+			},
+			"JLinkedSet": {
+				"args": [],
+				"content": "LinkedHashSet<$T> collection = new java.util.LinkedHashSet<>()"
+			},
+			"SHashSet": {
+				"args": [],
+				"content": "HashSet<$T> collection = new scala.collection.mutable.HashSet<>()"
+			},
+			"SLinkedSet": {
+				"args": [],
+				"content": "LinkedHashSet<$T> collection = new scala.collection.mutable.LinkedHashSet<>()"
+			}
 		},
-		"JLinkedSet": {
-			"args": [],
-			"content": "LinkedHashSet<$T> collection = new LinkedHashSet<>()"
-		},
-		"SHashSet": {
-			"args": [],
-			"content": "HashSet<$T> collection = new HashSet<>()"
-		},
-		"SLinkedSet": {
-			"args": [],
-			"content": "LinkedHashSet<$T> collection = new LinkedHashSet<>()"
+		"scala": {
+			"JHashSet": {
+				"args": [],
+				"content": "var collection = new util.HashSet[$T]()"
+			},
+			"JLinkedSet": {
+				"args": [],
+				"content": "var collection = new util.LinkedHashSet[$T]()"
+			},
+			"SHashSet": {
+				"args": [],
+				"content": "var collection = mutable.HashSet[$T]()"
+			},
+			"SLinkedSet": {
+				"args": [],
+				"content": "var collection = mutable.LinkedHashSet[$T]()"
+			}
 		}
 	},
 	"operations": {

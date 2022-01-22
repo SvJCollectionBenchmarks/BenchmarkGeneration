@@ -56,7 +56,7 @@ public class MyBenchmark {
     }
 
     public void dummy() {
-        Vector<String> collection = new java.util.Vector<>();
+        new scala.collection.mutable.ListBuffer<Integer>();
     }
 
 }

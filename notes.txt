@@ -7,9 +7,9 @@ Add prefixes to collections to avoid import mishaps
 Add appropriate imports]:
     + GeneralMaps
     + GeneralSequences
-    - GeneralSets
-    - IndexedShrinkableSequences
-    - LinearShrinkableSequences
+    + GeneralSets
+    + IndexedShrinkableSequences
+    + LinearShrinkableSequences
     - SortedMaps
     - SortedSets
 
@@ -30,6 +30,6 @@ Wymagania minimalne:
 	- Opracować wyniki w formie graficznej
 
 Wymagania docelowe:
-	- Uwzględnić wielowątkowe zastosowania (yikes)
+	- Uwzględnić wielowątkowe zastosowania (yikes) [For memory usage you can add GC or HS_GC profiler using the addProfiler method when building runner options.]
 	- Uwzględnić zastosowania w przeszukiwaniu (można pokryć odpowiednimi grupami)
     - Uwzględnić wymagania pamięciowe kolekcji (yikes)

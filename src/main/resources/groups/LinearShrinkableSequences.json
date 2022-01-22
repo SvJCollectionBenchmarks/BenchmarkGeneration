@@ -3,14 +3,38 @@
 		"JLinkedSequence": "java",
 		"SLinkedSequence": "scala"
 	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;",
+			"import scala.collection.immutable.*;"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable",
+			"import scala.collection.immutable"
+		]
+	},
 	"init": {
-		"JLinkedSequence": {
-			"args": [],
-			"content": "LinkedList<$T> collection = new LinkedList<>()"
+		"java": {
+			"JLinkedSequence": {
+				"args": [],
+				"content": "LinkedList<$T> collection = new java.util.LinkedList<>()"
+			},
+			"SLinkedSequence": {
+				"args": [],
+				"content": "ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
+			}
 		},
-		"SLinkedSequence": {
-			"args": [],
-			"content": "ListBuffer<$T> collection = new ListBuffer<>()"
+		"scala": {
+			"JLinkedSequence": {
+				"args": [],
+				"content": "var collection = new util.LinkedList[$T]()"
+			},
+			"SLinkedSequence": {
+				"args": [],
+				"content": "var collection = mutable.ListBuffer[$T]()"
+			}
 		}
 	},
 	"operations": {

@@ -38,9 +38,8 @@ fun main() {
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
                 profiles.addAll(defaultProfile)
-                val operationsWithArguments = chosenOperations.map {
-                    Pair(it, ArgumentsGenerator.generateArguments(groupName, profiles, it, propertiesTree))
-                }
+                val operationsWithArguments = chosenOperations.associateWith { ArgumentsGenerator.generateArguments(groupName, profiles, it, propertiesTree) }
+                println(operationsWithArguments)
             }
 
         }

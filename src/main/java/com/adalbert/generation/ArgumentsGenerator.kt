@@ -22,8 +22,8 @@ object ArgumentsGenerator {
             .map { it.type }.toSet()
             .associateWith { matchVariableWithRandom(it, group, profiles, propertiesTree) }
         arguments.forEach { if (typeVariables.containsKey(it.type)) it.type = typeVariables[it.type]!! }
-        println("${arguments.map { it.type } }")
-        return mapOf()
+        // TODO: If mapping from type to random value is null, we should throw an exception
+        return arguments.associate { it.name to (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped")  }
     }
 
     private fun matchVariableWithRandom(text: String, group: String, profiles: List<String>, propertiesTree: Tree): String {
@@ -35,10 +35,10 @@ object ArgumentsGenerator {
         return text.replace("\$$variableName", randomizedValue)
     }
 
-    val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {
+    private val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {
         this.putAll(listOf("int", "Int", "Integer").associateWith { { "${Random.nextInt(1, 10)}" } })
-        this.putAll(listOf("float, Float").associateWith { { "${Random.nextDouble(10.0)}" } })
-        this.putAll(listOf("double, Double").associateWith { { "${Random.nextDouble(10.0)}" } })
+        this.putAll(listOf("float", "Float").associateWith { { "${Random.nextDouble(10.0)}" } })
+        this.putAll(listOf("double", "Double").associateWith { { "${Random.nextDouble(10.0)}" } })
         this.putAll(listOf("boolean", "Boolean").associateWith { { "${Random.nextBoolean()}" } })
         this.putAll(listOf("long", "Long").associateWith { { "${Random.nextLong(Long.MAX_VALUE)}" } })
         this["String"] = { ('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("") }

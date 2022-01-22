@@ -1,19 +1,6 @@
 Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
-
-
-[Add two languages support to more JSONs than only GeneralSequences
-Add prefixes to collections to avoid import mishaps
-Add appropriate imports]:
-    + GeneralMaps
-    + GeneralSequences
-    + GeneralSets
-    + IndexedShrinkableSequences
-    + LinearShrinkableSequences
-    + SortedMaps
-    + SortedSets
-
-
+args of methods should be divided into languages
 
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji

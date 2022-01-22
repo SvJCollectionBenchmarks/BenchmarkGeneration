@@ -10,8 +10,8 @@ Add appropriate imports]:
     + GeneralSets
     + IndexedShrinkableSequences
     + LinearShrinkableSequences
-    - SortedMaps
-    - SortedSets
+    + SortedMaps
+    + SortedSets
 
 
 

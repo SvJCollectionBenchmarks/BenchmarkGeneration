@@ -19,11 +19,11 @@
 		"java": {
 			"JLinkedSequence": {
 				"args": [],
-				"content": "LinkedList<$T> collection = new java.util.LinkedList<>()"
+				"content": "java.util.LinkedList<$T> collection = new java.util.LinkedList<>()"
 			},
 			"SLinkedSequence": {
 				"args": [],
-				"content": "ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
+				"content": "scala.collection.mutable.ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
 			}
 		},
 		"scala": {

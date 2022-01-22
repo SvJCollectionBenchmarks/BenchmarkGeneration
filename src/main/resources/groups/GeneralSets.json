@@ -21,19 +21,19 @@
 		"java": {
 			"JHashSet": {
 				"args": [],
-				"content": "HashSet<$T> collection = new java.util.HashSet<>()"
+				"content": "java.util.HashSet<$T> collection = new java.util.HashSet<>()"
 			},
 			"JLinkedSet": {
 				"args": [],
-				"content": "LinkedHashSet<$T> collection = new java.util.LinkedHashSet<>()"
+				"content": "java.util.LinkedHashSet<$T> collection = new java.util.LinkedHashSet<>()"
 			},
 			"SHashSet": {
 				"args": [],
-				"content": "HashSet<$T> collection = new scala.collection.mutable.HashSet<>()"
+				"content": "scala.collection.mutable.HashSet<$T> collection = new scala.collection.mutable.HashSet<>()"
 			},
 			"SLinkedSet": {
 				"args": [],
-				"content": "LinkedHashSet<$T> collection = new scala.collection.mutable.LinkedHashSet<>()"
+				"content": "scala.collection.mutable.LinkedHashSet<$T> collection = new scala.collection.mutable.LinkedHashSet<>()"
 			}
 		},
 		"scala": {

@@ -24,31 +24,31 @@
 		"java": {
 			"JArraySequence": {
 				"args": [],
-				"content": "ArrayList<$T> collection = new java.util.ArrayList<>()"
+				"content": "java.util.ArrayList<$T> collection = new java.util.ArrayList<>()"
 			},
 			"JLinkedSequence": {
 				"args": [],
-				"content": "LinkedList<$T> collection = new java.util.LinkedList<>()"
+				"content": "java.util.LinkedList<$T> collection = new java.util.LinkedList<>()"
 			},
 			"JVectorSequence": {
 				"args": [],
-				"content": "Vector<$T> collection = new java.util.Vector<>()"
+				"content": "java.util.Vector<$T> collection = new java.util.Vector<>()"
 			},
 			"SArrayBufferSequence": {
 				"args": [],
-				"content": "ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
+				"content": "scala.collection.mutable.ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
 			},
 			"SLinkedSequence": {
 				"args": [],
-				"content": "ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
+				"content": "scala.collection.mutable.ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
 			},
 			"SArraySequence": {
 				"args": [ { "name": "clazz", "type": "ClassTag<$T>" } ],
-				"content": "ArraySeq<$T> collection = scala.collection.immutable.ArraySeq.from(new ArrayBuffer<$T>(), $clazz)"
+				"content": "scala.collection.immutable.ArraySeq<$T> collection = scala.collection.immutable.ArraySeq.from(new ArrayBuffer<$T>(), $clazz)"
 			},
 			"SVectorSequence": {
 				"args": [],
-				"content": "Vector<$T> collection = scala.collection.immutable.Vector.from(new ArrayBuffer<$T>())"
+				"content": "scala.collection.immutable.Vector<$T> collection = scala.collection.immutable.Vector.from(new ArrayBuffer<$T>())"
 			}
 		},
 		"scala": {
@@ -73,7 +73,7 @@
 				"content": "var collection = mutable.ListBuffer[$T]()"
 			},
 			"SArraySequence": {
-				"args": [ { "name": "clazz", "type": "ClassTag<$T>" } ],
+				"args": [],
 				"content": "var collection = immutable.ArraySeq[$T]()"
 			},
 			"SVectorSequence": {

@@ -20,15 +20,15 @@
 		"java": {
 			"JArraySequence": {
 				"args": [],
-				"content": "ArrayList<$T> collection = new java.util.ArrayList<>()"
+				"content": "java.util.ArrayList<$T> collection = new java.util.ArrayList<>()"
 			},
 			"JVectorSequence": {
 				"args": [],
-				"content": "Vector<$T> collection = new java.util.Vector<>()"
+				"content": "java.util.Vector<$T> collection = new java.util.Vector<>()"
 			},
 			"SArrayBufferSequence": {
 				"args": [],
-				"content": "ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
+				"content": "scala.collection.mutable.ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
 			}
 		},
 		"scala": {

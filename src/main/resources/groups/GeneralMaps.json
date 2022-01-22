@@ -19,19 +19,19 @@
 		"java": {
 			"JHashMap": {
 				"args": [],
-				"content": "HashMap<$K, $V> collection = new java.util.HashMap<>()"
+				"content": "java.util.HashMap<$K, $V> collection = new java.util.HashMap<>()"
 			},
 			"JLinkedMap": {
 				"args": [],
-				"content": "LinkedHashMap<$K, $V> collection = new java.util.LinkedHashMap<>()"
+				"content": "java.util.LinkedHashMap<$K, $V> collection = new java.util.LinkedHashMap<>()"
 			},
 			"SHashMap": {
 				"args": [],
-				"content": "HashMap<$K, $V> collection = new scala.collection.mutable.HashMap<>()"
+				"content": "scala.collection.mutable.HashMap<$K, $V> collection = new scala.collection.mutable.HashMap<>()"
 			},
 			"SLinkedMap": {
 				"args": [],
-				"content": "LinkedHashMap<$K, $V> collection = new scala.collection.mutable.LinkedHashMap<>()"
+				"content": "scala.collection.mutable.LinkedHashMap<$K, $V> collection = new scala.collection.mutable.LinkedHashMap<>()"
 			}
 		},
 		"scala": {

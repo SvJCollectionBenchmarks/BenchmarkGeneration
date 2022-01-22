@@ -3,14 +3,39 @@
 		"JTreeMap": "java",
 		"STreeMap": "scala"
 	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;",
+			"import scala.collection.immutable.*;",
+			"import scala.math.*"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable",
+			"import scala.collection.immutable"
+		]
+	},
 	"init": {
-		"JTreeMap": {
-			"args": [],
-			"content": "TreeMap<$K, $V> collection = new TreeMap<>()"
+		"java": {
+			"JTreeMap": {
+				"args": [],
+				"content": "java.util.TreeMap<$K, $V> collection = new java.util.TreeMap<>()"
+			},
+			"STreeMap": {
+				"args": [],
+				"content": "scala.collection.mutable.TreeMap<$K, $V> collection = new scala.collection.mutable.TreeMap<>(new Ordering<$K>() { public int compare($K x, $K y) { return x.compareTo(y); }})"
+			}
 		},
-		"STreeMap": {
-			"args": [],
-			"content": "TreeMap<$K, $V> collection = new TreeMap<>(new Ordering<$K>() { public int compare($K x, $K y) { return x.compareTo(y); }})"
+		"scala": {
+			"JTreeMap": {
+				"args": [],
+				"content": "var collection = new util.TreeMap[$K, $V]()"
+			},
+			"STreeMap": {
+				"args": [],
+				"content": "var collection = mutable.TreeMap[$K, $V]()"
+			}
 		}
 	},
 	"operations": {

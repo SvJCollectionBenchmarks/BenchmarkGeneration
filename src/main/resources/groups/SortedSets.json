@@ -3,14 +3,39 @@
 		"JTreeSet": "java",
 		"STreeSet": "scala"
 	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;",
+			"import scala.collection.immutable.*;",
+			"import scala.math.*"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable",
+			"import scala.collection.immutable"
+		]
+	},
 	"init": {
-		"JTreeSet": {
-			"args": [],
-			"content": "TreeSet<$T> collection = new TreeSet<>()"
+		"java": {
+			"JTreeSet": {
+				"args": [],
+				"content": "java.util.TreeSet<$T> collection = new java.util.TreeSet<>()"
+			},
+			"STreeSet": {
+				"args": [],
+				"content": "scala.collection.mutable.TreeSet<$T> collection = new scala.collection.mutable.TreeSet<>(new Ordering<$T>() { public int compare($T x, $T y) { return x.compareTo(y); }})"
+			}
 		},
-		"STreeSet": {
-			"args": [],
-			"content": "TreeSet<$T> collection = new TreeSet<>(new Ordering<$T>() { public int compare($T x, $T y) { return x.compareTo(y); }})"
+		"scala": {
+			"JTreeSet": {
+				"args": [],
+				"content": "var collection = new util.TreeSet[$T]()"
+			},
+			"STreeSet": {
+				"args": [],
+				"content": "var collection = mutable.TreeSet[$T]()"
+			}
 		}
 	},
 	"operations": {

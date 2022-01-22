@@ -38,6 +38,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.*;
 
+import scala.collection.mutable.*;
+import scala.collection.immutable.*;
+import scala.math.*;
+
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
@@ -56,7 +60,7 @@ public class MyBenchmark {
     }
 
     public void dummy() {
-        new scala.collection.mutable.ListBuffer<Integer>();
+        scala.collection.mutable.TreeSet<Integer> collection = new scala.collection.mutable.TreeSet<>(new Ordering<Integer>() { public int compare(Integer x, Integer y) { return x.compareTo(y); }});
     }
 
 }

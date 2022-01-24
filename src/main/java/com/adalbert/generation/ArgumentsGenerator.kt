@@ -7,7 +7,7 @@ object ArgumentsGenerator {
 
     private data class Argument(var name: String, var type: String)
 
-    fun generateArguments(group: String, profiles: List<String>, operation: String, propertiesTree: Tree): Map<String, String> {
+    fun generateArguments(group: String, profiles: List<String>, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): Map<String, String> {
         val operationProfile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "operations", operation)
         val argsMappings = propertiesTree.getMappings("groups", group, "operations", operation, operationProfile, "args")
         val arguments = argsMappings?.let { argsInner -> (0 until argsInner.size / 2).map { index ->
@@ -17,22 +17,15 @@ object ArgumentsGenerator {
                 Argument (argsInner[(2 * index) + 1].second.first(), argsInner[2 * index].second.first())
             else throw IllegalStateException("Wrong args mapping found!")
         }}?.toMutableList() ?: throw IllegalStateException("Didn't find argument mappings for operation $operation from $group group!")
-        val typeVariables = arguments
-            .filter { it.type.contains("$") }
-            .map { it.type }.toSet()
-            .associateWith { matchVariableWithRandom(it, group, profiles, propertiesTree) }
-        arguments.forEach { if (typeVariables.containsKey(it.type)) it.type = typeVariables[it.type]!! }
+        arguments.forEach { if (it.type.contains("$")) it.type = matchKeyWithTypeVariable(it.type, typeVariables) }
         // TODO: If mapping from type to random value is null, we should throw an exception
         return arguments.associate { it.name to (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped")  }
     }
 
-    private fun matchVariableWithRandom(text: String, group: String, profiles: List<String>, propertiesTree: Tree): String {
+    private fun matchKeyWithTypeVariable(text: String, typeVariables: Map<String, String>): String {
         if (!text.contains("$")) return text
         val variableName = text.substringFromLast("$").substringUntil('[', ']', '<', '>')
-        val variableProfile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "variables")
-        val randomizedValue = propertiesTree.getValues("groups", group, "variables", variableProfile, variableName)?.random()
-            ?: throw IllegalStateException("Couldn't get variable $text for group $group!")
-        return text.replace("\$$variableName", randomizedValue)
+        return text.replace("\$$variableName", typeVariables[variableName]!!)
     }
 
     private val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {

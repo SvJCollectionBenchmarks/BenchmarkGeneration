@@ -1,6 +1,7 @@
 Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
 args of methods should be divided into languages
+TYPE VARIABLES ARE RANDOMIZED SEPARATELY FOR EVERY METHOD
 
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji

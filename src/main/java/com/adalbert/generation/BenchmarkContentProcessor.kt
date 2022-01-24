@@ -53,7 +53,7 @@ object BenchmarkContentProcessor {
     }
 
     private fun processExpressionWithVariables(expression: String, context: Map<String, List<String>>, propertiesTree: Tree): String {
-        val variableRegex = Regex("\\$([^\\.]*)")
+        val variableRegex = Regex("\\$([a-zA-Z]*)")
         val fragments = expression.split(".").map { it.trim() }
         val previouslyMatched = mutableListOf<String>()
         fragments.forEach {

@@ -131,11 +131,6 @@
 		}
 	},
 	"variables": {
-		"java": {
-			"T": ["Integer", "String", "Double", "Float", "Boolean", "Long"]
-		},
-		"scala": {
-			"T": ["Int", "String", "Double", "Float", "Boolean", "Long"]
-		}
+		"T": ["Integer", "String", "Double", "Float", "Boolean", "Long"]
 	}
 }

@@ -21,7 +21,7 @@ fun main() {
 
     (0 until profilesNumber).forEach {
         val groups = propertiesTree.getKeys("groups")
-        groups?.forEach { groupName -> if (groupName.contains("map", true)) {
+        groups?.forEach { groupName ->
             val operations: MutableMap<String, IntRange> = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
                 ?: throw IllegalStateException("Couldn't read operations provided by $groupName!")
             // WARN: The famous "can't measure nothing" paradigm
@@ -35,27 +35,20 @@ fun main() {
             println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations")
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
-            val newTypeVariables = propertiesTree.getKeys("groups", groupName, "variables")
-                ?.map { profile -> profile to propertiesTree.getKeys("groups", groupName, "variables", profile)
-                    ?.associateWith { propertiesTree.getValues("groups", groupName, "variables", profile, it)?.random() }
-                }
+            val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")
+                ?.associateWith { propertiesTree.getValues("groups", groupName, "variables", it)?.random()
+                    ?: throw IllegalArgumentException("Variable of name $it doesn't exist in group $groupName!")
+                } ?: throw IllegalStateException("Couldn't get variables mapping for $groupName group!")
 
             generated?.forEach { generatedName ->
                 val profiles = mutableListOf(generatedName)
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
                 profiles.addAll(defaultProfile)
-                val profileForVariable = propertiesTree.getFirstMatchingKey(profiles, "groups", groupName, "variables")
-                val typeVariables = propertiesTree.getKeys("groups", groupName, "variables", profileForVariable)
-                    ?: throw IllegalStateException("Couldn't get variables for group $groupName!")
-                val randomizedVariablesValues = typeVariables.associateWith {
-                    propertiesTree.getValues("groups", groupName, "variables", profileForVariable, it)?.random()
-                        ?: throw IllegalStateException("Couldn't map variable $it for group $groupName to a value!")
-                }
-                val operationsWithArguments = chosenOperations.associateWith { ArgumentsGenerator.generateArguments(groupName, profiles, it, randomizedVariablesValues, propertiesTree) }
+                val operationsWithArguments = chosenOperations.associateWith { ArgumentsGenerator.generateArguments(groupName, profiles, it, typeVariables, propertiesTree) }
                 println(operationsWithArguments)
             }
-        }}
+        }
     }
 }
 

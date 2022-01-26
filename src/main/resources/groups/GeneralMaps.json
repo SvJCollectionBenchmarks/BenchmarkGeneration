@@ -148,13 +148,7 @@
 		}
 	},
 	"variables": {
-		"java": {
-			"K": ["Integer", "String", "Double", "Float", "Boolean", "Long"],
-			"V": ["Integer", "String", "Double", "Float", "Boolean", "Long"]
-		},
-		"scala": {
-			"K": ["Int", "String", "Double", "Float", "Boolean", "Long"],
-			"V": ["Int", "String", "Double", "Float", "Boolean", "Long"]
-		}
+		"K": ["Integer", "String", "Double", "Float", "Boolean", "Long"],
+		"V": ["Integer", "String", "Double", "Float", "Boolean", "Long"]
 	}
 }

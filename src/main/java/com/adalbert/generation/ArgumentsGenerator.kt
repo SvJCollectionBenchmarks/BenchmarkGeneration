@@ -29,11 +29,26 @@ object ArgumentsGenerator {
     }
 
     private val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {
-        this.putAll(listOf("int", "Int", "Integer").associateWith { { "${Random.nextInt(1, 10)}" } })
+        this.putAll(listOf("int", "Integer").associateWith { { "${Random.nextInt(1, 10)}" } })
         this.putAll(listOf("float", "Float").associateWith { { "${Random.nextDouble(10.0)}" } })
         this.putAll(listOf("double", "Double").associateWith { { "${Random.nextDouble(10.0)}" } })
         this.putAll(listOf("boolean", "Boolean").associateWith { { "${Random.nextBoolean()}" } })
         this.putAll(listOf("long", "Long").associateWith { { "${Random.nextLong(Long.MAX_VALUE)}" } })
+        this["Collection<? extends Integer>"] = { "new ArrayList<Integer>(${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }
+        })"}
+        this["Collection<? extends Long>"] = { "new ArrayList<Long>(${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }
+        })"}
+        this["Collection<? extends Float>"] = { "new ArrayList<Float>(${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }
+        })"}
+        this["Collection<? extends Double>"] = { "new ArrayList<Double>(${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }
+        })"}
+        this["Collection<? extends String>"] = { "new ArrayList<String>(${
+            (0 until Random.nextInt(3, 5)).joinToString(",") { "\"${this["String"]!!()}\"" }
+        })"}
         this["String"] = { ('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("") }
     }
 

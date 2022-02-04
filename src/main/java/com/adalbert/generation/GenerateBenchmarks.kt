@@ -41,7 +41,7 @@ fun main() {
                 profiles.addAll(defaultProfile)
                 context["profile"] = profiles
                 println("############### ${profiles[0]} ###############")
-                println(BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree))
+                println(BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)["java"])
             }
         }
     }

@@ -1,7 +1,12 @@
 Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
 args of methods should be divided into languages
-TYPE VARIABLES ARE RANDOMIZED SEPARATELY FOR EVERY METHOD
+
+ARGUMENTS SHOULD BE GENERATED ONCE PER GROUP, NOT PER METHOD:
+    1. Group your operations by profiles they are going to be set in;
+    2. For one of the profiles (traditionally Java) generate arguments based on the type to instance function;
+    3. For all other profiles, check if a newly made profile transition function can reapply similar values;
+    4. If the transition is not supported, generate a new argument based on the rules from the 2. point;
 
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji

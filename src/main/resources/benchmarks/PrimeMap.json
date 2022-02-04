@@ -1,0 +1,43 @@
+{
+  "imports": {
+    "java": [
+      "import java.util.*;",
+      "import scala.collection.immutable.*;",
+      "import scala.collection.mutable.*;",
+      "import scala.math.Ordering;"
+    ],
+    "scala": [
+      "import java.util",
+      "import scala.collection.immutable",
+      "import scala.collection.mutable"
+    ]
+  },
+  "fields": {
+    "java": [
+      "dummy"
+    ],
+    "scala": [
+      "dummy"
+    ]
+  },
+  "setup": {
+    "java": [],
+    "scala": []
+  },
+  "groups": [
+    "GeneralMaps",
+    "SortedMaps"
+  ],
+  "variables": {
+    "profiled": {
+      "java": {
+        "java": {
+          "iteratorImport": "java.util.Iterator"
+        },
+        "scala": {
+          "iteratorImport": "scala.collection.Iterator"
+        }
+      }
+    }
+  }
+}

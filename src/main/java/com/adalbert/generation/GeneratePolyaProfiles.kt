@@ -40,14 +40,17 @@ fun main() {
                     ?: throw IllegalArgumentException("Variable of name $it doesn't exist in group $groupName!")
                 } ?: throw IllegalStateException("Couldn't get variables mapping for $groupName group!")
 
-            generated?.forEach { generatedName ->
-                val profiles = mutableListOf(generatedName)
-                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
-                    ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
-                profiles.addAll(defaultProfile)
-                val operationsWithArguments = chosenOperations.associateWith { ArgumentsGenerator.generateArguments(groupName, profiles, it, typeVariables, propertiesTree) }
-                println(operationsWithArguments)
-            }
+            val groupedByDefaultProfiles = generated?.groupBy { propertiesTree.getValues("groups", groupName, "generated", it)!! }
+            println("a")
+
+//            generated?.forEach { generatedName ->
+//                val profiles = mutableListOf(generatedName)
+//                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
+//                    ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
+//                profiles.addAll(defaultProfile)
+//                val operationsWithArguments = chosenOperations.associateWith { ArgumentsGenerator.generateArguments(groupName, profiles, it, typeVariables, propertiesTree) }
+//                println(operationsWithArguments)
+//            }
         }
     }
 }

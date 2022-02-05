@@ -1,25 +1,44 @@
 package com.adalbert.generation
 
-import com.adalbert.utils.*
+import com.adalbert.utils.Tree
+import com.adalbert.utils.randomTimes
+import com.adalbert.utils.substringFromLast
+import com.adalbert.utils.substringUntil
 import kotlin.random.Random
+
+data class Argument(var name: String, var type: String)
 
 object ArgumentsGenerator {
 
-    private data class Argument(var name: String, var type: String)
+    fun generateArgumentsForProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): Map<Argument, String> {
+        return getArgsMappingsForProfile(group, operationProfile, operation, typeVariables, propertiesTree)
+            .associateWith { (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped") }
+    }
 
-    fun generateArguments(group: String, profiles: List<String>, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): Map<String, String> {
-        val operationProfile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "operations", operation)
-        val argsMappings = propertiesTree.getMappings("groups", group, "operations", operation, operationProfile, "args")
-        val arguments = argsMappings?.let { argsInner -> (0 until argsInner.size / 2).map { index ->
+    fun mapArgumentsToProfile(group: String, possibleProfiles: List<String>, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree, protoArguments: Map<String, Map<Argument, String>>): Map<String, String> {
+        val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", group, "operations", operation)
+        val arguments = getArgsMappingsForProfile(group, operationProfile, operation, typeVariables, propertiesTree)
+
+        val notMappedTypes = arguments.forEach { profileArgument ->
+            val protoArgument = protoArguments[operation]?.keys?.firstOrNull { profileArgument.name == it.name } ?: throw IllegalStateException()
+            if (protoArgument.type != profileArgument.type && argumentTypesMapping[Pair(protoArgument.type, profileArgument.type)] == null)
+                println("You need to map ${protoArgument.type} to ${profileArgument.type} also!")
+        }
+
+        return mapOf()
+    }
+
+    private fun getArgsMappingsForProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): List<Argument> {
+        val rawArgsMappings = propertiesTree.getMappings("groups", group, "operations", operation, operationProfile, "args")
+        val argsMappings = rawArgsMappings?.let { argsInner -> (0 until argsInner.size / 2).map { index ->
             if (argsInner[2 * index].first == "name")
                 Argument (argsInner[2 * index].second.first(), argsInner[(2 * index) + 1].second.first())
             else if (argsInner[(2 * index) + 1].first == "name")
                 Argument (argsInner[(2 * index) + 1].second.first(), argsInner[2 * index].second.first())
             else throw IllegalStateException("Wrong args mapping found!")
-        }}?.toMutableList() ?: throw IllegalStateException("Didn't find argument mappings for operation $operation from $group group!")
-        arguments.forEach { if (it.type.contains("$")) it.type = matchKeyWithTypeVariable(it.type, typeVariables) }
-        // TODO: If mapping from type to random value is null, we should throw an exception
-        return arguments.associate { it.name to (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped")  }
+        }} ?: throw IllegalStateException("Didn't find argument mappings for operation $operation from $group group!")
+        argsMappings.forEach { if (it.type.contains("$")) it.type = matchKeyWithTypeVariable(it.type, typeVariables) }
+        return argsMappings
     }
 
     private fun matchKeyWithTypeVariable(text: String, typeVariables: Map<String, String>): String {
@@ -51,5 +70,24 @@ object ArgumentsGenerator {
         })"}
         this["String"] = { ('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("") }
     }
+
+    private val argumentTypesMapping = mutableMapOf<Pair<String, String>, () -> String>().apply {
+
+    }
+
+//    fun generateArguments(group: String, profiles: List<String>, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): Map<String, String> {
+//        val operationProfile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "operations", operation)
+//        val argsMappings = propertiesTree.getMappings("groups", group, "operations", operation, operationProfile, "args")
+//        val arguments = argsMappings?.let { argsInner -> (0 until argsInner.size / 2).map { index ->
+//            if (argsInner[2 * index].first == "name")
+//                Argument (argsInner[2 * index].second.first(), argsInner[(2 * index) + 1].second.first())
+//            else if (argsInner[(2 * index) + 1].first == "name")
+//                Argument (argsInner[(2 * index) + 1].second.first(), argsInner[2 * index].second.first())
+//            else throw IllegalStateException("Wrong args mapping found!")
+//        }}?.toMutableList() ?: throw IllegalStateException("Didn't find argument mappings for operation $operation from $group group!")
+//        arguments.forEach { if (it.type.contains("$")) it.type = matchKeyWithTypeVariable(it.type, typeVariables) }
+//        // TODO: If mapping from type to random value is null, we should throw an exception
+//        return arguments.associate { it.name to (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped")  }
+//    }
 
 }

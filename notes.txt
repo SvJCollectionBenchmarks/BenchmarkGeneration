@@ -8,6 +8,8 @@ ARGUMENTS SHOULD BE GENERATED ONCE PER GROUP, NOT PER METHOD:
     3. For all other profiles, check if a newly made profile transition function can reapply similar values;
     4. If the transition is not supported, generate a new argument based on the rules from the 2. point;
 
+Good mod for the primes benchmark: populate the map with all the numbers in the beginning, delete keys that are not prime.
+
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji
 		- Problemy z clear

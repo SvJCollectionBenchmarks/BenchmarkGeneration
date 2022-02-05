@@ -1,5 +1,7 @@
 package com.adalbert.generation
 
+import com.adalbert.generation.ArgumentsGenerator.generateArgumentsForProfile
+import com.adalbert.generation.ArgumentsGenerator.mapArgumentsToProfile
 import com.adalbert.utils.*
 import java.io.File
 import java.net.URLDecoder
@@ -7,6 +9,9 @@ import java.net.URLDecoder
 private const val profilesNumber = 1
 
 fun main() {
+
+    val defaultArgumentGenerationProfile = "java"
+
     val resourcesUri = URLDecoder.decode(Tree("", mutableListOf()).javaClass.getResource("/")?.path, "UTF-8")
         ?: throw IllegalStateException("Couldn't find main resources folder")
 
@@ -32,7 +37,7 @@ fun main() {
                 operations.scaleProbabilityInPlace(randomOperation, 1.2)
                 chosenOperations.add(randomOperation)
             }
-            println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations")
+            println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations for $groupName")
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
             val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")
@@ -40,17 +45,16 @@ fun main() {
                     ?: throw IllegalArgumentException("Variable of name $it doesn't exist in group $groupName!")
                 } ?: throw IllegalStateException("Couldn't get variables mapping for $groupName group!")
 
-            val groupedByDefaultProfiles = generated?.groupBy { propertiesTree.getValues("groups", groupName, "generated", it)!! }
-            println("a")
+            val protoArguments = chosenOperations.associateWith { generateArgumentsForProfile(groupName, defaultArgumentGenerationProfile, it, typeVariables, propertiesTree) }
 
-//            generated?.forEach { generatedName ->
-//                val profiles = mutableListOf(generatedName)
-//                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
-//                    ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
-//                profiles.addAll(defaultProfile)
-//                val operationsWithArguments = chosenOperations.associateWith { ArgumentsGenerator.generateArguments(groupName, profiles, it, typeVariables, propertiesTree) }
-//                println(operationsWithArguments)
-//            }
+            generated?.forEach { generatedName ->
+                val possibleProfiles = mutableListOf(generatedName)
+                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
+                    ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
+                possibleProfiles.addAll(defaultProfile)
+                val operationsWithArguments = chosenOperations.associateWith { mapArgumentsToProfile(groupName, possibleProfiles, it, typeVariables, propertiesTree, protoArguments) }
+                println("$generatedName $operationsWithArguments")
+            }
         }
     }
 }

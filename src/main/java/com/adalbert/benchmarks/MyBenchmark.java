@@ -36,6 +36,8 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
+import scala.collection.IterableOnce;
+import scala.collection.mutable.ArrayBuffer;
 import scala.math.Ordering;
 
 import java.util.ArrayList;
@@ -47,7 +49,13 @@ import java.util.Iterator;
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
-    private final Collection<? extends Integer> elems = Arrays.asList(1, 2, 3, 4, 5);
+    private static final Collection<? extends Integer> elems = Arrays.asList(1, 2, 3, 4, 5);
+
+    public static void main(String[] args) {
+        ArrayBuffer<String> collection = new scala.collection.mutable.ArrayBuffer<String>();
+        elems.forEach(it -> collection.append(it.toString()));
+        System.out.println(collection);
+    }
 
     @Benchmark
     @Fork(1)

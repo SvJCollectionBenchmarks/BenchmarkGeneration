@@ -2,11 +2,13 @@ package com.adalbert.benchmarks
 
 import org.openjdk.jmh.annotations.{Benchmark, Fork, Scope, State}
 import org.openjdk.jmh.infra.Blackhole
+
 import scala.collection.mutable
 import scala.collection.immutable
 import java.util
-
 import scala.collection.mutable.ArrayBuffer
+import scala.jdk.CollectionConverters.CollectionHasAsScala
+import scala.reflect.ClassTag
 
 @State(Scope.Benchmark)
 class SBenchmark {
@@ -24,7 +26,12 @@ class SBenchmark {
     collection.clear()
   }
 
-  def dummy(): Unit = {
-    var collection = mutable.TreeMap[String, String]()
-  }
+}
+
+object Main extends App {
+  val classTag: ClassTag[Long] = ClassTag(Long.getClass)
+  val protoArgument: util.Collection[String] = new util.ArrayList()
+  (0 until 10).foreach(it => protoArgument.add(it.toString))
+  val targetArgument = protoArgument.asScala
+  println(targetArgument)
 }

@@ -1,14 +1,13 @@
 package com.adalbert.generation
 
-import com.adalbert.utils.Tree
-import com.adalbert.utils.randomTimes
-import com.adalbert.utils.substringFromLast
-import com.adalbert.utils.substringUntil
+import com.adalbert.utils.*
 import kotlin.random.Random
 
 data class Argument(var name: String, var type: String)
 
 object ArgumentsGenerator {
+
+    private data class InterProfileMapping(val profile: String, val protoType: String, val targetType: String)
 
     fun generateArgumentsForProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): Map<Argument, String> {
         return getArgsMappingsForProfile(group, operationProfile, operation, typeVariables, propertiesTree)
@@ -19,13 +18,19 @@ object ArgumentsGenerator {
         val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", group, "operations", operation)
         val arguments = getArgsMappingsForProfile(group, operationProfile, operation, typeVariables, propertiesTree)
 
-        val notMappedTypes = arguments.forEach { profileArgument ->
-            val protoArgument = protoArguments[operation]?.keys?.firstOrNull { profileArgument.name == it.name } ?: throw IllegalStateException()
-            if (protoArgument.type != profileArgument.type && argumentTypesMapping[Pair(protoArgument.type, profileArgument.type)] == null)
-                println("You need to map ${protoArgument.type} to ${profileArgument.type} also!")
+        return arguments.associate { targetArgument: Argument ->
+            val protoArgumentPair = protoArguments[operation]?.map { it }?.firstOrNull { it.key.name == targetArgument.name }
+                ?: throw IllegalStateException()
+            if (protoArgumentPair.key.type != targetArgument.type) {
+                val mapping = argumentTypesMapping[InterProfileMapping(operationProfile, protoArgumentPair.key.type, targetArgument.type)]
+                if (mapping == null) {
+                    println("\t### You may need to map ${protoArgumentPair.key.type} to ${targetArgument.type} also for profile $operationProfile! ###")
+                    val value = randomValuesGeneration[targetArgument.type]?.let { it1 -> it1() }
+                        ?: "${targetArgument.type} not mapped"
+                    targetArgument.name to value
+                } else protoArgumentPair.key.name to mapping(protoArgumentPair.value)
+            } else protoArgumentPair.key.name to protoArgumentPair.value
         }
-
-        return mapOf()
     }
 
     private fun getArgsMappingsForProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): List<Argument> {
@@ -71,23 +76,19 @@ object ArgumentsGenerator {
         this["String"] = { ('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("") }
     }
 
-    private val argumentTypesMapping = mutableMapOf<Pair<String, String>, () -> String>().apply {
-
-    }
-
-//    fun generateArguments(group: String, profiles: List<String>, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): Map<String, String> {
-//        val operationProfile = propertiesTree.getFirstMatchingKey(profiles, "groups", group, "operations", operation)
-//        val argsMappings = propertiesTree.getMappings("groups", group, "operations", operation, operationProfile, "args")
-//        val arguments = argsMappings?.let { argsInner -> (0 until argsInner.size / 2).map { index ->
-//            if (argsInner[2 * index].first == "name")
-//                Argument (argsInner[2 * index].second.first(), argsInner[(2 * index) + 1].second.first())
-//            else if (argsInner[(2 * index) + 1].first == "name")
-//                Argument (argsInner[(2 * index) + 1].second.first(), argsInner[2 * index].second.first())
-//            else throw IllegalStateException("Wrong args mapping found!")
-//        }}?.toMutableList() ?: throw IllegalStateException("Didn't find argument mappings for operation $operation from $group group!")
-//        arguments.forEach { if (it.type.contains("$")) it.type = matchKeyWithTypeVariable(it.type, typeVariables) }
-//        // TODO: If mapping from type to random value is null, we should throw an exception
-//        return arguments.associate { it.name to (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped")  }
-//    }
+    private val argumentTypesMapping = mutableMapOf<InterProfileMapping, (it: String) -> String> (
+        InterProfileMapping("scala", "Collection<? extends String>", "IterableOnce<String>") to { "ArrayBuffer[String](${it.substringFromLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Collection<? extends Double>", "IterableOnce<Double>") to { "ArrayBuffer[Double](${it.substringFromLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Collection<? extends Float>", "IterableOnce<Float>") to { "ArrayBuffer[Float](${it.substringFromLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Collection<? extends Integer>", "IterableOnce<Integer>") to { "ArrayBuffer[Integer](${it.substringFromLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Collection<? extends Long>", "IterableOnce<Long>") to { "ArrayBuffer[Long](${it.substringFromLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Collection<? extends Boolean>", "IterableOnce<Boolean>") to { "ArrayBuffer[Boolean](${it.substringFromLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "String[]", "ClassTag<String>") to { "ClassTag(String.getClass)" },
+        InterProfileMapping("scala", "Double[]", "ClassTag<Double>") to { "ClassTag(Double.getClass)" },
+        InterProfileMapping("scala", "Float[]", "ClassTag<Float>") to { "ClassTag(Float.getClass)" },
+        InterProfileMapping("scala", "Integer[]", "ClassTag<Integer>") to { "ClassTag(Integer.getClass)" },
+        InterProfileMapping("scala", "Long[]", "ClassTag<Long>") to { "ClassTag(Long.getClass)" },
+        InterProfileMapping("scala", "Boolean[]", "ClassTag<Boolean>") to { "ClassTag(Boolean.getClass)" }
+    )
 
 }

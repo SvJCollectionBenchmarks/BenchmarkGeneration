@@ -5,6 +5,7 @@ import com.adalbert.utils.substringUntilLast
 import java.io.File
 import java.net.URLDecoder
 
+
 fun main() {
     val resourcesUri = URLDecoder.decode(Tree("", mutableListOf()).javaClass.getResource("/")?.path, "UTF-8")
         ?: throw IllegalStateException("Couldn't find main resources folder")
@@ -34,15 +35,24 @@ fun main() {
         groups?.forEach { groupName ->
             context["group"] = listOf(groupName)
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
-            val methodCode = generated?.map { generatedName ->
+            val benchmarkMethods = generated?.map { generatedName ->
                 val profiles = mutableListOf(generatedName)
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)?.first()
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
+                // a project decision:
+                val language = defaultProfile
                 profiles.add(defaultProfile)
                 context["profile"] = profiles
-                BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)[defaultProfile]
-            }
-            methodCode?.forEach { println("\n$it\n") }
+                val code = BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)[language]
+                    ?: throw IllegalStateException("Couldn't generate methods code for $groupName and language $language!")
+                BenchmarkMethod(language, generatedName, code)
+            } ?: throw IllegalStateException()
+            BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, propertiesTree)
+                .forEach {
+                    println("############ ${it.key} ############")
+                    println(it.value)
+                }
+
         }
 
     }

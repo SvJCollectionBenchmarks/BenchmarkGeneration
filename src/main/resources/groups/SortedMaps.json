@@ -118,7 +118,7 @@
 			},
 			"scala": {
 				"args": [],
-				"content": "collection.keySet()"
+				"content": "collection.keySet"
 			}
 		},
 		"values": {
@@ -128,7 +128,7 @@
 			},
 			"scala": {
 				"args": [],
-				"content": "collection.values()"
+				"content": "collection.values"
 			}
 		}
 	},

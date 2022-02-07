@@ -58,21 +58,42 @@ object ArgumentsGenerator {
         this.putAll(listOf("double", "Double").associateWith { { "${Random.nextDouble(10.0)}" } })
         this.putAll(listOf("boolean", "Boolean").associateWith { { "${Random.nextBoolean()}" } })
         this.putAll(listOf("long", "Long").associateWith { { "${Random.nextLong(Long.MAX_VALUE)}" } })
-        this["Collection<? extends Integer>"] = { "new ArrayList<Integer>(${
+        this["Collection<? extends Integer>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }
         })"}
-        this["Collection<? extends Long>"] = { "new ArrayList<Long>(${
+        this["Collection<? extends Long>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }
         })"}
-        this["Collection<? extends Float>"] = { "new ArrayList<Float>(${
+        this["Collection<? extends Float>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }
         })"}
-        this["Collection<? extends Double>"] = { "new ArrayList<Double>(${
+        this["Collection<? extends Double>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }
         })"}
-        this["Collection<? extends String>"] = { "new ArrayList<String>(${
+        this["Collection<? extends Boolean>"] = { "Arrays.asList(${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }
+        })"}
+        this["Collection<? extends String>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 5)).joinToString(",") { "\"${this["String"]!!()}\"" }
         })"}
+        this["Integer[]"] = { "new Integer[] {${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }
+        }}"}
+        this["Long[]"] = { "new Long[] {${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }
+        }}"}
+        this["Float[]"] = { "new Float[] {${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }
+        }}"}
+        this["Double[]"] = { "new Double[] {${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }
+        }}"}
+        this["Boolean[]"] = { "new Boolean[] {${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }
+        }}"}
+        this["String[]"] = { "new String[] {${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["String"]!!() }
+        }}"}
         this["String"] = { ('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("") }
     }
 

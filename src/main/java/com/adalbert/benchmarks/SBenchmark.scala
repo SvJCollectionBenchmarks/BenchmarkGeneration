@@ -18,12 +18,18 @@ class SBenchmark {
   @Benchmark
   @Fork(1)
   def testMethodScala(bh: Blackhole): Unit = {
-    val collection = new ArrayBuffer[Int]()
-    collection.append(2)
-    collection.addAll(elems)
-    collection.subtractOne(3)
-    bh.consume(collection.apply(3))
-    collection.clear()
+    var collection = mutable.TreeMap[Integer, util.List[Integer]]();
+    for (i <- 2 until 100) {
+      var wasFound = false;
+      val iterator = collection.keySet.iterator;
+      while (iterator.hasNext && !wasFound) {
+        val key = iterator.next()
+        wasFound = i % key == 0;
+        if (wasFound) collection.apply(key).add(i);
+      }
+      if (!wasFound) collection.update(i, new util.ArrayList[Integer]());
+    }
+    bh.consume(collection.keySet);
   }
 
 }

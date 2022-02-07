@@ -34,15 +34,16 @@ fun main() {
         groups?.forEach { groupName ->
             context["group"] = listOf(groupName)
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
-            generated?.forEach { generatedName ->
+            val methodCode = generated?.map { generatedName ->
                 val profiles = mutableListOf(generatedName)
-                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
+                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)?.first()
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
-                profiles.addAll(defaultProfile)
+                profiles.add(defaultProfile)
                 context["profile"] = profiles
-                println("############### ${profiles[0]} ###############")
-                println(BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)["java"])
+                BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)[defaultProfile]
             }
+            methodCode?.forEach { println("\n$it\n") }
         }
+
     }
 }

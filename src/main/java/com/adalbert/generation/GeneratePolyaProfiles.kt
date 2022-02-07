@@ -52,11 +52,15 @@ fun main() {
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
                     ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
                 possibleProfiles.addAll(defaultProfile)
-                val operationsWithArguments = chosenOperations.associateWith { mapArgumentsToProfile(groupName, possibleProfiles, it, typeVariables, propertiesTree, protoArguments) }
-                println("$generatedName $operationsWithArguments")
+                val benchmarkNotationEntries = chosenOperations.map { operation ->
+                    val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", groupName, "operations", operation)
+                    val arguments = mapArgumentsToProfile(groupName, operationProfile, operation, typeVariables, propertiesTree, protoArguments)
+                    if (arguments.isEmpty()) "\${groupName.$groupName.operations.$operation.$operationProfile.content}"
+                    else "#{groupName.$groupName.operations.$operation.$operationProfile.content, ${arguments.map { "${it.key} = ${it.value}"}.joinToString(", ")}}"
+                }
+                println("######### $generatedName #########")
+                benchmarkNotationEntries.forEach { println(it) }
             }
         }
     }
 }
-
-

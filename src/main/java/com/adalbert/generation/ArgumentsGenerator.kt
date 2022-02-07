@@ -14,8 +14,7 @@ object ArgumentsGenerator {
             .associateWith { (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped") }
     }
 
-    fun mapArgumentsToProfile(group: String, possibleProfiles: List<String>, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree, protoArguments: Map<String, Map<Argument, String>>): Map<String, String> {
-        val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", group, "operations", operation)
+    fun mapArgumentsToProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree, protoArguments: Map<String, Map<Argument, String>>): Map<String, String> {
         val arguments = getArgsMappingsForProfile(group, operationProfile, operation, typeVariables, propertiesTree)
 
         return arguments.associate { targetArgument: Argument ->

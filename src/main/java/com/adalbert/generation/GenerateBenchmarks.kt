@@ -45,7 +45,7 @@ fun main() {
                 context["profile"] = profiles
                 val code = BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)[language]
                     ?: throw IllegalStateException("Couldn't generate methods code for $groupName and language $language!")
-                BenchmarkMethod(language, generatedName, code)
+                BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
             } ?: throw IllegalStateException()
             BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, propertiesTree)
                 .forEach {

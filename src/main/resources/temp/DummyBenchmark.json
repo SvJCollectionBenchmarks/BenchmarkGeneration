@@ -6,7 +6,9 @@
       "import scala.collection.mutable.ArrayBuffer;"
     ],
     "scala": [
-
+      "import java.util",
+      "import scala.collection.immutable",
+      "import scala.collection.mutable"
     ]
   },
   "fields": {

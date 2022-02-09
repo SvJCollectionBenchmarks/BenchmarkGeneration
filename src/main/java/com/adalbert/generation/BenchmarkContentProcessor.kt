@@ -23,7 +23,7 @@ object BenchmarkContentProcessor {
         return outputMap
     }
 
-    private fun processBenchmarkText(benchmarkText: String, context: MutableMap<String, List<String>>, propertiesTree: Tree): String {
+    fun processBenchmarkText(benchmarkText: String, context: MutableMap<String, List<String>>, propertiesTree: Tree): String {
         var innerBenchmarkText = benchmarkText
         variableExpressionRegex.findAll(innerBenchmarkText).forEach {
             innerBenchmarkText = innerBenchmarkText.replace(
@@ -41,7 +41,7 @@ object BenchmarkContentProcessor {
     }
 
     private fun processExpressionWithArguments(expression: String, context: MutableMap<String, List<String>>, propertiesTree: Tree): String {
-        val fragments = expression.split(",").map { it.trim() }
+        val fragments = expression.split("#").map { it.trim() }
         val argumentsList = mutableListOf<Pair<String, String>>()
         fragments.subList(1, fragments.size).forEach { argument ->
             val argumentDefinition = argument.split("=").map { it.trim() }

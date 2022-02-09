@@ -3,9 +3,9 @@ package com.adalbert.generation
 import com.adalbert.utils.*
 import kotlin.random.Random
 
-data class Argument(var name: String, var type: String)
-
 object ArgumentsGenerator {
+
+    data class Argument(var name: String, var type: String)
 
     private data class InterProfileMapping(val profile: String, val protoType: String, val targetType: String)
 
@@ -93,7 +93,7 @@ object ArgumentsGenerator {
         this["String[]"] = { "new String[] {${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["String"]!!() }
         }}"}
-        this["String"] = { ('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("") }
+        this["String"] = { "\"${('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("")}\"" }
     }
 
     private val argumentTypesMapping = mutableMapOf<InterProfileMapping, (it: String) -> String> (

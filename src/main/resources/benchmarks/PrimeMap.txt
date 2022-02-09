@@ -1,28 +1,28 @@
 <@java@>
-#{groups.$group.init.$language.$profile.content, K = Integer, V = java.util.List<Integer>};
+#{groups.$group.init.$language.$profile.content # K = Integer # V = java.util.List<Integer>};
 for (int i = 2; i < 100; i++) {
     boolean wasFound = false;
     ${benchmarks.$benchmark.variables.profiled.$language.$profile.iteratorImport}<Integer> iterator = ${groups.$group.operations.keys.$profile.content}.iterator();
     while (iterator.hasNext() && !wasFound) {
         Integer key = iterator.next();
         wasFound = i % key == 0;
-        if (wasFound) #{groups.$group.operations.get.$profile.content, key = key}.add(i);
+        if (wasFound) #{groups.$group.operations.get.$profile.content # key = key}.add(i);
     }
-    if (!wasFound) #{groups.$group.operations.put.$profile.content, key = i, value = new ArrayList<Integer>()};
+    if (!wasFound) #{groups.$group.operations.put.$profile.content # key = i # value = new ArrayList<Integer>()};
 }
 bh.consume(${groups.$group.operations.keys.$profile.content});
 <@java@>
 <@scala@>
-#{groups.$group.init.$language.$profile.content, K = Integer, V = util.List[Integer]};
+#{groups.$group.init.$language.$profile.content # K = Integer # V = util.List[Integer]};
 for (i <- 2 until 100) {
     var wasFound = false;
     val iterator = ${groups.$group.operations.keys.$profile.content}.iterator;
     while (iterator.hasNext && !wasFound) {
         val key = iterator.next()
         wasFound = i % key == 0;
-        if (wasFound) #{groups.$group.operations.get.$profile.content, key = key}.add(i);
+        if (wasFound) #{groups.$group.operations.get.$profile.content # key = key}.add(i);
     }
-    if (!wasFound) #{groups.$group.operations.put.$profile.content, key = i, value = new util.ArrayList[Integer]()};
+    if (!wasFound) #{groups.$group.operations.put.$profile.content # key = i # value = new util.ArrayList[Integer]()};
 }
 bh.consume(${groups.$group.operations.keys.$profile.content});
 <@scala@>

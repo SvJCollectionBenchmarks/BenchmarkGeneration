@@ -3,9 +3,9 @@ package com.adalbert.generation
 import com.adalbert.utils.Tree
 import java.lang.StringBuilder
 
-data class BenchmarkMethod(val language: String, val generatedName: String, val generatedCode: String)
-
 object BenchmarkContentGenerator {
+
+    data class BenchmarkMethod(val language: String, val generatedName: String, val generatedCode: String)
 
     fun generateFullSourceFromSnippets(benchmarkName: String, groupName: String, benchmarkMethods: List<BenchmarkMethod>, propertiesTree: Tree): Map<String, String> {
         val groupedByLanguage = benchmarkMethods.groupBy { it.language }

@@ -55,11 +55,11 @@ fun main() {
                 val benchmarkNotationEntries = chosenOperations.map { operation ->
                     val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", groupName, "operations", operation)
                     val arguments = mapArgumentsToProfile(groupName, operationProfile, operation, typeVariables, propertiesTree, protoArguments)
-                    if (arguments.isEmpty()) "\${groupName.$groupName.operations.$operation.$operationProfile.content}"
-                    else "#{groupName.$groupName.operations.$operation.$operationProfile.content, ${arguments.map { "${it.key} = ${it.value}"}.joinToString(", ")}}"
+                    if (arguments.isEmpty()) "\${groups.$groupName.operations.$operation.$operationProfile.content}"
+                    else "#{groups.$groupName.operations.$operation.$operationProfile.content # ${arguments.map { "${it.key} = ${it.value}"}.joinToString(" # ")}}"
                 }
                 println("######### $generatedName #########")
-                benchmarkNotationEntries.forEach { println(it) }
+                println(BenchmarkContentProcessor.processBenchmarkText(benchmarkNotationEntries.joinToString("\n"), mutableMapOf(), propertiesTree))
             }
         }
     }

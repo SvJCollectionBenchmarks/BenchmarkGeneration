@@ -1,6 +1,6 @@
 package com.adalbert.benchmarks
 
-import org.openjdk.jmh.annotations.{Benchmark, Fork, Scope, State}
+import org.openjdk.jmh.annotations.{Benchmark, Fork, Measurement, Scope, State, Warmup}
 import org.openjdk.jmh.infra.Blackhole
 
 import scala.collection.mutable
@@ -14,9 +14,12 @@ import scala.reflect.ClassTag
 class SBenchmark {
 
   private val elems = ArrayBuffer[Int](1, 2, 3, 4, 5)
+  // sad
 
   @Benchmark
   @Fork(1)
+  @Measurement(iterations = 1)
+  @Warmup(iterations = 1)
   def testMethodScala(bh: Blackhole): Unit = {
     var collection = mutable.TreeMap[Integer, util.List[Integer]]();
     for (i <- 2 until 100) {

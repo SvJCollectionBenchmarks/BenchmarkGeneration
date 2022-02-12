@@ -31,10 +31,7 @@
 
 package com.adalbert.benchmarks;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import scala.collection.IterableOnce;
 import scala.collection.mutable.ArrayBuffer;
@@ -44,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
-
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
@@ -58,7 +54,7 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    @Fork(1)
+    @BenchmarkMode(Mode.All)
     public void testJHashMap(Blackhole bh) {
         java.util.HashMap<Integer, java.util.List<Integer>> collection = new java.util.HashMap<>();
         for (int i = 2; i < 100; i++) {

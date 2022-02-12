@@ -24,11 +24,10 @@ fun main() {
         Tree("groups", groupsFiles.map { file -> JSONTreeParser.parseJsonFile(file) }.toMutableList()),
     ))
 
-    (0 until profilesNumber).forEach {
+    (0 until profilesNumber).forEach { _ ->
         val groups = propertiesTree.getKeys("groups")
-        groups?.forEach { groupName ->
-            val operations: MutableMap<String, IntRange> = propertiesTree.getKeys("groups", groupName, "operations")?.toProbabilityMap()
-                ?: throw IllegalStateException("Couldn't read operations provided by $groupName!")
+        groups.forEach { groupName ->
+            val operations: MutableMap<String, IntRange> = propertiesTree.getKeys("groups", groupName, "operations").toProbabilityMap()
             // WARN: The famous "can't measure nothing" paradigm
             operations.remove("clear")
             val chosenOperations = mutableListOf<String>()
@@ -41,16 +40,14 @@ fun main() {
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
             val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")
-                ?.associateWith { propertiesTree.getValues("groups", groupName, "variables", it)?.random()
-                    ?: throw IllegalArgumentException("Variable of name $it doesn't exist in group $groupName!")
-                } ?: throw IllegalStateException("Couldn't get variables mapping for $groupName group!")
+                .associateWith { propertiesTree.getValues("groups", groupName, "variables", it).random()
+                }
 
             val protoArguments = chosenOperations.associateWith { generateArgumentsForProfile(groupName, defaultArgumentGenerationProfile, it, typeVariables, propertiesTree) }
 
-            generated?.forEach { generatedName ->
+            val benchmarkMethods = generated.map { generatedName ->
                 val possibleProfiles = mutableListOf(generatedName)
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
-                    ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
                 possibleProfiles.addAll(defaultProfile)
                 val benchmarkNotationEntries = chosenOperations.map { operation ->
                     val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", groupName, "operations", operation)
@@ -58,9 +55,17 @@ fun main() {
                     if (arguments.isEmpty()) "\${groups.$groupName.operations.$operation.$operationProfile.content}"
                     else "#{groups.$groupName.operations.$operation.$operationProfile.content # ${arguments.map { "${it.key} = ${it.value}"}.joinToString(" # ")}}"
                 }
-                println("######### $generatedName #########")
-                println(BenchmarkContentProcessor.processBenchmarkText(benchmarkNotationEntries.joinToString("\n"), mutableMapOf(), propertiesTree))
+                val code = BenchmarkContentProcessor.processBenchmarkText(benchmarkNotationEntries.joinToString("\n"), mutableMapOf(), propertiesTree)
+                // assuming here the default profile is the language
+                BenchmarkContentGenerator.BenchmarkMethod(defaultProfile[0], generatedName, code)
             }
+
+            println(
+                BenchmarkContentGenerator
+                    .generateFullSourceFromPolyaSnippets(groupName, benchmarkMethods, propertiesTree)
+                    .joinToString("\n\n") { it.generatedCode }
+            )
+
         }
     }
 }

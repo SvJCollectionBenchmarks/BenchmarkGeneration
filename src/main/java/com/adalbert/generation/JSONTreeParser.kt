@@ -5,6 +5,7 @@ import com.adalbert.utils.substringUntilLast
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
+import com.fasterxml.jackson.databind.node.JsonNodeType
 import java.io.File
 
 object JSONTreeParser {
@@ -33,7 +34,10 @@ object JSONTreeParser {
             }
         } else {
             if (builtTree.values == null) builtTree.values = mutableListOf()
-            builtTree.values?.add(root.textValue())
+            builtTree.values?.add(when (root.nodeType) {
+                JsonNodeType.BOOLEAN -> root.booleanValue().toString()
+                else -> root.textValue()
+            })
         }
     }
 

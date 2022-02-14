@@ -40,32 +40,33 @@ fun main() {
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
             val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")
-                .associateWith { propertiesTree.getValues("groups", groupName, "variables", it).random()
-                }
+                .associateWith { propertiesTree.getValues("groups", groupName, "variables", it).random() }
 
             val protoArguments = chosenOperations.associateWith { generateArgumentsForProfile(groupName, defaultArgumentGenerationProfile, it, typeVariables, propertiesTree) }
 
-            val benchmarkMethods = generated.map { generatedName ->
+            val benchmarkClasses = generated.map { generatedName ->
                 val possibleProfiles = mutableListOf(generatedName)
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
                 possibleProfiles.addAll(defaultProfile)
                 val benchmarkNotationEntries = chosenOperations.map { operation ->
                     val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", groupName, "operations", operation)
                     val arguments = mapArgumentsToProfile(groupName, operationProfile, operation, typeVariables, propertiesTree, protoArguments)
-                    if (arguments.isEmpty()) "\${groups.$groupName.operations.$operation.$operationProfile.content}"
+                    val isConsumable = propertiesTree.getValue("groups", groupName, "operations", operation, operationProfile, "isConsumable").toBoolean()
+                    val entry = if (arguments.isEmpty()) "\${groups.$groupName.operations.$operation.$operationProfile.content}"
                     else "#{groups.$groupName.operations.$operation.$operationProfile.content # ${arguments.map { "${it.key} = ${it.value}"}.joinToString(" # ")}}"
+                    if (isConsumable) "bh.consume($entry)" else entry
                 }
                 val code = BenchmarkContentProcessor.processBenchmarkText(benchmarkNotationEntries.joinToString("\n"), mutableMapOf(), propertiesTree)
                 // assuming here the default profile is the language
-                BenchmarkContentGenerator.BenchmarkMethod(defaultProfile[0], generatedName, code)
+                val language = defaultProfile[0]
+                val method = BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
+                val collectionInit = propertiesTree.getValue("groups", groupName, "init", language, generatedName, "content")
+                    .replaceVariablesWithValues(typeVariables)
+                val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, "")
+                BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)
             }
 
-            println(
-                BenchmarkContentGenerator
-                    .generateFullSourceFromPolyaSnippets(groupName, benchmarkMethods, propertiesTree)
-                    .joinToString("\n\n") { it.generatedCode }
-            )
-
+            benchmarkClasses.forEach { println(it) }
         }
     }
 }

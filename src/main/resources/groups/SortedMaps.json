@@ -19,20 +19,24 @@
 	"init": {
 		"java": {
 			"JTreeMap": {
+				"isConsumable": true,
 				"args": [],
 				"content": "java.util.TreeMap<$K, $V> collection = new java.util.TreeMap<>()"
 			},
 			"STreeMap": {
+				"isConsumable": true,
 				"args": [],
 				"content": "scala.collection.mutable.TreeMap<$K, $V> collection = new scala.collection.mutable.TreeMap<>(new Ordering<$K>() { public int compare($K x, $K y) { return x.compareTo(y); }})"
 			}
 		},
 		"scala": {
 			"JTreeMap": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = new util.TreeMap[$K, $V]()"
 			},
 			"STreeMap": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = mutable.TreeMap[$K, $V]()"
 			}
@@ -41,26 +45,31 @@
 	"operations": {
 		"size": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			}
 		},
 		"get": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.get($key)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.apply($key)"
 			}
 		},
 		"put": {
 			"java": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
@@ -68,6 +77,7 @@
 				"content": "collection.put($key, $value)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
@@ -77,26 +87,31 @@
 		},
 		"containsKey": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.containsKey($key)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.contains($key)"
 			}
 		},
 		"remove": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			}
 		},
 		"replace": {
 			"java": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
@@ -104,6 +119,7 @@
 				"content": "collection.replace($key, $value)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
@@ -113,20 +129,24 @@
 		},
 		"keys": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.keySet()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.keySet"
 			}
 		},
 		"values": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.values()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.values"
 			}

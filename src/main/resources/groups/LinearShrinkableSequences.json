@@ -18,20 +18,24 @@
 	"init": {
 		"java": {
 			"JLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "java.util.LinkedList<$T> collection = new java.util.LinkedList<>()"
 			},
 			"SLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "scala.collection.mutable.ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
 			}
 		},
 		"scala": {
 			"JLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = new util.LinkedList[$T]()"
 			},
 			"SLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = mutable.ListBuffer[$T]()"
 			}
@@ -40,36 +44,43 @@
 	"operations": {
 		"size": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			}
 		},
 		"get": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.get($index)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.apply($index)"
 			}
 		},
 		"add": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.add($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.append($elem)"
 			}
 		},
 		"set": {
 			"java": {
+				"isConsumable": true,
 				"args": [
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -77,6 +88,7 @@
 				"content": "collection.set($index, $elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -86,46 +98,55 @@
 		},
 		"contains": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			}
 		},
 		"indexOf": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.indexOf($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.indexOf($elem)"
 			}
 		},
 		"lastIndexOf": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.lastIndexOf($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.lastIndexOf($elem, collection.size() - 1)"
 			}
 		},
 		"addAll": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.addAll($elems)"
 			}
 		},
 		"subCollection": {
 			"java": {
+				"isConsumable": true,
 				"args": [
 					{ "name": "index", "type": "int" },
 					{ "name": "count", "type": "int" }
@@ -133,6 +154,7 @@
 				"content": "collection.subList($index, $index + $count + 1)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [
 					{ "name": "index", "type": "int" },
 					{ "name": "count", "type": "int" }
@@ -142,16 +164,19 @@
 		},
 		"iterator": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.iterator()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.iterator()"
 			}
 		},
 		"insert": {
 			"java": {
+				"isConsumable": true,
 				"args": [
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -159,6 +184,7 @@
 				"content": "collection.add($index, $elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -168,40 +194,48 @@
 		},
 		"remove": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.remove($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.subtractOne($elem)"
 			}
 		},
 		"removeAt": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.remove($index)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.remove($index)"
 			}
 		},
 		"removeAll": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.removeAll($elems)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.subtractAll($elems)"
 			}
 		},
 		"clear": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.clear()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.clear()"
 			}

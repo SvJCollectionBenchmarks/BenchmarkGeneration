@@ -23,60 +23,74 @@
 	"init": {
 		"java": {
 			"JArraySequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "java.util.ArrayList<$T> collection = new java.util.ArrayList<>()"
 			},
 			"JLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "java.util.LinkedList<$T> collection = new java.util.LinkedList<>()"
 			},
 			"JVectorSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "java.util.Vector<$T> collection = new java.util.Vector<>()"
 			},
 			"SArrayBufferSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "scala.collection.mutable.ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
 			},
 			"SLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "scala.collection.mutable.ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
 			},
 			"SArraySequence": {
+				"isConsumable": true,
 				"args": [ { "name": "clazz", "type": "ClassTag<$T>" } ],
 				"content": "scala.collection.immutable.ArraySeq<$T> collection = scala.collection.immutable.ArraySeq.from(new ArrayBuffer<$T>(), $clazz)"
 			},
 			"SVectorSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "scala.collection.immutable.Vector<$T> collection = scala.collection.immutable.Vector.from(new ArrayBuffer<$T>())"
 			}
 		},
 		"scala": {
 			"JArraySequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = new util.ArrayList[$T]()"
 			},
 			"JLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = new util.LinkedList[$T]()"
 			},
 			"JVectorSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = new util.Vector[$T]()"
 			},
 			"SArrayBufferSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = mutable.ArrayBuffer[$T]()"
 			},
 			"SLinkedSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = mutable.ListBuffer[$T]()"
 			},
 			"SArraySequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = immutable.ArraySeq[$T]()"
 			},
 			"SVectorSequence": {
+				"isConsumable": true,
 				"args": [],
 				"content": "var collection = immutable.Vector[$T]()"
 			}
@@ -85,44 +99,53 @@
 	"operations": {
 		"size": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			}
 		},
 		"get": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.get($index)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.apply($index)"
 			}
 		},
 		"add": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.add($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.append($elem)"
 			},
 			"SArraySequence": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection = collection.appended($elem)"
 			},
 			"SVectorSequence": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection = collection.appended($elem)"
 			}
 		},
 		"set": {
 			"java": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -130,6 +153,7 @@
 				"content": "collection.set($index, $elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -137,6 +161,7 @@
 				"content": "collection.update($index, $elem)"
 			},
 			"SVectorSequence": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -146,54 +171,65 @@
 		},
 		"contains": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			}
 		},
 		"indexOf": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.indexOf($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.indexOf($elem)"
 			}
 		},
 		"lastIndexOf": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.lastIndexOf($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.lastIndexOf($elem, collection.size() - 1)"
 			}
 		},
 		"addAll": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"SArraySequence": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection = collection.appendedAll($elems)"
 			},
 			"SVectorSequence": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection = collection.appendedAll($elems)"
 			}
 		},
 		"subCollection": {
 			"java": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "count", "type": "int" }
@@ -201,6 +237,7 @@
 				"content": "collection.subList($index, $index + $count + 1)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "count", "type": "int" }
@@ -210,16 +247,19 @@
 		},
 		"iterator": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.iterator()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.iterator()"
 			}
 		},
 		"insert": {
 			"java": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -227,6 +267,7 @@
 				"content": "collection.add($index, $elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -236,40 +277,48 @@
 		},
 		"remove": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.remove($elem)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.subtractOne($elem)"
 			}
 		},
 		"removeAt": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.remove($index)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "index", "type": "int" } ],
 				"content": "collection.remove($index)"
 			}
 		},
 		"removeAll": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.removeAll($elems)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.subtractAll($elems)"
 			}
 		},
 		"clear": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.clear()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.clear()"
 			}

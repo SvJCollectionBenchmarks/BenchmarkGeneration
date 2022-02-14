@@ -2,7 +2,6 @@ Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
 Include Char to types, exclude Boolean from types
 Add initialization methods and type variables resolving for Polya benchmark classes
-Add consuming method results in Polya profiles
 
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji

@@ -94,3 +94,9 @@ fun <K, V> Map<K, V>.firstOrNull(predicate: (V) -> Boolean): K? {
     this.forEach { if (predicate(it.value)) return it.key }
     return null
 }
+
+fun String.replaceVariablesWithValues(variables: Map<String, String>): String {
+    var outcome = this
+    variables.forEach { outcome = outcome.replace("\$${it.key}", it.value) }
+    return outcome
+}

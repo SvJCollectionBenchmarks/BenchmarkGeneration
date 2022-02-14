@@ -56,34 +56,40 @@
 	"operations": {
 		"size": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			}
 		},
 		"get": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.get($key)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.apply($key)"
 			}
 		},
 		"put": {
 			"java": {
-				"args": [ 
+				"isConsumable": true,
+				"args": [
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
 				],
 				"content": "collection.put($key, $value)"
 			},
 			"scala": {
-				"args": [ 
+				"isConsumable": true,
+				"args": [
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
 				],
@@ -92,34 +98,40 @@
 		},
 		"containsKey": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.containsKey($key)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.contains($key)"
 			}
 		},
 		"remove": {
 			"java": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			}
 		},
 		"replace": {
 			"java": {
-				"args": [ 
+				"isConsumable": true,
+				"args": [
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
 				],
 				"content": "collection.replace($key, $value)"
 			},
 			"scala": {
-				"args": [ 
+				"isConsumable": true,
+				"args": [
 					{ "name": "key", "type": "$K" },
 					{ "name": "value", "type": "$V" }
 				],
@@ -128,20 +140,24 @@
 		},
 		"keys": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.keySet()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.keySet"
 			}
 		},
 		"values": {
 			"java": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.values()"
 			},
 			"scala": {
+				"isConsumable": true,
 				"args": [],
 				"content": "collection.values"
 			}

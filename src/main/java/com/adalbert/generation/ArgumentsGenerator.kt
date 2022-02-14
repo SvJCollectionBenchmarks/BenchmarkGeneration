@@ -53,10 +53,10 @@ object ArgumentsGenerator {
 
     private val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {
         this.putAll(listOf("int", "Integer").associateWith { { "${Random.nextInt(1, 10)}" } })
-        this.putAll(listOf("float", "Float").associateWith { { "${Random.nextDouble(10.0)}" } })
+        this.putAll(listOf("float", "Float").associateWith { { "${Random.nextDouble(10.0)}f" } })
         this.putAll(listOf("double", "Double").associateWith { { "${Random.nextDouble(10.0)}" } })
         this.putAll(listOf("boolean", "Boolean").associateWith { { "${Random.nextBoolean()}" } })
-        this.putAll(listOf("long", "Long").associateWith { { "${Random.nextLong(Long.MAX_VALUE)}" } })
+        this.putAll(listOf("long", "Long").associateWith { { "${Random.nextLong(Long.MAX_VALUE)}L" } })
         this["Collection<? extends Integer>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }
         })"}

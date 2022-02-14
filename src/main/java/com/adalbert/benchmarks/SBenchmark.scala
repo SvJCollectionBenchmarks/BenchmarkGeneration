@@ -14,7 +14,6 @@ import scala.reflect.ClassTag
 class SBenchmark {
 
   private val elems = ArrayBuffer[Int](1, 2, 3, 4, 5)
-  // sad
 
   @Benchmark
   @Fork(1)

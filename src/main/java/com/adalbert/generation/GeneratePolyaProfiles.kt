@@ -11,6 +11,7 @@ private const val profilesNumber = 1
 fun main() {
 
     val defaultArgumentGenerationProfile = "java"
+    val defaultElementsCount = 100
 
     val resourcesUri = URLDecoder.decode(Tree("", mutableListOf()).javaClass.getResource("/")?.path, "UTF-8")
         ?: throw IllegalStateException("Couldn't find main resources folder")
@@ -62,7 +63,14 @@ fun main() {
                 val method = BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
                 val collectionInit = propertiesTree.getValue("groups", groupName, "init", language, generatedName, "content")
                     .replaceVariablesWithValues(typeVariables)
-                val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, "")
+                val operation = if (generatedName.contains("Map")) "put" else "add"
+                val elementsFilling = (0 until defaultElementsCount).map {
+                    val arguments = generateArgumentsForProfile(groupName, defaultProfile[0], operation, typeVariables, propertiesTree)
+                    "#{groups.$groupName.operations.$operation.${defaultProfile[0]}.content # ${
+                        arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" # ")
+                    }}"
+                }.map {BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
+                val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
                 BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)
             }
 

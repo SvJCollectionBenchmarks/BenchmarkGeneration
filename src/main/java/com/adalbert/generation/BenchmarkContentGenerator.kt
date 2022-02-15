@@ -8,7 +8,7 @@ import kotlin.text.StringBuilder
 object BenchmarkContentGenerator {
 
     data class BenchmarkMethod(val language: String, val generatedName: String, val generatedCode: String)
-    data class BenchmarkInitialization(val collectionInit: String, val elementsFilling: String)
+    data class BenchmarkInitialization(val collectionInit: String, val elementsFilling: List<String>)
     data class BenchmarkClass(val language: String, val className: String, val generatedCode: String)
 
     // TODO: Change to Benchmark class, refactor
@@ -48,12 +48,17 @@ object BenchmarkContentGenerator {
     ): BenchmarkClass {
         val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("_yyyyMMdd_HHmmssSSS_"))
         val className = "Polya$timeOfExecution${groupName}Benchmark"
+        val eol = if (method.language == "java") ";" else ""
         val bob = StringBuilder()
         bob.appendLine(generalImports[method.language]
             ?: throw IllegalStateException("Language ${method.language} not supported!"))
         bob.appendLine("@State(Scope.Benchmark)")
         bob.appendLine("${if (method.language == "java") "public " else ""}class $className {")
-        bob.appendLine("\t${initialization.collectionInit}${if (method.language == "java") ";" else ""}")
+        bob.appendLine("\t${initialization.collectionInit}$eol")
+        bob.appendLine("\t@Setup(Level.Invocation)")
+        bob.appendLine("\t${methodsDeclarations[method.language to "setup"]!!(method.generatedName)}")
+        initialization.elementsFilling.forEach { bob.appendLine("\t\t$it$eol") }
+        bob.appendLine("\t}")
         stringifyMethod(bob, method)
         bob.appendLine("}")
         return BenchmarkClass(method.language, className, bob.toString())
@@ -62,7 +67,7 @@ object BenchmarkContentGenerator {
     private fun stringifyMethod(bob: StringBuilder, method: BenchmarkMethod) {
         val (language, generatedName, generatedCode) = method
         bob.appendLine("\t@Benchmark")
-        bob.appendLine("\t${methodsDeclarations[language]!!(generatedName)}")
+        bob.appendLine("\t${methodsDeclarations[language to "init"]!!(generatedName)}")
         generatedCode.split("\n").forEach {
             bob.appendLine("\t\t$it${if (method.language == "java") ";" else ""}")
         }
@@ -70,8 +75,10 @@ object BenchmarkContentGenerator {
     }
 
     val methodsDeclarations = mapOf(
-        "java" to { generatedName: String -> "public void test$generatedName(Blackhole bh) {" },
-        "scala" to { generatedName: String -> "def test$generatedName(bh: Blackhole): Unit = {" }
+        Pair("java", "init") to { generatedName: String -> "public void test$generatedName(Blackhole bh) {" },
+        Pair("scala", "init")  to { generatedName: String -> "def test$generatedName(bh: Blackhole): Unit = {" },
+        Pair("java", "setup")  to { generatedName: String -> "public void setup$generatedName() {" },
+        Pair("scala", "setup")  to { generatedName: String -> "def setup$generatedName(): Unit = {" },
     )
 
 }

@@ -40,7 +40,7 @@ object ArgumentsGenerator {
             else if (argsInner[(2 * index) + 1].first == "name")
                 Argument (argsInner[(2 * index) + 1].second.first(), argsInner[2 * index].second.first())
             else throw IllegalStateException("Wrong args mapping found!")
-        }} ?: throw IllegalStateException("Didn't find argument mappings for operation $operation from $group group!")
+        }}
         argsMappings.forEach { if (it.type.contains("$")) it.type = matchKeyWithTypeVariable(it.type, typeVariables) }
         return argsMappings
     }
@@ -56,6 +56,7 @@ object ArgumentsGenerator {
         this.putAll(listOf("float", "Float").associateWith { { "${Random.nextDouble(10.0)}f" } })
         this.putAll(listOf("double", "Double").associateWith { { "${Random.nextDouble(10.0)}" } })
         this.putAll(listOf("boolean", "Boolean").associateWith { { "${Random.nextBoolean()}" } })
+        this.putAll(listOf("char", "Char").associateWith { { "'${('a' .. 'z').random()}'" } })
         this.putAll(listOf("long", "Long").associateWith { { "${Random.nextLong(Long.MAX_VALUE)}L" } })
         this["Collection<? extends Integer>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }
@@ -71,6 +72,9 @@ object ArgumentsGenerator {
         })"}
         this["Collection<? extends Boolean>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }
+        })"}
+        this["Collection<? extends Char>"] = { "Arrays.asList(${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Char"]!!() }
         })"}
         this["Collection<? extends String>"] = { "Arrays.asList(${
             (0 until Random.nextInt(3, 5)).joinToString(",") { "\"${this["String"]!!()}\"" }
@@ -90,6 +94,9 @@ object ArgumentsGenerator {
         this["Boolean[]"] = { "new Boolean[] {${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }
         }}"}
+        this["Char[]"] = { "new Char[] {${
+            (0 until Random.nextInt(3, 10)).joinToString(",") { this["Char"]!!() }
+        }}"}
         this["String[]"] = { "new String[] {${
             (0 until Random.nextInt(3, 10)).joinToString(",") { this["String"]!!() }
         }}"}
@@ -103,12 +110,14 @@ object ArgumentsGenerator {
         InterProfileMapping("scala", "Collection<? extends Integer>", "IterableOnce<Integer>") to { "ArrayBuffer[Integer](${it.substringFromLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Collection<? extends Long>", "IterableOnce<Long>") to { "ArrayBuffer[Long](${it.substringFromLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Collection<? extends Boolean>", "IterableOnce<Boolean>") to { "ArrayBuffer[Boolean](${it.substringFromLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Collection<? extends Char>", "IterableOnce<Char>") to { "ArrayBuffer[Char](${it.substringFromLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "String[]", "ClassTag<String>") to { "ClassTag(String.getClass)" },
         InterProfileMapping("scala", "Double[]", "ClassTag<Double>") to { "ClassTag(Double.getClass)" },
         InterProfileMapping("scala", "Float[]", "ClassTag<Float>") to { "ClassTag(Float.getClass)" },
         InterProfileMapping("scala", "Integer[]", "ClassTag<Integer>") to { "ClassTag(Integer.getClass)" },
         InterProfileMapping("scala", "Long[]", "ClassTag<Long>") to { "ClassTag(Long.getClass)" },
-        InterProfileMapping("scala", "Boolean[]", "ClassTag<Boolean>") to { "ClassTag(Boolean.getClass)" }
+        InterProfileMapping("scala", "Boolean[]", "ClassTag<Boolean>") to { "ClassTag(Boolean.getClass)" },
+        InterProfileMapping("scala", "Char[]", "ClassTag<Char>") to { "ClassTag(Char.getClass)" }
     )
 
 }

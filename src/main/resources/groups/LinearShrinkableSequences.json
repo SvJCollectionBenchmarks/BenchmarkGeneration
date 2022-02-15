@@ -51,7 +51,7 @@
 			"scala": {
 				"isConsumable": true,
 				"args": [],
-				"content": "collection.size()"
+				"content": "collection.size"
 			}
 		},
 		"get": {
@@ -129,7 +129,7 @@
 			"scala": {
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
-				"content": "collection.lastIndexOf($elem, collection.size() - 1)"
+				"content": "collection.lastIndexOf($elem, collection.size - 1)"
 			}
 		},
 		"addAll": {
@@ -171,7 +171,7 @@
 			"scala": {
 				"isConsumable": true,
 				"args": [],
-				"content": "collection.iterator()"
+				"content": "collection.iterator"
 			}
 		},
 		"insert": {
@@ -242,6 +242,6 @@
 		}
 	},
 	"variables": {
-		"T": ["Integer", "String", "Double", "Float", "Boolean", "Long"]
+		"T": ["Integer", "String", "Double", "Float", "Char", "Long"]
 	}
 }

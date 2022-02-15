@@ -14,7 +14,7 @@ object BenchmarkContentProcessor {
         val languages = propertiesTree.getValues("languages")
         val benchmarkFileContent = benchmarkFile.readText()
         val languageTags = languageTagRegex.findAll(benchmarkFileContent)
-        languages?.forEach { language ->
+        languages.forEach { language ->
             val specificLanguageTags = languageTags.filter { it.groupValues[0].contains(language) }.sortedBy { it.range.first }.toList()
             val benchmarkText = benchmarkFileContent.substring(specificLanguageTags[0].range.last + 1, specificLanguageTags[1].range.first).trim()
             context["language"] = listOf(language)

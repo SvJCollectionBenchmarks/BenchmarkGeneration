@@ -52,7 +52,7 @@
 			"scala": {
 				"isConsumable": true,
 				"args": [],
-				"content": "collection.size()"
+				"content": "collection.size"
 			}
 		},
 		"get": {
@@ -153,7 +153,7 @@
 		}
 	},
 	"variables": {
-		"K": ["Integer", "String", "Double", "Float", "Boolean", "Long"],
-		"V": ["Integer", "String", "Double", "Float", "Boolean", "Long"]
+		"K": ["Integer", "String", "Double", "Float", "Char", "Long"],
+		"V": ["Integer", "String", "Double", "Float", "Char", "Long"]
 	}
 }

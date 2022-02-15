@@ -53,6 +53,11 @@ public class MyBenchmark {
         System.out.println(collection);
     }
 
+    @Setup(Level.Invocation)
+    public void setup() {
+
+    }
+
     @Benchmark
     @BenchmarkMode(Mode.All)
     public void testJHashMap(Blackhole bh) {

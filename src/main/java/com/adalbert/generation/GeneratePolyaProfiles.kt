@@ -32,7 +32,7 @@ fun main() {
             // WARN: The famous "can't measure nothing" paradigm
             operations.remove("clear")
             val chosenOperations = mutableListOf<String>()
-            (1 .. 10).forEach { _ ->
+            (1 .. 100).forEach { _ ->
                 val randomOperation = operations.random() ?: throw IllegalStateException()
                 operations.scaleProbabilityInPlace(randomOperation, 1.2)
                 chosenOperations.add(randomOperation)

@@ -45,21 +45,8 @@ import java.util.Iterator;
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
-    private static final Collection<? extends Integer> elems = Arrays.asList(1, 2, 3, 4, 5);
-
-    public static void main(String[] args) {
-        ArrayBuffer<String> collection = new scala.collection.mutable.ArrayBuffer<String>();
-        elems.forEach(it -> collection.append(it.toString()));
-        System.out.println(collection);
-    }
-
-    @Setup(Level.Invocation)
-    public void setup() {
-
-    }
-
     @Benchmark
-    @BenchmarkMode(Mode.All)
+    @Measurement(iterations = 6)
     public void testJHashMap(Blackhole bh) {
         java.util.HashMap<Integer, java.util.List<Integer>> collection = new java.util.HashMap<>();
         for (int i = 2; i < 100; i++) {
@@ -76,7 +63,7 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    @Fork(1)
+    @Measurement(iterations = 6)
     public void testJLinkedMap(Blackhole bh) {
         java.util.LinkedHashMap<Integer, java.util.List<Integer>> collection = new java.util.LinkedHashMap<>();
         for (int i = 2; i < 100; i++) {
@@ -93,7 +80,7 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    @Fork(1)
+    @Measurement(iterations = 6)
     public void testSHashMap(Blackhole bh) {
         scala.collection.mutable.HashMap<Integer, java.util.List<Integer>> collection = new scala.collection.mutable.HashMap<>();
         for (int i = 2; i < 100; i++) {
@@ -110,7 +97,7 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    @Fork(1)
+    @Measurement(iterations = 6)
     public void testSLinkedMap(Blackhole bh) {
         scala.collection.mutable.LinkedHashMap<Integer, java.util.List<Integer>> collection = new scala.collection.mutable.LinkedHashMap<>();
         for (int i = 2; i < 100; i++) {
@@ -127,7 +114,7 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    @Fork(1)
+    @Measurement(iterations = 6)
     public void testJTreeMap(Blackhole bh) {
         java.util.TreeMap<Integer, java.util.List<Integer>> collection = new java.util.TreeMap<>();
         for (int i = 2; i < 100; i++) {
@@ -144,7 +131,7 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    @Fork(1)
+    @Measurement(iterations = 6)
     public void testSTreeMap(Blackhole bh) {
         scala.collection.mutable.TreeMap<Integer, java.util.List<Integer>> collection = new scala.collection.mutable.TreeMap<>(new Ordering<Integer>() { public int compare(Integer x, Integer y) { return x.compareTo(y); }});
         for (int i = 2; i < 100; i++) {

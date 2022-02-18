@@ -1,0 +1,554 @@
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.openjdk.jmh.util.Utils (file:/C:/Users/wojci/source/master-thesis/BenchmarkGeneration/target/benchmarks.jar) to method java.io.Console.encoding()
+WARNING: Please consider reporting this to the maintainers of org.openjdk.jmh.util.Utils
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+# JMH version: 1.34
+# VM version: JDK 11.0.2, OpenJDK 64-Bit Server VM, 11.0.2+9
+# VM invoker: C:\Program Files\Java\jdk-11.0.2\bin\java.exe
+# VM options: <none>
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 6 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.adalbert.benchmarks.MyBenchmark.testJHashMap
+
+# Run progress: 0,00% complete, ETA 00:55:00
+# Fork: 1 of 5
+# Warmup Iteration   1: 347036,273 ops/s
+# Warmup Iteration   2: 352931,425 ops/s
+# Warmup Iteration   3: 360747,920 ops/s
+# Warmup Iteration   4: 361634,326 ops/s
+# Warmup Iteration   5: 360224,837 ops/s
+Iteration   1: 360378,230 ops/s
+Iteration   2: 361348,608 ops/s
+Iteration   3: 361087,004 ops/s
+Iteration   4: 360845,191 ops/s
+Iteration   5: 361267,802 ops/s
+Iteration   6: 360834,751 ops/s
+
+# Run progress: 3,33% complete, ETA 00:53:20
+# Fork: 2 of 5
+# Warmup Iteration   1: 348542,055 ops/s
+# Warmup Iteration   2: 353704,795 ops/s
+# Warmup Iteration   3: 361458,838 ops/s
+# Warmup Iteration   4: 360383,423 ops/s
+# Warmup Iteration   5: 360060,495 ops/s
+Iteration   1: 357475,680 ops/s
+Iteration   2: 360611,623 ops/s
+Iteration   3: 361524,442 ops/s
+Iteration   4: 360885,576 ops/s
+Iteration   5: 362044,219 ops/s
+Iteration   6: 361268,584 ops/s
+
+# Run progress: 6,67% complete, ETA 00:51:29
+# Fork: 3 of 5
+# Warmup Iteration   1: 350109,336 ops/s
+# Warmup Iteration   2: 353817,533 ops/s
+# Warmup Iteration   3: 363143,162 ops/s
+# Warmup Iteration   4: 362391,563 ops/s
+# Warmup Iteration   5: 362427,039 ops/s
+Iteration   1: 362303,714 ops/s
+Iteration   2: 362975,493 ops/s
+Iteration   3: 362290,514 ops/s
+Iteration   4: 352645,645 ops/s
+Iteration   5: 356869,996 ops/s
+Iteration   6: 363084,426 ops/s
+
+# Run progress: 10,00% complete, ETA 00:49:39
+# Fork: 4 of 5
+# Warmup Iteration   1: 340588,314 ops/s
+# Warmup Iteration   2: 352666,469 ops/s
+# Warmup Iteration   3: 361801,336 ops/s
+# Warmup Iteration   4: 362272,340 ops/s
+# Warmup Iteration   5: 362111,440 ops/s
+Iteration   1: 361659,941 ops/s
+Iteration   2: 361860,292 ops/s
+Iteration   3: 361841,795 ops/s
+Iteration   4: 361081,005 ops/s
+Iteration   5: 361909,949 ops/s
+Iteration   6: 361828,047 ops/s
+
+# Run progress: 13,33% complete, ETA 00:47:49
+# Fork: 5 of 5
+# Warmup Iteration   1: 350276,131 ops/s
+# Warmup Iteration   2: 355691,427 ops/s
+# Warmup Iteration   3: 362969,422 ops/s
+# Warmup Iteration   4: 355075,205 ops/s
+# Warmup Iteration   5: 363011,962 ops/s
+Iteration   1: 363884,101 ops/s
+Iteration   2: 363630,835 ops/s
+Iteration   3: 362938,121 ops/s
+Iteration   4: 363779,431 ops/s
+Iteration   5: 363728,968 ops/s
+Iteration   6: 363725,017 ops/s
+
+
+Result "com.adalbert.benchmarks.MyBenchmark.testJHashMap":
+  361386,967 ?(99.9%) 1537,770 ops/s [Average]
+  (min, avg, max) = (352645,645, 361386,967, 363884,101), stdev = 2301,662
+  CI (99.9%): [359849,197, 362924,737] (assumes normal distribution)
+
+
+# JMH version: 1.34
+# VM version: JDK 11.0.2, OpenJDK 64-Bit Server VM, 11.0.2+9
+# VM invoker: C:\Program Files\Java\jdk-11.0.2\bin\java.exe
+# VM options: <none>
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 6 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.adalbert.benchmarks.MyBenchmark.testJLinkedMap
+
+# Run progress: 16,67% complete, ETA 00:45:58
+# Fork: 1 of 5
+# Warmup Iteration   1: 455204,930 ops/s
+# Warmup Iteration   2: 450412,009 ops/s
+# Warmup Iteration   3: 433538,715 ops/s
+# Warmup Iteration   4: 433300,652 ops/s
+# Warmup Iteration   5: 433581,818 ops/s
+Iteration   1: 433851,037 ops/s
+Iteration   2: 433504,094 ops/s
+Iteration   3: 433688,893 ops/s
+Iteration   4: 433968,660 ops/s
+Iteration   5: 433236,993 ops/s
+Iteration   6: 432345,133 ops/s
+
+# Run progress: 20,00% complete, ETA 00:44:08
+# Fork: 2 of 5
+# Warmup Iteration   1: 457142,397 ops/s
+# Warmup Iteration   2: 451381,961 ops/s
+# Warmup Iteration   3: 431017,960 ops/s
+# Warmup Iteration   4: 431089,460 ops/s
+# Warmup Iteration   5: 431037,723 ops/s
+Iteration   1: 430930,977 ops/s
+Iteration   2: 430281,848 ops/s
+Iteration   3: 430495,517 ops/s
+Iteration   4: 431461,479 ops/s
+Iteration   5: 430491,413 ops/s
+Iteration   6: 430055,995 ops/s
+
+# Run progress: 23,33% complete, ETA 00:42:18
+# Fork: 3 of 5
+# Warmup Iteration   1: 418883,347 ops/s
+# Warmup Iteration   2: 452956,867 ops/s
+# Warmup Iteration   3: 426904,141 ops/s
+# Warmup Iteration   4: 426845,771 ops/s
+# Warmup Iteration   5: 426984,648 ops/s
+Iteration   1: 427301,526 ops/s
+Iteration   2: 427826,279 ops/s
+Iteration   3: 428103,463 ops/s
+Iteration   4: 425904,449 ops/s
+Iteration   5: 427972,182 ops/s
+Iteration   6: 427819,460 ops/s
+
+# Run progress: 26,67% complete, ETA 00:40:27
+# Fork: 4 of 5
+# Warmup Iteration   1: 456940,541 ops/s
+# Warmup Iteration   2: 450877,752 ops/s
+# Warmup Iteration   3: 432973,774 ops/s
+# Warmup Iteration   4: 433966,105 ops/s
+# Warmup Iteration   5: 433146,355 ops/s
+Iteration   1: 433400,552 ops/s
+Iteration   2: 432845,481 ops/s
+Iteration   3: 431759,502 ops/s
+Iteration   4: 433290,453 ops/s
+Iteration   5: 431588,155 ops/s
+Iteration   6: 433662,341 ops/s
+
+# Run progress: 30,00% complete, ETA 00:38:37
+# Fork: 5 of 5
+# Warmup Iteration   1: 452190,777 ops/s
+# Warmup Iteration   2: 448246,850 ops/s
+# Warmup Iteration   3: 426301,929 ops/s
+# Warmup Iteration   4: 427924,998 ops/s
+# Warmup Iteration   5: 425970,465 ops/s
+Iteration   1: 427147,635 ops/s
+Iteration   2: 426498,873 ops/s
+Iteration   3: 425701,246 ops/s
+Iteration   4: 426137,825 ops/s
+Iteration   5: 425825,984 ops/s
+Iteration   6: 426895,088 ops/s
+
+
+Result "com.adalbert.benchmarks.MyBenchmark.testJLinkedMap":
+  430133,084 ?(99.9%) 1950,240 ops/s [Average]
+  (min, avg, max) = (425701,246, 430133,084, 433968,660), stdev = 2919,027
+  CI (99.9%): [428182,845, 432083,324] (assumes normal distribution)
+
+
+# JMH version: 1.34
+# VM version: JDK 11.0.2, OpenJDK 64-Bit Server VM, 11.0.2+9
+# VM invoker: C:\Program Files\Java\jdk-11.0.2\bin\java.exe
+# VM options: <none>
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 6 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.adalbert.benchmarks.MyBenchmark.testJTreeMap
+
+# Run progress: 33,33% complete, ETA 00:36:47
+# Fork: 1 of 5
+# Warmup Iteration   1: 323911,446 ops/s
+# Warmup Iteration   2: 329108,145 ops/s
+# Warmup Iteration   3: 321888,105 ops/s
+# Warmup Iteration   4: 321763,024 ops/s
+# Warmup Iteration   5: 322224,937 ops/s
+Iteration   1: 321745,333 ops/s
+Iteration   2: 321880,318 ops/s
+Iteration   3: 321966,876 ops/s
+Iteration   4: 321865,049 ops/s
+Iteration   5: 321169,327 ops/s
+Iteration   6: 321041,793 ops/s
+
+# Run progress: 36,67% complete, ETA 00:34:56
+# Fork: 2 of 5
+# Warmup Iteration   1: 324717,815 ops/s
+# Warmup Iteration   2: 325108,373 ops/s
+# Warmup Iteration   3: 316380,796 ops/s
+# Warmup Iteration   4: 316393,275 ops/s
+# Warmup Iteration   5: 315495,327 ops/s
+Iteration   1: 316292,400 ops/s
+Iteration   2: 316243,638 ops/s
+Iteration   3: 316653,078 ops/s
+Iteration   4: 316741,506 ops/s
+Iteration   5: 316527,287 ops/s
+Iteration   6: 315073,014 ops/s
+
+# Run progress: 40,00% complete, ETA 00:33:06
+# Fork: 3 of 5
+# Warmup Iteration   1: 323653,815 ops/s
+# Warmup Iteration   2: 328500,721 ops/s
+# Warmup Iteration   3: 321384,033 ops/s
+# Warmup Iteration   4: 319813,180 ops/s
+# Warmup Iteration   5: 320774,060 ops/s
+Iteration   1: 317798,055 ops/s
+Iteration   2: 321167,891 ops/s
+Iteration   3: 321152,502 ops/s
+Iteration   4: 321117,304 ops/s
+Iteration   5: 320498,211 ops/s
+Iteration   6: 320707,614 ops/s
+
+# Run progress: 43,33% complete, ETA 00:31:16
+# Fork: 4 of 5
+# Warmup Iteration   1: 320210,377 ops/s
+# Warmup Iteration   2: 323380,227 ops/s
+# Warmup Iteration   3: 321353,875 ops/s
+# Warmup Iteration   4: 321263,756 ops/s
+# Warmup Iteration   5: 320879,538 ops/s
+Iteration   1: 321635,148 ops/s
+Iteration   2: 321494,182 ops/s
+Iteration   3: 321272,383 ops/s
+Iteration   4: 321275,384 ops/s
+Iteration   5: 321798,423 ops/s
+Iteration   6: 321628,269 ops/s
+
+# Run progress: 46,67% complete, ETA 00:29:25
+# Fork: 5 of 5
+# Warmup Iteration   1: 323336,611 ops/s
+# Warmup Iteration   2: 320749,567 ops/s
+# Warmup Iteration   3: 320828,067 ops/s
+# Warmup Iteration   4: 320387,131 ops/s
+# Warmup Iteration   5: 320571,275 ops/s
+Iteration   1: 320429,615 ops/s
+Iteration   2: 320245,297 ops/s
+Iteration   3: 319938,273 ops/s
+Iteration   4: 320594,322 ops/s
+Iteration   5: 320469,751 ops/s
+Iteration   6: 321157,710 ops/s
+
+
+Result "com.adalbert.benchmarks.MyBenchmark.testJTreeMap":
+  320052,665 ?(99.9%) 1403,902 ops/s [Average]
+  (min, avg, max) = (315073,014, 320052,665, 321966,876), stdev = 2101,294
+  CI (99.9%): [318648,764, 321456,567] (assumes normal distribution)
+
+
+# JMH version: 1.34
+# VM version: JDK 11.0.2, OpenJDK 64-Bit Server VM, 11.0.2+9
+# VM invoker: C:\Program Files\Java\jdk-11.0.2\bin\java.exe
+# VM options: <none>
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 6 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.adalbert.benchmarks.MyBenchmark.testSHashMap
+
+# Run progress: 50,00% complete, ETA 00:27:35
+# Fork: 1 of 5
+# Warmup Iteration   1: 287425,957 ops/s
+# Warmup Iteration   2: 290950,745 ops/s
+# Warmup Iteration   3: 290377,425 ops/s
+# Warmup Iteration   4: 290641,840 ops/s
+# Warmup Iteration   5: 290569,536 ops/s
+Iteration   1: 290863,361 ops/s
+Iteration   2: 290613,606 ops/s
+Iteration   3: 290573,362 ops/s
+Iteration   4: 290670,843 ops/s
+Iteration   5: 290944,979 ops/s
+Iteration   6: 290737,044 ops/s
+
+# Run progress: 53,33% complete, ETA 00:25:44
+# Fork: 2 of 5
+# Warmup Iteration   1: 290474,595 ops/s
+# Warmup Iteration   2: 294369,693 ops/s
+# Warmup Iteration   3: 294042,735 ops/s
+# Warmup Iteration   4: 293515,163 ops/s
+# Warmup Iteration   5: 294119,096 ops/s
+Iteration   1: 294228,979 ops/s
+Iteration   2: 294419,898 ops/s
+Iteration   3: 293332,997 ops/s
+Iteration   4: 294053,399 ops/s
+Iteration   5: 293898,715 ops/s
+Iteration   6: 293390,711 ops/s
+
+# Run progress: 56,67% complete, ETA 00:23:54
+# Fork: 3 of 5
+# Warmup Iteration   1: 288296,157 ops/s
+# Warmup Iteration   2: 293579,300 ops/s
+# Warmup Iteration   3: 294082,032 ops/s
+# Warmup Iteration   4: 293995,557 ops/s
+# Warmup Iteration   5: 293020,576 ops/s
+Iteration   1: 293735,695 ops/s
+Iteration   2: 294161,861 ops/s
+Iteration   3: 294114,997 ops/s
+Iteration   4: 293670,907 ops/s
+Iteration   5: 292931,658 ops/s
+Iteration   6: 293470,863 ops/s
+
+# Run progress: 60,00% complete, ETA 00:22:04
+# Fork: 4 of 5
+# Warmup Iteration   1: 287942,180 ops/s
+# Warmup Iteration   2: 291016,893 ops/s
+# Warmup Iteration   3: 289689,446 ops/s
+# Warmup Iteration   4: 288739,121 ops/s
+# Warmup Iteration   5: 289385,497 ops/s
+Iteration   1: 288850,109 ops/s
+Iteration   2: 289407,308 ops/s
+Iteration   3: 289499,465 ops/s
+Iteration   4: 289453,530 ops/s
+Iteration   5: 289374,035 ops/s
+Iteration   6: 289508,884 ops/s
+
+# Run progress: 63,33% complete, ETA 00:20:13
+# Fork: 5 of 5
+# Warmup Iteration   1: 285190,887 ops/s
+# Warmup Iteration   2: 287707,288 ops/s
+# Warmup Iteration   3: 287252,308 ops/s
+# Warmup Iteration   4: 287263,599 ops/s
+# Warmup Iteration   5: 286616,002 ops/s
+Iteration   1: 287207,522 ops/s
+Iteration   2: 286432,988 ops/s
+Iteration   3: 287313,958 ops/s
+Iteration   4: 287156,867 ops/s
+Iteration   5: 287172,110 ops/s
+Iteration   6: 287085,404 ops/s
+
+
+Result "com.adalbert.benchmarks.MyBenchmark.testSHashMap":
+  290942,535 ?(99.9%) 1779,962 ops/s [Average]
+  (min, avg, max) = (286432,988, 290942,535, 294419,898), stdev = 2664,164
+  CI (99.9%): [289162,573, 292722,498] (assumes normal distribution)
+
+
+# JMH version: 1.34
+# VM version: JDK 11.0.2, OpenJDK 64-Bit Server VM, 11.0.2+9
+# VM invoker: C:\Program Files\Java\jdk-11.0.2\bin\java.exe
+# VM options: <none>
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 6 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.adalbert.benchmarks.MyBenchmark.testSLinkedMap
+
+# Run progress: 66,67% complete, ETA 00:18:23
+# Fork: 1 of 5
+# Warmup Iteration   1: 463619,903 ops/s
+# Warmup Iteration   2: 472038,614 ops/s
+# Warmup Iteration   3: 470073,342 ops/s
+# Warmup Iteration   4: 469151,111 ops/s
+# Warmup Iteration   5: 470466,528 ops/s
+Iteration   1: 468476,045 ops/s
+Iteration   2: 470472,269 ops/s
+Iteration   3: 464385,715 ops/s
+Iteration   4: 469889,062 ops/s
+Iteration   5: 469552,952 ops/s
+Iteration   6: 469798,910 ops/s
+
+# Run progress: 70,00% complete, ETA 00:16:33
+# Fork: 2 of 5
+# Warmup Iteration   1: 463526,667 ops/s
+# Warmup Iteration   2: 485398,835 ops/s
+# Warmup Iteration   3: 475657,297 ops/s
+# Warmup Iteration   4: 477644,833 ops/s
+# Warmup Iteration   5: 478981,031 ops/s
+Iteration   1: 477622,508 ops/s
+Iteration   2: 478671,675 ops/s
+Iteration   3: 477372,854 ops/s
+Iteration   4: 479037,844 ops/s
+Iteration   5: 479460,747 ops/s
+Iteration   6: 476286,417 ops/s
+
+# Run progress: 73,33% complete, ETA 00:14:42
+# Fork: 3 of 5
+# Warmup Iteration   1: 464630,500 ops/s
+# Warmup Iteration   2: 468035,470 ops/s
+# Warmup Iteration   3: 471764,250 ops/s
+# Warmup Iteration   4: 472101,971 ops/s
+# Warmup Iteration   5: 469807,475 ops/s
+Iteration   1: 470839,419 ops/s
+Iteration   2: 471780,856 ops/s
+Iteration   3: 470638,598 ops/s
+Iteration   4: 471258,180 ops/s
+Iteration   5: 472121,908 ops/s
+Iteration   6: 470697,840 ops/s
+
+# Run progress: 76,67% complete, ETA 00:12:52
+# Fork: 4 of 5
+# Warmup Iteration   1: 472224,768 ops/s
+# Warmup Iteration   2: 480305,946 ops/s
+# Warmup Iteration   3: 476063,335 ops/s
+# Warmup Iteration   4: 477412,323 ops/s
+# Warmup Iteration   5: 477336,355 ops/s
+Iteration   1: 476407,594 ops/s
+Iteration   2: 476451,303 ops/s
+Iteration   3: 476233,880 ops/s
+Iteration   4: 475863,201 ops/s
+Iteration   5: 476356,112 ops/s
+Iteration   6: 477015,481 ops/s
+
+# Run progress: 80,00% complete, ETA 00:11:02
+# Fork: 5 of 5
+# Warmup Iteration   1: 468026,610 ops/s
+# Warmup Iteration   2: 475763,320 ops/s
+# Warmup Iteration   3: 472368,768 ops/s
+# Warmup Iteration   4: 471449,414 ops/s
+# Warmup Iteration   5: 471388,410 ops/s
+Iteration   1: 470261,294 ops/s
+Iteration   2: 472479,290 ops/s
+Iteration   3: 472074,230 ops/s
+Iteration   4: 472455,033 ops/s
+Iteration   5: 472924,302 ops/s
+Iteration   6: 471733,239 ops/s
+
+
+Result "com.adalbert.benchmarks.MyBenchmark.testSLinkedMap":
+  473287,292 ?(99.9%) 2459,456 ops/s [Average]
+  (min, avg, max) = (464385,715, 473287,292, 479460,747), stdev = 3681,199
+  CI (99.9%): [470827,836, 475746,748] (assumes normal distribution)
+
+
+# JMH version: 1.34
+# VM version: JDK 11.0.2, OpenJDK 64-Bit Server VM, 11.0.2+9
+# VM invoker: C:\Program Files\Java\jdk-11.0.2\bin\java.exe
+# VM options: <none>
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 6 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.adalbert.benchmarks.MyBenchmark.testSTreeMap
+
+# Run progress: 83,33% complete, ETA 00:09:11
+# Fork: 1 of 5
+# Warmup Iteration   1: 307588,140 ops/s
+# Warmup Iteration   2: 319093,856 ops/s
+# Warmup Iteration   3: 317872,982 ops/s
+# Warmup Iteration   4: 318295,594 ops/s
+# Warmup Iteration   5: 318581,563 ops/s
+Iteration   1: 318311,572 ops/s
+Iteration   2: 317501,592 ops/s
+Iteration   3: 318209,919 ops/s
+Iteration   4: 318141,272 ops/s
+Iteration   5: 318354,897 ops/s
+Iteration   6: 318034,018 ops/s
+
+# Run progress: 86,67% complete, ETA 00:07:21
+# Fork: 2 of 5
+# Warmup Iteration   1: 306584,834 ops/s
+# Warmup Iteration   2: 317880,470 ops/s
+# Warmup Iteration   3: 317995,595 ops/s
+# Warmup Iteration   4: 318262,098 ops/s
+# Warmup Iteration   5: 318190,473 ops/s
+Iteration   1: 318370,036 ops/s
+Iteration   2: 318459,836 ops/s
+Iteration   3: 317816,520 ops/s
+Iteration   4: 317632,898 ops/s
+Iteration   5: 317725,102 ops/s
+Iteration   6: 318436,819 ops/s
+
+# Run progress: 90,00% complete, ETA 00:05:31
+# Fork: 3 of 5
+# Warmup Iteration   1: 306079,099 ops/s
+# Warmup Iteration   2: 315094,365 ops/s
+# Warmup Iteration   3: 318107,293 ops/s
+# Warmup Iteration   4: 318522,182 ops/s
+# Warmup Iteration   5: 317065,175 ops/s
+Iteration   1: 318474,255 ops/s
+Iteration   2: 318496,252 ops/s
+Iteration   3: 317938,521 ops/s
+Iteration   4: 318558,032 ops/s
+Iteration   5: 318061,092 ops/s
+Iteration   6: 318088,851 ops/s
+
+# Run progress: 93,33% complete, ETA 00:03:40
+# Fork: 4 of 5
+# Warmup Iteration   1: 309447,015 ops/s
+# Warmup Iteration   2: 318629,530 ops/s
+# Warmup Iteration   3: 319056,631 ops/s
+# Warmup Iteration   4: 317794,787 ops/s
+# Warmup Iteration   5: 319153,403 ops/s
+Iteration   1: 318866,236 ops/s
+Iteration   2: 318560,913 ops/s
+Iteration   3: 313636,950 ops/s
+Iteration   4: 316484,985 ops/s
+Iteration   5: 312848,731 ops/s
+Iteration   6: 317973,179 ops/s
+
+# Run progress: 96,67% complete, ETA 00:01:50
+# Fork: 5 of 5
+# Warmup Iteration   1: 307885,939 ops/s
+# Warmup Iteration   2: 319186,711 ops/s
+# Warmup Iteration   3: 318984,872 ops/s
+# Warmup Iteration   4: 318878,000 ops/s
+# Warmup Iteration   5: 318070,849 ops/s
+Iteration   1: 319366,049 ops/s
+Iteration   2: 319616,755 ops/s
+Iteration   3: 318936,359 ops/s
+Iteration   4: 318151,768 ops/s
+Iteration   5: 317817,693 ops/s
+Iteration   6: 318711,665 ops/s
+
+
+Result "com.adalbert.benchmarks.MyBenchmark.testSTreeMap":
+  317919,426 ?(99.9%) 934,825 ops/s [Average]
+  (min, avg, max) = (312848,731, 317919,426, 319616,755), stdev = 1399,203
+  CI (99.9%): [316984,600, 318854,251] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:55:10
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                    Mode  Cnt       Score      Error  Units
+MyBenchmark.testJHashMap    thrpt   30  361386,967 ? 1537,770  ops/s
+MyBenchmark.testJLinkedMap  thrpt   30  430133,084 ? 1950,240  ops/s
+MyBenchmark.testJTreeMap    thrpt   30  320052,665 ? 1403,902  ops/s
+MyBenchmark.testSHashMap    thrpt   30  290942,535 ? 1779,962  ops/s
+MyBenchmark.testSLinkedMap  thrpt   30  473287,292 ? 2459,456  ops/s
+MyBenchmark.testSTreeMap    thrpt   30  317919,426 ?  934,825  ops/s

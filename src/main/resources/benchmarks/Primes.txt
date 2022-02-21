@@ -13,16 +13,16 @@ for (int i = 2; i < 100; i++) {
 bh.consume(${groups.$group.operations.keys.$profile.content});
 <@java@>
 <@scala@>
-#{groups.$group.init.$language.$profile.content # K = Integer # V = util.List[Integer]};
+#{groups.$group.init.$language.$profile.content # K = Integer # V = util.List[Integer]}
 for (i <- 2 until 100) {
-    var wasFound = false;
-    val iterator = ${groups.$group.operations.keys.$profile.content}.iterator;
+    var wasFound = false
+    val iterator = ${groups.$group.operations.keys.$profile.content}.iterator
     while (iterator.hasNext && !wasFound) {
         val key = iterator.next()
-        wasFound = i % key == 0;
-        if (wasFound) #{groups.$group.operations.get.$profile.content # key = key}.add(i);
+        wasFound = i % key == 0
+        if (wasFound) #{groups.$group.operations.get.$profile.content # key = key}.add(i)
     }
-    if (!wasFound) #{groups.$group.operations.put.$profile.content # key = i # value = new util.ArrayList[Integer]()};
+    if (!wasFound) #{groups.$group.operations.put.$profile.content # key = i # value = new util.ArrayList[Integer]()}
 }
-bh.consume(${groups.$group.operations.keys.$profile.content});
+bh.consume(${groups.$group.operations.keys.$profile.content})
 <@scala@>

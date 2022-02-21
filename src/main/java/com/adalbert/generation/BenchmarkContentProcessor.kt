@@ -12,7 +12,7 @@ object BenchmarkContentProcessor {
     fun processBenchmarkFileContent(benchmarkFile: File, context: MutableMap<String, List<String>>, propertiesTree: Tree): Map<String, String> {
         val outputMap = mutableMapOf<String, String>()
         val languages = propertiesTree.getValues("languages")
-        val benchmarkFileContent = benchmarkFile.readText()
+        val benchmarkFileContent = benchmarkFile.readLines().joinToString("\n")
         val languageTags = languageTagRegex.findAll(benchmarkFileContent)
         languages.forEach { language ->
             val specificLanguageTags = languageTags.filter { it.groupValues[0].contains(language) }.sortedBy { it.range.first }.toList()
@@ -63,14 +63,13 @@ object BenchmarkContentProcessor {
                 previouslyMatched.add(resolved)
             } else previouslyMatched.add(it)
         }
-        return propertiesTree.getValues(previouslyMatched)?.joinToString(", ")
-            ?: throw IllegalStateException("Values in the tree are null!")
+        return propertiesTree.getValues(previouslyMatched).joinToString(", ")
     }
 
     private fun matchValueWithVariable(previouslyMatched: List<String>, variable: String, context: Map<String, List<String>>, propertiesTree: Tree): String? {
         val values = context[variable] ?: return null
         if (values.size == 1) return values[0]
-        val possibleTreeValues = propertiesTree.getKeys(previouslyMatched) ?: return null
+        val possibleTreeValues = propertiesTree.getKeys(previouslyMatched)
         return values.firstOrNull { possibleTreeValues.contains(it) }
     }
 }

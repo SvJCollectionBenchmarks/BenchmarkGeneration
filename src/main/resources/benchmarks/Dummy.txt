@@ -8,5 +8,5 @@ bh.consume(#{groups.$group.operations.get.$profile.content # index = 3});
 ${groups.$group.operations.clear.$profile.content};
 <@java@>
 <@scala@>
-${groups.$group.operations.clear.$profile.content};
+${groups.$group.operations.clear.$profile.content}
 <@scala@>

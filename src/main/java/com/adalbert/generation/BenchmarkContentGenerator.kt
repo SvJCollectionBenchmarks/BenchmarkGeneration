@@ -11,18 +11,17 @@ object BenchmarkContentGenerator {
     data class BenchmarkInitialization(val collectionInit: String, val elementsFilling: List<String>)
     data class BenchmarkClass(val language: String, val className: String, val generatedCode: String)
 
-    // TODO: Change to Benchmark class, refactor
-    fun generateFullSourceFromSnippets(benchmarkName: String, groupName: String, benchmarkMethods: List<BenchmarkMethod>, propertiesTree: Tree): Map<String, String> {
+    fun generateFullSourceFromSnippets(benchmarkName: String, groupName: String, benchmarkMethods: List<BenchmarkMethod>, propertiesTree: Tree): List<BenchmarkClass> {
         val groupedByLanguage = benchmarkMethods.groupBy { it.language }
-        return groupedByLanguage.keys.associateWith { language ->
+        return groupedByLanguage.keys.map { language ->
             val bob = StringBuilder()
             val imports = propertiesTree.getValues("benchmarks", benchmarkName, "imports", language)
-                ?: throw IllegalStateException("No imports declaration, presumably for $benchmarkName")
+            val className = "${language[0].uppercase()}${benchmarkName}${groupName}Benchmark"
             imports.forEach { bob.appendLine(it) }
-            bob.appendLine("class ${benchmarkName}${groupName}Benchmark {")
+            bob.appendLine("class $className {")
             groupedByLanguage[language]?.forEach { method -> stringifyMethod(bob, method) }
             bob.appendLine("}")
-            bob.toString()
+            BenchmarkClass(language,className, bob.toString())
         }
     }
 

@@ -1,6 +1,7 @@
 Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
 Think on the constrained sets of possible values instead of randomization for Polya
+Maybe in the final running script save the values from multiple Polya classes in one folder
 
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji

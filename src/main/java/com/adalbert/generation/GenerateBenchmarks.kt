@@ -32,25 +32,24 @@ fun main() {
         val benchmarkName = benchmarkFile.name.substringUntilLast(".")
         context["benchmark"] = listOf(benchmarkName)
         val groups = propertiesTree.getValues("benchmarks", benchmarkName, "groups")
-        groups?.forEach { groupName ->
+        groups.forEach { groupName ->
             context["group"] = listOf(groupName)
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
-            val benchmarkMethods = generated?.map { generatedName ->
+            val benchmarkMethods = generated.map { generatedName ->
                 val profiles = mutableListOf(generatedName)
-                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)?.first()
-                    ?: throw IllegalStateException("Couldn't get default profile reading for $generatedName!")
+                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName).first()
+                profiles.add(defaultProfile)
                 // a project decision:
                 val language = defaultProfile
-                profiles.add(defaultProfile)
                 context["profile"] = profiles
                 val code = BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)[language]
                     ?: throw IllegalStateException("Couldn't generate methods code for $groupName and language $language!")
                 BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
-            } ?: throw IllegalStateException()
+            }
             BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, propertiesTree)
                 .forEach {
-                    println("############ ${it.key} ############")
-                    println(it.value)
+                    println("############ ${it.className} ############")
+                    println(it.generatedCode)
                 }
 
         }

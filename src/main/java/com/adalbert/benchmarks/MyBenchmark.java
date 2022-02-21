@@ -31,15 +31,14 @@
 
 package com.adalbert.benchmarks;
 
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
-import scala.collection.IterableOnce;
-import scala.collection.mutable.ArrayBuffer;
 import scala.math.Ordering;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 
 @State(Scope.Benchmark)

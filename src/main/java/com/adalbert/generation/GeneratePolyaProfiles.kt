@@ -1,7 +1,10 @@
 package com.adalbert.generation
 
-import com.adalbert.generation.ArgumentsGenerator.generateArgumentsForProfile
-import com.adalbert.generation.ArgumentsGenerator.mapArgumentsToProfile
+import com.adalbert.functional.BenchmarkContentGenerator
+import com.adalbert.functional.BenchmarkContentProcessor
+import com.adalbert.functional.JSONTreeParser
+import com.adalbert.functional.ArgumentsGenerator.generateArgumentsForProfile
+import com.adalbert.functional.ArgumentsGenerator.mapArgumentsToProfile
 import com.adalbert.utils.*
 import java.io.File
 import java.net.URLDecoder
@@ -69,7 +72,7 @@ fun main() {
                     "#{groups.$groupName.operations.$operation.${defaultProfile[0]}.content # ${
                         arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" # ")
                     }}"
-                }.map {BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
+                }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
                 val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
                 BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)
             }

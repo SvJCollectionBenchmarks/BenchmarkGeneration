@@ -2,13 +2,15 @@
   "imports": {
     "java": [
       "import java.util.*;",
-      "import scala.collection.IterableOnce;",
-      "import scala.collection.mutable.ArrayBuffer;"
+      "import org.openjdk.jmh.annotations.*;",
+      "import org.openjdk.jmh.infra.Blackhole;"
     ],
     "scala": [
       "import java.util",
       "import scala.collection.immutable",
-      "import scala.collection.mutable"
+      "import scala.collection.mutable",
+      "import org.openjdk.jmh.annotations.Benchmark",
+      "import org.openjdk.jmh.infra.Blackhole"
     ]
   },
   "fields": {

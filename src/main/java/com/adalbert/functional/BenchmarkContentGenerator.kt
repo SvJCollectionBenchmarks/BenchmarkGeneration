@@ -1,4 +1,4 @@
-package com.adalbert.generation
+package com.adalbert.functional
 
 import com.adalbert.utils.Tree
 import java.time.LocalDateTime
@@ -17,8 +17,9 @@ object BenchmarkContentGenerator {
             val bob = StringBuilder()
             val imports = propertiesTree.getValues("benchmarks", benchmarkName, "imports", language)
             val className = "${language[0].uppercase()}${benchmarkName}${groupName}Benchmark"
+            bob.appendLine("package com.adalbert;")
             imports.forEach { bob.appendLine(it) }
-            bob.appendLine("class $className {")
+            bob.appendLine("${if (language == "java") "public " else ""} class $className {")
             groupedByLanguage[language]?.forEach { method -> stringifyMethod(bob, method) }
             bob.appendLine("}")
             BenchmarkClass(language,className, bob.toString())
@@ -49,7 +50,8 @@ object BenchmarkContentGenerator {
         val className = "Polya$timeOfExecution${groupName}Benchmark"
         val eol = if (method.language == "java") ";" else ""
         val bob = StringBuilder()
-        bob.appendLine(generalImports[method.language]
+        bob.appendLine(
+            generalImports[method.language]
             ?: throw IllegalStateException("Language ${method.language} not supported!"))
         bob.appendLine("@State(Scope.Benchmark)")
         bob.appendLine("${if (method.language == "java") "public " else ""}class $className {")

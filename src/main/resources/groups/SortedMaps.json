@@ -38,7 +38,7 @@
 			"STreeMap": {
 				"isConsumable": true,
 				"args": [],
-				"content": "var collection = mutable.TreeMap[$K, $V]()"
+				"content": "var collection = immutable.TreeMap[$K, $V]()"
 			}
 		}
 	},

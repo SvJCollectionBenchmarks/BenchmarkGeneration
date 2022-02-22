@@ -1,5 +1,7 @@
 package com.adalbert.utils
 
+import java.nio.file.Path
+import java.nio.file.Paths
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -99,4 +101,14 @@ fun String.replaceVariablesWithValues(variables: Map<String, String>): String {
     var outcome = this
     variables.forEach { outcome = outcome.replace("\$${it.key}", it.value) }
     return outcome
+}
+
+fun Path.add(fragment: String): Path {
+    return Paths.get(this.toString(), fragment)
+}
+
+fun Path.add(fragments: List<String>): Path {
+    return if (fragments.isNotEmpty())
+        this.add(fragments.first()).add(fragments.drop(1))
+    else this
 }

@@ -14,20 +14,17 @@
     ]
   },
   "fields": {
-    "java": [
-      "dummy"
-    ],
-    "scala": [
-      "dummy"
-    ]
+    "java": [],
+    "scala": []
   },
   "setup": {
     "java": [],
     "scala": []
   },
   "groups": [
-    "GeneralMaps",
-    "SortedMaps"
+    "GeneralSequences",
+    "IndexedShrinkableSequences",
+    "LinearShrinkableSequences"
   ],
   "variables": {
     "profiled": {

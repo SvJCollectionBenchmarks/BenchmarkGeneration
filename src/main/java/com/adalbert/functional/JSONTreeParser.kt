@@ -1,4 +1,4 @@
-package com.adalbert.generation
+package com.adalbert.functional
 
 import com.adalbert.utils.Tree
 import com.adalbert.utils.substringUntilLast
@@ -16,7 +16,7 @@ object JSONTreeParser {
         return outcomeTree
     }
 
-    fun traverse(root: JsonNode, builtTree: Tree) {
+    private fun traverse(root: JsonNode, builtTree: Tree) {
         if (root.isObject) {
             val fieldNames = root.fieldNames()
             while (fieldNames.hasNext()) {

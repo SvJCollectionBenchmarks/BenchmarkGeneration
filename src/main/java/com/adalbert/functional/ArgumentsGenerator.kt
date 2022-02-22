@@ -1,4 +1,4 @@
-package com.adalbert.generation
+package com.adalbert.functional
 
 import com.adalbert.utils.*
 import kotlin.random.Random

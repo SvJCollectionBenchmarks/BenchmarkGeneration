@@ -160,6 +160,14 @@
 				],
 				"content": "collection.update($index, $elem)"
 			},
+			"SArraySequence": {
+				"isConsumable": true,
+				"args": [
+					{ "name": "index", "type": "int" },
+					{ "name": "elem", "type": "$T" }
+				],
+				"content": "collection = collection.updated($index, $elem)"
+			},
 			"SVectorSequence": {
 				"isConsumable": true,
 				"args": [ 

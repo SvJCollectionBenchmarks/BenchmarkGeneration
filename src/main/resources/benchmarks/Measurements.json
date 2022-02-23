@@ -14,45 +14,24 @@
     ]
   },
   "fields": {
-    "java": [
-      "dummy"
-    ],
-    "scala": [
-      "dummy"
-    ]
+    "java": [],
+    "scala": []
   },
   "setup": {
     "java": [],
     "scala": []
   },
   "groups": [
-    "GeneralSequences"
+    "IndexedShrinkableSequences",
+    "LinearShrinkableSequences"
   ],
   "variables": {
     "profiled": {
       "java": {
         "java": {
-          "elemsOne": "Arrays.asList(1, 2, 3, 4, 5)"
         },
         "scala": {
-          "elemsOne": "couldn't get that working"
         }
-      },
-      "scala": {
-        "java": {
-          "elemsOne": "Arrays.asList(1, 2, 3, 4, 5)"
-        },
-        "scala": {
-          "elemsOne": "ArrayBuffer[Int](1, 2, 3, 4, 5)"
-        }
-      }
-    },
-    "universal": {
-      "java": {
-        "T": "Integer"
-      },
-      "scala": {
-        "T": "Int"
       }
     }
   }

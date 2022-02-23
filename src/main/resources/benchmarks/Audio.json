@@ -22,19 +22,14 @@
     "scala": []
   },
   "groups": [
-    "GeneralSequences",
     "IndexedShrinkableSequences",
     "LinearShrinkableSequences"
   ],
   "variables": {
     "profiled": {
       "java": {
-        "java": {
-          "iteratorImport": "java.util.Iterator"
-        },
-        "scala": {
-          "iteratorImport": "scala.collection.Iterator"
-        }
+        "java": {},
+        "scala": {}
       }
     }
   }

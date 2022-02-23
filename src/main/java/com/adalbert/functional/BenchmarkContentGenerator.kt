@@ -60,17 +60,17 @@ object BenchmarkContentGenerator {
         bob.appendLine("\t${methodsDeclarations[method.language to "setup"]!!(method.generatedName)}")
         initialization.elementsFilling.forEach { bob.appendLine("\t\t$it$eol") }
         bob.appendLine("\t}")
-        stringifyMethod(bob, method)
+        stringifyMethod(bob, method, eol)
         bob.appendLine("}")
         return BenchmarkClass(method.language, className, bob.toString())
     }
 
-    private fun stringifyMethod(bob: StringBuilder, method: BenchmarkMethod) {
+    private fun stringifyMethod(bob: StringBuilder, method: BenchmarkMethod, lineEnding: String = "") {
         val (language, generatedName, generatedCode) = method
         bob.appendLine("\t@Benchmark")
         bob.appendLine("\t${methodsDeclarations[language to "init"]!!(generatedName)}")
         generatedCode.split("\n").forEach {
-            bob.appendLine("\t\t$it${if (method.language == "java") ";" else ""}")
+            bob.appendLine("\t\t$it$lineEnding")
         }
         bob.appendLine("\t}")
     }

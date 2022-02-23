@@ -6,6 +6,7 @@ import org.openjdk.jmh.infra.Blackhole
 import scala.collection.mutable
 import scala.collection.immutable
 import java.util
+import java.util.ArrayList
 import scala.collection.mutable.ArrayBuffer
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 import scala.reflect.ClassTag
@@ -20,18 +21,25 @@ class SBenchmark {
   @Measurement(iterations = 1)
   @Warmup(iterations = 1)
   def testMethodScala(bh: Blackhole): Unit = {
-    var collection = mutable.TreeMap[Integer, util.List[Integer]]();
-    for (i <- 2 until 100) {
-      var wasFound = false;
-      val iterator = collection.keySet.iterator;
-      while (iterator.hasNext && !wasFound) {
-        val key = iterator.next()
-        wasFound = i % key == 0;
-        if (wasFound) collection.apply(key).add(i);
-      }
-      if (!wasFound) collection.update(i, new util.ArrayList[Integer]());
+    val collection = new util.ArrayList[Double]
+    for (i <- 0 until 1000) {
+      collection.add(i / 2.0)
     }
-    bh.consume(collection.keySet);
+    for (i <- 0 until 1000) {
+      if (i % 10 < 4) collection.set(i, -1.0)
+    }
+    bh.consume(collection.get(100))
+    collection.remove(100)
+    bh.consume(collection.get(900))
+    collection.remove(900)
+    bh.consume(collection.get(200))
+    collection.remove(200)
+    bh.consume(collection.get(800))
+    collection.remove(800)
+    bh.consume(collection.get(300))
+    collection.remove(300)
+    bh.consume(collection.get(700))
+    collection.remove(700)
   }
 
 }

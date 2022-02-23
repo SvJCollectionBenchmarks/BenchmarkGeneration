@@ -2,6 +2,7 @@ package com.adalbert.generation
 
 import com.adalbert.functional.BenchmarkContentGenerator
 import com.adalbert.functional.BenchmarkContentProcessor
+import com.adalbert.functional.BenchmarkProjectHelper
 import com.adalbert.functional.JSONTreeParser
 import com.adalbert.utils.Tree
 import com.adalbert.utils.add
@@ -16,13 +17,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 private val generatedCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalOwn")
-private val generationCommand = { language: String, generatedPostfix: String ->
-    listOf(
-        "cmd.exe", "/c", "mvn", "archetype:generate", "-DinteractiveMode=false", "-DarchetypeGroupId=org.openjdk.jmh",
-        "-DarchetypeArtifactId=jmh-$language-benchmark-archetype", "-DgroupId=com.adalbert",
-        "-DartifactId=jmh-$language-$generatedPostfix", "-Dversion=1.0"
-    )
-}
 private val supportedLanguages = listOf("java", "scala")
 
 fun main() {
@@ -48,16 +42,7 @@ fun main() {
 
     val projectGeneratedPostfix = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         .replace(":", "-").replace("T", "_").substringBefore(".")
-    supportedLanguages.forEach {
-        println("### Generating $it project... ###")
-        ProcessBuilder()
-            .command(generationCommand(it, projectGeneratedPostfix))
-            .directory(generatedCodeRoot.toFile())
-            .start().waitFor()
-        val projectRoot = generatedCodeRoot.add("jmh-$it-$projectGeneratedPostfix")
-        val sourcesRoot = projectRoot.add("src\\main\\$it\\com\\adalbert")
-        Files.delete(sourcesRoot.add("MyBenchmark.$it"))
-    }
+    supportedLanguages.forEach { BenchmarkProjectHelper.generateProjectInGivenLanguage(generatedCodeRoot, it, projectGeneratedPostfix) }
 
     benchmarksTexts.forEach { benchmarkFile ->
         val context: MutableMap<String, List<String>> = mutableMapOf()

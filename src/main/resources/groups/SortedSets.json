@@ -150,6 +150,42 @@
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.subtractAll($elems)"
 			}
+		},
+		"union": {
+			"java": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "collection.addAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"content": "collection = collection.union($elems)"
+			}
+		},
+		"intersect": {
+			"java": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "collection.retainAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"content": "collection = collection.intersect($elems)"
+			}
+		},
+		"difference": {
+			"java": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "collection.removeAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"content": "collection = collection.diff($elems)"
+			}
 		}
 	},
 	"variables": {

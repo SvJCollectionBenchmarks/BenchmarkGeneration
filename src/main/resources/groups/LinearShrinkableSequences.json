@@ -66,7 +66,24 @@
 				"content": "collection.apply($index)"
 			}
 		},
-		"add": {
+		"prepend": {
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.add(0, $elem)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.prepend($elem)"
+			},
+			"JLinkedSequence": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.addFirst($elem)"
+			}
+		},
+		"append": {
 			"java": {
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
@@ -76,6 +93,11 @@
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.append($elem)"
+			},
+			"JLinkedSequence": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.addLast($elem)"
 			}
 		},
 		"set": {

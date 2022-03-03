@@ -37,11 +37,6 @@ class SBenchmark {
 
 }
 
-object Another extends App {
-  var collection = ArrayBuffer(1,2,3,4)
-  collection.append(2)
-}
-
 object Main extends App {
   var collection = mutable.HashSet[Integer]()
   val set3 = mutable.HashSet[Integer]()

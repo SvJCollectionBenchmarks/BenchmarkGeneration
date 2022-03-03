@@ -9,21 +9,22 @@ object BenchmarkProjectHelper {
 
     private val javaVersion = "11"
     private val scalaVersion = "2.13.7"
-    private val generationCommand = { language: String, generatedPostfix: String ->
+    private val generationCommand = { language: String ->
         listOf(
             "cmd.exe", "/c", "mvn", "archetype:generate", "-DinteractiveMode=false", "-DarchetypeGroupId=org.openjdk.jmh",
             "-DarchetypeArtifactId=jmh-$language-benchmark-archetype", "-DgroupId=com.adalbert",
-            "-DartifactId=jmh-$language-$generatedPostfix", "-Dversion=1.0"
+            "-DartifactId=jmh-$language", "-Dversion=1.0"
         )
     }
 
-    fun generateProjectInGivenLanguage(codeRoot: Path, language: String, postfix: String) {
+    fun generateProjectInGivenLanguage(codeRoot: Path, language: String) {
         println("### Generating $language project... ###")
+        Files.createDirectories(codeRoot)
         ProcessBuilder()
-            .command(generationCommand(language, postfix))
+            .command(generationCommand(language))
             .directory(codeRoot.toFile())
             .start().waitFor()
-        val projectRoot = codeRoot.add("jmh-$language-$postfix")
+        val projectRoot = codeRoot.add("jmh-$language")
         editPomSpec(projectRoot)
         val sourcesRoot = projectRoot.add("src\\main\\$language\\com\\adalbert")
         Files.delete(sourcesRoot.add("MyBenchmark.$language"))

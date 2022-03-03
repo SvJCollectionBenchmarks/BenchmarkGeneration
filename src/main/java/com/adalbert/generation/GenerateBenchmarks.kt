@@ -16,7 +16,7 @@ import java.nio.file.Paths
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-private val generatedCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalOwn")
+private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalOwn")
 private val supportedLanguages = listOf("java", "scala")
 
 fun main() {
@@ -40,9 +40,10 @@ fun main() {
         ?.filter { it.extension == "txt" }
         ?: throw IllegalStateException("Couldn't load benchmarks texts")
 
-    val projectGeneratedPostfix = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    val parentFolder = "Run_${LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}"
         .replace(":", "-").replace("T", "_").substringBefore(".")
-    supportedLanguages.forEach { BenchmarkProjectHelper.generateProjectInGivenLanguage(generatedCodeRoot, it, projectGeneratedPostfix) }
+    val newCodeRoot = baseCodeRoot.add(parentFolder)
+    supportedLanguages.forEach { BenchmarkProjectHelper.generateProjectInGivenLanguage(newCodeRoot, it) }
 
     benchmarksTexts.forEach { benchmarkFile ->
         val context: MutableMap<String, List<String>> = mutableMapOf()
@@ -65,7 +66,7 @@ fun main() {
             }
             BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, propertiesTree).forEach {
                 println("### Writing ${it.className} benchmark ###")
-                val projectRoot = generatedCodeRoot.add("jmh-${it.language}-$projectGeneratedPostfix")
+                val projectRoot = newCodeRoot.add("jmh-${it.language}")
                 val sourcesRoot = projectRoot.add("src\\main\\${it.language}\\com\\adalbert")
                 Files.write(sourcesRoot.add("${it.className}.${it.language}"), it.generatedCode.toByteArray(Charset.forName("UTF-8")))
             }

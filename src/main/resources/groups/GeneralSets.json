@@ -171,6 +171,57 @@
 				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
 				"content": "collection.subtractAll($elems)"
 			}
+		},
+		"union": {
+			"JHashSet": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "(new java.util.HashSet<>(collection)).addAll($elems)"
+			},
+			"JLinkedSet": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "(new java.util.LinkedHashSet<>(collection)).addAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"content": "collection.union($elems)"
+			}
+		},
+		"intersect": {
+			"JHashSet": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "(new java.util.HashSet<>(collection)).retainAll($elems)"
+			},
+			"JLinkedSet": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "(new java.util.LinkedHashSet<>(collection)).retainAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"content": "collection.intersect($elems)"
+			}
+		},
+		"difference": {
+			"JHashSet": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "(new java.util.HashSet<>(collection)).removeAll($elems)"
+			},
+			"JLinkedSet": {
+				"isConsumable": true,
+				"args": [{ "name": "elems", "type": "Set<$T>" }],
+				"content": "(new java.util.LinkedHashSet<>(collection)).removeAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"content": "collection.diff($elems)"
+			}
 		}
 	},
 	"variables": {

@@ -2,6 +2,7 @@ Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
 Think on the constrained sets of possible values instead of randomization for Polya
 Maybe in the final running script save the values from multiple Polya classes in one folder
+Make 'Measurements' more linear
 
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji
@@ -10,11 +11,16 @@ Planowane części pracy:
 	- Pomiar operacji w pseudo-losowych złożeniach - generacja jest bardzo pomocna
 		- Problemy z clear
 
+Co chcemy mierzyć w ramach poszczególnych grup:
+    - Zbiory:
+    - Mapy:
+    - Listy:
+
 Wymagania minimalne:
 	- Przyjrzeć się zestawom kolekcji i ich operacjom
 	- Spisać scenariusze dla wyznaczonych zestawów
 	- Pomierzyć wyznaczone grupy kolekcji
-	- Policzyć, czy wyniki istotnie się różnią między sobą (przedziały ufności)
+	- Policzyć, czy wyniki istotnie się różnią między sobą (test Tukeya / przedziały ufności)
 	- Opracować wyniki w formie graficznej
 
 Wymagania docelowe:

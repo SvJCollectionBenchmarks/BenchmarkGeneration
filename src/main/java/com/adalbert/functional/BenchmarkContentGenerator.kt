@@ -28,9 +28,9 @@ object BenchmarkContentGenerator {
 
     private val generalImports = mapOf(
         "java" to "import java.util.*;\n" +
-                "import scala.collection.immutable.*;\n" +
-                "import scala.collection.mutable.*;\n" +
-                "import scala.math.Ordering;\n" +
+//                "import scala.collection.immutable.*;\n" +
+//                "import scala.collection.mutable.*;\n" +
+//                "import scala.math.Ordering;\n" +
                 "import org.openjdk.jmh.annotations.*;\n" +
                 "import org.openjdk.jmh.infra.*;\n",
         "scala" to "import java.util\n" +
@@ -46,10 +46,11 @@ object BenchmarkContentGenerator {
         initialization: BenchmarkInitialization,
         propertiesTree: Tree
     ): BenchmarkClass {
-        val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("_yyyyMMdd_HHmmssSSS_"))
+        val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("_yyyyMMdd_HHmmssSSS"))
         val className = "${method.language[0].uppercase()}_${groupName}_Polya$timeOfExecution"
         val eol = if (method.language == "java") ";" else ""
         val bob = StringBuilder()
+        bob.appendLine("package com.adalbert;")
         bob.appendLine(
             generalImports[method.language]
             ?: throw IllegalStateException("Language ${method.language} not supported!"))

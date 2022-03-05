@@ -40,10 +40,7 @@ fun main() {
         ?.filter { it.extension == "txt" }
         ?: throw IllegalStateException("Couldn't load benchmarks texts")
 
-    val parentFolder = "Run_${LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}"
-        .replace(":", "-").replace("T", "_").substringBefore(".")
-    val newCodeRoot = baseCodeRoot.add(parentFolder)
-    supportedLanguages.forEach { BenchmarkProjectHelper.generateProjectInGivenLanguage(newCodeRoot, it) }
+    val newCodeRoot = BenchmarkProjectHelper.generateProjectsInSupportedLanguages(baseCodeRoot, supportedLanguages)
 
     benchmarksTexts.forEach { benchmarkFile ->
         val context: MutableMap<String, List<String>> = mutableMapOf()

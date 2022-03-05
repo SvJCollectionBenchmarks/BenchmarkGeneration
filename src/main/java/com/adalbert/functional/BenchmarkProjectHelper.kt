@@ -4,6 +4,8 @@ import com.adalbert.utils.add
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 object BenchmarkProjectHelper {
 
@@ -17,7 +19,15 @@ object BenchmarkProjectHelper {
         )
     }
 
-    fun generateProjectInGivenLanguage(codeRoot: Path, language: String) {
+    fun generateProjectsInSupportedLanguages(codeRoot: Path, languages: List<String>): Path {
+        val parentFolder = "Run_${LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}"
+            .replace(":", "-").replace("T", "_").substringBefore(".")
+        val newCodeRoot = codeRoot.add(parentFolder)
+        languages.forEach { BenchmarkProjectHelper.generateProjectInGivenLanguage(newCodeRoot, it) }
+        return newCodeRoot
+    }
+
+    private fun generateProjectInGivenLanguage(codeRoot: Path, language: String) {
         println("### Generating $language project... ###")
         Files.createDirectories(codeRoot)
         ProcessBuilder()

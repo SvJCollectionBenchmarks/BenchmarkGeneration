@@ -5,11 +5,20 @@ import com.adalbert.functional.BenchmarkContentProcessor
 import com.adalbert.functional.JSONTreeParser
 import com.adalbert.functional.ArgumentsGenerator.generateArgumentsForProfile
 import com.adalbert.functional.ArgumentsGenerator.mapArgumentsToProfile
+import com.adalbert.functional.BenchmarkProjectHelper
 import com.adalbert.utils.*
 import java.io.File
 import java.net.URLDecoder
+import java.nio.charset.Charset
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
 
-private const val profilesNumber = 1
+private const val profilesNumber = 1 //TODO: Why do we need it?
+private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
+private val supportedLanguages = listOf("java", "scala")
+
+private val additionOperations = mapOf("Map" to "put", "Sequence" to "append", "Set" to "add")
 
 fun main() {
 
@@ -27,6 +36,8 @@ fun main() {
         Tree("languages", mutableListOf(), mutableListOf("java", "scala")),
         Tree("groups", groupsFiles.map { file -> JSONTreeParser.parseJsonFile(file) }.toMutableList()),
     ))
+
+    val newCodeRoot = BenchmarkProjectHelper.generateProjectsInSupportedLanguages(baseCodeRoot, supportedLanguages)
 
     (0 until profilesNumber).forEach { _ ->
         val groups = propertiesTree.getKeys("groups")
@@ -66,10 +77,11 @@ fun main() {
                 val method = BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
                 val collectionInit = propertiesTree.getValue("groups", groupName, "init", language, generatedName, "content")
                     .replaceVariablesWithValues(typeVariables)
-                val operation = if (generatedName.contains("Map")) "put" else "add"
+                val additionOperation = additionOperations[additionOperations.keys.firstOrNull { generatedName.contains(it) }]
+                    ?: throw IllegalStateException("No addition operation for $generatedName!")
                 val elementsFilling = (0 until defaultElementsCount).map {
-                    val arguments = generateArgumentsForProfile(groupName, defaultProfile[0], operation, typeVariables, propertiesTree)
-                    "#{groups.$groupName.operations.$operation.${defaultProfile[0]}.content # ${
+                    val arguments = generateArgumentsForProfile(groupName, defaultProfile[0], additionOperation, typeVariables, propertiesTree)
+                    "#{groups.$groupName.operations.$additionOperation.${defaultProfile[0]}.content # ${
                         arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" # ")
                     }}"
                 }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
@@ -77,7 +89,12 @@ fun main() {
                 BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)
             }
 
-            benchmarkClasses.forEach { println(it) }
+            benchmarkClasses.forEach {
+                println("### Writing ${it.className} benchmark ###")
+                val projectRoot = newCodeRoot.add("jmh-${it.language}")
+                val sourcesRoot = projectRoot.add("src\\main\\${it.language}\\com\\adalbert")
+                Files.write(sourcesRoot.add("${it.className}.${it.language}"), it.generatedCode.toByteArray(Charset.forName("UTF-8")))
+            }
         }
     }
 }

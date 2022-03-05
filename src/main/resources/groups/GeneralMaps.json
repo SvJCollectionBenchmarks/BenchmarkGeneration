@@ -164,7 +164,7 @@
 		}
 	},
 	"variables": {
-		"K": ["Integer", "String", "Double", "Float", "Char", "Long"],
-		"V": ["Integer", "String", "Double", "Float", "Char", "Long"]
+		"K": ["Integer", "String", "Double", "Float", "Character", "Long"],
+		"V": ["Integer", "String", "Double", "Float", "Character", "Long"]
 	}
 }

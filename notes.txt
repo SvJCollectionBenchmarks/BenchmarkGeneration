@@ -1,8 +1,7 @@
 Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
-Think on the constrained sets of possible values instead of randomization for Polya
-Think about a common way of grouping measurements in Polya and self written (same folder?)
-Make 'Measurements' more linear
+Randomize arguments separately for the separate invocations of the same command in Polya
+[?] Make 'Measurements' more linear
 
 Planowane części pracy:
 	- Pomiar operacji w separacji - nie potrzebuje generacji

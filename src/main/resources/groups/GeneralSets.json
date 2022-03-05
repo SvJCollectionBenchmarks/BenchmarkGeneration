@@ -210,6 +210,6 @@
 		}
 	},
 	"variables": {
-		"T": ["Integer", "String", "Double", "Float", "Char", "Long"]
+		"T": ["Integer", "String", "Double", "Float", "Character", "Long"]
 	}
 }

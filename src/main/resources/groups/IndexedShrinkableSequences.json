@@ -79,34 +79,34 @@
 		},
 		"prepend": {
 			"java": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.add(0, $elem)"
 			},
 			"scala": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.prepend($elem)"
 			},
 			"JLinkedSequence": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.addFirst($elem)"
 			}
 		},
 		"append": {
 			"java": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.add($elem)"
 			},
 			"scala": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.append($elem)"
 			},
 			"JLinkedSequence": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.addLast($elem)"
 			}
@@ -209,7 +209,7 @@
 		},
 		"insert": {
 			"java": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -217,7 +217,7 @@
 				"content": "collection.add($index, $elem)"
 			},
 			"scala": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ 
 					{ "name": "index", "type": "int" },
 					{ "name": "elem", "type": "$T" }
@@ -275,6 +275,6 @@
 		}
 	},
 	"variables": {
-		"T": ["Integer", "String", "Double", "Float", "Char", "Long"]
+		"T": ["Integer", "String", "Double", "Float", "Character", "Long"]
 	}
 }

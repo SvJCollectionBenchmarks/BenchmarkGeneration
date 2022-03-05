@@ -39,6 +39,7 @@ object BenchmarkProjectHelper {
         val pomText =  Files.readAllLines(projectRoot.add("pom.xml")).joinToString("\n")
             .replace("<javac.target>1.8</javac.target>", javaText)
             .replace("<scala.stdLib.version>2.11.8</scala.stdLib.version>", scalaText)
+            .replace("<recompileMode>incremental</recompileMode>\n", "")
         Files.write(pomPath, pomText.toByteArray(Charset.forName("UTF-8")))
     }
 

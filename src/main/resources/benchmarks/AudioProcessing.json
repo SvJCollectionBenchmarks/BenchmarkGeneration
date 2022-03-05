@@ -40,7 +40,7 @@
           "samplesCreation": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         "scala": {
-          "samplesCreation": "val samples = ArrayBuffer(1.0, 0.75, 0.5, 0.25, 0.0)"
+          "samplesCreation": "val samples = mutable.ArrayBuffer(1.0, 0.75, 0.5, 0.25, 0.0)"
         }
       }
     }

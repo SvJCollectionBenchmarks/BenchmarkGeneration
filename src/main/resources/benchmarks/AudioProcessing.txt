@@ -22,7 +22,7 @@ for (i <- 0 until 1000 / samples.size) {
 }
 for (i <- collection.indices) {
     bh.consume(i);
-    Double elem = #{groups.$group.operations.get.$profile.content # index = i}
+    val elem = #{groups.$group.operations.get.$profile.content # index = i}
     #{groups.$group.operations.set.$profile.content # index = i # elem = elem * 0.5}
 }
 while (#{groups.$group.operations.contains.$profile.content # elem = 0.0})

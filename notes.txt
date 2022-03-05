@@ -1,7 +1,7 @@
 Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
 Think on the constrained sets of possible values instead of randomization for Polya
-Maybe in the final running script save the values from multiple Polya classes in one folder
+Think about a common way of grouping measurements in Polya and self written (same folder?)
 Make 'Measurements' more linear
 
 Planowane części pracy:

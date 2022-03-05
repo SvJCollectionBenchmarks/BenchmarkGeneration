@@ -16,7 +16,7 @@ object BenchmarkContentGenerator {
         return groupedByLanguage.keys.map { language ->
             val bob = StringBuilder()
             val imports = propertiesTree.getValues("benchmarks", benchmarkName, "imports", language)
-            val className = "${language[0].uppercase()}${benchmarkName}${groupName}Benchmark"
+            val className = "${language[0].uppercase()}_${benchmarkName}${groupName}_Benchmark"
             bob.appendLine("package com.adalbert;")
             imports.forEach { bob.appendLine(it) }
             bob.appendLine("${if (language == "java") "public " else ""} class $className {")
@@ -47,7 +47,7 @@ object BenchmarkContentGenerator {
         propertiesTree: Tree
     ): BenchmarkClass {
         val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("_yyyyMMdd_HHmmssSSS_"))
-        val className = "Polya$timeOfExecution${groupName}Benchmark"
+        val className = "${method.language[0].uppercase()}_${groupName}_Polya$timeOfExecution"
         val eol = if (method.language == "java") ";" else ""
         val bob = StringBuilder()
         bob.appendLine(

@@ -6,8 +6,8 @@ import java.io.File
 object BenchmarkContentProcessor {
 
     private val languageTagRegex = Regex("<@([^@]*)@>")
-    private val variableExpressionRegex = Regex("\\$\\{([^}]*)\\}")
-    private val argumentExpressionRegex = Regex("#\\{([^}]*)\\}")
+    private val variableExpressionRegex = Regex("\\$\\{(.*)\\}")
+    private val argumentExpressionRegex = Regex("#\\{(.*)\\}")
 
     fun processBenchmarkFileContent(benchmarkFile: File, context: MutableMap<String, List<String>>, propertiesTree: Tree): Map<String, String> {
         val outputMap = mutableMapOf<String, String>()

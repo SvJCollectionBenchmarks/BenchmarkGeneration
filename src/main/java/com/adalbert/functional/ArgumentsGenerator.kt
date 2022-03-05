@@ -51,7 +51,7 @@ object ArgumentsGenerator {
         return text.replace("\$$variableName", typeVariables[variableName]!!)
     }
 
-    val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {
+    private val randomValuesGeneration = mutableMapOf<String, () -> String>().apply {
         this.putAll(listOf("int", "Integer").associateWith { { "${Random.nextInt(1, 200)}" } })
         this.putAll(listOf("float", "Float").associateWith { { "${(1 .. 200).random().toDouble()}f" } })
         this.putAll(listOf("double", "Double").associateWith { { "${(1 .. 200).random().toDouble()}" } })
@@ -77,7 +77,7 @@ object ArgumentsGenerator {
         this["Float[]"] = { "new Float[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }}}"}
         this["Double[]"] = { "new Double[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }}}"}
         this["Boolean[]"] = { "new Boolean[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }}}"}
-        this["Char[]"] = { "new Char[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }}}"}
+        this["Character[]"] = { "new Character[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }}}"}
         this["String[]"] = { "new String[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["String"]!!() }}}"}
         this["String"] = { "\"${('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("")}\"" }
     }

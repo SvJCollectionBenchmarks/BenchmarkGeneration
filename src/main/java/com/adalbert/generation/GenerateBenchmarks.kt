@@ -61,12 +61,10 @@ fun main() {
                     ?: throw IllegalStateException("Couldn't generate methods code for $groupName and language $language!")
                 BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
             }
-            BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, propertiesTree).forEach {
-                println("### Writing ${it.className} benchmark ###")
-                val projectRoot = newCodeRoot.add("jmh-${it.language}")
-                val sourcesRoot = projectRoot.add("src\\main\\${it.language}\\com\\adalbert")
-                Files.write(sourcesRoot.add("${it.className}.${it.language}"), it.generatedCode.toByteArray(Charset.forName("UTF-8")))
-            }
+
+            val benchmarkClasses = BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, propertiesTree)
+            BenchmarkProjectHelper.writeBenchmarkClasses(benchmarkClasses, newCodeRoot)
+
         }
 
     }

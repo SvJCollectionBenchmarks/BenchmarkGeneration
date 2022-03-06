@@ -12,10 +12,6 @@ fun String.substringUntilLast(text: String): String {
     return this.substring(0 until this.lastIndexOf(text))
 }
 
-fun String.substringFromLast(text: String): String {
-    return this.substring(this.lastIndexOf(text) + 1)
-}
-
 fun String.eliminateNotInSet(charSet: Set<Char> = (('a' .. 'z') + ('A' .. 'Z') + ('0' .. '9') + '.').toSet()): String {
     return this.filter { charSet.contains(it) }
 }

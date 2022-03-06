@@ -68,7 +68,7 @@ fun main() {
                     val arguments = mapArgumentsToProfile(groupName, operationProfile, operation, typeVariables, propertiesTree, protoArguments)
                     val isConsumable = propertiesTree.getValue("groups", groupName, "operations", operation, operationProfile, "isConsumable").toBoolean()
                     val entry = if (arguments.isEmpty()) "\${groups.$groupName.operations.$operation.$operationProfile.content}"
-                    else "#{groups.$groupName.operations.$operation.$operationProfile.content # ${arguments.map { "${it.key} = ${it.value}"}.joinToString(" # ")}}"
+                    else "#{groups.$groupName.operations.$operation.$operationProfile.content # ${arguments.map { "${it.key} = ${it.value}"}.joinToString(" ## ")} #}"
                     if (isConsumable) "bh.consume($entry)" else entry
                 }
                 val code = BenchmarkContentProcessor.processBenchmarkText(benchmarkNotationEntries.joinToString("\n"), mutableMapOf(), propertiesTree)
@@ -82,19 +82,14 @@ fun main() {
                 val elementsFilling = (0 until defaultElementsCount).map {
                     val arguments = generateArgumentsForProfile(groupName, defaultProfile[0], additionOperation, typeVariables, propertiesTree)
                     "#{groups.$groupName.operations.$additionOperation.${defaultProfile[0]}.content # ${
-                        arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" # ")
-                    }}"
+                        arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" ## ")
+                    }} #"
                 }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
                 val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
                 BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)
             }
 
-            benchmarkClasses.forEach {
-                println("### Writing ${it.className} benchmark ###")
-                val projectRoot = newCodeRoot.add("jmh-${it.language}")
-                val sourcesRoot = projectRoot.add("src\\main\\${it.language}\\com\\adalbert")
-                Files.write(sourcesRoot.add("${it.className}.${it.language}"), it.generatedCode.toByteArray(Charset.forName("UTF-8")))
-            }
+            BenchmarkProjectHelper.writeBenchmarkClasses(benchmarkClasses, newCodeRoot)
         }
     }
 }

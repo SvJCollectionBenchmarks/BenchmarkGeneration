@@ -6,8 +6,9 @@ import java.io.File
 object BenchmarkContentProcessor {
 
     private val languageTagRegex = Regex("<@([^@]*)@>")
-    private val variableExpressionRegex = Regex("\\$\\{(.*)\\}")
-    private val argumentExpressionRegex = Regex("#\\{(.*)\\}")
+    private val singleVariableRegex = Regex("\\$([a-zA-Z]*)")
+    private val variableExpressionRegex = Regex("\\$\\{([^}]*)\\}")
+    private val argumentExpressionRegex = Regex("\\#\\{([^#}]*(\\s*#[^\$#]*#)*)\\}")
 
     fun processBenchmarkFileContent(benchmarkFile: File, context: MutableMap<String, List<String>>, propertiesTree: Tree): Map<String, String> {
         val outputMap = mutableMapOf<String, String>()
@@ -41,23 +42,22 @@ object BenchmarkContentProcessor {
     }
 
     private fun processExpressionWithArguments(expression: String, context: MutableMap<String, List<String>>, propertiesTree: Tree): String {
-        val fragments = expression.split("#").map { it.trim() }
+        val argumentsFragments = expression.substringAfter("#").substringBeforeLast("#").split("##").map { it.trim() }
         val argumentsList = mutableListOf<Pair<String, String>>()
-        fragments.subList(1, fragments.size).forEach { argument ->
+        argumentsFragments.forEach { argument ->
             val argumentDefinition = argument.split("=").map { it.trim() }
             argumentsList.add(Pair(argumentDefinition[0], argumentDefinition[1]))
         }
-        var subExpression = processExpressionWithVariables(fragments[0], context, propertiesTree)
+        var subExpression = processExpressionWithVariables(expression.substringBefore("#").trim(), context, propertiesTree)
         argumentsList.forEach { subExpression = subExpression.replace("\$${it.first}", it.second) }
         return subExpression
     }
 
     private fun processExpressionWithVariables(expression: String, context: Map<String, List<String>>, propertiesTree: Tree): String {
-        val variableRegex = Regex("\\$([a-zA-Z]*)")
         val fragments = expression.split(".").map { it.trim() }
         val previouslyMatched = mutableListOf<String>()
         fragments.forEach {
-            if (it.matches(variableRegex)) {
+            if (it.matches(singleVariableRegex)) {
                 val resolved = matchValueWithVariable(previouslyMatched, it.substring(1), context, propertiesTree)
                     ?: throw IllegalStateException("Couldn't process variable ${it.substring(1)} with the given context and previously matched $previouslyMatched")
                 previouslyMatched.add(resolved)

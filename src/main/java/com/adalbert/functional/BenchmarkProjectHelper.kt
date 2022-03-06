@@ -53,4 +53,12 @@ object BenchmarkProjectHelper {
         Files.write(pomPath, pomText.toByteArray(Charset.forName("UTF-8")))
     }
 
+    fun writeBenchmarkClasses(benchmarkClasses: List<BenchmarkContentGenerator.BenchmarkClass>, codeRoot: Path) {
+        benchmarkClasses.forEach {
+            println("### Writing ${it.className} benchmark ###")
+            val sourcesRoot = codeRoot.add("jmh-${it.language}").add("src\\main\\${it.language}\\com\\adalbert")
+            Files.write(sourcesRoot.add("${it.className}.${it.language}"), it.generatedCode.toByteArray(Charset.forName("UTF-8")))
+        }
+    }
+
 }

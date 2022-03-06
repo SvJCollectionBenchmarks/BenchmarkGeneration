@@ -1,30 +1,30 @@
 <@java@>
-#{groups.$group.init.$language.$profile.content # T = Double};
+#{groups.$group.init.$language.$profile.content # T = Double #};
 ${benchmarks.$benchmark.variables.profiled.$language.$profile.samplesCreation};
 for (int i = 0; i < 1000 / samples.size(); i++) {
     bh.consume(i);
-    #{groups.$group.operations.addAll.$profile.content # elems = samples};
+    #{groups.$group.operations.addAll.$profile.content # elems = samples #};
 }
 for (int i = 0; i < collection.size(); i++) {
     bh.consume(i);
-    Double elem = #{groups.$group.operations.get.$profile.content # index = i};
-    #{groups.$group.operations.set.$profile.content # index = i # elem = elem * 0.5};
+    Double elem = #{groups.$group.operations.get.$profile.content # index = i #};
+    #{groups.$group.operations.set.$profile.content # index = i ## elem = elem * 0.5 #};
 }
-while (#{groups.$group.operations.contains.$profile.content # elem = 0.0})
-    #{groups.$group.operations.remove.$profile.content # elem = 0.0};
+while (#{groups.$group.operations.contains.$profile.content # elem = 0.0 #})
+    #{groups.$group.operations.remove.$profile.content # elem = 0.0 #};
 <@java@>
 <@scala@>
-#{groups.$group.init.$language.$profile.content # T = Double}
+#{groups.$group.init.$language.$profile.content # T = Double #}
 ${benchmarks.$benchmark.variables.profiled.$language.$profile.samplesCreation}
 for (i <- 0 until 1000 / samples.size) {
     bh.consume(i);
-    #{groups.$group.operations.addAll.$profile.content # elems = samples}
+    #{groups.$group.operations.addAll.$profile.content # elems = samples #}
 }
 for (i <- collection.indices) {
     bh.consume(i);
-    val elem = #{groups.$group.operations.get.$profile.content # index = i}
-    #{groups.$group.operations.set.$profile.content # index = i # elem = elem * 0.5}
+    val elem = #{groups.$group.operations.get.$profile.content # index = i #}
+    #{groups.$group.operations.set.$profile.content # index = i ## elem = elem * 0.5 #}
 }
-while (#{groups.$group.operations.contains.$profile.content # elem = 0.0})
-    #{groups.$group.operations.remove.$profile.content # elem = 0.0}
+while (#{groups.$group.operations.contains.$profile.content # elem = 0.0 #})
+    #{groups.$group.operations.remove.$profile.content # elem = 0.0 #}
 <@scala@>

@@ -207,6 +207,18 @@
 				"args": [ { "name": "elems", "type": "Set<$T>" } ],
 				"content": "collection = collection.diff($elems)"
 			}
+		},
+		"isEmpty": {
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.isEmpty()"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.isEmpty"
+			}
 		}
 	},
 	"variables": {

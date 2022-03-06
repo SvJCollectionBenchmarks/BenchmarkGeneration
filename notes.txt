@@ -1,6 +1,7 @@
 Add isEmpty method to all
 Separate immutable collections to another group maybe (don't compare it with mutables explicitly)?
 Randomize arguments separately for the separate invocations of the same command in Polya
+Think of the different benchmarks for measurements groups
 [?] Make 'Measurements' more linear
 
 Planowane części pracy:
@@ -12,6 +13,12 @@ Planowane części pracy:
 
 Co chcemy mierzyć w ramach poszczególnych grup:
     - Zbiory:
+        - [GeneralSets] Duży problem z algorytmem Dijkstry
+        - [SortedSets] Indeksacja dużego zbioru par (indeks, ByteArray) - ważna kolejność wstawiania
+        - Benchmark pokazujący podstawowe edycje i przeszukiwanie na małych zbiorach (add, remove, contains)
+        - Benchmark pokazujący podstawowe edycje i przeszukiwanie na dużych zbiorach
+        - Benchmark pokazujący wielowątkową edycję i odczyt średniego zbioru
+        - Benchmark pokazujący operacje na zbiorach (union, intersect, difference)
     - Mapy:
     - Listy:
 

@@ -272,6 +272,18 @@
 				"args": [],
 				"content": "collection.clear()"
 			}
+		},
+		"isEmpty": {
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.isEmpty()"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.isEmpty"
+			}
 		}
 	},
 	"variables": {

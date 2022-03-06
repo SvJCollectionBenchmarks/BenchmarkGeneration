@@ -33,6 +33,7 @@ object BenchmarkContentGenerator {
         "scala" to "import java.util\n" +
                 "import scala.collection.immutable\n" +
                 "import scala.collection.mutable\n" +
+                "import scala.reflect.ClassTag\n" +
                 "import org.openjdk.jmh.annotations.{Benchmark, Level, Scope, Setup, State}\n" +
                 "import org.openjdk.jmh.infra.Blackhole\n",
     )

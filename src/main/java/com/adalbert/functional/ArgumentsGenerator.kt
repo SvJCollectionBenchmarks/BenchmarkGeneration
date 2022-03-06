@@ -65,13 +65,13 @@ object ArgumentsGenerator {
         this["Collection<? extends Boolean>"] = { "Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }})"}
         this["Collection<? extends Character>"] = { "Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }})"}
         this["Collection<? extends String>"] = { "Arrays.asList(${(0 until Random.nextInt(3, 5)).joinToString(",") { this["String"]!!() }})"}
-        this["Set<Integer>"] = { "new HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }}))"}
-        this["Set<Long>"] = { "new HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }}))"}
-        this["Set<Float>"] = { "new HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }}))"}
-        this["Set<Double>"] = { "new HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }}))"}
-        this["Set<Boolean>"] = { "new HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }}))"}
-        this["Set<Character>"] = { "new HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }}))"}
-        this["Set<String>"] = { "new HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 5)).joinToString(",") { this["String"]!!() }}))"}
+        this["Set<Integer>"] = { "new java.util.HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }}))"}
+        this["Set<Long>"] = { "new java.util.HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }}))"}
+        this["Set<Float>"] = { "new java.util.HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }}))"}
+        this["Set<Double>"] = { "new java.util.HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }}))"}
+        this["Set<Boolean>"] = { "new java.util.HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }}))"}
+        this["Set<Character>"] = { "new java.util.HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }}))"}
+        this["Set<String>"] = { "new java.util.HashSet<>(Arrays.asList(${(0 until Random.nextInt(3, 5)).joinToString(",") { this["String"]!!() }}))"}
         this["Integer[]"] = { "new Integer[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }}}"}
         this["Long[]"] = { "new Long[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }}}"}
         this["Float[]"] = { "new Float[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }}}"}
@@ -89,7 +89,7 @@ object ArgumentsGenerator {
         InterProfileMapping("scala", "Collection<? extends Integer>", "IterableOnce<Integer>") to { "mutable.ArrayBuffer[Integer](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Collection<? extends Long>", "IterableOnce<Long>") to { "mutable.ArrayBuffer[Long](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Collection<? extends Boolean>", "IterableOnce<Boolean>") to { "mutable.ArrayBuffer[Boolean](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Collection<? extends Character>", "IterableOnce<Character>") to { "mutable.ArrayBuffer[Char](${it.substringAfterLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Collection<? extends Character>", "IterableOnce<Character>") to { "mutable.ArrayBuffer[Character](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Set<String>", "Set<String>") to { "mutable.HashSet[String](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Set<Double>", "Set<Double>") to { "mutable.HashSet[Double](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Set<Float>", "Set<Float>") to { "mutable.HashSet[Float](${it.substringAfterLast("(").substringUntil(')')})" },
@@ -97,13 +97,13 @@ object ArgumentsGenerator {
         InterProfileMapping("scala", "Set<Long>", "Set<Long>") to { "mutable.HashSet[Long](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Set<Boolean>", "Set<Boolean>") to { "mutable.HashSet[Boolean](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Set<Character>", "Set<Character>") to { "mutable.HashSet[Char](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "String[]", "ClassTag<String>") to { "ClassTag(String.getClass)" },
-        InterProfileMapping("scala", "Double[]", "ClassTag<Double>") to { "ClassTag(Double.getClass)" },
-        InterProfileMapping("scala", "Float[]", "ClassTag<Float>") to { "ClassTag(Float.getClass)" },
-        InterProfileMapping("scala", "Integer[]", "ClassTag<Integer>") to { "ClassTag(Integer.getClass)" },
-        InterProfileMapping("scala", "Long[]", "ClassTag<Long>") to { "ClassTag(Long.getClass)" },
-        InterProfileMapping("scala", "Boolean[]", "ClassTag<Boolean>") to { "ClassTag(Boolean.getClass)" },
-        InterProfileMapping("scala", "Char[]", "ClassTag<Character>") to { "ClassTag(Char.getClass)" }
+        InterProfileMapping("scala", "String[]", "ClassTag<String>") to { "classTag[String]" },
+        InterProfileMapping("scala", "Double[]", "ClassTag<Double>") to { "classTag[Double]" },
+        InterProfileMapping("scala", "Float[]", "ClassTag<Float>") to { "classTag[Float]" },
+        InterProfileMapping("scala", "Integer[]", "ClassTag<Integer>") to { "classTag[Integer]" },
+        InterProfileMapping("scala", "Long[]", "ClassTag<Long>") to { "classTag[Long]" },
+        InterProfileMapping("scala", "Boolean[]", "ClassTag<Boolean>") to { "classTag[Boolean]" },
+        InterProfileMapping("scala", "Char[]", "ClassTag<Character>") to { "classTag[Char]" }
     )
 
 }

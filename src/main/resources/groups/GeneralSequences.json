@@ -317,12 +317,12 @@
 		},
 		"remove": {
 			"java": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.remove($elem)"
 			},
 			"scala": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.subtractOne($elem)"
 			}

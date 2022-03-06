@@ -83,7 +83,7 @@ fun main() {
                     val arguments = generateArgumentsForProfile(groupName, defaultProfile[0], additionOperation, typeVariables, propertiesTree)
                     "#{groups.$groupName.operations.$additionOperation.${defaultProfile[0]}.content # ${
                         arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" ## ")
-                    }} #"
+                    } #}"
                 }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
                 val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
                 BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)

@@ -28,16 +28,13 @@ object BenchmarkContentGenerator {
 
     private val generalImports = mapOf(
         "java" to "import java.util.*;\n" +
-//                "import scala.collection.immutable.*;\n" +
-//                "import scala.collection.mutable.*;\n" +
-//                "import scala.math.Ordering;\n" +
                 "import org.openjdk.jmh.annotations.*;\n" +
                 "import org.openjdk.jmh.infra.*;\n",
         "scala" to "import java.util\n" +
                 "import scala.collection.immutable\n" +
                 "import scala.collection.mutable\n" +
-                "import org.openjdk.jmh.annotations\n" +
-                "import org.openjdk.jmh.infra\n",
+                "import org.openjdk.jmh.annotations.{Benchmark, Level, Scope, Setup, State}\n" +
+                "import org.openjdk.jmh.infra.Blackhole\n",
     )
 
     fun generateFullSourceFromPolyaSnippets (

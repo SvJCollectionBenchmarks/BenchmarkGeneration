@@ -22,8 +22,8 @@
     "scala": []
   },
   "groups": [
-    "IndexedShrinkableSequences",
-    "LinearShrinkableSequences"
+    "IndexedSequences",
+    "LinearSequences"
   ],
   "variables": {
     "profiled": {

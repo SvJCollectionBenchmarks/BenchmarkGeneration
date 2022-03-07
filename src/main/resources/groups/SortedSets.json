@@ -99,7 +99,7 @@
 			},
 			"scala": {
 				"isConsumable": true,
-				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.addAll($elems)"
 			}
 		},
@@ -111,7 +111,7 @@
 			},
 			"scala": {
 				"isConsumable": false,
-				"args": [ { "name": "tag", "type": "ClassTag<$T>" } ],
+				"args": [ { "name": "tag", "type": "ClassTag[$T]" } ],
 				"content": "collection.toArray($tag)"
 			}
 		},
@@ -147,7 +147,7 @@
 			},
 			"scala": {
 				"isConsumable": true,
-				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.subtractAll($elems)"
 			}
 		},
@@ -159,7 +159,7 @@
 			},
 			"scala": {
 				"isConsumable": false,
-				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"args": [ { "name": "elems", "type": "Set[$T]" } ],
 				"content": "collection = collection.union($elems)"
 			}
 		},
@@ -171,7 +171,7 @@
 			},
 			"scala": {
 				"isConsumable": false,
-				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"args": [ { "name": "elems", "type": "Set[$T]" } ],
 				"content": "collection = collection.intersect($elems)"
 			}
 		},
@@ -183,7 +183,7 @@
 			},
 			"scala": {
 				"isConsumable": false,
-				"args": [ { "name": "elems", "type": "Set<$T>" } ],
+				"args": [ { "name": "elems", "type": "Set[$T]" } ],
 				"content": "collection = collection.diff($elems)"
 			}
 		},

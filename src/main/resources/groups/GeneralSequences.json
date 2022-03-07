@@ -253,7 +253,7 @@
 			},
 			"scala": {
 				"isConsumable": true,
-				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"SArraySequence": {
@@ -347,7 +347,7 @@
 			},
 			"scala": {
 				"isConsumable": true,
-				"args": [ { "name": "elems", "type": "IterableOnce<$T>" } ],
+				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.subtractAll($elems)"
 			}
 		},

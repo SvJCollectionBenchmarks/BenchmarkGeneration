@@ -90,20 +90,20 @@ object ArgumentsGenerator {
         InterProfileMapping("scala", "Collection<? extends Long>", "IterableOnce[Long]") to { "mutable.ArrayBuffer[Long](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Collection<? extends Boolean>", "IterableOnce[Boolean]") to { "mutable.ArrayBuffer[Boolean](${it.substringAfterLast("(").substringUntil(')')})" },
         InterProfileMapping("scala", "Collection<? extends Character>", "IterableOnce[Character]") to { "mutable.ArrayBuffer[Character](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Set<String>", "Set[String]") to { "mutable.HashSet[String](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Set<Double>", "Set[Double]") to { "mutable.HashSet[Double](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Set<Float>", "Set[Float]") to { "mutable.HashSet[Float](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Set<Integer>", "Set[Integer]") to { "mutable.HashSet[Integer](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Set<Long>", "Set[Long]") to { "mutable.HashSet[Long](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Set<Boolean>", "Set[Boolean]") to { "mutable.HashSet[Boolean](${it.substringAfterLast("(").substringUntil(')')})" },
-        InterProfileMapping("scala", "Set<Character>", "Set[Character]") to { "mutable.HashSet[Char](${it.substringAfterLast("(").substringUntil(')')})" },
+        InterProfileMapping("scala", "Set<String>", "Set[String]") to { "mutable.HashSet[String](${it.substringAfterLast("(").substringUntil(')')}" },
+        InterProfileMapping("scala", "Set<Double>", "Set[Double]") to { "mutable.HashSet[Double](${it.substringAfterLast("(").substringUntil(')')}" },
+        InterProfileMapping("scala", "Set<Float>", "Set[Float]") to { "mutable.HashSet[Float](${it.substringAfterLast("(").substringUntil(')')}" },
+        InterProfileMapping("scala", "Set<Integer>", "Set[Integer]") to { "mutable.HashSet[Integer](${it.substringAfterLast("(").substringUntil(')')}" },
+        InterProfileMapping("scala", "Set<Long>", "Set[Long]") to { "mutable.HashSet[Long](${it.substringAfterLast("(").substringUntil(')')}" },
+        InterProfileMapping("scala", "Set<Boolean>", "Set[Boolean]") to { "mutable.HashSet[Boolean](${it.substringAfterLast("(").substringUntil(')')}" },
+        InterProfileMapping("scala", "Set<Character>", "Set[Character]") to { "mutable.HashSet[Char](${it.substringAfterLast("(").substringUntil(')')}" },
         InterProfileMapping("scala", "String[]", "ClassTag[String]") to { "classTag[String]" },
         InterProfileMapping("scala", "Double[]", "ClassTag[Double]") to { "classTag[Double]" },
         InterProfileMapping("scala", "Float[]", "ClassTag[Float]") to { "classTag[Float]" },
         InterProfileMapping("scala", "Integer[]", "ClassTag[Integer]") to { "classTag[Integer]" },
         InterProfileMapping("scala", "Long[]", "ClassTag[Long]") to { "classTag[Long]" },
         InterProfileMapping("scala", "Boolean[]", "ClassTag[Boolean]") to { "classTag[Boolean]" },
-        InterProfileMapping("scala", "Char[]", "ClassTag[Character]") to { "classTag[Char]" }
+        InterProfileMapping("scala", "Character[]", "ClassTag[Character]") to { "classTag[Char]" }
     )
 
 }

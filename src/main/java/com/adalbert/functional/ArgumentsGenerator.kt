@@ -34,7 +34,7 @@ object ArgumentsGenerator {
 
     private fun getArgsMappingsForProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree): List<Argument> {
         val rawArgsMappings = propertiesTree.getMappings("groups", group, "operations", operation, operationProfile, "args")
-        val argsMappings = rawArgsMappings?.let { argsInner -> (0 until argsInner.size / 2).map { index ->
+        val argsMappings = rawArgsMappings.let { argsInner -> (0 until argsInner.size / 2).map { index ->
             if (argsInner[2 * index].first == "name")
                 Argument (argsInner[2 * index].second.first(), argsInner[(2 * index) + 1].second.first())
             else if (argsInner[(2 * index) + 1].first == "name")

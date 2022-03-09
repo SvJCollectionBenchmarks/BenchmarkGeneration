@@ -5,6 +5,8 @@ import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.HashMap;
+
 public class Another {
     @Benchmark
     @Warmup(time = 1)

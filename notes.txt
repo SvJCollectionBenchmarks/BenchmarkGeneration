@@ -3,13 +3,27 @@
 Co chcemy mierzyć w ramach poszczególnych grup:
     - Zbiory:
         - [GeneralSets] Duży problem z algorytmem Dijkstry
-        - [SortedSets] Indeksacja dużego zbioru par (indeks, ByteArray) - ważna kolejność wstawiania
-        - Benchmark pokazujący podstawowe edycje i przeszukiwanie na małych zbiorach (add, remove, contains)
-        - Benchmark pokazujący podstawowe edycje i przeszukiwanie na dużych zbiorach
-        - Benchmark pokazujący wielowątkową edycję i odczyt średniego zbioru
-        - Benchmark pokazujący operacje na zbiorach (union, intersect, difference)
+        - [SortedSets]
+        - Benchmark podstawowych edycje i przeszukiwania na małych zbiorach (add, remove, contains)
+        - Benchmark podstawowych edycje i przeszukiwania na dużych zbiorach
+        - Benchmark wielowątkowej edycji i odczytu średniego zbioru
+        - Benchmark operacji na zbiorach (union, intersect, difference)
     - Mapy:
+        - [GeneralMaps] Wyznaczanie liczb pierwszych
+        - [SortedMaps] Budowa dużego indeksu informacji z liczbowymi identyfikatorami - ważna kolejność wstawiania
+        - Benchmark budowy i odczytu mapy o dużej ilości kluczy tekstowych
+        - Benchmark wyszukania kluczy w dużej mapie
+        - Benchmark zamiany i usuwania kluczy z dużej mapy
+        - Benchmark wielowątkowej edycji i odczytu na mapie
     - Listy:
+        - [GeneralSequences] Processing audio
+        - [LinearSequences] InsertSort dużej listy
+        - [IndexedSequences]
+        - Benchmark załadowania dużej ilości danych w przodzie listy
+        - Benchmark załadowania dużej ilości danych w tyle listy
+        - Benchmark edycji danych w oddalonych miejscach w dużej liście - insert, set, remove
+        - Benchmark masowej edycji dużych list w oddalonych miejscach - addAll, removeAll, clear
+        - Benchmark wyszukiwania danych w liście - get, indexOf, lastIndexOf, contains
 
 Wymagania minimalne:
 	- Przyjrzeć się zestawom kolekcji i ich operacjom

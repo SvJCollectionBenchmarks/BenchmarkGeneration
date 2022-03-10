@@ -1,0 +1,48 @@
+{
+  "imports": {
+    "java": [
+      "import java.util.*;",
+      "import org.openjdk.jmh.annotations.*;",
+      "import org.openjdk.jmh.infra.Blackhole;"
+    ],
+    "scala": [
+      "import java.util",
+      "import scala.collection.immutable",
+      "import scala.collection.mutable",
+      "import org.openjdk.jmh.annotations.Benchmark",
+      "import org.openjdk.jmh.infra.Blackhole"
+    ]
+  },
+  "fields": {
+    "java": [],
+    "scala": []
+  },
+  "setup": {
+    "java": [],
+    "scala": []
+  },
+  "groups": [
+    "GeneralSets",
+    "SortedSets"
+  ],
+  "variables": {
+    "profiled": {
+      "java": {
+        "java": {
+          "values": "Arrays.asList(value - 1, value, value + 1)"
+        },
+        "scala": {
+          "values": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      },
+      "scala": {
+        "java": {
+          "values": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        "scala": {
+          "values": "Vector(value - 1, value, value + 1)"
+        }
+      }
+    }
+  }
+}

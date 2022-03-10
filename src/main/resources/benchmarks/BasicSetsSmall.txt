@@ -1,0 +1,30 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # T = Integer #};
+for (int i = 0; i < 1000; i++) #{groups.$group.operations.add.$profile.content # elem = i #};
+for (int i = 0; i < 1000; i++) {
+    int value = i % 4 == 0 ? -i : i;
+    switch (i % 5) {
+        case 0: #{groups.$group.operations.add.$profile.content # elem = value #}; break;
+        case 1: #{groups.$group.operations.remove.$profile.content # elem = value #}; break;
+        case 2: bh.consume(#{groups.$group.operations.contains.$profile.content # elem = value #}); break;
+        case 3: #{groups.$group.operations.addAll.$profile.content # elems = ${benchmarks.$benchmark.variables.profiled.$language.$profile.values} #};
+        case 4: #{groups.$group.operations.removeAll.$profile.content # elems = ${benchmarks.$benchmark.variables.profiled.$language.$profile.values} #};
+    }
+}
+collection.clear();
+<@java@>
+<@scala@>
+val collection: mutable.HashSet[Integer] = new mutable.HashSet[Integer]
+for (i <- 0 until 1000) collection.add(i)
+for (i <- 0 until 1000) {
+  val value: Int = if (i % 4 == 0) -i else i
+  i % 5 match {
+    case 0 => #{groups.$group.operations.add.$profile.content # elem = value #}
+    case 1 => #{groups.$group.operations.remove.$profile.content # elem = value #}
+    case 2 => bh.consume(#{groups.$group.operations.contains.$profile.content # elem = value #})
+    case 3 => #{groups.$group.operations.addAll.$profile.content # elems = ${benchmarks.$benchmark.variables.profiled.$language.$profile.values} #}
+    case 4 => #{groups.$group.operations.removeAll.$profile.content # elems = ${benchmarks.$benchmark.variables.profiled.$language.$profile.values} #}
+  }
+}
+collection.clear()
+<@scala@>

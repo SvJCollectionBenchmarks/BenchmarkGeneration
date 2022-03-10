@@ -22,25 +22,21 @@
     "scala": []
   },
   "groups": [
-    "IndexedSequences",
-    "LinearSequences"
+    "GeneralSets",
+    "SortedSets"
   ],
   "variables": {
     "profiled": {
       "java": {
         "java": {
-          "iterator": "java.util.Iterator<Double>"
         },
         "scala": {
-          "iterator": "scala.collection.Iterator<Double>"
         }
       },
       "scala": {
         "java": {
-          "iterator": "util.Iterator<Double>"
         },
         "scala": {
-          "iterator": "scala.collection.Iterator[Double]"
         }
       }
     }

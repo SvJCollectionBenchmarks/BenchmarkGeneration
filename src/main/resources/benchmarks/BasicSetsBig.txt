@@ -1,0 +1,27 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # T = Integer #};
+for (int i = 0; i < 1000000; i++) #{groups.$group.operations.add.$profile.content # elem = i #};
+for (int i = 0; i < 10000; i++) {
+    int value = i % 3 == 0 ? -i : i;
+    switch (i % 4) {
+        case 0:
+        case 1: #{groups.$group.operations.add.$profile.content # elem = value #}; break;
+        case 2: bh.consume(#{groups.$group.operations.remove.$profile.content # elem = value #}); break;
+        case 3: bh.consume(#{groups.$group.operations.contains.$profile.content # elem = value #}); break;
+    }
+}
+collection.clear();
+<@java@>
+<@scala@>
+val collection: mutable.HashSet[Integer] = new mutable.HashSet[Integer]
+for (i <- 0 until 1000000) collection.add(i)
+for (i <- 0 until 10000) {
+  val value: Int = if (i % 3 == 0) -i else i
+  i % 4 match {
+    case 0 | 1 => #{groups.$group.operations.add.$profile.content # elem = value #}
+    case 2 => bh.consume(#{groups.$group.operations.remove.$profile.content # elem = value #})
+    case 3 => bh.consume(#{groups.$group.operations.contains.$profile.content # elem = value #})
+  }
+}
+collection.clear()
+<@scala@>

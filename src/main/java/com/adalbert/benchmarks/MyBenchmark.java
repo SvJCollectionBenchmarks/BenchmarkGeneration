@@ -31,119 +31,33 @@
 
 package com.adalbert.benchmarks;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
-import scala.math.Ordering;
+import scala.collection.mutable.ArrayBuffer;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.HashSet;
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
     @Benchmark
-    @Measurement(iterations = 6)
-    public void testJHashMap(Blackhole bh) {
-        java.util.HashMap<Integer, java.util.List<Integer>> collection = new java.util.HashMap<>();
-        for (int i = 2; i < 100; i++) {
-            boolean wasFound = false;
-            Iterator<Integer> iterator = collection.keySet().iterator();
-            while (iterator.hasNext() && !wasFound) {
-                Integer key = iterator.next();
-                wasFound = i % key == 0;
-                if (wasFound) collection.get(key).add(i);
+    @Fork(1)
+    @Measurement(time = 1)
+    @Warmup(time = 1)
+    public void testMethodJava(Blackhole bh) {
+        HashSet<Integer> collection = new HashSet<>();
+        for (int i = 0; i < 1000000; i++) collection.add(i);
+        for (int i = 0; i < 10000; i++) {
+            int value = i % 3 == 0 ? -i : i;
+            switch (i % 4) {
+                case 0:
+                case 1: collection.add(value); break;
+                case 2: collection.remove(value); break;
+                case 3: bh.consume(collection.contains(value)); break;
             }
-            if (!wasFound) collection.put(i, new ArrayList<Integer>());
         }
-        bh.consume(collection.keySet());
-    }
-
-    @Benchmark
-    @Measurement(iterations = 6)
-    public void testJLinkedMap(Blackhole bh) {
-        java.util.LinkedHashMap<Integer, java.util.List<Integer>> collection = new java.util.LinkedHashMap<>();
-        for (int i = 2; i < 100; i++) {
-            boolean wasFound = false;
-            Iterator<Integer> iterator = collection.keySet().iterator();
-            while (iterator.hasNext() && !wasFound) {
-                Integer key = iterator.next();
-                wasFound = i % key == 0;
-                if (wasFound) collection.get(key).add(i);
-            }
-            if (!wasFound) collection.put(i, new ArrayList<Integer>());
-        }
-        bh.consume(collection.keySet());
-    }
-
-    @Benchmark
-    @Measurement(iterations = 6)
-    public void testSHashMap(Blackhole bh) {
-        scala.collection.mutable.HashMap<Integer, java.util.List<Integer>> collection = new scala.collection.mutable.HashMap<>();
-        for (int i = 2; i < 100; i++) {
-            boolean wasFound = false;
-            scala.collection.Iterator<Integer> iterator = collection.keySet().iterator();
-            while (iterator.hasNext() && !wasFound) {
-                Integer key = iterator.next();
-                wasFound = i % key == 0;
-                if (wasFound) collection.apply(key).add(i);
-            }
-            if (!wasFound) collection.update(i, new ArrayList<Integer>());
-        }
-        bh.consume(collection.keySet());
-    }
-
-    @Benchmark
-    @Measurement(iterations = 6)
-    public void testSLinkedMap(Blackhole bh) {
-        scala.collection.mutable.LinkedHashMap<Integer, java.util.List<Integer>> collection = new scala.collection.mutable.LinkedHashMap<>();
-        for (int i = 2; i < 100; i++) {
-            boolean wasFound = false;
-            scala.collection.Iterator<Integer> iterator = collection.keySet().iterator();
-            while (iterator.hasNext() && !wasFound) {
-                Integer key = iterator.next();
-                wasFound = i % key == 0;
-                if (wasFound) collection.apply(key).add(i);
-            }
-            if (!wasFound) collection.update(i, new ArrayList<Integer>());
-        }
-        bh.consume(collection.keySet());
-    }
-
-    @Benchmark
-    @Measurement(iterations = 6)
-    public void testJTreeMap(Blackhole bh) {
-        java.util.TreeMap<Integer, java.util.List<Integer>> collection = new java.util.TreeMap<>();
-        for (int i = 2; i < 100; i++) {
-            boolean wasFound = false;
-            java.util.Iterator<Integer> iterator = collection.keySet().iterator();
-            while (iterator.hasNext() && !wasFound) {
-                Integer key = iterator.next();
-                wasFound = i % key == 0;
-                if (wasFound) collection.get(key).add(i);
-            }
-            if (!wasFound) collection.put(i, new ArrayList<Integer>());
-        }
-        bh.consume(collection.keySet());
-    }
-
-    @Benchmark
-    @Measurement(iterations = 6)
-    public void testSTreeMap(Blackhole bh) {
-        scala.collection.mutable.TreeMap<Integer, java.util.List<Integer>> collection = new scala.collection.mutable.TreeMap<>(new Ordering<Integer>() { public int compare(Integer x, Integer y) { return x.compareTo(y); }});
-        for (int i = 2; i < 100; i++) {
-            boolean wasFound = false;
-            scala.collection.Iterator<Integer> iterator = collection.keySet().iterator();
-            while (iterator.hasNext() && !wasFound) {
-                Integer key = iterator.next();
-                wasFound = i % key == 0;
-                if (wasFound) collection.apply(key).add(i);
-            }
-            if (!wasFound) collection.update(i, new ArrayList<Integer>());
-        }
-        bh.consume(collection.keySet());
+        collection.clear();
     }
 
 }

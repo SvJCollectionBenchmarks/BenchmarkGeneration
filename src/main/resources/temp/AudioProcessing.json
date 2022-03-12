@@ -9,17 +9,13 @@
       "import java.util",
       "import scala.collection.immutable",
       "import scala.collection.mutable",
-      "import org.openjdk.jmh.annotations.Benchmark",
+      "import org.openjdk.jmh.annotations._",
       "import org.openjdk.jmh.infra.Blackhole"
     ]
   },
-  "fields": {
-    "java": [],
-    "scala": []
-  },
-  "setup": {
-    "java": [],
-    "scala": []
+  "outer": {
+    "java": [""],
+    "scala": [""]
   },
   "groups": [
     "GeneralSequences"

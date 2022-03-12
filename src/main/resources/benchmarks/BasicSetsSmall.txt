@@ -11,7 +11,7 @@ for (int i = 0; i < 1000; i++) {
         case 4: #{groups.$group.operations.removeAll.$profile.content # elems = ${benchmarks.$benchmark.variables.profiled.$language.$profile.values} #};
     }
 }
-collection.clear();
+${groups.$group.operations.clear.$profile.content};
 <@java@>
 <@scala@>
 val collection: mutable.HashSet[Integer] = new mutable.HashSet[Integer]
@@ -26,5 +26,5 @@ for (i <- 0 until 1000) {
     case 4 => #{groups.$group.operations.removeAll.$profile.content # elems = ${benchmarks.$benchmark.variables.profiled.$language.$profile.values} #}
   }
 }
-collection.clear()
+${groups.$group.operations.clear.$profile.content}
 <@scala@>

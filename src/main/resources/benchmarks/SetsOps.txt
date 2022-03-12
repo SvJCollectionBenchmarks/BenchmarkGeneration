@@ -1,0 +1,22 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # T = Integer #};
+#{groups.$group.operations.union.$profile.content # elems = firstSet #};
+#{groups.$group.operations.union.$profile.content # elems = secondSet #};
+#{groups.$group.operations.union.$profile.content # elems = thirdSet #};
+#{groups.$group.operations.intersect.$profile.content # elems = firstSet #};
+#{groups.$group.operations.difference.$profile.content # elems = secondSet #};
+#{groups.$group.operations.intersect.$profile.content # elems = thirdSet #};
+bh.consume(${groups.$group.operations.size.$profile.content});
+${groups.$group.operations.clear.$profile.content};
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # T = Integer #};
+#{groups.$group.operations.union.$profile.content # elems = firstSet #};
+#{groups.$group.operations.union.$profile.content # elems = secondSet #};
+#{groups.$group.operations.union.$profile.content # elems = thirdSet #};
+#{groups.$group.operations.intersect.$profile.content # elems = firstSet #};
+#{groups.$group.operations.difference.$profile.content # elems = secondSet #};
+#{groups.$group.operations.intersect.$profile.content # elems = thirdSet #};
+bh.consume(${groups.$group.operations.size.$profile.content});
+${groups.$group.operations.clear.$profile.content};
+<@scala@>

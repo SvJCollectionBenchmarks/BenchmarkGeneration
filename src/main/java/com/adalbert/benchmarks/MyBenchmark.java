@@ -33,13 +33,26 @@ package com.adalbert.benchmarks;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
-import scala.collection.mutable.ArrayBuffer;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
+
+    private HashSet<Integer> firstSet;
+    private HashSet<Integer> secondSet;
+    private HashSet<Integer> thirdSet;
+    @Setup
+    public void prepareSets() {
+        firstSet = new HashSet<>();
+        secondSet = new HashSet<>();
+        thirdSet = new HashSet<>();
+        for (int i = 0; i < 10000; i++) {
+            if (i % 3 == 0) firstSet.add(i);
+            if (i % 5 == 0) secondSet.add(i);
+            if (i % 7 == 0) thirdSet.add(i);
+        }
+    }
 
     @Benchmark
     @Fork(1)
@@ -47,17 +60,13 @@ public class MyBenchmark {
     @Warmup(time = 1)
     public void testMethodJava(Blackhole bh) {
         HashSet<Integer> collection = new HashSet<>();
-        for (int i = 0; i < 1000000; i++) collection.add(i);
-        for (int i = 0; i < 10000; i++) {
-            int value = i % 3 == 0 ? -i : i;
-            switch (i % 4) {
-                case 0:
-                case 1: collection.add(value); break;
-                case 2: collection.remove(value); break;
-                case 3: bh.consume(collection.contains(value)); break;
-            }
-        }
-        collection.clear();
+        collection.addAll(firstSet);
+        collection.addAll(secondSet);
+        collection.addAll(thirdSet);
+        collection.retainAll(firstSet);
+        collection.removeAll(secondSet);
+        collection.retainAll(thirdSet);
+        bh.consume(collection.size());
     }
 
 }

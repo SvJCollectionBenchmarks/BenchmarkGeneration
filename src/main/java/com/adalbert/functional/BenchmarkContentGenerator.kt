@@ -15,11 +15,11 @@ object BenchmarkContentGenerator {
         val groupedByLanguage = benchmarkMethods.groupBy { it.language }
         return groupedByLanguage.keys.map { language ->
             val bob = StringBuilder()
-            val imports = propertiesTree.getValues("benchmarks", benchmarkName, "imports", language)
             val className = "${language[0].uppercase()}_${benchmarkName}${groupName}_Benchmark"
             bob.appendLine("package com.adalbert;")
-            imports.forEach { bob.appendLine(it) }
+            propertiesTree.getValues("benchmarks", benchmarkName, "imports", language).forEach { bob.appendLine(it) }
             bob.appendLine("${if (language == "java") "public " else ""} class $className {")
+            propertiesTree.getValues("benchmarks", benchmarkName, "outer", language).forEach { bob.appendLine("\t$it") }
             groupedByLanguage[language]?.forEach { method -> stringifyMethod(bob, method) }
             bob.appendLine("}")
             BenchmarkClass(language,className, bob.toString())

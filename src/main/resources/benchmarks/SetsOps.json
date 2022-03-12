@@ -1,0 +1,71 @@
+{
+  "imports": {
+    "java": [
+      "import java.util.*;",
+      "import org.openjdk.jmh.annotations.*;",
+      "import org.openjdk.jmh.infra.Blackhole;",
+      "@State(Scope.Benchmark)"
+    ],
+    "scala": [
+      "import java.util",
+      "import scala.collection.immutable",
+      "import scala.collection.mutable",
+      "import org.openjdk.jmh.annotations._",
+      "import org.openjdk.jmh.infra.Blackhole",
+      "@State(Scope.Benchmark)"
+    ]
+  },
+  "outer": {
+    "java": [
+      "private HashSet<Integer> firstSet;",
+      "private HashSet<Integer> secondSet;",
+      "private HashSet<Integer> thirdSet;",
+      "@Setup",
+      "public void prepareSets() {",
+      "\tfirstSet = new HashSet<>();",
+      "\tsecondSet = new HashSet<>();",
+      "\tthirdSet = new HashSet<>();",
+      "\tfor (int i = 0; i < 10000; i++) {",
+      "\t\tif (i % 3 == 0) firstSet.add(i);",
+      "\t\tif (i % 5 == 0) secondSet.add(i);",
+      "\t\tif (i % 7 == 0) thirdSet.add(i);",
+      "\t}",
+      "}"
+    ],
+    "scala": [
+      "private var firstSet: mutable.HashSet[Integer] = null",
+      "private var secondSet: mutable.HashSet[Integer] = null",
+      "private var thirdSet: mutable.HashSet[Integer] = null",
+      "@Setup def prepareSets(): Unit = {",
+      "\tfirstSet = new mutable.HashSet[Integer]",
+      "\tsecondSet = new mutable.HashSet[Integer]",
+      "\tthirdSet = new mutable.HashSet[Integer]",
+      "\tfor (i <- 0 until 10000) {",
+      "\t\tif (i % 3 == 0) firstSet.add(i)",
+      "\t\tif (i % 5 == 0) secondSet.add(i)",
+      "\t\tif (i % 7 == 0) thirdSet.add(i)",
+      "\t}",
+      "}"
+    ]
+  },
+  "groups": [
+    "GeneralSets",
+    "SortedSets"
+  ],
+  "variables": {
+    "profiled": {
+      "java": {
+        "java": {
+        },
+        "scala": {
+        }
+      },
+      "scala": {
+        "java": {
+        },
+        "scala": {
+        }
+      }
+    }
+  }
+}

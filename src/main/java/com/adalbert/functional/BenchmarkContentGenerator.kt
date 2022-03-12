@@ -11,11 +11,12 @@ object BenchmarkContentGenerator {
     data class BenchmarkInitialization(val collectionInit: String, val elementsFilling: List<String>)
     data class BenchmarkClass(val language: String, val className: String, val generatedCode: String)
 
-    fun generateFullSourceFromSnippets(benchmarkName: String, groupName: String, benchmarkMethods: List<BenchmarkMethod>, propertiesTree: Tree): List<BenchmarkClass> {
+    fun generateFullSourceFromSnippets(benchmarkName: String, groupName: String, benchmarkMethods: List<BenchmarkMethod>, propertiesTree: Tree, annotation: String = ""): List<BenchmarkClass> {
         val groupedByLanguage = benchmarkMethods.groupBy { it.language }
         return groupedByLanguage.keys.map { language ->
             val bob = StringBuilder()
-            val className = "${language[0].uppercase()}_${benchmarkName}${groupName}_Benchmark"
+            val annotationPart = if (annotation.isEmpty()) "" else "${annotation}_"
+            val className = "${language[0].uppercase()}_${benchmarkName}${groupName}_${annotationPart}Benchmark"
             bob.appendLine("package com.adalbert;")
             propertiesTree.getValues("benchmarks", benchmarkName, "imports", language).forEach { bob.appendLine(it) }
             bob.appendLine("${if (language == "java") "public " else ""} class $className {")

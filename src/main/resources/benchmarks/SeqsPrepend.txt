@@ -1,0 +1,12 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # T = Double #};
+for (int i = 0; i < 10000; i++)
+    #{groups.$group.operations.prepend.$profile.content # elem = Math.sin(i/0.01) #};
+${groups.$group.operations.clear.$profile.content};
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # T = Double #}
+for (i <- 0 until 10000)
+    #{groups.$group.operations.prepend.$profile.content # elem = Math.sin(i/0.01) #}
+${groups.$group.operations.clear.$profile.content}
+<@scala@>

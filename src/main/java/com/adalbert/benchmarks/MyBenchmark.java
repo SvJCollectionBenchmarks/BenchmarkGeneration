@@ -42,17 +42,19 @@ public class MyBenchmark {
     @Measurement(time = 1)
     @Warmup(time = 1)
     public void testMethodJava(Blackhole bh) {
-        java.util.HashMap<Integer, Integer> collection = new java.util.HashMap<>();
-        for (int i = 0; i < 100000; i++) collection.put(i, i);
-        for (int i = 0; i < 100000; i++) {
-            int value = i % 3 == 0 ? -i : i;
-            if (collection.containsKey(value))
-                switch (i % 2) {
-                    case 0: collection.replace(value, -value);
-                    case 1: collection.remove(value);
-                }
-            else collection.put(value, value);
-        }
+        java.util.ArrayList<Double> collection = new java.util.ArrayList<>();
+        for (int i = 0; i < 10000; i++)
+            collection.add(0, Math.sin(i/0.01));
+    }
+
+    @Benchmark
+    @Fork(1)
+    @Measurement(time = 1)
+    @Warmup(time = 1)
+    public void testMethodJavaLinked(Blackhole bh) {
+        java.util.LinkedList<Double> collection = new java.util.LinkedList<>();
+        for (int i = 0; i < 10000; i++)
+            collection.addFirst(Math.sin(i/0.01));
     }
 
 }

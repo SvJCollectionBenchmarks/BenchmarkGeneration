@@ -1,4 +1,5 @@
 {
+  "generateMode": "CollectionPerMethod",
   "imports": {
     "java": [
       "import java.util.*;",

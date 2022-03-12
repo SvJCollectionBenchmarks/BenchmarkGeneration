@@ -19,21 +19,25 @@
     "scala": [""]
   },
   "groups": [
-    "GeneralMaps",
-    "SortedMaps"
+    "GeneralSets",
+    "SortedSets"
   ],
   "variables": {
     "profiled": {
       "java": {
         "java": {
+          "values": "Arrays.asList(value - 1, value, value + 1)"
         },
         "scala": {
+          "values": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         }
       },
       "scala": {
         "java": {
+          "values": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         "scala": {
+          "values": "Vector(value - 1, value, value + 1)"
         }
       }
     }

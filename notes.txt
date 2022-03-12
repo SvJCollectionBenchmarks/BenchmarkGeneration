@@ -11,9 +11,9 @@ Co chcemy mierzyć w ramach poszczególnych grup:
     - Mapy:
         - [GeneralMaps] Wyznaczanie liczb pierwszych
         - [SortedMaps] Budowa dużego indeksu informacji z liczbowymi identyfikatorami - ważna kolejność wstawiania
-        - Benchmark budowy i odczytu mapy o dużej ilości kluczy tekstowych
+        + Benchmark budowy i odczytu mapy o dużej ilości kluczy tekstowych
         - Benchmark wyszukania kluczy w naprawdę dużej mapie ?
-        - Benchmark zamiany i usuwania kluczy z dużej mapy
+        - Benchmark zamiany, dodawania i usuwania kluczy z dużej mapy
         - Benchmark wielowątkowej edycji i odczytu na mapie
     - Listy:
         - [GeneralSequences] Processing audio

@@ -1,0 +1,27 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # K = Integer ## V = Integer #};
+for (int i = 0; i < 100000; i++)
+    #{groups.$group.operations.put.$profile.content # key = i ## value = i #};
+for (int i = 0; i < 100000; i++) {
+    int value = i % 3 == 0 ? -i : i;
+    if (#{groups.$group.operations.containsKey.$profile.content # key = value #})
+        switch (i % 2) {
+            case 0: #{groups.$group.operations.replace.$profile.content # key = value ## value = -value#};
+            case 1: #{groups.$group.operations.remove.$profile.content # key = value #};
+        }
+    else #{groups.$group.operations.put.$profile.content # key = value ## value = value #};
+}
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # K = Integer ## V = Integer #}
+for (i <- 0 until 100000)
+    #{groups.$group.operations.put.$profile.content # key = i ## value = i #}
+for (i <- 0 until 100000) {
+    val value = if (i % 3 == 0) -i else i
+    if (#{groups.$group.operations.containsKey.$profile.content # key = value #}) i % 2 match {
+       case 0 => #{groups.$group.operations.replace.$profile.content # key = value ## value = -value#}
+       case 1 => #{groups.$group.operations.remove.$profile.content # key = value #}
+    }
+    else #{groups.$group.operations.put.$profile.content # key = value ## value = value #}
+}
+<@scala@>

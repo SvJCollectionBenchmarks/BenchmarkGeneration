@@ -1,0 +1,40 @@
+{
+  "imports": {
+    "java": [
+      "import java.util.*;",
+      "import org.openjdk.jmh.annotations.*;",
+      "import org.openjdk.jmh.infra.Blackhole;"
+    ],
+    "scala": [
+      "import java.util",
+      "import scala.collection.immutable",
+      "import scala.collection.mutable",
+      "import org.openjdk.jmh.annotations._",
+      "import org.openjdk.jmh.infra.Blackhole"
+    ]
+  },
+  "outer": {
+    "java": [""],
+    "scala": [""]
+  },
+  "groups": [
+    "GeneralMaps",
+    "SortedMaps"
+  ],
+  "variables": {
+    "profiled": {
+      "java": {
+        "java": {
+        },
+        "scala": {
+        }
+      },
+      "scala": {
+        "java": {
+        },
+        "scala": {
+        }
+      }
+    }
+  }
+}

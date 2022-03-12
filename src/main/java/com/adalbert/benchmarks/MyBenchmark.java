@@ -42,24 +42,17 @@ public class MyBenchmark {
     @Measurement(time = 1)
     @Warmup(time = 1)
     public void testMethodJava(Blackhole bh) {
-        java.util.HashMap<String, String> collection = new java.util.HashMap<>();
-        for (int i = 0; i < 10000; i++)
-            collection.put(String.format("Key %d", i), String.format("Value %d", i));
-        for (int i = 0; i < 1000; i++) {
+        java.util.HashMap<Integer, Integer> collection = new java.util.HashMap<>();
+        for (int i = 0; i < 100000; i++) collection.put(i, i);
+        for (int i = 0; i < 100000; i++) {
             int value = i % 3 == 0 ? -i : i;
-            String mapKey = String.format("Key %d", value);
-            String mapValue = String.format("New value %d", value);
-            if (collection.containsKey(mapKey))
+            if (collection.containsKey(value))
                 switch (i % 2) {
-                    case 0: collection.replace(mapKey, mapValue);
-                    case 1: collection.remove(mapKey);
+                    case 0: collection.replace(value, -value);
+                    case 1: collection.remove(value);
                 }
-            else collection.put(mapKey, mapValue);
+            else collection.put(value, value);
         }
-        bh.consume(collection.size());
-        bh.consume(collection.keySet());
-        bh.consume(collection.values());
-        collection.clear();
     }
 
 }

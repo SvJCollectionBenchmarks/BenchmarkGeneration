@@ -102,12 +102,12 @@
 		},
 		"clear": {
 			"java": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
 			},
 			"scala": {
-				"isConsumable": true,
+				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
 			}

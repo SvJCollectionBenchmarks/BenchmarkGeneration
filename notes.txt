@@ -4,15 +4,15 @@ Co chcemy mierzyć w ramach poszczególnych grup:
     - Zbiory:
         - [GeneralSets] Duży problem z algorytmem Dijkstry
         - [SortedSets]
-        - Benchmark podstawowych edycje i przeszukiwania na małych zbiorach (add, remove, contains)
-        - Benchmark podstawowych edycje i przeszukiwania na dużych zbiorach
+        + Benchmark podstawowych edycje i przeszukiwania na małych zbiorach (add, remove, contains)
+        + Benchmark podstawowych edycje i przeszukiwania na dużych zbiorach
         - Benchmark wielowątkowej edycji i odczytu średniego zbioru
-        - Benchmark operacji na zbiorach (union, intersect, difference)
+        + Benchmark operacji na zbiorach (union, intersect, difference)
     - Mapy:
         - [GeneralMaps] Wyznaczanie liczb pierwszych
         - [SortedMaps] Budowa dużego indeksu informacji z liczbowymi identyfikatorami - ważna kolejność wstawiania
         - Benchmark budowy i odczytu mapy o dużej ilości kluczy tekstowych
-        - Benchmark wyszukania kluczy w dużej mapie
+        - Benchmark wyszukania kluczy w naprawdę dużej mapie ?
         - Benchmark zamiany i usuwania kluczy z dużej mapy
         - Benchmark wielowątkowej edycji i odczytu na mapie
     - Listy:

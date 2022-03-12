@@ -1,0 +1,40 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # K = String ## V = String #};
+for (int i = 0; i < 10000; i++)
+    #{groups.$group.operations.put.$profile.content # key = String.format("Key %d", i) ## value = String.format("Value %d", i) #};
+for (int i = 0; i < 1000; i++) {
+    int value = i % 3 == 0 ? -i : i;
+    String mapKey = String.format("Key %d", value);
+    String mapValue = String.format("New value %d", value);
+    if (#{groups.$group.operations.containsKey.$profile.content # key = mapKey #})
+        switch (i % 2) {
+            case 0: #{groups.$group.operations.replace.$profile.content # key = mapKey ## value = mapValue #};
+            case 1: #{groups.$group.operations.remove.$profile.content # key = mapKey #};
+        }
+    else #{groups.$group.operations.put.$profile.content # key = mapKey ## value = mapValue #};
+}
+bh.consume(${groups.$group.operations.size.$profile.content});
+bh.consume(${groups.$group.operations.keys.$profile.content});
+bh.consume(${groups.$group.operations.values.$profile.content});
+${groups.$group.operations.clear.$profile.content};
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # K = String ## V = String #}
+for (i <- 0 until 10000)
+    #{groups.$group.operations.put.$profile.content # key = String.format("Key %d", i) ## value = String.format("Value %d", i) #}
+for (i <- 0 until 1000) {
+    val value = if (i % 3 == 0) -i else i
+    val mapKey = String.format("Key %d", value)
+    val mapValue = String.format("New value %d", value)
+    if (#{groups.$group.operations.containsKey.$profile.content # key = mapKey #})
+        i % 2 match {
+            case 0 => #{groups.$group.operations.replace.$profile.content # key = mapKey ## value = mapValue #}
+            case 1 => #{groups.$group.operations.remove.$profile.content # key = mapKey #}
+        }
+    else #{groups.$group.operations.put.$profile.content # key = mapKey ## value = mapValue #}
+}
+bh.consume(${groups.$group.operations.size.$profile.content})
+bh.consume(${groups.$group.operations.keys.$profile.content})
+bh.consume(${groups.$group.operations.values.$profile.content})
+${groups.$group.operations.clear.$profile.content}
+<@scala@>

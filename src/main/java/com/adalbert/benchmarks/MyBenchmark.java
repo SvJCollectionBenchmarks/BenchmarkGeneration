@@ -34,39 +34,32 @@ package com.adalbert.benchmarks;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.HashSet;
-
 @State(Scope.Benchmark)
 public class MyBenchmark {
-
-    private HashSet<Integer> firstSet;
-    private HashSet<Integer> secondSet;
-    private HashSet<Integer> thirdSet;
-    @Setup
-    public void prepareSets() {
-        firstSet = new HashSet<>();
-        secondSet = new HashSet<>();
-        thirdSet = new HashSet<>();
-        for (int i = 0; i < 10000; i++) {
-            if (i % 3 == 0) firstSet.add(i);
-            if (i % 5 == 0) secondSet.add(i);
-            if (i % 7 == 0) thirdSet.add(i);
-        }
-    }
 
     @Benchmark
     @Fork(1)
     @Measurement(time = 1)
     @Warmup(time = 1)
     public void testMethodJava(Blackhole bh) {
-        HashSet<Integer> collection = new HashSet<>();
-        collection.addAll(firstSet);
-        collection.addAll(secondSet);
-        collection.addAll(thirdSet);
-        collection.retainAll(firstSet);
-        collection.removeAll(secondSet);
-        collection.retainAll(thirdSet);
+        java.util.HashMap<String, String> collection = new java.util.HashMap<>();
+        for (int i = 0; i < 10000; i++)
+            collection.put(String.format("Key %d", i), String.format("Value %d", i));
+        for (int i = 0; i < 1000; i++) {
+            int value = i % 3 == 0 ? -i : i;
+            String mapKey = String.format("Key %d", value);
+            String mapValue = String.format("New value %d", value);
+            if (collection.containsKey(mapKey))
+                switch (i % 2) {
+                    case 0: collection.replace(mapKey, mapValue);
+                    case 1: collection.remove(mapKey);
+                }
+            else collection.put(mapKey, mapValue);
+        }
         bh.consume(collection.size());
+        bh.consume(collection.keySet());
+        bh.consume(collection.values());
+        collection.clear();
     }
 
 }

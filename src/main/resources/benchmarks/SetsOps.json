@@ -16,7 +16,11 @@
       "@State(Scope.Benchmark)"
     ]
   },
-  "outer": {
+  "outerProcessed": {
+    "java": [""],
+    "scala": [""]
+  },
+  "outerUnprocessed": {
     "java": [
       "private HashSet<Integer> firstSet;",
       "private HashSet<Integer> secondSet;",

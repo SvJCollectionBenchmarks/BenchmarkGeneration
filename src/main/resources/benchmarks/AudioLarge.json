@@ -14,7 +14,11 @@
       "import org.openjdk.jmh.infra.Blackhole"
     ]
   },
-  "outer": {
+  "outerProcessed": {
+    "java": ["${benchmarks.$benchmark.variables.profiled.$language.$profile.iterator}"],
+    "scala": ["${benchmarks.$benchmark.variables.profiled.$language.$profile.iterator}"]
+  },
+  "outerUnprocessed": {
     "java": [""],
     "scala": [""]
   },

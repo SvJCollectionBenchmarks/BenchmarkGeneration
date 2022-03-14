@@ -11,16 +11,19 @@ object BenchmarkContentGenerator {
     data class BenchmarkInitialization(val collectionInit: String, val elementsFilling: List<String>)
     data class BenchmarkClass(val language: String, val className: String, val generatedCode: String)
 
-    fun generateFullSourceFromSnippets(benchmarkName: String, groupName: String, benchmarkMethods: List<BenchmarkMethod>, propertiesTree: Tree, annotation: String = ""): List<BenchmarkClass> {
+    fun generateFullSourceFromSnippets(benchmarkName: String, groupName: String, benchmarkMethods: List<BenchmarkMethod>, context: MutableMap<String, List<String>>, propertiesTree: Tree, annotation: String = ""): List<BenchmarkClass> {
         val groupedByLanguage = benchmarkMethods.groupBy { it.language }
         return groupedByLanguage.keys.map { language ->
             val bob = StringBuilder()
+            context["language"] = listOf(language)
             val annotationPart = if (annotation.isEmpty()) "" else "${annotation}_"
             val className = "${language[0].uppercase()}_${benchmarkName}${groupName}_${annotationPart}Benchmark"
             bob.appendLine("package com.adalbert;")
             propertiesTree.getValues("benchmarks", benchmarkName, "imports", language).forEach { bob.appendLine(it) }
-            bob.appendLine("${if (language == "java") "public " else ""} class $className {")
-            propertiesTree.getValues("benchmarks", benchmarkName, "outer", language).forEach { bob.appendLine("\t$it") }
+            bob.appendLine("${ if (language == "java") "public " else "" } class $className {")
+            propertiesTree.getValues("benchmarks", benchmarkName, "outerUnprocessed", language).forEach { bob.appendLine("\t$it") }
+            val outerToProcess = propertiesTree.getValues("benchmarks", benchmarkName, "outerProcessed", language).joinToString("\n")
+            bob.appendLine(BenchmarkContentProcessor.processBenchmarkText(outerToProcess, context, propertiesTree))
             groupedByLanguage[language]?.forEach { method -> stringifyMethod(bob, method) }
             bob.appendLine("}")
             BenchmarkClass(language,className, bob.toString())

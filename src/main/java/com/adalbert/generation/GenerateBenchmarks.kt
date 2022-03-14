@@ -5,16 +5,11 @@ import com.adalbert.functional.BenchmarkContentProcessor
 import com.adalbert.functional.BenchmarkProjectHelper
 import com.adalbert.functional.JSONTreeParser
 import com.adalbert.utils.Tree
-import com.adalbert.utils.add
 import com.adalbert.utils.substringUntilLast
 import java.io.File
 import java.net.URLDecoder
-import java.nio.charset.Charset
-import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalOwn")
 private val supportedLanguages = listOf("java", "scala")
@@ -53,24 +48,29 @@ fun main() {
             context["group"] = listOf(groupName)
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
             val generationMode = propertiesTree.getValue("benchmarks", benchmarkName, "generateMode")
-            if (generationMode == GenerationMode.CollectionPerMethod.name) {
-                val benchmarkMethods = generated.map { generatedName ->
-                    val profiles = mutableListOf(generatedName)
-                    val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName).first()
-                    profiles.add(defaultProfile)
-                    // a project decision:
-                    val language = defaultProfile
-                    context["profile"] = profiles
-                    val code = BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)[language]
-                        ?: throw IllegalStateException("Couldn't generate methods code for $groupName and language $language!")
-                    BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
-                }
-
-                val benchmarkClasses = BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, propertiesTree)
-                BenchmarkProjectHelper.writeBenchmarkClasses(benchmarkClasses, newCodeRoot)
-            } else if (generationMode == GenerationMode.CollectionPerClass.name) {
-                throw NotImplementedError()
+            val benchmarkMethods = generated.map { generatedName ->
+                val profiles = mutableListOf(generatedName)
+                val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName).first()
+                profiles.add(defaultProfile)
+                // a project decision:
+                val language = defaultProfile
+                context["profile"] = profiles
+                val code = BenchmarkContentProcessor.processBenchmarkFileContent(benchmarkFile, context, propertiesTree)[language]
+                    ?: throw IllegalStateException("Couldn't generate methods code for $groupName and language $language!")
+                BenchmarkContentGenerator.BenchmarkMethod(language, generatedName, code)
             }
+
+            val benchmarkClasses = when (generationMode) {
+                GenerationMode.CollectionPerMethod.name -> BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, benchmarkMethods, context, propertiesTree)
+                GenerationMode.CollectionPerClass.name ->
+                    benchmarkMethods
+                        .map { BenchmarkContentGenerator.generateFullSourceFromSnippets(benchmarkName, groupName, listOf(it), context, propertiesTree, it.generatedName) }
+                        .flatten()
+                else -> throw IllegalArgumentException("Unrecognized mode of operation: $generationMode")
+            }
+
+            BenchmarkProjectHelper.writeBenchmarkClasses(benchmarkClasses, newCodeRoot)
+
         }
 
     }

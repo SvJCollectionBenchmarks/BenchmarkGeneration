@@ -14,7 +14,11 @@
       "import org.openjdk.jmh.infra.Blackhole"
     ]
   },
-  "outer": {
+  "outerProcessed": {
+    "java": [""],
+    "scala": [""]
+  },
+  "outerUnprocessed": {
     "java": [""],
     "scala": [""]
   },

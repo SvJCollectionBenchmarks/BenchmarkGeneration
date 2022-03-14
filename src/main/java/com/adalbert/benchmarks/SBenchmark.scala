@@ -4,7 +4,7 @@ import org.openjdk.jmh.annotations._
 import org.openjdk.jmh.infra.Blackhole
 
 import java.util
-import java.util.{HashMap, HashSet}
+import java.util.{ArrayList, HashMap, HashSet}
 import scala.collection.mutable
 
 @State(Scope.Benchmark)
@@ -29,27 +29,21 @@ class SBenchmark {
   @Measurement(iterations = 1)
   @Warmup(iterations = 1)
   def testMethodScala(bh: Blackhole): Unit = {
-    val collection = new mutable.HashMap[String, String]
+    val collection = new util.ArrayList[Double]
     for (i <- 0 until 10000) {
-      collection.put(String.format("Key %d", i), String.format("Value %d", i))
+      collection.add(Math.sin(i / 0.01))
     }
-    for (i <- 0 until 1000) {
-      val value = if (i % 3 == 0) -i
-      else i
-      val mapKey = String.format("Key %d", value)
-      val mapValue = String.format("New value %d", value)
-      if (collection.contains(mapKey)) i % 2 match {
+    for (i <- 0 until 3000) {
+      val index = (i * 3000) % collection.size
+      i % 3 match {
         case 0 =>
-          collection.update(mapKey, mapValue)
+          collection.add(index, 0.0)
         case 1 =>
-          collection.remove(mapKey)
+          collection.set(index, 1.0)
+        case 2 =>
+          collection.remove(index)
       }
-      else collection.put(mapKey, mapValue)
     }
-    bh.consume(collection.size)
-    bh.consume(collection.keySet)
-    bh.consume(collection.values)
-    collection.clear()
   }
 
 }

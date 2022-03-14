@@ -15,8 +15,8 @@
     ]
   },
   "outerProcessed": {
-    "java": ["${benchmarks.$benchmark.variables.profiled.$language.$profile.iterator}"],
-    "scala": ["${benchmarks.$benchmark.variables.profiled.$language.$profile.iterator}"]
+    "java": [""],
+    "scala": [""]
   },
   "outerUnprocessed": {
     "java": [""],
@@ -29,18 +29,14 @@
     "profiled": {
       "java": {
         "java": {
-          "iterator": "java.util.Iterator<Double>"
         },
         "scala": {
-          "iterator": "scala.collection.Iterator<Double>"
         }
       },
       "scala": {
         "java": {
-          "iterator": "util.Iterator<Double>"
         },
         "scala": {
-          "iterator": "scala.collection.Iterator[Double]"
         }
       }
     }

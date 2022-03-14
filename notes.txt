@@ -19,8 +19,8 @@ Co chcemy mierzyć w ramach poszczególnych grup:
         - [GeneralSequences] Processing audio
         - [LinearSequences] InsertSort dużej listy / Rekurencyjne algorytmy (head/tail)
         - [IndexedSequences]
-        - Benchmark załadowania dużej ilości danych w przodzie listy
-        - Benchmark załadowania dużej ilości danych w tyle listy
+        + Benchmark załadowania dużej ilości danych w przodzie listy
+        + Benchmark załadowania dużej ilości danych w tyle listy
         - Benchmark edycji danych w oddalonych miejscach w dużej liście - insert, set, remove
         - Benchmark masowej edycji dużych list w oddalonych miejscach - addAll, removeAll, clear
         - Benchmark wyszukiwania danych w liście - get, indexOf, lastIndexOf, contains

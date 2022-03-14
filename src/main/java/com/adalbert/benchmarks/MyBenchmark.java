@@ -43,18 +43,15 @@ public class MyBenchmark {
     @Warmup(time = 1)
     public void testMethodJava(Blackhole bh) {
         java.util.ArrayList<Double> collection = new java.util.ArrayList<>();
-        for (int i = 0; i < 10000; i++)
-            collection.add(0, Math.sin(i/0.01));
-    }
-
-    @Benchmark
-    @Fork(1)
-    @Measurement(time = 1)
-    @Warmup(time = 1)
-    public void testMethodJavaLinked(Blackhole bh) {
-        java.util.LinkedList<Double> collection = new java.util.LinkedList<>();
-        for (int i = 0; i < 10000; i++)
-            collection.addFirst(Math.sin(i/0.01));
+        for (int i = 0; i < 10000; i++) collection.add(Math.sin(i/0.01));
+        for (int i = 0; i < 3000; i++) {
+            int index = (i * 3000) % collection.size();
+            switch (i % 3) {
+                case 0: collection.add(index, 0.0); break;
+                case 1: collection.set(index, 1.0); break;
+                case 2: collection.remove(index); break;
+            }
+        }
     }
 
 }

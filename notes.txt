@@ -12,7 +12,6 @@ Co chcemy mierzyć w ramach poszczególnych grup:
         - [GeneralMaps] Wyznaczanie liczb pierwszych
         - [SortedMaps] Budowa dużego indeksu informacji z liczbowymi identyfikatorami - ważna kolejność wstawiania
         + Benchmark budowy i odczytu mapy o dużej ilości kluczy tekstowych
-        - Benchmark wyszukania kluczy w naprawdę dużej mapie ?
         + Benchmark zamiany, dodawania i usuwania kluczy z dużej mapy
         - Benchmark wielowątkowej edycji i odczytu na mapie
     - Listy:
@@ -22,7 +21,7 @@ Co chcemy mierzyć w ramach poszczególnych grup:
         + Benchmark załadowania dużej ilości danych w przodzie listy
         + Benchmark załadowania dużej ilości danych w tyle listy
         + Benchmark edycji danych w oddalonych miejscach w dużej liście - insert, set, remove
-        - Benchmark wyszukiwania danych w liście - get, indexOf, lastIndexOf, contains
+        + Benchmark wyszukiwania danych w liście - get, indexOf, lastIndexOf, contains
 
 Wymagania minimalne:
 	- Przyjrzeć się zestawom kolekcji i ich operacjom

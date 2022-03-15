@@ -1,0 +1,30 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # T = Integer #};
+for (int i = 0; i < 10000; i++)
+    #{groups.$group.operations.append.$profile.content # elem = i #};
+for (int i = 0; i < 3000; i++) {
+    int index = (i * 3000) % ${groups.$group.operations.size.$profile.content};
+    bh.consume(#{groups.$group.operations.get.$profile.content # index = index #});
+    int value = i % 3 == 0 ? -index : index;
+    switch (i % 3) {
+        case 0: bh.consume(#{groups.$group.operations.indexOf.$profile.content # elem = value #}); break;
+        case 1: bh.consume(#{groups.$group.operations.lastIndexOf.$profile.content # elem = value #}); break;
+        case 2: bh.consume(#{groups.$group.operations.contains.$profile.content # elem = value #}); break;
+    }
+}
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # T = Integer #}
+for (i <- 0 until 10000)
+    #{groups.$group.operations.append.$profile.content # elem = i #}
+for (i <- 0 until 3000) {
+    val index = (i * 3000) % ${groups.$group.operations.size.$profile.content};
+    bh.consume(#{groups.$group.operations.get.$profile.content # index = index #})
+    val value = if (i % 3 == 0) -index else index
+    (i % 3) match {
+        case 0 => bh.consume(#{groups.$group.operations.indexOf.$profile.content # elem = value #})
+        case 1 => bh.consume(#{groups.$group.operations.lastIndexOf.$profile.content # elem = value #})
+        case 2 => bh.consume(#{groups.$group.operations.contains.$profile.content # elem = value #})
+    }
+}
+<@scala@>

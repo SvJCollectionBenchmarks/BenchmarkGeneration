@@ -2,12 +2,14 @@
 #{groups.$group.init.$language.$profile.content # T = Double #};
 for (int i = 0; i < 10000; i++)
     #{groups.$group.operations.append.$profile.content # elem = Math.sin(i/0.01) #};
+${benchmarks.$benchmark.variables.profiled.$language.$profile.samples};
 for (int i = 0; i < 3000; i++) {
     int index = (i * 3000) % ${groups.$group.operations.size.$profile.content};
-    switch (i % 3) {
+    switch (i % 4) {
         case 0: #{groups.$group.operations.set.$profile.content # index = index ## elem = 1.0 #}; break;
         case 1: #{groups.$group.operations.insert.$profile.content # index = index ## elem = 1.0 #}; break;
         case 2: #{groups.$group.operations.removeAt.$profile.content # index = index #}; break;
+        case 3: #{groups.$group.operations.insertAll.$profile.content # index = index ## elems = samples #}; break;
     }
 }
 <@java@>
@@ -15,12 +17,14 @@ for (int i = 0; i < 3000; i++) {
 #{groups.$group.init.$language.$profile.content # T = Double #}
 for (i <- 0 until 10000)
     #{groups.$group.operations.append.$profile.content # elem = Math.sin(i/0.01) #}
+${benchmarks.$benchmark.variables.profiled.$language.$profile.samples}
 for (i <- 0 until 3000) {
     val index = (i * 3000) % ${groups.$group.operations.size.$profile.content};
-    match (i % 3) {
+    (i % 4) match {
         case 0 => #{groups.$group.operations.set.$profile.content # index = index ## elem = 1.0 #}
         case 1 => #{groups.$group.operations.insert.$profile.content # index = index ## elem = 1.0 #}
-        case 2 => #{groups.$group.operations.removeAt.$profile.content # index = index #};
+        case 2 => #{groups.$group.operations.removeAt.$profile.content # index = index #}
+        case 3 => #{groups.$group.operations.insertAll.$profile.content # index = index ## elems = samples #}
     }
 }
 <@scala@>

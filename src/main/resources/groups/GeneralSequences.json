@@ -199,6 +199,24 @@
 				"content": "collection.addAll($elems)"
 			}
 		},
+		"insertAll": {
+			"java": {
+				"isConsumable": true,
+				"args": [
+					{ "name": "index", "type": "int" },
+					{ "name": "elems", "type": "Collection<? extends $T>" }
+				],
+				"content": "collection.addAll($index, $elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [
+					{ "name": "index", "type": "int" },
+					{ "name": "elems", "type": "IterableOnce[$T]" }
+				],
+				"content": "collection.insertAll($index, $elems)"
+			}
+		},
 		"subCollection": {
 			"java": {
 				"isConsumable": true,
@@ -280,7 +298,7 @@
 			"scala": {
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
-				"content": "collection.subtractAll($elems)"
+				"content": "collection.filterInPlace(!$elems.contains(_))"
 			}
 		},
 		"clear": {

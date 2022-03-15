@@ -29,14 +29,18 @@
     "profiled": {
       "java": {
         "java": {
+          "samples": "List<Double> samples = Arrays.asList(1.0, 0.0, -1.0, 0.0, 1.0, 0.0, -1.0, 0.0)"
         },
         "scala": {
+          "samples": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         }
       },
       "scala": {
         "java": {
+          "samples": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         "scala": {
+          "samples": "val samples = mutable.ArrayBuffer(1.0, 0.0, -1.0, 0.0, 1.0, 0.0, -1.0, 0.0)"
         }
       }
     }

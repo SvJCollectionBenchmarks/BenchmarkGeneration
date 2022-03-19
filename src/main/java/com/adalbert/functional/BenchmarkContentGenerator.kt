@@ -71,6 +71,9 @@ object BenchmarkContentGenerator {
     private fun stringifyMethod(bob: StringBuilder, method: BenchmarkMethod, lineEnding: String = "") {
         val (language, generatedName, generatedCode) = method
         bob.appendLine("\t@Benchmark")
+//        bob.appendLine("\t@Fork(1)")
+//        bob.appendLine("\t@Warmup(time=1)")
+//        bob.appendLine("\t@Measurement(time=1)")
         bob.appendLine("\t${methodsDeclarations[language to "init"]!!(generatedName)}")
         generatedCode.split("\n").forEach {
             bob.appendLine("\t\t$it$lineEnding")

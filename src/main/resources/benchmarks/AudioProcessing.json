@@ -29,18 +29,22 @@
     "profiled": {
       "java": {
         "java": {
-          "samplesCreation": "List<Double> samples = Arrays.asList(1.0, 0.75, 0.5, 0.25, 0.0)"
+          "samplesCreation": "List<Double> samples = Arrays.asList(1.0, 0.75, 0.5, 0.25, 0.0)",
+          "zeroCollection": "List<Double> zero = Arrays.asList(0.0)"
         },
         "scala": {
-          "samplesCreation": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          "samplesCreation": "VALUE NOT MAPPED",
+          "zeroCollection": "VALUE NOT MAPPED"
         }
       },
       "scala": {
         "java": {
-          "samplesCreation": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          "samplesCreation": "VALUE NOT MAPPED",
+          "zeroCollection": "VALUE NOT MAPPED"
         },
         "scala": {
-          "samplesCreation": "val samples = mutable.ArrayBuffer(1.0, 0.75, 0.5, 0.25, 0.0)"
+          "samplesCreation": "val samples = mutable.ArrayBuffer(1.0, 0.75, 0.5, 0.25, 0.0)",
+          "zeroCollection": "val zero = mutable.ArrayBuffer(0.0)"
         }
       }
     }

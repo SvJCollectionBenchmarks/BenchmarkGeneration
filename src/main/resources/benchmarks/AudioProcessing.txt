@@ -10,8 +10,8 @@ for (int i = 0; i < collection.size(); i++) {
     Double elem = #{groups.$group.operations.get.$profile.content # index = i #};
     #{groups.$group.operations.set.$profile.content # index = i ## elem = elem * 0.5 #};
 }
-while (#{groups.$group.operations.contains.$profile.content # elem = 0.0 #})
-    #{groups.$group.operations.remove.$profile.content # elem = 0.0 #};
+${benchmarks.$benchmark.variables.profiled.$language.$profile.zeroCollection};
+#{groups.$group.operations.removeAll.$profile.content # elems = zero #};
 <@java@>
 <@scala@>
 #{groups.$group.init.$language.$profile.content # T = Double #}
@@ -25,6 +25,6 @@ for (i <- collection.indices) {
     val elem = #{groups.$group.operations.get.$profile.content # index = i #}
     #{groups.$group.operations.set.$profile.content # index = i ## elem = elem * 0.5 #}
 }
-while (#{groups.$group.operations.contains.$profile.content # elem = 0.0 #})
-    #{groups.$group.operations.remove.$profile.content # elem = 0.0 #}
+${benchmarks.$benchmark.variables.profiled.$language.$profile.zeroCollection}
+#{groups.$group.operations.removeAll.$profile.content # elems = zero #}
 <@scala@>

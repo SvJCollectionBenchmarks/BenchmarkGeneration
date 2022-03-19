@@ -301,6 +301,40 @@
 				"content": "collection.filterInPlace(!$elems.contains(_))"
 			}
 		},
+		"removeFirst": {
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(0)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(0)"
+			},
+			"JLinkedSequence": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.removeFirst()"
+			}
+		},
+		"removeLast": {
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(collection.size() - 1)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(collection.size - 1)"
+			},
+			"JLinkedSequence": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.removeLast()"
+			}
+		},
 		"clear": {
 			"java": {
 				"isConsumable": false,
@@ -311,6 +345,45 @@
 				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
+			}
+		},
+		"first": {
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.get(0)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.head"
+			},
+			"JLinkedSequence": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.getFirst()"
+			},
+			"JVectorSequence": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.firstElement()"
+			}
+		},
+		"last": {
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.get(collection.size() - 1)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.last"
+			},
+			"JLinkedSequence": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.getLast()"
 			}
 		},
 		"isEmpty": {

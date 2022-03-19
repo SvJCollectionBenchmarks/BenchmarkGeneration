@@ -1,6 +1,6 @@
 <@java@>
 #{groups.$group.init.$language.$profile.content # K = Integer ## V = java.util.List<Integer> #};
-for (int i = 2; i < 100; i++) {
+for (int i = 2; i < 10000; i++) {
     boolean wasFound = false;
     ${benchmarks.$benchmark.variables.profiled.$language.$profile.iteratorImport}<Integer> iterator = ${groups.$group.operations.keys.$profile.content}.iterator();
     while (iterator.hasNext() && !wasFound) {
@@ -14,7 +14,7 @@ bh.consume(${groups.$group.operations.keys.$profile.content});
 <@java@>
 <@scala@>
 #{groups.$group.init.$language.$profile.content # K = Integer ## V = util.List[Integer] #}
-for (i <- 2 until 100) {
+for (i <- 2 until 10000) {
     var wasFound = false
     val iterator = ${groups.$group.operations.keys.$profile.content}.iterator
     while (iterator.hasNext && !wasFound) {

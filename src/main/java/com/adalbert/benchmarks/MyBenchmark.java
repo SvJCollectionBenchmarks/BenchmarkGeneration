@@ -34,8 +34,7 @@ package com.adalbert.benchmarks;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Iterator;
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
@@ -44,18 +43,45 @@ public class MyBenchmark {
     @Fork(1)
     @Measurement(time = 1)
     @Warmup(time = 1)
-    public void testMethodJava(Blackhole bh) {
+    public void testMethodFirst(Blackhole bh) {
+        java.util.ArrayList<Integer> source = new java.util.ArrayList<>();
+        for (int i = 0; i < 10000; i++) source.add(i % 300); //append
         java.util.ArrayList<Integer> collection = new java.util.ArrayList<>();
-        for (int i = 0; i < 10000; i++) collection.add(i);
-        for (int i = 0; i < 1000; i++) {
-            int index = (i * 3000) % collection.size();
-            bh.consume(collection.get(index));
-            int value = i % 3 == 0 ? -index : index;
-            switch (i % 3) {
-                case 0: bh.consume(collection.indexOf(value)); break;
-                case 1: bh.consume(collection.lastIndexOf(value)); break;
-                case 2: bh.consume(collection.contains(value)); break;
+        while (!source.isEmpty()) {
+            int key = source.get(source.size() - 1); //last
+            source.remove(source.size() - 1); // removeLast
+            boolean stopSearch = false;
+            int index = 0;
+            Iterator<Integer> iter = collection.iterator(); //iterator
+            while (iter.hasNext() && !stopSearch) {
+                int elem = iter.next();
+                if (key > elem) stopSearch = true;
+                else index++;
             }
+            collection.add(index, key); // insert
+        }
+    }
+
+    @Benchmark
+    @Fork(1)
+    @Measurement(time = 1)
+    @Warmup(time = 1)
+    public void testMethodSecond(Blackhole bh) {
+        java.util.LinkedList<Integer> source = new java.util.LinkedList<>();
+        for (int i = 0; i < 10000; i++) source.add(i % 300); //append
+        java.util.LinkedList<Integer> collection = new java.util.LinkedList<>();
+        while (!source.isEmpty()) {
+            int key = source.getLast(); //last
+            source.removeLast(); // removeLast
+            boolean stopSearch = false;
+            int index = 0;
+            Iterator<Integer> iter = collection.iterator(); //iterator
+            while (iter.hasNext() && !stopSearch) {
+                int elem = iter.next();
+                if (key > elem) stopSearch = true;
+                else index++;
+            }
+            collection.add(index, key); // insert
         }
     }
 

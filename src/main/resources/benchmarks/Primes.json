@@ -23,8 +23,7 @@
     "scala": [""]
   },
   "groups": [
-    "GeneralMaps",
-    "SortedMaps"
+    "GeneralMaps"
   ],
   "variables": {
     "profiled": {

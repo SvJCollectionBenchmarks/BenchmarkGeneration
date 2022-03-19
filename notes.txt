@@ -10,7 +10,7 @@ Co chcemy mierzyć w ramach poszczególnych grup:
         + Benchmark operacji na zbiorach (union, intersect, difference)
     - Mapy:
         + [GeneralMaps] Wyznaczanie liczb pierwszych
-        - [SortedMaps] Budowa dużego indeksu informacji z liczbowymi identyfikatorami - ważna kolejność wstawiania
+        + [SortedMaps] Budowa dużego indeksu informacji z liczbowymi identyfikatorami - ważna kolejność wstawiania
         + Benchmark budowy i odczytu mapy o dużej ilości kluczy tekstowych
         + Benchmark zamiany, dodawania i usuwania kluczy z dużej mapy
         - Benchmark wielowątkowej edycji i odczytu na mapie

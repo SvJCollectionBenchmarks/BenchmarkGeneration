@@ -1,0 +1,26 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # K = Long ## V = String #};
+for (int i = 0; i < 1000; i++) {
+    Long key = (long)(Math.sqrt(i) * Math.sin(i) * 10000);
+    #{groups.$group.operations.put.$profile.content # key = key ## value = String.format("Book %d", i) #};
+}
+for (long i = 0; i < 250000L; i++) {
+    bh.consume(i);
+    if (i % 100 == 0) bh.consume(${groups.$group.operations.keys.$profile.content});
+    if (i % 2 == 0) bh.consume(#{groups.$group.operations.get.$profile.content # key = i #});
+    else bh.consume(#{groups.$group.operations.get.$profile.content # key = -i #});
+}
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # K = Long ## V = String #};
+for (i <- 0 until 1000) {
+    val key = (Math.sqrt(i) * Math.sin(i) * 10000).longValue()
+    #{groups.$group.operations.put.$profile.content # key = key ## value = String.format("Book %d", i) #}
+}
+for ( i <- 0 until 250000) {
+    bh.consume(i);
+    if (i % 100 == 0) bh.consume(${groups.$group.operations.keys.$profile.content})
+    if (i % 2 == 0) bh.consume(#{groups.$group.operations.get.$profile.content # key = i #})
+    else bh.consume(#{groups.$group.operations.get.$profile.content # key = -i #})
+}
+<@scala@>

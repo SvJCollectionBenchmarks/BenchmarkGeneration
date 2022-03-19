@@ -34,54 +34,25 @@ package com.adalbert.benchmarks;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.Iterator;
+import java.util.TreeMap;
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
     @Benchmark
     @Fork(1)
-    @Measurement(time = 1)
-    @Warmup(time = 1)
+    @Measurement(time = 5)
+    @Warmup(time = 5)
     public void testMethodFirst(Blackhole bh) {
-        java.util.ArrayList<Integer> source = new java.util.ArrayList<>();
-        for (int i = 0; i < 10000; i++) source.add(i % 300); //append
-        java.util.ArrayList<Integer> collection = new java.util.ArrayList<>();
-        while (!source.isEmpty()) {
-            int key = source.get(source.size() - 1); //last
-            source.remove(source.size() - 1); // removeLast
-            boolean stopSearch = false;
-            int index = 0;
-            Iterator<Integer> iter = collection.iterator(); //iterator
-            while (iter.hasNext() && !stopSearch) {
-                int elem = iter.next();
-                if (key > elem) stopSearch = true;
-                else index++;
-            }
-            collection.add(index, key); // insert
+        TreeMap<Long, String> collection = new TreeMap<>();
+        for (int i = 0; i < 1000; i++) {
+            Long key = (long)(Math.sqrt(i) * Math.sin(i) * 10000);
+            collection.put(key, String.format("Book %d", i));
         }
-    }
-
-    @Benchmark
-    @Fork(1)
-    @Measurement(time = 1)
-    @Warmup(time = 1)
-    public void testMethodSecond(Blackhole bh) {
-        java.util.LinkedList<Integer> source = new java.util.LinkedList<>();
-        for (int i = 0; i < 10000; i++) source.add(i % 300); //append
-        java.util.LinkedList<Integer> collection = new java.util.LinkedList<>();
-        while (!source.isEmpty()) {
-            int key = source.getLast(); //last
-            source.removeLast(); // removeLast
-            boolean stopSearch = false;
-            int index = 0;
-            Iterator<Integer> iter = collection.iterator(); //iterator
-            while (iter.hasNext() && !stopSearch) {
-                int elem = iter.next();
-                if (key > elem) stopSearch = true;
-                else index++;
-            }
-            collection.add(index, key); // insert
+        for (long i = 0; i < 250000L; i++) {
+            if (i % 100 == 0) bh.consume(collection.keySet());
+            if (i % 2 == 0) bh.consume(collection.get(i));
+            else bh.consume(collection.get(-i));
         }
     }
 

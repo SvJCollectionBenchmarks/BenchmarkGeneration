@@ -14,7 +14,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-private const val profilesNumber = 1 //TODO: Why do we need it?
+private const val profilesNumber = 1
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
 private val supportedLanguages = listOf("java", "scala")
 
@@ -42,9 +42,9 @@ fun main() {
     (0 until profilesNumber).forEach { _ ->
         val groups = propertiesTree.getKeys("groups")
         groups.forEach { groupName ->
-            val operations: MutableMap<String, IntRange> = propertiesTree.getKeys("groups", groupName, "operations").toProbabilityMap()
-            // WARN: The famous "can't measure nothing" paradigm
-            operations.remove("clear")
+            val operations = propertiesTree.getKeys("groups", groupName, "operations").filter {
+                propertiesTree.getValue("groups", groupName, "operations", it, "java", "isBenchmarkedAutomatically") == "true"
+            }.toProbabilityMap()
             val chosenOperations = mutableListOf<String>()
             (1 .. 20).forEach { _ ->
                 val randomOperation = operations.random() ?: throw IllegalStateException()

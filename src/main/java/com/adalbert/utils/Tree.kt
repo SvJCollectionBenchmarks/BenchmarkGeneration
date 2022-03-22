@@ -12,7 +12,8 @@ data class Tree(val key: String, val children: MutableList<Tree>, var values: Mu
         if (keys.isEmpty()) return values
             ?: throw IllegalArgumentException("Null values found in tree under given keys $keys!")
         val child = children.firstOrNull { it.key == keys.first() }
-        if (child == null) throw IllegalArgumentException("Child with key '${keys.first()}' not found in node '$key'")
+        if (child == null)
+            throw IllegalArgumentException("Child with key '${keys.first()}' not found in node '$key'")
         else return child.getValues(keys.drop(1))
     }
 

@@ -34,26 +34,63 @@ package com.adalbert.benchmarks;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
+
+    private static class Node {
+        private int id;
+        private List<Integer> dependant;
+        public Node(int id) {
+            this.id = id;
+            this.dependant = new ArrayList<>();
+        }
+        public void addDependency(int dependency) {
+            this.dependant.add(dependency);
+        }
+    }
 
     @Benchmark
     @Fork(1)
     @Measurement(time = 5)
     @Warmup(time = 5)
     public void testMethodFirst(Blackhole bh) {
-        TreeMap<Long, String> collection = new TreeMap<>();
+        HashSet<Node> collection = new HashSet<>();
         for (int i = 0; i < 1000; i++) {
-            Long key = (long)(Math.sqrt(i) * Math.sin(i) * 10000);
-            collection.put(key, String.format("Book %d", i));
+            boolean toAdd = true;
+            Iterator<Node> iter = collection.iterator();
+            while (iter.hasNext()) {
+                Node primes = iter.next();
+                if (i % primes.id == 0) {
+                    toAdd = false;
+                    primes.dependant.add(i);
+                }
+            }
+            if (toAdd) collection.add(new Node(i));
         }
-        for (long i = 0; i < 250000L; i++) {
-            if (i % 100 == 0) bh.consume(collection.keySet());
-            if (i % 2 == 0) bh.consume(collection.get(i));
-            else bh.consume(collection.get(-i));
+        System.out.println("aaa");
+    }
+
+    public static void main(String[] args) {
+        HashSet<Node> collection = new HashSet<>();
+        for (int i = 2; i < 1000; i++) {
+            boolean toAdd = true;
+//            Node newNode REVERSE THE NODE
+            Iterator<Node> iter = collection.iterator();
+            while (iter.hasNext()) {
+                Node primes = iter.next();
+                if (i % primes.id == 0) {
+                    toAdd = false;
+                    primes.dependant.add(i);
+                }
+            }
+            if (toAdd) collection.add(new Node(i));
         }
+        System.out.println("aaa");
     }
 
 }

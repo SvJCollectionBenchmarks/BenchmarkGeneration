@@ -43,7 +43,7 @@ fun main() {
         val groups = propertiesTree.getKeys("groups")
         groups.forEach { groupName ->
             val operations = propertiesTree.getKeys("groups", groupName, "operations").filter {
-                propertiesTree.getValue("groups", groupName, "operations", it, "java", "isBenchmarkedAutomatically") == "true"
+                propertiesTree.getValue("groups", groupName, "operations", it, "isBenchmarkedAutomatically") == "true"
             }.toProbabilityMap()
             val chosenOperations = mutableListOf<String>()
             (1 .. 20).forEach { _ ->

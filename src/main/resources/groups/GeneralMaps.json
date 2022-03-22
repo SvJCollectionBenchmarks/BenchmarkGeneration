@@ -55,36 +55,34 @@
 	},
 	"operations": {
 		"size": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.size"
 			}
 		},
 		"get": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.get($key)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.apply($key)"
 			}
 		},
 		"put": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [
 					{ "name": "key", "type": "$K" },
@@ -93,7 +91,6 @@
 				"content": "collection.put($key, $value)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [
 					{ "name": "key", "type": "$K" },
@@ -103,36 +100,34 @@
 			}
 		},
 		"containsKey": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.containsKey($key)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.contains($key)"
 			}
 		},
 		"remove": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
 				"content": "collection.remove($key)"
 			}
 		},
 		"replace": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [
 					{ "name": "key", "type": "$K" },
@@ -141,7 +136,6 @@
 				"content": "collection.replace($key, $value)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [
 					{ "name": "key", "type": "$K" },
@@ -151,56 +145,52 @@
 			}
 		},
 		"keys": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.keySet()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.keySet"
 			}
 		},
 		"values": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.values()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.values"
 			}
 		},
 		"isEmpty": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.isEmpty()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.isEmpty"
 			}
 		},
 		"clear": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"

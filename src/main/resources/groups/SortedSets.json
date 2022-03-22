@@ -40,182 +40,169 @@
 	},
 	"operations": {
 		"size": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.size()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.size"
 			}
 		},
 		"add": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.add($elem)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.add($elem)"
 			}
 		},
 		"contains": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.contains($elem)"
 			}
 		},
 		"clear": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
 			}
 		},
 		"addAll": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.addAll($elems)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.addAll($elems)"
 			}
 		},
 		"toArray": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": false,
 				"args": [ { "name": "tag", "type": "$T[]" } ],
 				"content": "collection.toArray($tag)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": false,
 				"args": [ { "name": "tag", "type": "ClassTag[$T]" } ],
 				"content": "collection.toArray($tag)"
 			}
 		},
 		"iterator": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.iterator()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.iterator"
 			}
 		},
 		"remove": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.remove($elem)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elem", "type": "$T" } ],
 				"content": "collection.remove($elem)"
 			}
 		},
 		"removeAll": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
 				"content": "collection.removeAll($elems)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.subtractAll($elems)"
 			}
 		},
 		"union": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": false,
 				"args": [{ "name": "elems", "type": "Set<$T>" }],
 				"content": "collection.addAll($elems)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": false,
 				"args": [ { "name": "elems", "type": "Set[$T]" } ],
 				"content": "collection = collection.union($elems)"
 			}
 		},
 		"intersect": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": false,
 				"args": [{ "name": "elems", "type": "Set<$T>" }],
 				"content": "collection.retainAll($elems)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": false,
 				"args": [ { "name": "elems", "type": "Set[$T]" } ],
 				"content": "collection = collection.intersect($elems)"
 			}
 		},
 		"difference": {
+			"isBenchmarkedAutomatically": true,
 			"java": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": false,
 				"args": [{ "name": "elems", "type": "Set<$T>" }],
 				"content": "collection.removeAll($elems)"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": true,
 				"isConsumable": false,
 				"args": [ { "name": "elems", "type": "Set[$T]" } ],
 				"content": "collection = collection.diff($elems)"
 			}
 		},
 		"isEmpty": {
+			"isBenchmarkedAutomatically": false,
 			"java": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.isEmpty()"
 			},
 			"scala": {
-				"isBenchmarkedAutomatically": false,
 				"isConsumable": true,
 				"args": [],
 				"content": "collection.isEmpty"

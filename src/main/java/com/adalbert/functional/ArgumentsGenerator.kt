@@ -14,11 +14,14 @@ object ArgumentsGenerator {
             .associateWith { (randomValuesGeneration[it.type]?.let { it1 -> it1() } ?: "${it.type} not mapped") }
     }
 
-    fun mapArgumentsToProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree, protoArguments: Map<String, Map<Argument, String>>): Map<String, String> {
+    fun mapArgumentsToProfile(group: String, operationProfile: String, operation: String, typeVariables: Map<String, String>, propertiesTree: Tree,
+                              index: Int, protoArguments: Map<Pair<Int, String>, Map<Argument, String>>): Map<String, String> {
         val arguments = getArgsMappingsForProfile(group, operationProfile, operation, typeVariables, propertiesTree)
 
         return arguments.associate { targetArgument: Argument ->
-            val protoArgumentPair = protoArguments[operation]?.map { it }?.firstOrNull { it.key.name == targetArgument.name }
+            val protoArgument = protoArguments.entries.firstOrNull { it.key.first == index && it.key.second == operation }?.value
+                ?: throw IllegalStateException()
+            val protoArgumentPair = protoArgument.map { it }.firstOrNull { it.key.name == targetArgument.name }
                 ?: throw IllegalStateException()
             if (protoArgumentPair.key.type != targetArgument.type) {
                 val mapping = argumentTypesMapping[InterProfileMapping(operationProfile, protoArgumentPair.key.type, targetArgument.type)]
@@ -58,20 +61,20 @@ object ArgumentsGenerator {
         this.putAll(listOf("boolean", "Boolean").associateWith { { "${Random.nextBoolean()}" } })
         this.putAll(listOf("char", "Character").associateWith { { "'${(200 until 400).random().toChar()}'" } })
         this.putAll(listOf("long", "Long").associateWith { { "${(1 .. 200).random()}L" } })
-        this["Collection<? extends Integer>"] = { "util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }})"}
-        this["Collection<? extends Long>"] = { "util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }})"}
-        this["Collection<? extends Float>"] = { "util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }})"}
-        this["Collection<? extends Double>"] = { "util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }})"}
-        this["Collection<? extends Boolean>"] = { "util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }})"}
-        this["Collection<? extends Character>"] = { "util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }})"}
-        this["Collection<? extends String>"] = { "util.Arrays.asList(${(0 until Random.nextInt(3, 5)).joinToString(",") { this["String"]!!() }})"}
-        this["Set<Integer>"] = { "new java.util.HashSet[Integer](util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }}))"}
-        this["Set<Long>"] = { "new java.util.HashSet[Long](util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }}))"}
-        this["Set<Float>"] = { "new java.util.HashSet[Float](util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }}))"}
-        this["Set<Double>"] = { "new java.util.HashSet[Double](util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }}))"}
-        this["Set<Boolean>"] = { "new java.util.HashSet[Boolean](util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }}))"}
-        this["Set<Character>"] = { "new java.util.HashSet[Character](util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }}))"}
-        this["Set<String>"] = { "new java.util.HashSet[String](util.Arrays.asList(${(0 until Random.nextInt(3, 5)).joinToString(",") { this["String"]!!() }}))"}
+        this["Collection<? extends Integer>"] = { "java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }})"}
+        this["Collection<? extends Long>"] = { "java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }})"}
+        this["Collection<? extends Float>"] = { "java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }})"}
+        this["Collection<? extends Double>"] = { "java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }})"}
+        this["Collection<? extends Boolean>"] = { "java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }})"}
+        this["Collection<? extends Character>"] = { "java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }})"}
+        this["Collection<? extends String>"] = { "java.util.Arrays.asList(${(0 until Random.nextInt(3, 5)).joinToString(",") { this["String"]!!() }})"}
+        this["Set<Integer>"] = { "new java.util.HashSet<Integer>(java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }}))"}
+        this["Set<Long>"] = { "new java.util.HashSet<Long>(java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }}))"}
+        this["Set<Float>"] = { "new java.util.HashSet<Float>(java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }}))"}
+        this["Set<Double>"] = { "new java.util.HashSet<Double>(java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Double"]!!() }}))"}
+        this["Set<Boolean>"] = { "new java.util.HashSet<Boolean>(java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }}))"}
+        this["Set<Character>"] = { "new java.util.HashSet<Character>(java.util.Arrays.asList(${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }}))"}
+        this["Set<String>"] = { "new java.util.HashSet<String>(java.util.Arrays.asList(${(0 until Random.nextInt(3, 5)).joinToString(",") { this["String"]!!() }}))"}
         this["Integer[]"] = { "new Integer[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Integer"]!!() }}}"}
         this["Long[]"] = { "new Long[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Long"]!!() }}}"}
         this["Float[]"] = { "new Float[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Float"]!!() }}}"}
@@ -79,7 +82,7 @@ object ArgumentsGenerator {
         this["Boolean[]"] = { "new Boolean[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Boolean"]!!() }}}"}
         this["Character[]"] = { "new Character[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["Character"]!!() }}}"}
         this["String[]"] = { "new String[] {${(0 until Random.nextInt(3, 10)).joinToString(",") { this["String"]!!() }}}"}
-        this["String"] = { "\"${('a' .. 'z').toList().randomTimes(Random.nextInt(5, 20)).joinToString("")}\"" }
+        this["String"] = { "\"${this["char"]!!().replace("'", "").times(10)}\"" }
     }
 
     private val argumentTypesMapping = mutableMapOf<InterProfileMapping, (it: String) -> String> (
@@ -96,14 +99,14 @@ object ArgumentsGenerator {
         InterProfileMapping("scala", "Set<Integer>", "Set[Integer]") to { "mutable.HashSet[Integer](${it.substringAfterLast("(").substringUntil(')')}" },
         InterProfileMapping("scala", "Set<Long>", "Set[Long]") to { "mutable.HashSet[Long](${it.substringAfterLast("(").substringUntil(')')}" },
         InterProfileMapping("scala", "Set<Boolean>", "Set[Boolean]") to { "mutable.HashSet[Boolean](${it.substringAfterLast("(").substringUntil(')')}" },
-        InterProfileMapping("scala", "Set<Character>", "Set[Character]") to { "mutable.HashSet[Char](${it.substringAfterLast("(").substringUntil(')')}" },
+        InterProfileMapping("scala", "Set<Character>", "Set[Character]") to { "mutable.HashSet[Character](${it.substringAfterLast("(").substringUntil(')')}" },
         InterProfileMapping("scala", "String[]", "ClassTag[String]") to { "classTag[String]" },
         InterProfileMapping("scala", "Double[]", "ClassTag[Double]") to { "classTag[Double]" },
         InterProfileMapping("scala", "Float[]", "ClassTag[Float]") to { "classTag[Float]" },
         InterProfileMapping("scala", "Integer[]", "ClassTag[Integer]") to { "classTag[Integer]" },
         InterProfileMapping("scala", "Long[]", "ClassTag[Long]") to { "classTag[Long]" },
         InterProfileMapping("scala", "Boolean[]", "ClassTag[Boolean]") to { "classTag[Boolean]" },
-        InterProfileMapping("scala", "Character[]", "ClassTag[Character]") to { "classTag[Char]" }
+        InterProfileMapping("scala", "Character[]", "ClassTag[Character]") to { "classTag[Character]" }
     )
 
 }

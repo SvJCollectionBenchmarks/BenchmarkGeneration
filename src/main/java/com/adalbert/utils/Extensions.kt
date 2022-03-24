@@ -41,8 +41,16 @@ fun <T> Set<T>.randomWithout(value: T): T {
     return element
 }
 
-fun <T> List<T>.randomTimes(times: Int): List<T> {
+fun <T> List<T>.times(times: Int): List<T> {
     return (0 until times).map { this.random() }
+}
+
+fun <T> List<T>.itemsPercentage(): Map<T, Double> {
+    val elementsSet = this.distinct()
+    return elementsSet.associateWith { elem ->
+        val percent = this.count { it == elem }.toDouble() / this.size * 100
+        (percent * 100).toInt() / 100.0
+    }
 }
 
 fun <T> List<T>.toProbabilityMap(probabilityPoints: Int = 1_000_000): MutableMap<T, IntRange> {

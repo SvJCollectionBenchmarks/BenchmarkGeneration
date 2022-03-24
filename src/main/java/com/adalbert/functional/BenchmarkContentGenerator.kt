@@ -38,8 +38,8 @@ object BenchmarkContentGenerator {
                 "import scala.collection.immutable\n" +
                 "import scala.collection.mutable\n" +
                 "import scala.reflect.classTag\n" +
-                "import org.openjdk.jmh.annotations.{Benchmark, Level, Scope, Setup, State}\n" +
-                "import org.openjdk.jmh.infra.Blackhole\n",
+                "import org.openjdk.jmh.annotations._\n" +
+                "import org.openjdk.jmh.infra._\n",
     )
 
     fun generateFullSourceFromPolyaSnippets (
@@ -48,8 +48,8 @@ object BenchmarkContentGenerator {
         initialization: BenchmarkInitialization,
         propertiesTree: Tree
     ): BenchmarkClass {
-        val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("_yyyyMMdd_HHmmssSSS"))
-        val className = "${method.language[0].uppercase()}_${groupName}_${method.generatedName}_Polya$timeOfExecution"
+        val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"))
+        val className = "${method.language[0].uppercase()}_${groupName}${method.generatedName}_Polya$timeOfExecution"
         val eol = if (method.language == "java") ";" else ""
         val bob = StringBuilder()
         bob.appendLine("package com.adalbert;")
@@ -71,9 +71,9 @@ object BenchmarkContentGenerator {
     private fun stringifyMethod(bob: StringBuilder, method: BenchmarkMethod, lineEnding: String = "") {
         val (language, generatedName, generatedCode) = method
         bob.appendLine("\t@Benchmark")
-//        bob.appendLine("\t@Fork(1)")
-//        bob.appendLine("\t@Warmup(time=1)")
-//        bob.appendLine("\t@Measurement(time=1)")
+        bob.appendLine("\t@Fork(1)")
+        bob.appendLine("\t@Warmup(time=1)")
+        bob.appendLine("\t@Measurement(time=1)")
         bob.appendLine("\t${methodsDeclarations[language to "init"]!!(generatedName)}")
         generatedCode.split("\n").forEach {
             bob.appendLine("\t\t$it$lineEnding")

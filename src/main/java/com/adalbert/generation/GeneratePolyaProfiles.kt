@@ -9,22 +9,21 @@ import com.adalbert.functional.BenchmarkProjectHelper
 import com.adalbert.utils.*
 import java.io.File
 import java.net.URLDecoder
-import java.nio.charset.Charset
-import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-private const val profilesNumber = 1
+private const val argumentGenerationProfile = "java"
+private const val elementsCount = 100
+private const val operationsCount = 100
+private const val profilesNumber = 5
+private const val startingPolyaMultiplier = 1.4
+
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
 private val supportedLanguages = listOf("java", "scala")
 
 private val additionOperations = mapOf("Map" to "put", "Sequence" to "append", "Set" to "add")
 
 fun main() {
-
-    val defaultArgumentGenerationProfile = "java"
-    val defaultElementsCount = 100
-
     val resourcesUri = URLDecoder.decode(Tree("", mutableListOf()).javaClass.getResource("/")?.path, "UTF-8")
         ?: throw IllegalStateException("Couldn't find main resources folder")
 
@@ -46,26 +45,29 @@ fun main() {
                 propertiesTree.getValue("groups", groupName, "operations", it, "isBenchmarkedAutomatically") == "true"
             }.toProbabilityMap()
             val chosenOperations = mutableListOf<String>()
-            (1 .. 20).forEach { _ ->
+            (1 .. operationsCount).forEach { _ ->
                 val randomOperation = operations.random() ?: throw IllegalStateException()
-                operations.scaleProbabilityInPlace(randomOperation, 1.2)
+                val operationCount = chosenOperations.count { it == randomOperation }
+                val realMultiplier =  (1.0 + (startingPolyaMultiplier - 1.0) / (operationCount + 1))
+                operations.scaleProbabilityInPlace(randomOperation, realMultiplier)
                 chosenOperations.add(randomOperation)
             }
             println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations for $groupName")
+            println("Used operations are: ${chosenOperations.itemsPercentage()}")
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
             val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")
                 .associateWith { propertiesTree.getValues("groups", groupName, "variables", it).random() }
 
-            val protoArguments = chosenOperations.associateWith { generateArgumentsForProfile(groupName, defaultArgumentGenerationProfile, it, typeVariables, propertiesTree) }
+            val protoArguments = chosenOperations.mapIndexed {index, it -> index to it }.associateWith { generateArgumentsForProfile(groupName, argumentGenerationProfile, it.second, typeVariables, propertiesTree) }
 
             val benchmarkClasses = generated.map { generatedName ->
                 val possibleProfiles = mutableListOf(generatedName)
                 val defaultProfile = propertiesTree.getValues("groups", groupName, "generated", generatedName)
                 possibleProfiles.addAll(defaultProfile)
-                val benchmarkNotationEntries = chosenOperations.map { operation ->
+                val benchmarkNotationEntries = chosenOperations.mapIndexed { index, operation ->
                     val operationProfile = propertiesTree.getFirstMatchingKey(possibleProfiles, "groups", groupName, "operations", operation)
-                    val arguments = mapArgumentsToProfile(groupName, operationProfile, operation, typeVariables, propertiesTree, protoArguments)
+                    val arguments = mapArgumentsToProfile(groupName, operationProfile, operation, typeVariables, propertiesTree, index, protoArguments)
                     val isConsumable = propertiesTree.getValue("groups", groupName, "operations", operation, operationProfile, "isConsumable").toBoolean()
                     val entry = if (arguments.isEmpty()) "\${groups.$groupName.operations.$operation.$operationProfile.content}"
                     else "#{groups.$groupName.operations.$operation.$operationProfile.content # ${arguments.map { "${it.key} = ${it.value}"}.joinToString(" ## ")} #}"
@@ -79,7 +81,7 @@ fun main() {
                     .replaceVariablesWithValues(typeVariables)
                 val additionOperation = additionOperations[additionOperations.keys.firstOrNull { generatedName.contains(it) }]
                     ?: throw IllegalStateException("No addition operation for $generatedName!")
-                val elementsFilling = (0 until defaultElementsCount).map {
+                val elementsFilling = (0 until elementsCount).map {
                     val arguments = generateArgumentsForProfile(groupName, defaultProfile[0], additionOperation, typeVariables, propertiesTree)
                     "#{groups.$groupName.operations.$additionOperation.${defaultProfile[0]}.content # ${
                         arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" ## ")

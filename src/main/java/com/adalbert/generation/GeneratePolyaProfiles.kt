@@ -1,11 +1,8 @@
 package com.adalbert.generation
 
-import com.adalbert.functional.BenchmarkContentGenerator
-import com.adalbert.functional.BenchmarkContentProcessor
-import com.adalbert.functional.JSONTreeParser
+import com.adalbert.functional.*
 import com.adalbert.functional.ArgumentsGenerator.generateArgumentsForProfile
 import com.adalbert.functional.ArgumentsGenerator.mapArgumentsToProfile
-import com.adalbert.functional.BenchmarkProjectHelper
 import com.adalbert.utils.*
 import java.io.File
 import java.net.URLDecoder
@@ -60,6 +57,7 @@ fun main() {
                 .associateWith { propertiesTree.getValues("groups", groupName, "variables", it).random() }
 
             val protoArguments = chosenOperations.mapIndexed {index, it -> index to it }.associateWith { generateArgumentsForProfile(groupName, argumentGenerationProfile, it.second, typeVariables, propertiesTree) }
+            var fillingArgs: List<Map<ArgumentsGenerator.Argument, String>>? = null   // A little hacky, but fast
 
             val benchmarkClasses = generated.map { generatedName ->
                 val possibleProfiles = mutableListOf(generatedName)
@@ -81,11 +79,11 @@ fun main() {
                     .replaceVariablesWithValues(typeVariables)
                 val additionOperation = additionOperations[additionOperations.keys.firstOrNull { generatedName.contains(it) }]
                     ?: throw IllegalStateException("No addition operation for $generatedName!")
+                fillingArgs = fillingArgs ?: (0 until elementsCount)
+                    .map { generateArgumentsForProfile(groupName, defaultProfile[0], additionOperation, typeVariables, propertiesTree) }
                 val elementsFilling = (0 until elementsCount).map {
-                    val arguments = generateArgumentsForProfile(groupName, defaultProfile[0], additionOperation, typeVariables, propertiesTree)
                     "#{groups.$groupName.operations.$additionOperation.${defaultProfile[0]}.content # ${
-                        arguments.map { "${it.key.name} = ${it.value}" }.joinToString(" ## ")
-                    } #}"
+                        fillingArgs?.get(it)?.map { "${it.key.name} = ${it.value}" }?.joinToString(" ## ")} #}"
                 }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
                 val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
                 BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)

@@ -43,7 +43,7 @@ fun main() {
         val context: MutableMap<String, List<String>> = mutableMapOf()
         val benchmarkName = benchmarkFile.name.substringUntilLast(".")
         context["benchmark"] = listOf(benchmarkName)
-       val groups = propertiesTree.getValues("benchmarks", benchmarkName, "groups")
+        val groups = propertiesTree.getValues("benchmarks", benchmarkName, "groups")
         groups.forEach { groupName ->
             context["group"] = listOf(groupName)
             val generated = propertiesTree.getKeys("groups", groupName, "generated")

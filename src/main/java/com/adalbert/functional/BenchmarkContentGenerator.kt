@@ -46,10 +46,11 @@ object BenchmarkContentGenerator {
         groupName: String,
         method: BenchmarkMethod,
         initialization: BenchmarkInitialization,
-        propertiesTree: Tree
+        identifier: String = ""
     ): BenchmarkClass {
         val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"))
-        val className = "${method.language[0].uppercase()}_${groupName}${method.generatedName}_Polya$timeOfExecution"
+        val identifierPart = identifier.ifEmpty { method.generatedName }
+        val className = "${method.language[0].uppercase()}_${groupName}${identifierPart}_Polya$timeOfExecution"
         val eol = if (method.language == "java") ";" else ""
         val bob = StringBuilder()
         bob.appendLine("package com.adalbert;")

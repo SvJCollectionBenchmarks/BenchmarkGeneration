@@ -86,7 +86,7 @@ fun main() {
                         fillingArgs?.get(it)?.map { "${it.key.name} = ${it.value}" }?.joinToString(" ## ")} #}"
                 }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
                 val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
-                BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, propertiesTree)
+                BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization)
             }
 
             BenchmarkProjectHelper.writeBenchmarkClasses(benchmarkClasses, newCodeRoot)

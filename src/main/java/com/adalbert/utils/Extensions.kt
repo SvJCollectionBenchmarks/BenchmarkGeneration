@@ -2,6 +2,7 @@ package com.adalbert.utils
 
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -51,6 +52,10 @@ fun <T> List<T>.itemsPercentage(): Map<T, Double> {
         val percent = this.count { it == elem }.toDouble() / this.size * 100
         (percent * 100).toInt() / 100.0
     }
+}
+
+fun String.ownCapitalize(): String {
+    return this.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 }
 
 fun <T> List<T>.toProbabilityMap(probabilityPoints: Int = 1_000_000): MutableMap<T, IntRange> {

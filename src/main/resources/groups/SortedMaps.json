@@ -62,7 +62,7 @@
 			"scala": {
 				"isConsumable": true,
 				"args": [ { "name": "key", "type": "$K" } ],
-				"content": "collection.apply($key)"
+				"content": "collection.getOrElse($key, null)"
 			}
 		},
 		"put": {

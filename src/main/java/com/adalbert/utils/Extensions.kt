@@ -48,57 +48,14 @@ fun <T> List<T>.times(times: Int): List<T> {
 
 fun <T> List<T>.itemsPercentage(): Map<T, Double> {
     val elementsSet = this.distinct()
-    return elementsSet.associateWith { elem ->
+    return elementsSet.map { elem ->
         val percent = this.count { it == elem }.toDouble() / this.size * 100
-        (percent * 100).toInt() / 100.0
-    }
+        elem to (percent * 100).toInt() / 100.0
+    }.sortedBy { -it.second }.toMap()
 }
 
 fun String.ownCapitalize(): String {
     return this.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-}
-
-fun <T> List<T>.toProbabilityMap(probabilityPoints: Int = 1_000_000): MutableMap<T, IntRange> {
-    val outcome = mutableMapOf<T, IntRange>()
-    val points = IntArray (this.size) { probabilityPoints / this.size }
-    val differenceFromTotal = probabilityPoints - points.sum()
-    (0 until abs(differenceFromTotal)).forEach { points[it % points.size] += differenceFromTotal.sign }
-    var lastIndex = 0
-    for (i in this.indices) {
-        outcome[this[i]] = lastIndex until lastIndex + points[i]
-        lastIndex += points[i]
-    }
-    return outcome
-}
-
-fun <T> MutableMap<T, IntRange>.scaleProbabilityInPlace(key: T, times: Double) {
-    val totalProbabilityPoints = this.values.sumOf { it.last - it.first + 1 }
-    val oldProbabilityPoints = this[key]?.let { it.last - it.first + 1 }
-        ?: throw IllegalArgumentException("No key $key in given map!")
-    val newProbabilityPoints: Int = min((oldProbabilityPoints * times).toInt(), totalProbabilityPoints - this.size + 1)
-    val difference = ((oldProbabilityPoints - newProbabilityPoints).toDouble() / (this.size - 1)).toInt()
-    val probabilityPoints = this.map { it.key to max(1, (it.value.last - it.value.first + difference + 1)) }
-        .filter { it.first != key }.toMap().toMutableMap()
-    val differenceFromTotal = totalProbabilityPoints - (probabilityPoints.values.sum() + newProbabilityPoints)
-    (0 until abs(differenceFromTotal)).forEach { _ ->
-        val randomKey = probabilityPoints.filter { differenceFromTotal.sign > 0 || it.value > 1 }.keys.random()
-        probabilityPoints[randomKey] = probabilityPoints[randomKey]!! + differenceFromTotal.sign
-    }
-    var lastPoint = 0
-    this.forEach {
-        val currentDifference = if (it.key == key) newProbabilityPoints.toInt()
-            else probabilityPoints[it.key] ?: throw IllegalStateException("A value ${it.key} wasn't mapped to new probability!")
-        val newProbabilityRange = lastPoint until lastPoint + currentDifference
-        lastPoint += currentDifference
-        this[it.key] = newProbabilityRange
-    }
-}
-
-fun <T> Map<T, IntRange>.random(): T? {
-    val lastProbabilityPoint = this.maxByOrNull { it.value.last + 1 }?.value?.last?.plus(1)
-        ?: throw IllegalStateException("No max probability in the map!")
-    val randomInt = Random.nextInt(lastProbabilityPoint)
-    return this.firstOrNull { it.contains(randomInt) }
 }
 
 fun <K, V> Map<K, V>.firstOrNull(predicate: (V) -> Boolean): K? {
@@ -120,4 +77,64 @@ fun Path.add(fragments: List<String>): Path {
     return if (fragments.isNotEmpty())
         this.add(fragments.first()).add(fragments.drop(1))
     else this
+}
+
+fun IntRange.size(): Int {
+    return this.last - this.first + 1
+}
+
+fun LongRange.size(): Long {
+    return this.last - this.first + 1
+}
+
+
+fun <T> List<T>.toProbabilityMap(probabilityPoints: Int = 1_000_000): MutableMap<T, IntRange> {
+    val outcome = mutableMapOf<T, IntRange>()
+    val points = IntArray (this.size) { probabilityPoints / this.size }
+    val differenceFromTotal = probabilityPoints - points.sum()
+    (0 until abs(differenceFromTotal)).forEach { points[it % points.size] += differenceFromTotal.sign }
+    var lastIndex = 0
+    for (i in this.indices) {
+        outcome[this[i]] = lastIndex until lastIndex + points[i]
+        lastIndex += points[i]
+    }
+    return outcome
+}
+
+fun <T> MutableMap<T, IntRange>.displayProbabilityMap() {
+    val sum = this.values.sumOf { it.last - it.first + 1 }
+    println("Probability map, $sum points total:")
+    this.map { Pair(it.key, (it.value.last - it.value.first + 1).toDouble() / sum * 100) }
+        .sortedBy { -it.second }
+        .forEach { println("${it.first}\t\t${String.format("%.2f", it.second)}%") }
+}
+
+fun <T> MutableMap<T, IntRange>.scaleProbabilityInPlace(key: T, times: Double) {
+    val totalProbabilityPoints = this.values.sumOf { it.last - it.first + 1 }
+    val oldProbabilityPoints = this[key]?.let { it.last - it.first + 1 }
+        ?: throw IllegalArgumentException("No key $key in given map!")
+    val newProbabilityPoints: Int = min((oldProbabilityPoints * times).toInt(), totalProbabilityPoints - this.size + 1)
+    val difference = ((oldProbabilityPoints - newProbabilityPoints).toDouble() / (this.size - 1)).toInt()
+    val probabilityPoints = this.map { it.key to max(1, (it.value.last - it.value.first + difference + 1)) }
+        .filter { it.first != key }.toMap().toMutableMap()
+    val differenceFromTotal = totalProbabilityPoints - (probabilityPoints.values.sum() + newProbabilityPoints)
+    (0 until abs(differenceFromTotal)).forEach { _ ->
+        val randomKey = probabilityPoints.filter { differenceFromTotal.sign > 0 || it.value > 1 }.keys.random()
+        probabilityPoints[randomKey] = probabilityPoints[randomKey]!! + differenceFromTotal.sign
+    }
+    var lastPoint = 0
+    this.forEach {
+        val currentDifference = if (it.key == key) newProbabilityPoints.toInt()
+        else probabilityPoints[it.key] ?: throw IllegalStateException("A value ${it.key} wasn't mapped to new probability!")
+        val newProbabilityRange = lastPoint until lastPoint + currentDifference
+        lastPoint += currentDifference
+        this[it.key] = newProbabilityRange
+    }
+}
+
+fun <T> Map<T, IntRange>.random(): T? {
+    val lastProbabilityPoint = this.maxByOrNull { it.value.last + 1 }?.value?.last?.plus(1)
+        ?: throw IllegalStateException("No max probability in the map!")
+    val randomInt = Random.nextInt(lastProbabilityPoint)
+    return this.firstOrNull { it.contains(randomInt) }
 }

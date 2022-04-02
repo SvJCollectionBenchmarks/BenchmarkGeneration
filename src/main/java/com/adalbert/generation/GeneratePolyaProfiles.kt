@@ -12,8 +12,8 @@ import java.nio.file.Paths
 private const val argumentGenerationProfile = "java"
 private const val elementsCount = 100
 private const val operationsCount = 100
-private const val profilesNumber = 5
-private const val startingPolyaMultiplier = 1.4
+private const val profilesNumber = 1
+private const val startingPolyaMultiplier = 1.5
 
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
 private val supportedLanguages = listOf("java", "scala")

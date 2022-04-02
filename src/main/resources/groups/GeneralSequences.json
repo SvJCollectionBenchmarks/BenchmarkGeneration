@@ -36,7 +36,7 @@
 				"args": [],
 				"content": "scala.collection.mutable.ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
 			},
-			"SLinkedSequence": {
+			"SLinkedSequence":  {
 				"args": [],
 				"content": "scala.collection.mutable.ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
 			}

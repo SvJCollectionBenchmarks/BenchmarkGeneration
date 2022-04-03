@@ -15,8 +15,8 @@ Co chcemy mierzyć w ramach poszczególnych grup:
         + Benchmark zamiany, dodawania i usuwania kluczy z dużej mapy
         - Benchmark wielowątkowej edycji i odczytu na mapie
     - Listy:
-        + [GeneralSequences] Processing audio
-        - [GeneralSequences] InsertSort dużej listy / Rekurencyjne algorytmy (head/tail)
+        + [IndexedSequences] Processing audio
+        - [AllSequences] InsertSort dużej listy iteratorami
         + Benchmark załadowania dużej ilości danych w przodzie listy
         + Benchmark załadowania dużej ilości danych w tyle listy
         + Benchmark edycji danych w oddalonych miejscach w dużej liście - insert, set, remove

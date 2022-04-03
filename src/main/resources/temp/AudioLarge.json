@@ -23,7 +23,7 @@
     "scala": [""]
   },
   "groups": [
-    "GeneralSequences"
+    "IndexedSequences"
   ],
   "variables": {
     "profiled": {

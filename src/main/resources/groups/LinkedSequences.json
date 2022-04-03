@@ -1,0 +1,385 @@
+{
+	"generated": {
+		"JLinkedSequence": "java",
+		"SLinkedSequence": "scala"
+	},
+	"imports": {
+		"java": [
+			"import java.util.*;",
+			"import scala.collection.mutable.*;",
+			"import scala.collection.immutable.*;"
+		],
+		"scala": [
+			"import java.util",
+			"import scala.collection.mutable",
+			"import scala.collection.immutable"
+		]
+	},
+	"init": {
+		"java": {
+			"JLinkedSequence": {
+				"args": [],
+				"content": "java.util.LinkedList<$T> collection = new java.util.LinkedList<>()"
+			},
+			"SLinkedSequence":  {
+				"args": [],
+				"content": "scala.collection.mutable.ListBuffer<$T> collection = new scala.collection.mutable.ListBuffer<>()"
+			}
+		},
+		"scala": {
+			"JLinkedSequence": {
+				"args": [],
+				"content": "var collection = new util.LinkedList[$T]()"
+			},
+			"SLinkedSequence": {
+				"args": [],
+				"content": "var collection = mutable.ListBuffer[$T]()"
+			}
+		}
+	},
+	"operations": {
+		"size": {
+			"isBenchmarkedAutomatically": false,
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.size()"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.size"
+			}
+		},
+		"get": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "index", "type": "int" } ],
+				"content": "collection.get($index)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "index", "type": "int" } ],
+				"content": "collection.apply($index)"
+			}
+		},
+		"prepend": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.add(0, $elem)"
+			},
+			"scala": {
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.prepend($elem)"
+			},
+			"JLinkedSequence": {
+				"isBenchmarkedAutomatically": true,
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.addFirst($elem)"
+			}
+		},
+		"append": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.add($elem)"
+			},
+			"scala": {
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.append($elem)"
+			},
+			"JLinkedSequence": {
+				"isBenchmarkedAutomatically": true,
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.addLast($elem)"
+			}
+		},
+		"set": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ 
+					{ "name": "index", "type": "int" },
+					{ "name": "elem", "type": "$T" }
+				],
+				"content": "collection.set($index, $elem)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ 
+					{ "name": "index", "type": "int" },
+					{ "name": "elem", "type": "$T" }
+				],
+				"content": "collection.update($index, $elem)"
+			}
+		},
+		"contains": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.contains($elem)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.contains($elem)"
+			}
+		},
+		"indexOf": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.indexOf($elem)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.indexOf($elem)"
+			}
+		},
+		"lastIndexOf": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.lastIndexOf($elem)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.lastIndexOf($elem, collection.size - 1)"
+			}
+		},
+		"addAll": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
+				"content": "collection.addAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
+				"content": "collection.addAll($elems)"
+			}
+		},
+		"insertAll": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [
+					{ "name": "index", "type": "int" },
+					{ "name": "elems", "type": "Collection<? extends $T>" }
+				],
+				"content": "collection.addAll($index, $elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [
+					{ "name": "index", "type": "int" },
+					{ "name": "elems", "type": "IterableOnce[$T]" }
+				],
+				"content": "collection.insertAll($index, $elems)"
+			}
+		},
+		"subCollection": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ 
+					{ "name": "index", "type": "int" },
+					{ "name": "count", "type": "int" }
+				],
+				"content": "collection.subList($index, $index + $count + 1)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ 
+					{ "name": "index", "type": "int" },
+					{ "name": "count", "type": "int" }
+				],
+				"content": "collection.slice($index, $index + $count + 1)"
+			}
+		},
+		"iterator": {
+			"isBenchmarkedAutomatically": false,
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.iterator()"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.iterator"
+			}
+		},
+		"insert": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": false,
+				"args": [ 
+					{ "name": "index", "type": "int" },
+					{ "name": "elem", "type": "$T" }
+				],
+				"content": "collection.add($index, $elem)"
+			},
+			"scala": {
+				"isConsumable": false,
+				"args": [ 
+					{ "name": "index", "type": "int" },
+					{ "name": "elem", "type": "$T" }
+				],
+				"content": "collection.insert($index, $elem)"
+			}
+		},
+		"remove": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.remove($elem)"
+			},
+			"scala": {
+				"isConsumable": false,
+				"args": [ { "name": "elem", "type": "$T" } ],
+				"content": "collection.subtractOne($elem)"
+			}
+		},
+		"removeAt": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "index", "type": "int" } ],
+				"content": "collection.remove($index)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "index", "type": "int" } ],
+				"content": "collection.remove($index)"
+			}
+		},
+		"removeAll": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
+				"content": "collection.removeAll($elems)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
+				"content": "collection.filterInPlace(!$elems.contains(_))"
+			}
+		},
+		"removeFirst": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(0)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(0)"
+			},
+			"JLinkedSequence": {
+				"isBenchmarkedAutomatically": true,
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.removeFirst()"
+			}
+		},
+		"removeLast": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(collection.size() - 1)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.remove(collection.size - 1)"
+			},
+			"JLinkedSequence": {
+				"isBenchmarkedAutomatically": true,
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.removeLast()"
+			}
+		},
+		"clear": {
+			"isBenchmarkedAutomatically": false,
+			"java": {
+				"isConsumable": false,
+				"args": [],
+				"content": "collection.clear()"
+			},
+			"scala": {
+				"isConsumable": false,
+				"args": [],
+				"content": "collection.clear()"
+			}
+		},
+		"first": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.get(0)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.head"
+			},
+			"JLinkedSequence": {
+				"isBenchmarkedAutomatically": true,
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.getFirst()"
+			}
+		},
+		"last": {
+			"isBenchmarkedAutomatically": true,
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.get(collection.size() - 1)"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.last"
+			}
+		},
+		"isEmpty": {
+			"isBenchmarkedAutomatically": false,
+			"java": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.isEmpty()"
+			},
+			"scala": {
+				"isConsumable": true,
+				"args": [],
+				"content": "collection.isEmpty"
+			}
+		}
+	},
+	"variables": {
+		"T": ["Integer", "String", "Double", "Float", "Character", "Long"]
+	}
+}

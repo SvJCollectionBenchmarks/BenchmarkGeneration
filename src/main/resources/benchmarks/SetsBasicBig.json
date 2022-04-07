@@ -27,19 +27,9 @@
     "SortedSets"
   ],
   "variables": {
-    "profiled": {
-      "java": {
-        "java": {
-        },
-        "scala": {
-        }
-      },
-      "scala": {
-        "java": {
-        },
-        "scala": {
-        }
-      }
+    "unprofiled": {
+      "addBatch": "20000",
+      "operationBatch": "1000"
     }
   }
 }

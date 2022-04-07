@@ -26,19 +26,8 @@
     "ShrinkableSequences"
   ],
   "variables": {
-    "profiled": {
-      "java": {
-        "java": {
-        },
-        "scala": {
-        }
-      },
-      "scala": {
-        "java": {
-        },
-        "scala": {
-        }
-      }
+    "unprofiled": {
+      "batch": "5000"
     }
   }
 }

@@ -44,6 +44,10 @@
           "values": "Vector(value - 1, value, value + 1)"
         }
       }
+    },
+    "unprofiled": {
+      "addBatch": "1000",
+      "operationBatch": "10000"
     }
   }
 }

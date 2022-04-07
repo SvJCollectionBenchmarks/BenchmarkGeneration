@@ -26,15 +26,10 @@
     "SortedMaps"
   ],
   "variables": {
-    "profiled": {
-      "java": {
-        "java": {},
-        "scala": {}
-      },
-      "scala": {
-        "java": {},
-        "scala": {}
-      }
+    "profiled": {},
+    "unprofiled": {
+      "addBatch": "100",
+      "lookupBatch": "10000"
     }
   }
 }

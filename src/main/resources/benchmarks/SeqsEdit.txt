@@ -1,10 +1,10 @@
 <@java@>
 #{groups.$group.init.$language.$profile.content # T = Double #};
-for (int i = 0; i < 10000; i++)
+for (int i = 0; i < ${benchmarks.$benchmark.variables.unprofiled.batch}; i++)
     #{groups.$group.operations.append.$profile.content # elem = Math.sin(i/0.01) #};
 ${benchmarks.$benchmark.variables.profiled.$language.$profile.samples};
-for (int i = 0; i < 3000; i++) {
-    int index = (i * 3000) % ${groups.$group.operations.size.$profile.content};
+for (int i = 0; i < ${benchmarks.$benchmark.variables.unprofiled.batch}; i++) {
+    int index = (i * ${benchmarks.$benchmark.variables.unprofiled.batch} / 3) % ${groups.$group.operations.size.$profile.content};
     switch (i % 4) {
         case 0: #{groups.$group.operations.set.$profile.content # index = index ## elem = 1.0 #}; break;
         case 1: #{groups.$group.operations.insert.$profile.content # index = index ## elem = 1.0 #}; break;
@@ -15,11 +15,11 @@ for (int i = 0; i < 3000; i++) {
 <@java@>
 <@scala@>
 #{groups.$group.init.$language.$profile.content # T = Double #}
-for (i <- 0 until 10000)
+for (i <- 0 until ${benchmarks.$benchmark.variables.unprofiled.batch})
     #{groups.$group.operations.append.$profile.content # elem = Math.sin(i/0.01) #}
 ${benchmarks.$benchmark.variables.profiled.$language.$profile.samples}
-for (i <- 0 until 3000) {
-    val index = (i * 3000) % ${groups.$group.operations.size.$profile.content};
+for (i <- 0 until ${benchmarks.$benchmark.variables.unprofiled.batch}) {
+    val index = (i * ${benchmarks.$benchmark.variables.unprofiled.batch} / 3) % ${groups.$group.operations.size.$profile.content};
     (i % 4) match {
         case 0 => #{groups.$group.operations.set.$profile.content # index = index ## elem = 1.0 #}
         case 1 => #{groups.$group.operations.insert.$profile.content # index = index ## elem = 1.0 #}

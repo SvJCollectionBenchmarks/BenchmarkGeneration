@@ -43,6 +43,9 @@
           "samples": "val samples = mutable.ArrayBuffer(1.0, 0.0, -1.0, 0.0, 1.0, 0.0, -1.0, 0.0)"
         }
       }
+    },
+    "unprofiled": {
+      "batch": "1000"
     }
   }
 }

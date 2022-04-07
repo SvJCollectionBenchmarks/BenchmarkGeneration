@@ -1,8 +1,8 @@
 <@java@>
 #{groups.$group.init.$language.$profile.content # K = Integer ## V = Integer #};
-for (int i = 0; i < 100000; i++)
+for (int i = 0; i < ${benchmarks.$benchmark.variables.unprofiled.batch}; i++)
     #{groups.$group.operations.put.$profile.content # key = i ## value = i #};
-for (int i = 0; i < 100000; i++) {
+for (int i = 0; i < ${benchmarks.$benchmark.variables.unprofiled.batch}; i++) {
     int value = i % 3 == 0 ? -i : i;
     if (#{groups.$group.operations.containsKey.$profile.content # key = value #})
         switch (i % 2) {
@@ -14,9 +14,9 @@ for (int i = 0; i < 100000; i++) {
 <@java@>
 <@scala@>
 #{groups.$group.init.$language.$profile.content # K = Integer ## V = Integer #}
-for (i <- 0 until 100000)
+for (i <- 0 until ${benchmarks.$benchmark.variables.unprofiled.batch})
     #{groups.$group.operations.put.$profile.content # key = i ## value = i #}
-for (i <- 0 until 100000) {
+for (i <- 0 until ${benchmarks.$benchmark.variables.unprofiled.batch}) {
     val value = if (i % 3 == 0) -i else i
     if (#{groups.$group.operations.containsKey.$profile.content # key = value #}) i % 2 match {
        case 0 => #{groups.$group.operations.replace.$profile.content # key = value ## value = -value#}

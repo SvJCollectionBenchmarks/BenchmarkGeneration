@@ -27,19 +27,9 @@
     "SortedMaps"
   ],
   "variables": {
-    "profiled": {
-      "java": {
-        "java": {
-        },
-        "scala": {
-        }
-      },
-      "scala": {
-        "java": {
-        },
-        "scala": {
-        }
-      }
+    "profiled": {},
+    "unprofiled": {
+      "batch": "5000"
     }
   }
 }

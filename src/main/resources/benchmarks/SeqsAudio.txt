@@ -1,7 +1,7 @@
 <@java@>
 #{groups.$group.init.$language.$profile.content # T = Double #};
 ${benchmarks.$benchmark.variables.profiled.$language.$profile.samplesCreation};
-for (int i = 0; i < 1000 / samples.size(); i++) {
+for (int i = 0; i < ${benchmarks.$benchmark.variables.unprofiled.batch} / samples.size(); i++) {
     bh.consume(i);
     #{groups.$group.operations.addAll.$profile.content # elems = samples #};
 }
@@ -16,7 +16,7 @@ ${benchmarks.$benchmark.variables.profiled.$language.$profile.zeroCollection};
 <@scala@>
 #{groups.$group.init.$language.$profile.content # T = Double #}
 ${benchmarks.$benchmark.variables.profiled.$language.$profile.samplesCreation}
-for (i <- 0 until 1000 / samples.size) {
+for (i <- 0 until ${benchmarks.$benchmark.variables.unprofiled.batch} / samples.size) {
     bh.consume(i);
     #{groups.$group.operations.addAll.$profile.content # elems = samples #}
 }

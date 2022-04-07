@@ -47,6 +47,9 @@
           "zeroCollection": "val zero = mutable.ArrayBuffer(0.0)"
         }
       }
+    },
+    "unprofiled": {
+      "batch": "10000"
     }
   }
 }

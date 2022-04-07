@@ -35,6 +35,9 @@
           "iteratorImport": "scala.collection.Iterator"
         }
       }
+    },
+    "unprofiled": {
+      "batch": "1000"
     }
   }
 }

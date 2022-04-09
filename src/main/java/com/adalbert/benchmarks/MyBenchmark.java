@@ -41,68 +41,46 @@ import java.util.ListIterator;
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
-//    private static class Node {
-//        private int id;
-//        private List<Integer> dependant;
-//        public Node(int id) {
-//            this.id = id;
-//            this.dependant = new ArrayList<>();
-//        }
-//        public void addDependency(int dependency) {
-//            this.dependant.add(dependency);
-//        }
-//    }
-//
-//    @Benchmark
-//    @Fork(1)
-//    @Measurement(time = 5)
-//    @Warmup(time = 5)
-//    public void testMethodFirst(Blackhole bh) {
-//        HashSet<Node> collection = new HashSet<>();
-//        for (int i = 0; i < 1000; i++) {
-//            boolean toAdd = true;
-//            Iterator<Node> iter = collection.iterator();
-//            while (iter.hasNext()) {
-//                Node primes = iter.next();
-//                if (i % primes.id == 0) {
-//                    toAdd = false;
-//                    primes.dependant.add(i);
-//                }
-//            }
-//            if (toAdd) collection.add(new Node(i));
-//        }
-//        System.out.println("aaa");
-//    }
-
     @Benchmark
     @Fork(1)
+    @Measurement(time=1)
+    @Warmup(time=1)
     public void testArrayList(Blackhole bh) {
         ArrayList<Integer> collection = new ArrayList<>();
         ListIterator<Integer> iter = null;
         int value = 0;
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000; i++) {
+            boolean wasAdded = false;
             value = i / (i % 3 + 1);
             iter = collection.listIterator();
-            while (iter.hasNext())
-                if (iter.next() >= value)
+            while (iter.hasNext() && !wasAdded)
+                if (iter.next() >= value){
                     iter.add(value);
+                    wasAdded = true;
+                }
+            if (!wasAdded) collection.add(value);
         }
     }
 
     @Benchmark
     @Fork(1)
+    @Measurement(time=1)
+    @Warmup(time=1)
     public void testLinkedList(Blackhole bh) {
         LinkedList<Integer> collection = new LinkedList<>();
         ListIterator<Integer> iter = null;
         int value = 0;
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000; i++) {
+            boolean wasAdded = false;
             value = i / (i % 3 + 1);
             iter = collection.listIterator();
-            while (iter.hasNext())
-                if (iter.next() >= value)
+            while (iter.hasNext() && !wasAdded)
+                if (iter.next() >= value){
                     iter.add(value);
+                    wasAdded = true;
+                }
+            if (!wasAdded) collection.add(value);
         }
     }
-
 
 }

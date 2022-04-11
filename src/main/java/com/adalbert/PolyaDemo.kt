@@ -19,7 +19,7 @@ fun main() {
 //    options.displayProbabilityMap()
 
     val randomCount = 100
-    val startingPolyaMultiplier = 2.8
+    val startingPolyaMultiplier = 1.4
     val options = ProbabilityList.of((1 .. 10).map { "Option $it" })
     val chosenOptions = mutableListOf<String>()
     (1 .. randomCount).forEach { _ ->

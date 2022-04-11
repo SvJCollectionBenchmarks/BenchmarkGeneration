@@ -10,10 +10,10 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 private const val argumentGenerationProfile = "java"
-private const val elementsCount = 100
-private const val operationsCount = 100
-private const val profilesNumber = 1
-private const val startingPolyaMultiplier = 1.5
+private const val elementsCount = 500
+private const val operationsCount = 500
+private const val profilesNumber = 5
+private const val startingPolyaMultiplier = 1.3
 
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
 private val supportedLanguages = listOf("java", "scala")
@@ -35,7 +35,7 @@ fun main() {
 
     val newCodeRoot = BenchmarkProjectHelper.generateProjectsInSupportedLanguages(baseCodeRoot, supportedLanguages)
 
-    (0 until profilesNumber).forEach { _ ->
+    (0 until profilesNumber).forEach { profileId ->
         val groups = propertiesTree.getKeys("groups")
         groups.forEach { groupName ->
             val operations = propertiesTree.getKeys("groups", groupName, "operations").filter {
@@ -86,7 +86,7 @@ fun main() {
                         fillingArgs?.get(it)?.map { "${it.key.name} = ${it.value}" }?.joinToString(" ## ")} #}"
                 }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
                 val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
-                BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization)
+                BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, profileId)
             }
 
             BenchmarkProjectHelper.writeBenchmarkClasses(benchmarkClasses, newCodeRoot)

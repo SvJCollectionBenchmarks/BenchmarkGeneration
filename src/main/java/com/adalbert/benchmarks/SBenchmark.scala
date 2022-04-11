@@ -1,11 +1,13 @@
 package com.adalbert.benchmarks
 
+import com.adalbert.benchmarks.Weird.Cell
 import org.openjdk.jmh.annotations._
 import org.openjdk.jmh.infra.Blackhole
 
 import java.util
-import java.util.{ArrayList, HashMap, HashSet}
+import java.util.{ArrayList, Arrays, Comparator, HashMap, HashSet, List, Objects, Set}
 import scala.collection.mutable
+import scala.collection.mutable.Set
 
 @State(Scope.Benchmark)
 class SBenchmark {
@@ -45,5 +47,51 @@ class SBenchmark {
       }
     }
   }
+//
+//  object Cell {
+//    def livingCell(row: Int, column: Int) = new Weird.Cell(row, column, true)
+//    def deadCell(row: Int, column: Int) = new Weird.Cell(row, column, false)
+//  }
+//  class Cell private(val row: Int, val column: Int, val isAlive: Boolean) {
+//    override def equals(o: Any): Boolean = {
+//      if (this == o) return true
+//      if (o == null || (getClass ne o.getClass)) return false
+//      val cell = o.asInstanceOf[Weird.Cell]
+//      row == cell.row && column == cell.column && isAlive == cell.isAlive
+//    }
+//    override def hashCode: Int = Objects.hash(row, column, isAlive)
+//    override def toString: String = "Cell{" + "row=" + row + ", column=" + column + ", isAlive=" + isAlive + '}'
+//  }
+//  private val startingPoint = util.Arrays.asList(
+//    Cell.livingCell(0, 0), Cell.livingCell(1, 0), Cell.livingCell(2, 0),
+//    Cell.livingCell(3, 1),
+//    Cell.livingCell(1, 2), Cell.livingCell(2, 2),
+//    Cell.livingCell(3, 3),
+//    Cell.livingCell(0, 4), Cell.livingCell(1, 4), Cell.livingCell(2, 4)
+//  )
+//  private def addLivingCell(collection: mutable.Set[Weird.Cell], row: Int, column: Int): Unit = {
+//    collection.remove(Cell.deadCell(row, column))
+//    collection.add(Cell.livingCell(row, column))
+//    for (i <- -1 until 2)
+//      for (j <- -1 until 2)
+//        if (!(i == 0 && j == 0) && !collection.contains(Cell.livingCell(row + i, column + j)))
+//          collection.add(Cell.deadCell(row + i, column + j))
+//  }
+//  private def removeLivingCell(collection: mutable.Set[Weird.Cell], row: Int, column: Int): Unit = {
+//    collection.remove(Cell.livingCell(row, column))
+//    if (neighbours(collection, row, column) != 0) collection.add(Cell.deadCell(row, column))
+//    for (i <- -1 until 2)
+//      for (j <- -1 until 2)
+//        if (!(i == 0 && j == 0) && neighbours(collection, row + i, column + j) == 0)
+//          collection.remove(Cell.deadCell(row + i, column + j))
+//  }
+//  private def neighbours(collection: mutable.Set[Weird.Cell], row: Int, column: Int) = {
+//    var neighbours = 0
+//    for (i <- -1 until 2)
+//      for (j <- -1 until 2)
+//        if (!(i == 0 && j == 0) && collection.contains(Cell.livingCell(row + i, column + j)))
+//          neighbours += 1
+//    neighbours
+//  }
 
 }

@@ -1,0 +1,32 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # T = Cell #}
+for (Cell cell : startingPoint) addLivingCell(collection, cell.row(), cell.column());
+List<Cell> additions = new ArrayList<>();
+List<Cell> removals = new ArrayList<>();
+while (!collection.isEmpty()) {
+    ${benchmarks.$benchmark.variables.profiled.$language.$profile.iteratorImport}<Cell> iter = ${groups.$group.operations.iterator.$profile.content};
+    while (iter.hasNext()) {
+        Cell cell = iter.next();
+        int neighbours = neighbours(collection, cell.row(), cell.column());
+        if (!cell.isAlive() && neighbours == 3)
+            additions.add(Cell.livingCell(cell.row(), cell.column()));
+        else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))
+            removals.add(Cell.livingCell(cell.row(), cell.column()));
+    }
+    additions.forEach(c -> addLivingCell(collection, c.row(), c.column()));
+    removals.forEach(c -> removeLivingCell(collection, c.row(), c.column()));
+    additions.clear(); removals.clear();
+}
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # T = Integer #}
+for (i <- 2 until ${benchmarks.$benchmark.variables.unprofiled.batch}) #{groups.$group.operations.add.$profile.content # elem = i #}
+for (i <- 2 until ${benchmarks.$benchmark.variables.unprofiled.batch}) {
+    var j = 2
+    while (#{groups.$group.operations.contains.$profile.content # elem = i #} && i * j < ${benchmarks.$benchmark.variables.unprofiled.batch}) {
+        #{groups.$group.operations.remove.$profile.content # elem = i*j #}
+        j += 1
+    }
+}
+<@scala@>
+

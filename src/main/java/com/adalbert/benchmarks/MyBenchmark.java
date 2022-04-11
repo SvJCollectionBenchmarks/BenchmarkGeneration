@@ -43,7 +43,7 @@ public class MyBenchmark {
 
     @Benchmark
     @Fork(1)
-    @Measurement(time=1)
+    @Measurement(time=1, iterations = 50)
     @Warmup(time=1)
     public void testArrayList(Blackhole bh) {
         ArrayList<Integer> collection = new ArrayList<>();

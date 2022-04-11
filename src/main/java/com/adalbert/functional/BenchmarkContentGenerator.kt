@@ -46,11 +46,12 @@ object BenchmarkContentGenerator {
         groupName: String,
         method: BenchmarkMethod,
         initialization: BenchmarkInitialization,
+        profileId: Int,
         identifier: String = ""
     ): BenchmarkClass {
         val timeOfExecution = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"))
         val identifierPart = identifier.ifEmpty { "_${method.generatedName}" }
-        val className = "${method.language[0].uppercase()}_${groupName}${identifierPart}_Polya$timeOfExecution"
+        val className = "${method.language[0].uppercase()}_Profile${profileId}${groupName}${identifierPart}_$timeOfExecution"
         val eol = if (method.language == "java") ";" else ""
         val bob = StringBuilder()
         bob.appendLine("package com.adalbert;")
@@ -62,6 +63,7 @@ object BenchmarkContentGenerator {
         bob.appendLine("\t${initialization.collectionInit}$eol")
         bob.appendLine("\t@Setup(Level.Invocation)")
         bob.appendLine("\t${methodsDeclarations[method.language to "setup"]!!(method.generatedName)}")
+        bob.appendLine("\t\tcollection = ${initialization.collectionInit.substringAfter("=").trim()}$eol")
         initialization.elementsFilling.forEach { bob.appendLine("\t\t$it$eol") }
         bob.appendLine("\t}")
         stringifyMethod(bob, method, eol)

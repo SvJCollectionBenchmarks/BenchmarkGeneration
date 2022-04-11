@@ -251,23 +251,25 @@ public class Weird {
         }
     }
 
-//    public static void main(String[] args) {
-//        HashSet<Cell> collection = new HashSet<>();
-//        for (Cell cell : startingPoint) addLivingCell(collection, cell.row(), cell.column());
-//        List<Cell> additions = new ArrayList<>();
-//        List<Cell> removals = new ArrayList<>();
-//        while (!collection.isEmpty()) {
-//            displayCells(collection);
-//            collection.forEach(cell -> {
-//                int neighbours = neighbours(collection, cell.row(), cell.column());
-//                if (!cell.isAlive() && neighbours == 3)
-//                    additions.add(Cell.livingCell(cell.row(), cell.column()));
-//                else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))
-//                    removals.add(Cell.livingCell(cell.row(), cell.column()));
-//            });
-//            additions.forEach(c -> addLivingCell(collection, c.row(), c.column()));
-//            removals.forEach(c -> removeLivingCell(collection, c.row(), c.column()));
-//            additions.clear(); removals.clear();
-//        }
-//    }
+    public static void main(String[] args) {
+        HashSet<Cell> collection = new HashSet<>();
+        for (Cell cell : startingPoint) addLivingCell(collection, cell.row(), cell.column());
+        List<Cell> additions = new ArrayList<>();
+        List<Cell> removals = new ArrayList<>();
+        while (!collection.isEmpty()) {
+            displayCells(collection);
+            Iterator<Cell> iter = collection.iterator();
+            while (iter.hasNext()) {
+                Cell cell = iter.next();
+                int neighbours = neighbours(collection, cell.row(), cell.column());
+                if (!cell.isAlive() && neighbours == 3)
+                    additions.add(Cell.livingCell(cell.row(), cell.column()));
+                else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))
+                    removals.add(Cell.livingCell(cell.row(), cell.column()));
+            }
+            additions.forEach(c -> addLivingCell(collection, c.row(), c.column()));
+            removals.forEach(c -> removeLivingCell(collection, c.row(), c.column()));
+            additions.clear(); removals.clear();
+        }
+    }
 }

@@ -13,8 +13,8 @@ import java.util.*
 
 private const val argumentGenerationProfile = "java"
 private const val profilesNumber = 1
-private const val elementsCount = 100
-private const val operationsCount = 100
+private const val elementsCount = 500
+private const val operationsCount = 500
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\singleOperational")
 private val additionOperations = mapOf("Map" to "put", "Sequence" to "append", "Set" to "add")
 private val supportedLanguages = listOf("java", "scala")
@@ -34,7 +34,7 @@ fun main() {
 
     val newCodeRoot = BenchmarkProjectHelper.generateProjectsInSupportedLanguages(baseCodeRoot, supportedLanguages)
 
-    (0 until profilesNumber).forEach { _ ->
+    (0 until profilesNumber).forEach { profileId ->
         val groups = propertiesTree.getKeys("groups")
         groups.forEach { groupName ->
             propertiesTree.getKeys("groups", groupName, "operations").filter {
@@ -75,7 +75,7 @@ fun main() {
                             fillingArgs?.get(it)?.map { "${it.key.name} = ${it.value}" }?.joinToString(" ## ")} #}"
                     }.map { BenchmarkContentProcessor.processBenchmarkText(it, mutableMapOf(), propertiesTree)}
                     val initialization = BenchmarkContentGenerator.BenchmarkInitialization(collectionInit, elementsFilling)
-                    BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, chosenOperation.ownCapitalize())
+                    BenchmarkContentGenerator.generateFullSourceFromPolyaSnippets(groupName, method, initialization, profileId, chosenOperation.ownCapitalize())
                 }
 
                 BenchmarkProjectHelper.writeBenchmarkClasses(benchmarkClasses, newCodeRoot)

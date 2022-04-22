@@ -10,9 +10,9 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 private const val argumentGenerationProfile = "java"
-private const val elementsCount = 500
+private const val elementsCount = 1200
 private const val operationsCount = 500
-private const val profilesNumber = 5
+private const val profilesNumber = 1
 private const val startingPolyaMultiplier = 1.3
 
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
@@ -37,7 +37,7 @@ fun main() {
 
     (0 until profilesNumber).forEach { profileId ->
         val groups = propertiesTree.getKeys("groups")
-        groups.forEach { groupName ->
+        groups.filter { propertiesTree.getValue("groups", it, "benchmarkedAutomatically") == "true" }.forEach { groupName ->
             val operations = propertiesTree.getKeys("groups", groupName, "operations").filter {
                 propertiesTree.getValue("groups", groupName, "operations", it, "isBenchmarkedAutomatically") == "true"
             }.toProbabilityMap()
@@ -45,12 +45,13 @@ fun main() {
             (1 .. operationsCount).forEach { _ ->
                 val randomOperation = operations.random() ?: throw IllegalStateException()
                 val operationCount = chosenOperations.count { it == randomOperation }
-                val realMultiplier =  (1.0 + (startingPolyaMultiplier - 1.0) / (operationCount + 1))
+                val realMultiplier =  1.0 + (startingPolyaMultiplier - 1.0) / (operationCount + 1)
                 operations.scaleProbabilityInPlace(randomOperation, realMultiplier)
                 chosenOperations.add(randomOperation)
             }
             println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations for $groupName")
             println("Used operations are: ${chosenOperations.itemsPercentage()}")
+            BenchmarkProjectHelper.writeNote("Used operations are: ${chosenOperations.itemsPercentage()}", groupName, newCodeRoot)
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
             val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")

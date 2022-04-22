@@ -1,8 +1,9 @@
 {
+	"benchmarkedAutomatically": false,
 	"generated": {
 		"JArraySequence": "java",
 		"JVectorSequence": "java",
-		"SArrayBufferSequence": "scala"
+		"SArraySequence": "scala"
 	},
 	"imports": {
 		"java": [
@@ -26,7 +27,7 @@
 				"args": [],
 				"content": "java.util.Vector<$T> collection = new java.util.Vector<>()"
 			},
-			"SArrayBufferSequence": {
+			"SArraySequence": {
 				"args": [],
 				"content": "scala.collection.mutable.ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
 			}
@@ -40,7 +41,7 @@
 				"args": [],
 				"content": "var collection = new util.Vector[$T]()"
 			},
-			"SArrayBufferSequence": {
+			"SArraySequence": {
 				"args": [],
 				"content": "var collection = mutable.ArrayBuffer[$T]()"
 			}
@@ -189,25 +190,6 @@
 				"content": "collection.insertAll($index, $elems)"
 			}
 		},
-		"subCollection": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [ 
-					{ "name": "index", "type": "int" },
-					{ "name": "count", "type": "int" }
-				],
-				"content": "collection.subList($index, $index + $count + 1)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [ 
-					{ "name": "index", "type": "int" },
-					{ "name": "count", "type": "int" }
-				],
-				"content": "collection.slice($index, $index + $count + 1)"
-			}
-		},
 		"iterator": {
 			"isBenchmarkedAutomatically": false,
 			"java": {
@@ -267,7 +249,7 @@
 			}
 		},
 		"removeAll": {
-			"isBenchmarkedAutomatically": true,
+			"isBenchmarkedAutomatically": false,
 			"java": {
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
@@ -277,32 +259,6 @@
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.filterInPlace(!$elems.contains(_))"
-			}
-		},
-		"removeFirst": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(0)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(0)"
-			}
-		},
-		"removeLast": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(collection.size() - 1)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(collection.size - 1)"
 			}
 		},
 		"clear": {
@@ -316,38 +272,6 @@
 				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
-			}
-		},
-		"first": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.get(0)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.head"
-			},
-			"JVectorSequence": {
-				"isBenchmarkedAutomatically": true,
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.firstElement()"
-			}
-		},
-		"last": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.get(collection.size() - 1)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.last"
 			}
 		},
 		"isEmpty": {

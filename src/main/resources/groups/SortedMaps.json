@@ -1,4 +1,5 @@
 {
+	"benchmarkedAutomatically": false,
 	"generated": {
 		"JTreeMap": "java",
 		"STreeMap": "scala"

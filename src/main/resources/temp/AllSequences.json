@@ -3,7 +3,7 @@
 		"JArraySequence": "java",
 		"JLinkedSequence": "java",
 		"JVectorSequence": "java",
-		"SArrayBufferSequence": "scala",
+		"SArraySequence": "scala",
 		"SLinkedSequence": "scala",
 		"SArraySequence": "scala",
 		"SVectorSequence": "scala"
@@ -34,7 +34,7 @@
 				"args": [],
 				"content": "java.util.Vector<$T> collection = new java.util.Vector<>()"
 			},
-			"SArrayBufferSequence": {
+			"SArraySequence": {
 				"args": [],
 				"content": "scala.collection.mutable.ArrayBuffer<$T> collection = new scala.collection.mutable.ArrayBuffer<>()"
 			},
@@ -64,7 +64,7 @@
 				"args": [],
 				"content": "var collection = new util.Vector[$T]()"
 			},
-			"SArrayBufferSequence": {
+			"SArraySequence": {
 				"args": [],
 				"content": "var collection = mutable.ArrayBuffer[$T]()"
 			},

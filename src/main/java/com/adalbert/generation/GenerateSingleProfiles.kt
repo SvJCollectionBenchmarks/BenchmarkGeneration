@@ -13,7 +13,7 @@ import java.util.*
 
 private const val argumentGenerationProfile = "java"
 private const val profilesNumber = 1
-private const val elementsCount = 500
+private const val elementsCount = 1200
 private const val operationsCount = 500
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\singleOperational")
 private val additionOperations = mapOf("Map" to "put", "Sequence" to "append", "Set" to "add")
@@ -36,7 +36,7 @@ fun main() {
 
     (0 until profilesNumber).forEach { profileId ->
         val groups = propertiesTree.getKeys("groups")
-        groups.forEach { groupName ->
+        groups.filter { propertiesTree.getValue("groups", it, "benchmarkedAutomatically") == "true" }.forEach { groupName ->
             propertiesTree.getKeys("groups", groupName, "operations").filter {
                 propertiesTree.getValue("groups", groupName, "operations", it, "isBenchmarkedAutomatically") == "true"
             }.forEach { chosenOperation ->

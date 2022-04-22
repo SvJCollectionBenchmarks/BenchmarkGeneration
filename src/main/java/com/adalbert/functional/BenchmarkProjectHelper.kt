@@ -61,4 +61,9 @@ object BenchmarkProjectHelper {
         }
     }
 
+    fun writeNote(note: String, filePostfix: String, codeRoot: Path) {
+        println("### Writing benchmark note ###")
+        Files.write(codeRoot.add("note-${filePostfix}.txt"), note.toByteArray(Charset.forName("UTF-8")))
+    }
+
 }

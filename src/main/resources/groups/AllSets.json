@@ -1,15 +1,18 @@
 {
-	"benchmarkedAutomatically": false,
+	"benchmarkedAutomatically": true,
 	"generated": {
+		"JHashSet": "java",
+		"JLinkedSet": "java",
 		"JTreeSet": "java",
+		"SHashSet": "scala",
+		"SLinkedSet": "scala",
 		"STreeSet": "scala"
 	},
 	"imports": {
 		"java": [
 			"import java.util.*;",
 			"import scala.collection.mutable.*;",
-			"import scala.collection.immutable.*;",
-			"import scala.math.*"
+			"import scala.collection.immutable.*;"
 		],
 		"scala": [
 			"import java.util",
@@ -19,6 +22,22 @@
 	},
 	"init": {
 		"java": {
+			"JHashSet": {
+				"args": [],
+				"content": "java.util.HashSet<$T> collection = new java.util.HashSet<>()"
+			},
+			"JLinkedSet": {
+				"args": [],
+				"content": "java.util.LinkedHashSet<$T> collection = new java.util.LinkedHashSet<>()"
+			},
+			"SHashSet": {
+				"args": [],
+				"content": "scala.collection.mutable.HashSet<$T> collection = new scala.collection.mutable.HashSet<>()"
+			},
+			"SLinkedSet": {
+				"args": [],
+				"content": "scala.collection.mutable.LinkedHashSet<$T> collection = new scala.collection.mutable.LinkedHashSet<>()"
+			},
 			"JTreeSet": {
 				"args": [],
 				"content": "java.util.TreeSet<$T> collection = new java.util.TreeSet<>()"
@@ -29,6 +48,22 @@
 			}
 		},
 		"scala": {
+			"JHashSet": {
+				"args": [],
+				"content": "var collection = new util.HashSet[$T]()"
+			},
+			"JLinkedSet": {
+				"args": [],
+				"content": "var collection = new util.LinkedHashSet[$T]()"
+			},
+			"SHashSet": {
+				"args": [],
+				"content": "var collection = mutable.HashSet[$T]()"
+			},
+			"SLinkedSet": {
+				"args": [],
+				"content": "var collection = mutable.LinkedHashSet[$T]()"
+			},
 			"JTreeSet": {
 				"args": [],
 				"content": "var collection = new util.TreeSet[$T]()"

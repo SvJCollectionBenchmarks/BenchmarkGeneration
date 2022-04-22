@@ -23,7 +23,7 @@
     "scala": [""]
   },
   "groups": [
-    "ShrinkableSequences"
+    "AllSequences"
   ],
   "variables": {
     "profiled": {

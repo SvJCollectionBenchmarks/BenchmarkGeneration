@@ -1,4 +1,5 @@
 {
+	"benchmarkedAutomatically": false,
 	"generated": {
 		"JLinkedSequence": "java",
 		"SLinkedSequence": "scala"
@@ -192,25 +193,6 @@
 				"content": "collection.insertAll($index, $elems)"
 			}
 		},
-		"subCollection": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [ 
-					{ "name": "index", "type": "int" },
-					{ "name": "count", "type": "int" }
-				],
-				"content": "collection.subList($index, $index + $count + 1)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [ 
-					{ "name": "index", "type": "int" },
-					{ "name": "count", "type": "int" }
-				],
-				"content": "collection.slice($index, $index + $count + 1)"
-			}
-		},
 		"iterator": {
 			"isBenchmarkedAutomatically": false,
 			"java": {
@@ -270,7 +252,7 @@
 			}
 		},
 		"removeAll": {
-			"isBenchmarkedAutomatically": true,
+			"isBenchmarkedAutomatically": false,
 			"java": {
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "Collection<? extends $T>" } ],
@@ -280,44 +262,6 @@
 				"isConsumable": true,
 				"args": [ { "name": "elems", "type": "IterableOnce[$T]" } ],
 				"content": "collection.filterInPlace(!$elems.contains(_))"
-			}
-		},
-		"removeFirst": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(0)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(0)"
-			},
-			"JLinkedSequence": {
-				"isBenchmarkedAutomatically": true,
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.removeFirst()"
-			}
-		},
-		"removeLast": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(collection.size() - 1)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.remove(collection.size - 1)"
-			},
-			"JLinkedSequence": {
-				"isBenchmarkedAutomatically": true,
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.removeLast()"
 			}
 		},
 		"clear": {
@@ -331,38 +275,6 @@
 				"isConsumable": false,
 				"args": [],
 				"content": "collection.clear()"
-			}
-		},
-		"first": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.get(0)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.head"
-			},
-			"JLinkedSequence": {
-				"isBenchmarkedAutomatically": true,
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.getFirst()"
-			}
-		},
-		"last": {
-			"isBenchmarkedAutomatically": true,
-			"java": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.get(collection.size() - 1)"
-			},
-			"scala": {
-				"isConsumable": true,
-				"args": [],
-				"content": "collection.last"
 			}
 		},
 		"isEmpty": {

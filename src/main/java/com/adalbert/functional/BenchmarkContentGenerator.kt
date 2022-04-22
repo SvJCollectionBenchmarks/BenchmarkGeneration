@@ -75,7 +75,7 @@ object BenchmarkContentGenerator {
         val (language, generatedName, generatedCode) = method
         bob.appendLine("\t@Benchmark")
         bob.appendLine("\t@Fork(1)")
-        bob.appendLine("\t@Warmup(time=1)")
+        bob.appendLine("\t@Warmup(time=2)")
         bob.appendLine("\t@Measurement(time=1)")
         bob.appendLine("\t${methodsDeclarations[language to "init"]!!(generatedName)}")
         generatedCode.split("\n").forEach {
@@ -85,8 +85,8 @@ object BenchmarkContentGenerator {
     }
 
     val methodsDeclarations = mapOf(
-        Pair("java", "init") to { generatedName: String -> "public void test$generatedName(Blackhole bh) {" },
-        Pair("scala", "init")  to { generatedName: String -> "def test$generatedName(bh: Blackhole): Unit = {" },
+        Pair("java", "init") to { generatedName: String -> "public void $generatedName(Blackhole bh) {" },
+        Pair("scala", "init")  to { generatedName: String -> "def $generatedName(bh: Blackhole): Unit = {" },
         Pair("java", "setup")  to { generatedName: String -> "public void setup$generatedName() {" },
         Pair("scala", "setup")  to { generatedName: String -> "def setup$generatedName(): Unit = {" },
     )

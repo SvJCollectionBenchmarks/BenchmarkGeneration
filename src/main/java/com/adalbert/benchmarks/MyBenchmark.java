@@ -42,9 +42,10 @@ import java.util.ListIterator;
 public class MyBenchmark {
 
     @Benchmark
+    @BenchmarkMode(Mode.SampleTime)
     @Fork(1)
-    @Measurement(time=1, iterations = 50)
-    @Warmup(time=1)
+//    @Measurement(time=1)
+//    @Warmup(time=1)
     public void testArrayList(Blackhole bh) {
         ArrayList<Integer> collection = new ArrayList<>();
         ListIterator<Integer> iter = null;
@@ -63,9 +64,10 @@ public class MyBenchmark {
     }
 
     @Benchmark
+    @BenchmarkMode(Mode.SampleTime)
     @Fork(1)
-    @Measurement(time=1)
-    @Warmup(time=1)
+//    @Measurement(time=1)
+//    @Warmup(time=1)
     public void testLinkedList(Blackhole bh) {
         LinkedList<Integer> collection = new LinkedList<>();
         ListIterator<Integer> iter = null;

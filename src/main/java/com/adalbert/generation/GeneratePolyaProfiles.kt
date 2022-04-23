@@ -12,7 +12,7 @@ import java.nio.file.Paths
 private const val argumentGenerationProfile = "java"
 private const val elementsCount = 1200
 private const val operationsCount = 500
-private const val profilesNumber = 1
+private const val profilesNumber = 5
 private const val startingPolyaMultiplier = 1.3
 
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
@@ -51,7 +51,7 @@ fun main() {
             }
             println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations for $groupName")
             println("Used operations are: ${chosenOperations.itemsPercentage()}")
-            BenchmarkProjectHelper.writeNote("Used operations are: ${chosenOperations.itemsPercentage()}", groupName, newCodeRoot)
+            BenchmarkProjectHelper.writeNote("Used operations are: ${chosenOperations.itemsPercentage()}", "$groupName-${profileId}", newCodeRoot)
             val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
             val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")

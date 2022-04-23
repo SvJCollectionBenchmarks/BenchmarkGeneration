@@ -82,17 +82,17 @@ public class Weird {
 
     private static void removeLivingCell(Set<Cell> collection, int row, int column) {
         collection.remove(Cell.livingCell(row, column));
-        if (neighbours(collection, row, column) != 0)
+        if (neighboursCount(collection, row, column) != 0)
             collection.add(Cell.deadCell(row, column));
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if (!(i == 0 && j == 0) && neighbours(collection, row+i, column+j) == 0)
+                if (!(i == 0 && j == 0) && neighboursCount(collection, row+i, column+j) == 0)
                     collection.remove(Cell.deadCell(row+i, column+j));
             }
         }
     }
 
-    private static int neighbours(Set<Cell> collection, int row, int column) {
+    private static int neighboursCount(Set<Cell> collection, int row, int column) {
         int neighbours = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -116,17 +116,17 @@ public class Weird {
 
     private static void removeLivingCell(scala.collection.mutable.Set<Cell> collection, int row, int column) {
         collection.remove(Cell.livingCell(row, column));
-        if (neighbours(collection, row, column) != 0)
+        if (neighboursCount(collection, row, column) != 0)
             collection.add(Cell.deadCell(row, column));
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if (!(i == 0 && j == 0) && neighbours(collection, row+i, column+j) == 0)
+                if (!(i == 0 && j == 0) && neighboursCount(collection, row+i, column+j) == 0)
                     collection.remove(Cell.deadCell(row+i, column+j));
             }
         }
     }
 
-    private static int neighbours(scala.collection.mutable.Set<Cell> collection, int row, int column) {
+    private static int neighboursCount(scala.collection.mutable.Set<Cell> collection, int row, int column) {
         int neighbours = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -168,7 +168,7 @@ public class Weird {
         List<Cell> removals = new ArrayList<>();
         while (!collection.isEmpty()) {
             collection.forEach(cell -> {
-                int neighbours = neighbours(collection, cell.row(), cell.column());
+                int neighbours = neighboursCount(collection, cell.row(), cell.column());
                 if (!cell.isAlive() && neighbours == 3)
                     additions.add(Cell.livingCell(cell.row(), cell.column()));
                 else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))
@@ -191,7 +191,7 @@ public class Weird {
         List<Cell> removals = new ArrayList<>();
         while (!collection.isEmpty()) {
             collection.forEach(cell -> {
-                int neighbours = neighbours(collection, cell.row(), cell.column());
+                int neighbours = neighboursCount(collection, cell.row(), cell.column());
                 if (!cell.isAlive() && neighbours == 3)
                     additions.add(Cell.livingCell(cell.row(), cell.column()));
                 else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))
@@ -214,7 +214,7 @@ public class Weird {
         List<Cell> removals = new ArrayList<>();
         while (!collection.isEmpty()) {
             collection.foreach(cell -> {
-                int neighbours = neighbours(collection, cell.row(), cell.column());
+                int neighbours = neighboursCount(collection, cell.row(), cell.column());
                 if (!cell.isAlive() && neighbours == 3)
                     additions.add(Cell.livingCell(cell.row(), cell.column()));
                 else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))
@@ -238,7 +238,7 @@ public class Weird {
         List<Cell> removals = new ArrayList<>();
         while (!collection.isEmpty()) {
             collection.foreach(cell -> {
-                int neighbours = neighbours(collection, cell.row(), cell.column());
+                int neighbours = neighboursCount(collection, cell.row(), cell.column());
                 if (!cell.isAlive() && neighbours == 3)
                     additions.add(Cell.livingCell(cell.row(), cell.column()));
                 else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))
@@ -261,7 +261,7 @@ public class Weird {
             Iterator<Cell> iter = collection.iterator();
             while (iter.hasNext()) {
                 Cell cell = iter.next();
-                int neighbours = neighbours(collection, cell.row(), cell.column());
+                int neighbours = neighboursCount(collection, cell.row(), cell.column());
                 if (!cell.isAlive() && neighbours == 3)
                     additions.add(Cell.livingCell(cell.row(), cell.column()));
                 else if (cell.isAlive() && (neighbours < 2 || neighbours > 3))

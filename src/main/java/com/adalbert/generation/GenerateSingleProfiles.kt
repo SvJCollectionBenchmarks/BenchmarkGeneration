@@ -12,7 +12,7 @@ import java.nio.file.Paths
 import java.util.*
 
 private const val argumentGenerationProfile = "java"
-private const val profilesNumber = 1
+private const val profilesNumber = 3
 private const val elementsCount = 1200
 private const val operationsCount = 500
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\singleOperational")

@@ -20,6 +20,7 @@ object BenchmarkContentGenerator {
             val className = "${language[0].uppercase()}_${benchmarkName}${groupName}_${annotationPart}Benchmark"
             bob.appendLine("package com.adalbert;")
             propertiesTree.getValues("benchmarks", benchmarkName, "imports", language).forEach { bob.appendLine(it) }
+            bob.appendLine("@State(Scope.Benchmark)")
             bob.appendLine("${ if (language == "java") "public " else "" } class $className {")
             propertiesTree.getValues("benchmarks", benchmarkName, "outerUnprocessed", language).forEach { bob.appendLine("\t$it") }
             val outerToProcess = propertiesTree.getValues("benchmarks", benchmarkName, "outerProcessed", language).joinToString("\n")

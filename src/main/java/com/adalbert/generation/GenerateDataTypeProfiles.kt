@@ -12,10 +12,10 @@ import java.nio.file.Paths
 private const val argumentGenerationProfile = "java"
 private const val elementsCount = 1200
 private const val operationsCount = 500
-private const val profilesNumber = 3
+private const val profilesNumber = 6
 private const val startingPolyaMultiplier = 1.3
 
-private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")
+private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalDataTypes")
 private val supportedLanguages = listOf("java", "scala")
 
 private val additionOperations = mapOf("Map" to "put", "Sequence" to "append", "Set" to "add")
@@ -35,30 +35,31 @@ fun main() {
 
     val newCodeRoot = BenchmarkProjectHelper.generateProjectsInSupportedLanguages(baseCodeRoot, supportedLanguages)
 
-    (0 until profilesNumber).forEach { profileId ->
-        val groups = propertiesTree.getKeys("groups")
-//            .filter { it.contains("map", true) }        // SINGLES OUT MAPS ONLY, DANGER
-        groups.filter { propertiesTree.getValue("groups", it, "benchmarkedAutomatically") == "true" }.forEach { groupName ->
-            val operations = propertiesTree.getKeys("groups", groupName, "operations").filter {
-                propertiesTree.getValue("groups", groupName, "operations", it, "isBenchmarkedAutomatically") == "true"
-            }.toProbabilityMap()
-            val chosenOperations = mutableListOf<String>()
-            (1 .. operationsCount).forEach { _ ->
-                val randomOperation = operations.random() ?: throw IllegalStateException()
-                val operationCount = chosenOperations.count { it == randomOperation }
-                val realMultiplier =  1.0 + (startingPolyaMultiplier - 1.0) / (operationCount + 1)
-                operations.scaleProbabilityInPlace(randomOperation, realMultiplier)
-                chosenOperations.add(randomOperation)
-            }
-            println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations for $groupName")
-            println("Used operations are: ${chosenOperations.itemsPercentage()}")
-            BenchmarkProjectHelper.writeNote("Used operations are: ${chosenOperations.itemsPercentage()}", "$groupName-${profileId}", newCodeRoot)
-            val generated = propertiesTree.getKeys("groups", groupName, "generated")
+    val groups = propertiesTree.getKeys("groups")
+    groups.filter { propertiesTree.getValue("groups", it, "benchmarkedAutomatically") == "true" }.forEach { groupName ->
+        val operations = propertiesTree.getKeys("groups", groupName, "operations").filter {
+            propertiesTree.getValue("groups", groupName, "operations", it, "isBenchmarkedAutomatically") == "true"
+        }.toProbabilityMap()
+        val chosenOperations = mutableListOf<String>()
+        (1 .. operationsCount).forEach { _ ->
+            val randomOperation = operations.random() ?: throw IllegalStateException()
+            val operationCount = chosenOperations.count { it == randomOperation }
+            val realMultiplier =  1.0 + (startingPolyaMultiplier - 1.0) / (operationCount + 1)
+            operations.scaleProbabilityInPlace(randomOperation, realMultiplier)
+            chosenOperations.add(randomOperation)
+        }
+        println("Using ${chosenOperations.distinct().size} out of ${operations.size} operations for $groupName")
+        println("Used operations are: ${chosenOperations.itemsPercentage()}")
+        val generated = propertiesTree.getKeys("groups", groupName, "generated")
 
+
+
+        (0 until profilesNumber).forEach { profileId ->
             val typeVariables = propertiesTree.getKeys("groups", groupName, "variables")
-                .associateWith { propertiesTree.getValues("groups", groupName, "variables", it).random() }
+                .associateWith { propertiesTree.getValues("groups", groupName, "variables", it)[profileId] }
 
-            val protoArguments = chosenOperations.mapIndexed {index, it -> index to it }.associateWith { generateArgumentsForProfile(groupName, argumentGenerationProfile, it.second, typeVariables, propertiesTree) }
+            val protoArguments = chosenOperations.mapIndexed {index, it -> index to it }
+                .associateWith { generateArgumentsForProfile(groupName, argumentGenerationProfile, it.second, typeVariables, propertiesTree) }
             var fillingArgs: List<Map<ArgumentsGenerator.Argument, String>>? = null   // A little hacky, but fast
 
             val benchmarkClasses = generated.map { generatedName ->

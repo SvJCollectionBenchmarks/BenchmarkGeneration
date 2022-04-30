@@ -31,58 +31,88 @@
 
 package com.adalbert.benchmarks;
 
-import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.infra.Blackhole;
+import org.jetbrains.annotations.NotNull;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.Objects;
+import java.util.TreeSet;
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
-    @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
-    @Fork(1)
-//    @Measurement(time=1)
-//    @Warmup(time=1)
-    public void testArrayList(Blackhole bh) {
-        ArrayList<Integer> collection = new ArrayList<>();
-        ListIterator<Integer> iter = null;
-        int value = 0;
-        for (int i = 0; i < 10000; i++) {
-            boolean wasAdded = false;
-            value = i / (i % 3 + 1);
-            iter = collection.listIterator();
-            while (iter.hasNext() && !wasAdded)
-                if (iter.next() >= value){
-                    iter.add(value);
-                    wasAdded = true;
-                }
-            if (!wasAdded) collection.add(value);
+    static class Task implements Comparable<Task> {
+        private final double priority;
+        private final int time;
+        private final String command;
+
+        public Task(double priority, int time, String command) {
+            this.priority = priority;
+            this.time = time;
+            this.command = command;
+        }
+
+        public double getPriority() { return priority; }
+        public String getCommand() { return command; }
+        public int getTime() { return time; }
+
+        @Override
+        public int compareTo(@NotNull Task o) {
+            return -(int)((this.priority - o.priority)*1000000);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            Task task = (Task) o;
+            return priority == task.priority && time == task.time && Objects.equals(command, task.command);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(priority, time, command);
+        }
+
+        @Override
+        public String toString() {
+            return "Task{" +
+                    "priority=" + priority +
+                    ", time=" + time +
+                    ", command='" + command + '\'' +
+                    '}';
         }
     }
 
-    @Benchmark
-    @BenchmarkMode(Mode.SampleTime)
-    @Fork(1)
+//    @Benchmark
+//    @Fork(1)
 //    @Measurement(time=1)
 //    @Warmup(time=1)
-    public void testLinkedList(Blackhole bh) {
-        LinkedList<Integer> collection = new LinkedList<>();
-        ListIterator<Integer> iter = null;
-        int value = 0;
-        for (int i = 0; i < 10000; i++) {
-            boolean wasAdded = false;
-            value = i / (i % 3 + 1);
-            iter = collection.listIterator();
-            while (iter.hasNext() && !wasAdded)
-                if (iter.next() >= value){
-                    iter.add(value);
-                    wasAdded = true;
-                }
-            if (!wasAdded) collection.add(value);
+//    public void testArrayList(Blackhole bh) {
+//        TreeSet<Task> collection = new TreeSet<>();
+//        for (int i = 0; i < 5; i++)
+//            collection.add(new Task((int) Math.floor(Math.sin(i)), "ABC"));
+//        System.out.println(collection);
+//    }
+
+    public static void main(String[] args) {
+        TreeSet<Task> collection = new TreeSet<>();
+        int calcPower = 0;
+        Task currentTask = null;
+        for (int i = 0; i < 1000; i++) {
+            switch (i % 2) {
+                case 0:  collection.add(new Task(1000 * Math.sin(i), i%3 + i%4 + i%5, "Command A")); break;
+                case 1:  collection.add(new Task(1000 * Math.cos(i), i%4 + i%6 + i%7, "Command B")); break;
+            }
+            if (currentTask == null)
+                currentTask = collection.iterator().next();
+            if (currentTask.time <= calcPower) {
+                calcPower -= currentTask.time;
+                collection.remove(currentTask);
+                currentTask = null;
+            }
+            calcPower += 5;
         }
+        System.out.println(collection.size());
     }
 
 }

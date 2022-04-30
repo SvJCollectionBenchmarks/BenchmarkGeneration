@@ -77,7 +77,7 @@ object BenchmarkContentGenerator {
         bob.appendLine("\t@Benchmark")
         bob.appendLine("\t@Fork(1)")
         bob.appendLine("\t@Warmup(time=2)")
-        bob.appendLine("\t@Measurement(time=1)")
+        bob.appendLine("\t@Measurement(time=1,iterations=1)")
         bob.appendLine("\t${methodsDeclarations[language to "init"]!!(generatedName)}")
         generatedCode.split("\n").forEach {
             bob.appendLine("\t\t$it$lineEnding")

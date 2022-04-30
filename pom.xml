@@ -77,6 +77,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <artifactId>scala-library</artifactId>
             <version>2.13.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-parallel-collections_2.13</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
     </dependencies>
 
     <properties>

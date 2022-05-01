@@ -12,7 +12,7 @@ import java.nio.file.Paths
 private const val argumentGenerationProfile = "java"
 private const val elementsCount = 1200
 private const val operationsCount = 500
-private const val profilesNumber = 3
+private const val profilesNumber = 5
 private const val startingPolyaMultiplier = 1.3
 
 private val baseCodeRoot: Path = Paths.get("C:\\Users\\wojci\\source\\master-thesis\\generated\\multiOperationalPolya")

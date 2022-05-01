@@ -246,6 +246,6 @@
 		}
 	},
 	"variables": {
-		"T": ["Integer", "String", "Double", "Float", "Character", "Long"]
+		"T": ["Double"]
 	}
 }

@@ -220,7 +220,7 @@
 		}
 	},
 	"variables": {
-		"K": ["Integer", "String", "Double", "Float", "Character", "Long"],
-		"V": ["Integer", "String", "Double", "Float", "Character", "Long"]
+		"K": ["Double"],
+		"V": ["Double"]
 	}
 }

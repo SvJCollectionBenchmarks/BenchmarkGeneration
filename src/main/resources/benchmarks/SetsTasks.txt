@@ -1,0 +1,43 @@
+<@java@>
+#{groups.$group.init.$language.$profile.content # T = Task #};
+int calcPower = 0;
+Task currentTask = null;
+for (int i = 0; i < ${benchmarks.$benchmark.variables.unprofiled.operationBatch}; i++) {
+
+    double priority = i % 2 == 0 ? 1000 * Math.sin(i) : 1000 * Math.cos(i);
+    int time =  i % 2 == 0 ? i%3 + i%4 + i%5 : i%4 + i%6 + i%7;
+    #{groups.$group.operations.add.$profile.content # elem = new Task(priority, time) #};
+
+    if (currentTask == null)
+        currentTask = ${groups.$group.operations.iterator.$profile.content}.next();
+    if (currentTask.getTime() <= calcPower) {
+        calcPower -= currentTask.getTime();
+        #{groups.$group.operations.add.$profile.content # elem = currentTask #};
+        currentTask = null;
+    }
+
+    calcPower += 5;
+}
+<@java@>
+<@scala@>
+#{groups.$group.init.$language.$profile.content # T = Task #}
+var calcPower = 0
+var currentTask: Task = null
+for (i <- 0 until ${benchmarks.$benchmark.variables.unprofiled.operationBatch}) {
+    val priority = if (i % 2 == 0) 1000 * Math.sin(i)
+        else 1000 * Math.cos(i)
+    val time = if (i % 2 == 0) i % 3 + i % 4 + i % 5
+        else i % 4 + i % 6 + i % 7
+    #{groups.$group.operations.add.$profile.content # elem = new Task(priority, time) #}
+
+    if (currentTask == null) currentTask = ${groups.$group.operations.iterator.$profile.content}.next
+    if (currentTask.getTime <= calcPower) {
+        calcPower -= currentTask.getTime
+        #{groups.$group.operations.add.$profile.content # elem = currentTask #}
+        currentTask = null
+    }
+
+    calcPower += 5
+}
+<@scala@>
+

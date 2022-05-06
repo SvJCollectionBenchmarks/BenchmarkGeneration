@@ -1,0 +1,82 @@
+{
+  "generateMode": "CollectionPerMethod",
+  "imports": {
+    "java": [
+      "import java.util.*;",
+      "import org.openjdk.jmh.annotations.*;",
+      "import org.openjdk.jmh.infra.Blackhole;"
+    ],
+    "scala": [
+      "import java.util",
+      "import scala.collection.immutable",
+      "import scala.collection.mutable",
+      "import org.openjdk.jmh.annotations._",
+      "import org.openjdk.jmh.infra.Blackhole",
+      "import java.util.Objects",
+      "import scala.collection.mutable.ArrayBuffer"
+    ]
+  },
+  "outerProcessed": {
+    "java": [""],
+    "scala": [""]
+  },
+  "outerUnprocessed": {
+    "java": [
+      "static class Task implements Comparable<Task> {",
+      "\tprivate final double priority;",
+      "\tprivate final int time;",
+      "\tpublic Task(double priority, int time) {",
+      "\t\tthis.priority = priority;",
+      "\t\tthis.time = time;",
+      "\t}",
+      "\tpublic int getTime() { return time; }",
+      "\t@Override",
+      "\tpublic int compareTo(Task o) {",
+      "\t\treturn -(int)((this.priority - o.priority)*1000000);",
+      "\t}",
+      "\t@Override",
+      "\tpublic boolean equals(Object o) {",
+      "\t\tif (o == null || getClass() != o.getClass()) return false;",
+      "\t\tTask task = (Task) o;",
+      "\t\treturn priority == task.priority && time == task.time;",
+      "\t}",
+      "\t@Override",
+      "\tpublic int hashCode() {",
+      "\t\treturn Objects.hash(priority, time);",
+      "\t}",
+      "}"
+    ],
+    "scala": [
+      "class Task(val priority: Double, val time: Int) extends Ordered[Task] {",
+      "\tdef getTime: Int = time",
+      "\toverride def hashCode: Int =",
+      "\t\tObjects.hash(priority, time)",
+      "\toverride def compare(that: Task): Int =",
+      "\t\t-((this.priority - that.priority) * 1000000).toInt",
+      "\toverride def equals(o: Any): Boolean = {",
+      "\t\tif (o == null || (getClass ne o.getClass)) return false",
+      "\t\tval task = o.asInstanceOf[Task]",
+      "\t\tpriority == task.priority && time == task.time",
+      "\t}",
+      "}"
+    ]
+  },
+  "groups": [
+    "GeneralSets"
+  ],
+  "variables": {
+    "profiled": {
+      "java": {
+        "java": {
+          "iteratorImport": "java.util.Iterator"
+        },
+        "scala": {
+          "iteratorImport": "scala.collection.Iterator"
+        }
+      }
+    },
+    "unprofiled": {
+      "operationBatch": "1000"
+    }
+  }
+}

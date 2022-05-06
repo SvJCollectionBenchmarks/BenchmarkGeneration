@@ -3,45 +3,46 @@ package com.adalbert.benchmarks
 import org.openjdk.jmh.annotations._
 import org.openjdk.jmh.infra.Blackhole
 
-import java.util
+import java.util.Objects
 import scala.collection.mutable
+
+class Task(val priority: Double, val time: Int) extends Ordered[Task] {
+  def getTime: Int = time
+  override def hashCode: Int =
+    Objects.hash(priority, time)
+  override def compare(that: Task): Int =
+    -((this.priority - that.priority) * 1000000).toInt
+  override def equals(o: Any): Boolean = {
+    if (o == null || (getClass ne o.getClass)) return false
+    val task = o.asInstanceOf[Task]
+    priority == task.priority && time == task.time
+  }
+}
 
 @State(Scope.Benchmark)
 class SBenchmark {
-
-  private var firstSet: mutable.HashSet[Integer] = null
-  private var secondSet: mutable.HashSet[Integer] = null
-  private var thirdSet: mutable.HashSet[Integer] = null
-  @Setup def prepareSets(): Unit = {
-    firstSet = new mutable.HashSet[Integer]
-    secondSet = new mutable.HashSet[Integer]
-    thirdSet = new mutable.HashSet[Integer]
-    for (i <- 0 until 10000) {
-      if (i % 3 == 0) firstSet.add(i)
-      if (i % 5 == 0) secondSet.add(i)
-      if (i % 7 == 0) thirdSet.add(i)
-    }
-  }
 
   @Benchmark
   @Fork(1)
   @Measurement(iterations = 1)
   @Warmup(iterations = 1)
   def testMethodScala(bh: Blackhole): Unit = {
-    val collection = new util.ArrayList[Double]
-    for (i <- 0 until 10000) {
-      collection.add(Math.sin(i / 0.01))
-    }
-    for (i <- 0 until 3000) {
-      val index = (i * 3000) % collection.size
-      i % 3 match {
-        case 0 =>
-          collection.add(index, 0.0)
-        case 1 =>
-          collection.set(index, 1.0)
-        case 2 =>
-          collection.remove(index)
+    val collection = new mutable.TreeSet[Task]
+    var calcPower = 0
+    var currentTask: Task = null
+    for (i <- 0 until 1000) {
+      val priority = if (i % 2 == 0) 1000 * Math.sin(i)
+      else 1000 * Math.cos(i)
+      val time = if (i % 2 == 0) i % 3 + i % 4 + i % 5
+      else i % 4 + i % 6 + i % 7
+      collection.add(new Task(priority, time))
+      if (currentTask == null) currentTask = collection.iterator.next
+      if (currentTask.getTime <= calcPower) {
+        calcPower -= currentTask.getTime
+        collection.remove(currentTask)
+        currentTask = null
       }
+      calcPower += 5
     }
   }
 

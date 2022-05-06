@@ -32,8 +32,8 @@
 package com.adalbert.benchmarks;
 
 import org.jetbrains.annotations.NotNull;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.Objects;
 import java.util.TreeSet;
@@ -44,16 +44,12 @@ public class MyBenchmark {
     static class Task implements Comparable<Task> {
         private final double priority;
         private final int time;
-        private final String command;
 
-        public Task(double priority, int time, String command) {
+        public Task(double priority, int time) {
             this.priority = priority;
             this.time = time;
-            this.command = command;
         }
 
-        public double getPriority() { return priority; }
-        public String getCommand() { return command; }
         public int getTime() { return time; }
 
         @Override
@@ -65,54 +61,61 @@ public class MyBenchmark {
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) return false;
             Task task = (Task) o;
-            return priority == task.priority && time == task.time && Objects.equals(command, task.command);
+            return priority == task.priority && time == task.time;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(priority, time, command);
-        }
-
-        @Override
-        public String toString() {
-            return "Task{" +
-                    "priority=" + priority +
-                    ", time=" + time +
-                    ", command='" + command + '\'' +
-                    '}';
+            return Objects.hash(priority, time);
         }
     }
 
-//    @Benchmark
-//    @Fork(1)
-//    @Measurement(time=1)
-//    @Warmup(time=1)
-//    public void testArrayList(Blackhole bh) {
-//        TreeSet<Task> collection = new TreeSet<>();
-//        for (int i = 0; i < 5; i++)
-//            collection.add(new Task((int) Math.floor(Math.sin(i)), "ABC"));
-//        System.out.println(collection);
-//    }
-
-    public static void main(String[] args) {
+    @Benchmark
+    @Fork(1)
+    @Measurement(time=1)
+    @Warmup(time=1)
+    public void testArrayList(Blackhole bh) {
         TreeSet<Task> collection = new TreeSet<>();
         int calcPower = 0;
         Task currentTask = null;
         for (int i = 0; i < 1000; i++) {
-            switch (i % 2) {
-                case 0:  collection.add(new Task(1000 * Math.sin(i), i%3 + i%4 + i%5, "Command A")); break;
-                case 1:  collection.add(new Task(1000 * Math.cos(i), i%4 + i%6 + i%7, "Command B")); break;
-            }
+
+            double priority = i % 2 == 0 ? 1000 * Math.sin(i) : 1000 * Math.cos(i);
+            int time =  i % 2 == 0 ? i%3 + i%4 + i%5 : i%4 + i%6 + i%7;
+            collection.add(new Task(priority, time));
+
             if (currentTask == null)
                 currentTask = collection.iterator().next();
             if (currentTask.time <= calcPower) {
-                calcPower -= currentTask.time;
+                calcPower -= currentTask.getTime();
                 collection.remove(currentTask);
                 currentTask = null;
             }
+
             calcPower += 5;
         }
-        System.out.println(collection.size());
     }
+
+//    public static void main(String[] args) {
+//        TreeSet<Task> collection = new TreeSet<>();
+//        int calcPower = 0;
+//        Task currentTask = null;
+//        for (int i = 0; i < 1000; i++) {
+//
+//            double priority = i % 2 == 0 ? 1000 * Math.sin(i) : 1000 * Math.cos(i);
+//            int time =  i % 2 == 0 ? i%3 + i%4 + i%5 : i%4 + i%6 + i%7;
+//            collection.add(new Task(priority, time));
+//
+//            if (currentTask == null)
+//                currentTask = collection.iterator().next();
+//            if (currentTask.time <= calcPower) {
+//                calcPower -= currentTask.time;
+//                collection.remove(currentTask);
+//                currentTask = null;
+//            }
+//
+//            calcPower += 5;
+//        }
+//    }
 
 }

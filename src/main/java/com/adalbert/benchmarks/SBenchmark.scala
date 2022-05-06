@@ -6,6 +6,8 @@ import org.openjdk.jmh.infra.Blackhole
 import java.util.Objects
 import scala.collection.mutable
 
+class Message(var id: Long, var message: String)
+
 class Task(val priority: Double, val time: Int) extends Ordered[Task] {
   def getTime: Int = time
   override def hashCode: Int =

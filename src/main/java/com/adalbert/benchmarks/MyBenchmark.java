@@ -34,39 +34,22 @@ package com.adalbert.benchmarks;
 import org.jetbrains.annotations.NotNull;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
+import scala.collection.mutable.ListBuffer;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.TreeSet;
 
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
-    static class Task implements Comparable<Task> {
-        private final double priority;
-        private final int time;
-
-        public Task(double priority, int time) {
-            this.priority = priority;
-            this.time = time;
-        }
-
-        public int getTime() { return time; }
-
-        @Override
-        public int compareTo(@NotNull Task o) {
-            return -(int)((this.priority - o.priority)*1000000);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == null || getClass() != o.getClass()) return false;
-            Task task = (Task) o;
-            return priority == task.priority && time == task.time;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(priority, time);
+    class Message {
+        long id;
+        String message;
+        public Message(long id, String message) {
+            this.id = id;
+            this.message = message;
         }
     }
 
@@ -75,47 +58,47 @@ public class MyBenchmark {
     @Measurement(time=1)
     @Warmup(time=1)
     public void testArrayList(Blackhole bh) {
-        TreeSet<Task> collection = new TreeSet<>();
-        int calcPower = 0;
-        Task currentTask = null;
-        for (int i = 0; i < 1000; i++) {
+        ListBuffer<Message> collection = new ListBuffer<>();
+        for (int i = 0; i < 10000; i++) {
+            double value = Math.sin(i) * (i % 5);
+            if (value > -0.25) collection.append(new Message(i, "Message text"));
+            if (i % 3 == 0 && !collection.isEmpty()) collection.remove(0);
 
-            double priority = i % 2 == 0 ? 1000 * Math.sin(i) : 1000 * Math.cos(i);
-            int time =  i % 2 == 0 ? i%3 + i%4 + i%5 : i%4 + i%6 + i%7;
-            collection.add(new Task(priority, time));
-
-            if (currentTask == null)
-                currentTask = collection.iterator().next();
-            if (currentTask.time <= calcPower) {
-                calcPower -= currentTask.getTime();
-                collection.remove(currentTask);
-                currentTask = null;
-            }
-
-            calcPower += 5;
+            int halfSize = collection.size() / 2;
+            if (value < -3.5 && !collection.isEmpty()) collection.update(halfSize, new Message(halfSize, "Another message text"));
+            if (value < -2.5 && !collection.isEmpty()) collection.remove(collection.size() / 2);
         }
     }
 
+    @Benchmark
+    @Fork(1)
+    @Measurement(time=1)
+    @Warmup(time=1)
+    public void testLinkedList(Blackhole bh) {
+        LinkedList<Message> collection = new LinkedList<>();
+        for (int i = 0; i < 10000; i++) {
+            double value = Math.sin(i) * (i % 5);
+            if (value > -0.25) collection.addLast(new Message(i, "Message text"));
+            if (i % 3 == 0 && !collection.isEmpty()) collection.removeFirst();
+
+            int halfSize = collection.size() / 2;
+            if (value < -3.5 && !collection.isEmpty()) collection.set(halfSize, new Message(halfSize, "Another message text"));
+            if (value < -2.5 && !collection.isEmpty()) collection.remove(collection.size() / 2);
+        }
+    }
+//
 //    public static void main(String[] args) {
-//        TreeSet<Task> collection = new TreeSet<>();
-//        int calcPower = 0;
-//        Task currentTask = null;
-//        for (int i = 0; i < 1000; i++) {
+//        LinkedList<Message> collection = new LinkedList<>();
+//        for (int i = 0; i < 10000; i++) {
+//            double value = Math.sin(i) * (i % 5);
+//            if (value > -0.25) collection.addLast(new Message(i, "Message text"));
+//            if (i % 3 == 0 && !collection.isEmpty()) collection.removeFirst();
 //
-//            double priority = i % 2 == 0 ? 1000 * Math.sin(i) : 1000 * Math.cos(i);
-//            int time =  i % 2 == 0 ? i%3 + i%4 + i%5 : i%4 + i%6 + i%7;
-//            collection.add(new Task(priority, time));
-//
-//            if (currentTask == null)
-//                currentTask = collection.iterator().next();
-//            if (currentTask.time <= calcPower) {
-//                calcPower -= currentTask.time;
-//                collection.remove(currentTask);
-//                currentTask = null;
-//            }
-//
-//            calcPower += 5;
+//            int halfSize = collection.size() / 2;
+//            if (value < -3.5 && !collection.isEmpty()) collection.set(halfSize, new Message(halfSize, "Another message text"));
+//            else if (value < -2.5 && !collection.isEmpty()) collection.remove(collection.size() / 2);
 //        }
+//        System.out.println(collection.size());
 //    }
 
 }

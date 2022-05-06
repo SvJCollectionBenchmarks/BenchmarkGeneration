@@ -1,0 +1,46 @@
+{
+  "generateMode": "CollectionPerMethod",
+  "imports": {
+    "java": [
+      "import java.util.*;",
+      "import org.openjdk.jmh.annotations.*;",
+      "import org.openjdk.jmh.infra.Blackhole;"
+    ],
+    "scala": [
+      "import java.util",
+      "import scala.collection.immutable",
+      "import scala.collection.mutable",
+      "import org.openjdk.jmh.annotations._",
+      "import org.openjdk.jmh.infra.Blackhole",
+      "import java.util.Objects",
+      "import scala.collection.mutable.ArrayBuffer"
+    ]
+  },
+  "outerProcessed": {
+    "java": [""],
+    "scala": [""]
+  },
+  "outerUnprocessed": {
+    "java": [
+      "class Message {",
+      "\tlong id;",
+      "\tString message;",
+      "\tpublic Message(long id, String message) {",
+      "\t\tthis.id = id;",
+      "\t\tthis.message = message;",
+      "\t}",
+      "}"
+    ],
+    "scala": [
+      "class Message(var id: Long, var message: String)"
+    ]
+  },
+  "groups": [
+    "LinkedSequences"
+  ],
+  "variables": {
+    "unprofiled": {
+      "operationBatch": "10000"
+    }
+  }
+}

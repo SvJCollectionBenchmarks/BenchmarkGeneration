@@ -62,19 +62,9 @@
     ]
   },
   "groups": [
-    "GeneralSets"
+    "SortedSets"
   ],
   "variables": {
-    "profiled": {
-      "java": {
-        "java": {
-          "iteratorImport": "java.util.Iterator"
-        },
-        "scala": {
-          "iteratorImport": "scala.collection.Iterator"
-        }
-      }
-    },
     "unprofiled": {
       "operationBatch": "1000"
     }

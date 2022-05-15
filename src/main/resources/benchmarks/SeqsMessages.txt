@@ -6,8 +6,8 @@ for (int i = 0; i < ${benchmarks.$benchmark.variables.unprofiled.operationBatch}
     if (i % 3 == 0 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.removeAt.$profile.content # index = 0 #};
 
     int halfSize = ${groups.$group.operations.size.$profile.content} / 2;
-    if (value < -3.5 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.set.$profile.content # index = halfSize ## elem = new Message(halfSize, "Another message text") #};
-    if (value < -2.5 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.removeAt.$profile.content # index = halfSize #};
+    if (value < -3.8 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.set.$profile.content # index = halfSize ## elem = new Message(halfSize, "Another message text") #};
+    if (value < -3.5 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.removeAt.$profile.content # index = halfSize #};
 }
 <@java@>
 <@scala@>
@@ -18,8 +18,8 @@ for (i <- 0 until ${benchmarks.$benchmark.variables.unprofiled.operationBatch}) 
     if (i % 3 == 0 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.removeAt.$profile.content # index = 0 #}
 
     val halfSize = ${groups.$group.operations.size.$profile.content} / 2
-    if (value < -3.5 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.set.$profile.content # index = halfSize ## elem = new Message(halfSize, "Another message text") #}
-    if (value < -2.5 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.removeAt.$profile.content # index = halfSize #}
+    if (value < -3.8 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.set.$profile.content # index = halfSize ## elem = new Message(halfSize, "Another message text") #}
+    if (value < -3.5 && !${groups.$group.operations.isEmpty.$profile.content}) #{groups.$group.operations.removeAt.$profile.content # index = halfSize #}
 }
 <@scala@>
 

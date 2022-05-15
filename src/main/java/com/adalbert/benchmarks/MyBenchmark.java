@@ -58,15 +58,15 @@ public class MyBenchmark {
     @Measurement(time=1)
     @Warmup(time=1)
     public void testArrayList(Blackhole bh) {
-        ListBuffer<Message> collection = new ListBuffer<>();
+        ArrayList<Message> collection = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
             double value = Math.sin(i) * (i % 5);
-            if (value > -0.25) collection.append(new Message(i, "Message text"));
+            if (value > -0.25) collection.add(new Message(i, "Message text"));
             if (i % 3 == 0 && !collection.isEmpty()) collection.remove(0);
 
             int halfSize = collection.size() / 2;
-            if (value < -3.5 && !collection.isEmpty()) collection.update(halfSize, new Message(halfSize, "Another message text"));
-            if (value < -2.5 && !collection.isEmpty()) collection.remove(collection.size() / 2);
+            if (value < -3.8 && !collection.isEmpty()) collection.set(halfSize, new Message(halfSize, "Another message text"));
+            if (value < -3.5 && !collection.isEmpty()) collection.remove(collection.size() / 2);
         }
     }
 
@@ -82,8 +82,8 @@ public class MyBenchmark {
             if (i % 3 == 0 && !collection.isEmpty()) collection.removeFirst();
 
             int halfSize = collection.size() / 2;
-            if (value < -3.5 && !collection.isEmpty()) collection.set(halfSize, new Message(halfSize, "Another message text"));
-            if (value < -2.5 && !collection.isEmpty()) collection.remove(collection.size() / 2);
+            if (value < -3.8 && !collection.isEmpty()) collection.set(halfSize, new Message(halfSize, "Another message text"));
+            if (value < -3.5 && !collection.isEmpty()) collection.remove(collection.size() / 2);
         }
     }
 //
